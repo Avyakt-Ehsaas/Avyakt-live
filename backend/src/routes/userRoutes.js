@@ -1,5 +1,5 @@
 import express from 'express';
-import { admin, protect } from '../middleware/authmiddleware.js';
+import { admin, protect } from '../middleware/authMiddleware.js';
 import { getAllUsers, deleteUser, getUserById ,
     updateSubscription,
     getStreakAndTree
