@@ -10,9 +10,10 @@ import meetingRoutes from "./routes/meetingRoutes.js"
 
 const app = express();
 
+const port ="https://avaykt-ehsaas.netlify.app" || 'http://localhost:5173'
 // ✅ FIXED CORS
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: port,
   credentials: true
 }));
 
