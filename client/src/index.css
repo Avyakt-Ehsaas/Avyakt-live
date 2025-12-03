@@ -1,1 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+
 @import "tailwindcss";
+
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+
+
+
+/* ====== ORANGE SCROLLBAR (CHROME, EDGE, SAFARI) ====== */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff7ed; /* light orange background */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #fb923c, #f97316); /* orange gradient */
+  border-radius: 10px;
+  border: 2px solid #fff7ed;
+  box-shadow: 0 0 8px rgba(249, 115, 22, 0.6);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #f97316, #ea580c);
+}
+
+
+
+/* ====== FIREFOX SUPPORT ====== */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #f97316 #fff7ed;
+}

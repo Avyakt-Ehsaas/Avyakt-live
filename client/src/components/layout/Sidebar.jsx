@@ -1,137 +1,89 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/useAuth';
-import { 
-  FiUser, 
-  FiUsers, 
-  FiVideo, 
-  FiCalendar, 
-  FiAward, 
-  FiSettings, 
-  FiLogOut,
-  FiTrendingUp,
-  FiBarChart2,
-  FiUserPlus,
-  FiShield,
-  FiGrid
-} from 'react-icons/fi';
-import { MdDashboard } from 'react-icons/md';
-import toast from 'react-hot-toast';
-import SidebarLink from '../ui/SidebarLink';
+import React from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { LayoutDashboard, Users, Clock, Settings, BarChart3, Zap, LogOut } from 'lucide-react';
+import { FaHome } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+
+const navItems = [
+    {name : "Home" , icon: FaHome , path: "/"},
+    { name: 'Dashboard Core', icon: LayoutDashboard, path: '/admin' },
+    { name: 'User Management', icon: Users, path: '/admin/users' },
+    { name: 'Analytics Hub', icon: BarChart3, path: '/admin/analytics' },
+    { name: 'Session Control', icon: Clock, path: '/admin/security-logs' },
+    { name: 'System Settings', icon: Settings, path: '/admin/settings' },
+];
 
 const Sidebar = () => {
-  const { user, logout, fetchMe } = useAuth();
-  const [isAdminView, setIsAdminView] = useState(false);
-  
-  const navigate = useNavigate();
+    const location = useLocation();
 
-  useEffect(() => { 
-    setIsAdminView(user?.role === 'admin');
-  }, [user]);
+    const baseLinkClass = "flex items-center p-3 rounded-lg text-gray-400 transition duration-300 transform hover:bg-cyan-900/40 hover:text-cyan-400 border border-transparent";
+    const activeLinkClass = "bg-purple-800/60 text-cyan-300 border-cyan-500/80 shadow-lg shadow-purple-500/30";
+    const logoClass = "flex items-center mb-10 p-2 pb-5 border-b border-gray-700/50";
 
-  const userMenu = [
-    { icon: <MdDashboard className="text-lg" />, label: 'Dashboard', path: '/user' },
-    { icon: <FiUser className="text-lg" />, label: 'My Profile', path: '/user/profile' },
-    { icon: <FiVideo className="text-lg" />, label: 'Join Meeting', path: '/join-meeting' },
-    { icon: <FiCalendar className="text-lg" />, label: 'My Attendance', path: '/attendance' },
-    { icon: <FiTrendingUp className="text-lg" />, label: 'Tree Growth', path: '/user/tree-growth' },
-    { icon: <FiAward className="text-lg" />, label: 'Achievements', path: '/user/achievements' },
-    { icon: <FiSettings className="text-lg" />, label: 'Settings', path: '/user/settings' },
-  ];
+    const itemVariants = {
+        hidden: { opacity: 0, x: -20 },
+        visible: { opacity: 1, x: 0 },
+    };
 
-  const adminMenu = [
-    { icon: <MdDashboard className="text-lg" />, label: 'Admin Dashboard', path: '/' },
-    { icon: <FiUsers className="text-lg" />, label: 'All Users', path: '/admin/users' },
-    { icon: <FiUserPlus className="text-lg" />, label: 'Create Meeting', path: '/admin/create-meeting' },
-    { icon: <FiCalendar className="text-lg" />, label: 'Attendance Reports', path: '/admin/attendance-reports' },
-    { icon: <FiBarChart2 className="text-lg" />, label: 'Engagement Control', path: '/admin/engagement' },
-    { icon: <FiTrendingUp className="text-lg" />, label: 'Analytics', path: '/admin/analytics' },
-    { icon: <FiSettings className="text-lg" />, label: 'System Settings', path: '/admin/settings' },
-    { icon: <FiShield className="text-lg" />, label: 'Security Logs', path: '/admin/security-logs' },
-  ];
+    return (
+        <motion.div 
+            className="fixed top-0 left-0 h-screen w-60 bg-gray-950/90 backdrop-blur-md shadow-2xl shadow-black/80 p-6 z-50"
+            initial={{ x: -250 }}
+            animate={{ x: 0 }}
+            transition={{ type: 'spring', stiffness: 100, damping: 20 }}
+        >
+            <Link 
+            to="/"
+            className={logoClass}>
+                <Zap className="w-7 h-7 text-cyan-400 mr-3 animate-pulse" />
+                <h1 className="text-2xl font-extrabold text-white tracking-wider">
+                    ADMIN <span className="text-purple-400">Avaykt</span>
+                </h1>
+            </Link>
 
-  const currentMenu = isAdminView ? adminMenu : userMenu;
+            <nav className="space-y-2">
+                {navItems.map((item, index) => {
+                    const isActive = location.pathname === item.path;
+                    return (
+                        <motion.div
+                            key={item.name}
+                            variants={itemVariants}
+                            initial="hidden"
+                            animate="visible"
+                            transition={{ delay: index * 0.05 + 0.3 }}
+                            whileHover={{ scale: 1.05, x: 5 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            <NavLink
+                                to={item.path}
+                                className={`${baseLinkClass} ${isActive ? activeLinkClass : ''}`}
+                            >
+                                <item.icon className={`w-5 h-5 mr-3 ${isActive ? 'text-cyan-300' : 'text-purple-500'}`} />
+                                <span className="font-medium text-sm">{item.name}</span>
+                            </NavLink>
+                        </motion.div>
+                    );
+                })}
+            </nav>
 
-  const handleLogout = async () => {
-      try {
-        await logout();
-        toast.success("user logged out")
-        await fetchMe();
-        navigate('/auth/login')
-      } catch (error) {
-        console.log(error , "user logged out failed!")
-        toast.error("Logout failed")
-      }
-  };
-  
-  return (
-    <div className="fixed top-0 w-64 h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-white shadow-lg flex flex-col">
-      {/* Logo */}
-      <div className="flex items-center justify-center p-4 border-b border-gray-200">
-        <div className="bg-indigo-600 text-white p-2 rounded-lg">
-          <FiGrid className="text-xl" />
-        </div>
-        <h1 className="ml-3 text-xl font-bold text-gray-800">Avaykt-Ehsaas</h1>
-      </div>
-
-      {/* Navigation */}
-      <nav className="flex-1 flex flex-col space-y-1 p-4 overflow-y-auto custom-scrollbar">
-        {currentMenu.map((item, index) => (
-          <SidebarLink
-            key={index}
-            icon={item.icon}
-            label={item.label}
-            path={item.path}
-          />
-        ))}
-
-        {/* Logout Button */}
-        <SidebarLink
-          icon={<FiLogOut />}
-          label="Logout"
-          path="#"
-          onClick={handleLogout}
-          isLogout={true}
-        />
-      </nav>
-
-      {/* User Profile */}
-      <div className="mt-auto pt-4 border-t border-gray-100">
-        <div className="flex items-center p-2 rounded-lg hover:bg-gray-50">
-          <div className="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-medium">
-            {user?.name?.charAt(0) || 'U'}
-          </div>
-          <div className="ml-3">
-            <p className="text-sm font-medium text-gray-800">{user?.name || 'User'}</p>
-            <p className="text-xs text-gray-500">{user?.email || 'user@example.com'}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+            <motion.div 
+                className="absolute bottom-6 left-6 right-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navItems.length * 0.05 + 0.5 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.95 }}
+            >
+                <button
+                    className="w-full flex items-center justify-center p-3 rounded-lg bg-gray-800/70 text-red-400 transition duration-300 hover:bg-red-900/50 hover:text-white border border-red-500/30"
+                >
+                    <LogOut className="w-5 h-5 mr-2" />
+                    <span className="font-semibold text-sm">Logout Session</span>
+                </button>
+            </motion.div>
+        </motion.div>
+    );
 };
-
-// Custom scrollbar styles
-const styles = `
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: rgba(237, 233, 254, 0.5);
-    border-radius: 3px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: rgba(168, 85, 247, 0.5);
-    border-radius: 3px;
-  }
-  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(168, 85, 247, 0.7);
-  }
-`;
-
-// Add styles to the document head
-const styleElement = document.createElement('style');
-styleElement.textContent = styles;
-document.head.appendChild(styleElement);
 
 export default Sidebar;

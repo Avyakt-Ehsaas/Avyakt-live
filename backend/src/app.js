@@ -6,8 +6,6 @@ import cookieParser from 'cookie-parser';
 // routes
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
-import attendanceRoutes from "./routes/attendanceRoutes.js";
-import dashboardRoutes from "./routes/dashboardRoutes.js"
 import meetingRoutes from "./routes/meetingRoutes.js"
 
 const app = express();
@@ -25,9 +23,7 @@ app.use(cookieParser()); // ✅ FIXED
 // routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
-app.use("/api/attendance", attendanceRoutes);
-app.use("/api/dashboard",dashboardRoutes);
-app.use("/api/meeting",meetingRoutes);
+app.use("/api/meetings",meetingRoutes)
 
 
 export default app;

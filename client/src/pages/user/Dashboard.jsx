@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import {
-  FiCalendar,
-  FiClock,
-  FiUsers,
-  FiVideo,
-  FiFileText,
-  FiBell,
-  FiPlus
-} from 'react-icons/fi';
+import { FiPlus } from 'react-icons/fi';
 import { motion , AnimatePresence } from 'framer-motion';
-import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import './Dashboard.css';
+import TestimonialCarousel from '../LandingPage/TestimonialCarousel';
+import FAQJoin from '../LandingPage/FAQJoin';
+import Footer from '../LandingPage/Footer';
+import AboutFounder from '../../components/AboutFounder';
+import YearLongJourney from '../../components/YearLongJourney';
+import { FiClock, FiCalendar, FiRefreshCw, FiBookOpen, FiPlay , FiSun, FiCpu, FiHeart, FiTarget , FiActivity , FiZap } from "react-icons/fi";
+import SubscriptionPricing from '../../components/SubscriptionPricing';
+import BeyondTrialSection from '../../components/BeyondTrialSection';
+
+
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
@@ -28,7 +29,6 @@ const Dashboard = () => {
     setTimeout(() => setLoading(false), 800);
   }, []);
 
-  // set index for phrase
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const Dashboard = () => {
 
     for (let i = 0; i < 70; i++) {
       const particle = document.createElement('div');
-      particle.className = 'absolute w-1 h-1 bg-orange-400 rounded-full animate-float';
+      particle.className = 'absolute w-1.5 h-1.5 bg-orange-500 rounded-full animate-float';
 
       particle.style.left = `${Math.random() * 100}%`;
       particle.style.bottom = `-${Math.random() * 200}px`;
@@ -61,15 +61,15 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen pt-[8rem] md:pt-0 overflow-hidden relative bg-[#fff8f1]">
+    <div className="min-h-screen pt-[8rem] md:pt-0 overflow-hidden relative bg-white">
 
       {/* HERO SECTION */}
-      <div className="relative max-w-7xl mx-auto px-6 pb-12 md:pt-18">
+      <div className="relative max-w-7xl mx-auto px-6 pb-12 md:pt-18 bg-white">
 
         {/* Particles */}
         <div
           id="particles"
-          className="absolute inset-0 overflow-hidden pointer-events-none bg-transparent"
+          className="absolute inset-0 overflow-hidden pointer-events-none"
         />
 
         <div className="px-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
@@ -120,9 +120,9 @@ const Dashboard = () => {
           <div className="relative w-full flex flex-col items-center justify-center min-h-[360px] md:min-h-[520px]">
 
             {/* Energy waves */}
-            <div className="absolute w-64 h-64 md:w-[420px] md:h-[420px] rounded-full border-2 border-orange-400 border-opacity-30 wave-ring">
-              <div className="absolute inset-8 md:inset-10 rounded-full border-2 border-orange-500 border-opacity-40 wave-ring"></div>
-              <div className="absolute inset-16 md:inset-20 rounded-full border-2 border-orange-300 border-opacity-20 wave-ring"></div>
+            <div className="absolute w-64 h-64 md:w-[420px] md:h-[420px] rounded-full border-2 border-orange-400/30 wave-ring">
+              <div className="absolute inset-8 md:inset-10 rounded-full border-2 border-orange-500 wave-ring"></div>
+              <div className="absolute inset-16 md:inset-20 rounded-full border-2 border-orange-300/20 wave-ring"></div>
             </div>
 
             {/* Glow Core */}
@@ -148,46 +148,311 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* WELLNESS SECTION */}
-      <section className="py-24 bg-gradient-to-b from-[#0B1220] to-[#1E293B] text-white">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-4xl font-semibold mb-6">Your Mental Wellness Journey</h2>
-          <p className="text-orange-200 mb-14">
-            Discover therapies designed to restore peace and balance in your life.
+
+
+
+;
+
+<section className="relative py-28 bg-gradient-to-br from-[#fffff] via-[#fff3e6] to-[#ffffff] overflow-hidden">
+
+  {/* Background Visual Tech (Warm Blur Orbs) */}
+  <div className="absolute -top-20 -left-20 w-96 h-96 bg-white/30 rounded-full blur-5xl" />
+  <div className="absolute top-1/3 -right-24 w-96 h-96 bg-orange/10 rounded-full blur-5xl" />
+  <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-white/30 rounded-full blur-5xl" />
+
+  {/* Grid Overlay */}
+  <div className="absolute inset-0 bg-[linear-gradient(to_right,#fb923c15_1px,transparent_1px),linear-gradient(to_bottom,#fb923c15_1px,transparent_1px)] bg-[size:55px_55px]" />
+
+  <div className="relative max-w-6xl mx-auto px-6 text-center">
+
+    <motion.h2
+      initial={{ opacity: 0, y: -30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent"
+    >
+      Program Overview
+    </motion.h2>
+
+    <p className="text-gray-600 mb-16 max-w-3xl mx-auto text-lg">
+      A science-backed, soul-driven system designed to bring clarity, peace, happiness and abundance into your daily life.
+    </p>
+
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 text-left">
+
+      {[
+        {
+          title: "Daily Guided Sessions",
+          desc: "15–20 minute live meditation every evening at 9 PM IST",
+          icon: <FiClock />
+        },
+        {
+          title: "Session Recordings",
+          desc: "All sessions stay available to you for 7 days",
+          icon: <FiPlay />
+        },
+        {
+          title: "21-Day Free Trial",
+          desc: "Complete access for 21 days before any payment is taken",
+          icon: <FiCalendar />
+        },
+        {
+          title: "Flexible Subscriptions",
+          desc: "Affordable plans — every plan unlocks full content",
+          icon: <FiRefreshCw />
+        },
+        {
+          title: "Holistic Practices",
+          desc: "Includes journaling, affirmations & gratitude practices",
+          icon: <FiBookOpen />
+        },
+        {
+          title: "Scientific Collaboration",
+          desc: "Aligned with research from IKSMHA Centre, IIT Mandi",
+          icon: <FiCpu />
+        }
+      ].map((item, i) => (
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ delay: i * 0.1 }}
+          viewport={{ once: true }}
+          key={i}
+          className="group relative bg-white/60 backdrop-blur-xl p-8 rounded-3xl border border-white/50 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.10)] hover:shadow-[0_30px_90px_-20px_rgba(251,146,60,0.50)] hover:-translate-y-2 transition-all duration-500"
+        >
+
+          {/* Icon */}
+          <div className="w-14 h-14 mb-5 flex items-center justify-center rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 text-white text-2xl shadow-lg group-hover:scale-110 transition duration-300">
+            {item.icon}
+          </div>
+
+          <h3 className="font-semibold text-xl mb-2 text-gray-900">
+            {item.title}
+          </h3>
+          <p className="text-gray-600 leading-relaxed">
+            {item.desc}
           </p>
 
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { title: "Guided Meditation", icon: "🧘" },
-              { title: "Sleep Therapy", icon: "🌙" },
-              { title: "Anxiety Relief", icon: "🌿" },
-              { title: "Focus Booster", icon: "☀️" },
-            ].map((item, i) => (
-              <div key={i} className="p-6 rounded-2xl bg-white/10 backdrop-blur-lg hover:scale-105 transition">
-                <div className="text-4xl mb-4">{item.icon}</div>
-                <h3 className="text-lg font-medium">{item.title}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+          <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-amber-500 opacity-0 group-hover:opacity-100 transition" />
 
-      {/* STATS SECTION */}
-      <section className="py-20 bg-[#020617] text-white">
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-10 text-center">
-          {[
-            { value: "32 hrs", label: "Meditated" },
-            { value: "7 Days", label: "Streak" },
-            { value: "14", label: "Sessions" },
-            { value: "82%", label: "Mind Calm" },
-          ].map((stat, i) => (
-            <div key={i} className="p-8 rounded-2xl bg-white/5 backdrop-blur-lg">
-              <h3 className="text-3xl text-orange-400 font-bold">{stat.value}</h3>
-              <p className="text-orange-200">{stat.label}</p>
+        </motion.div>
+      ))}
+    </div>
+
+    {/* CTA */}
+    <motion.a
+      href="#pricing"
+      whileHover={{ scale: 1.05 }}
+      className="inline-block mt-20 px-10 py-4 text-lg rounded-full font-medium bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-xl hover:shadow-orange-500/40 transition-all"
+    >
+      View Pricing Plans
+    </motion.a>
+
+  </div>
+</section>
+
+{/* BENEFITS SECTION (MODERN WARM TECH) */}
+<section className="relative py-28 bg-white overflow-hidden">
+
+  {/* Warm Blur Orbs */}
+  <div className="absolute top-10 left-10 w-96 h-96 bg-orange-200/30 rounded-full blur-3xl" />
+  <div className="absolute bottom-10 right-10 w-96 h-96 bg-amber-200/30 rounded-full blur-3xl" />
+
+  {/* Subtle Tech Grid */}
+  <div className="absolute inset-0 bg-[linear-gradient(to_right,#fb923c12_1px,transparent_1px),linear-gradient(to_bottom,#fb923c12_1px,transparent_1px)] bg-[size:60px_60px]" />
+
+  <div className="relative max-w-6xl mx-auto px-6 text-center">
+
+    <motion.h2
+      initial={{ opacity: 0, y: -30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="text-4xl md:text-5xl font-bold mb-20 bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent"
+    >
+      Benefits of Regular Meditation
+    </motion.h2>
+
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 text-left">
+
+      {[
+        {
+          title: "Reduced Stress",
+          desc: "Feel calmer, grounded and centered every single day",
+          icon: <FiSun />
+        },
+        {
+          title: "Better Memory",
+          desc: "Improved focus and faster information processing",
+          icon: <FiCpu />
+        },
+        {
+          title: "Emotional Balance",
+          desc: "Stronger emotional control and peace within",
+          icon: <FiHeart />
+        },
+        {
+          title: "Self Awareness",
+          desc: "Clarity, purpose and deep inner focus",
+          icon: <FiTarget />
+        },
+      ].map((item, i) => (
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.9 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ delay: i * 0.1 }}
+          viewport={{ once: true }}
+          key={i}
+          className="
+            group
+            relative
+            bg-white/70
+            backdrop-blur-xl
+            p-8
+            rounded-3xl
+            border border-orange-100
+            shadow-[0_15px_40px_-20px_rgba(0,0,0,0.2)]
+            hover:shadow-[0_25px_70px_-20px_rgba(251,146,60,0.45)]
+            hover:-translate-y-2
+            transition-all
+            duration-500
+          "
+        >
+
+          {/* Icon Box */}
+          <div className="w-16 h-16 mb-6 flex items-center justify-center rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 text-white text-2xl shadow-lg group-hover:scale-110 transition">
+            {item.icon}
+          </div>
+
+          <h3 className="text-xl font-semibold mb-3 text-gray-800">
+            {item.title}
+          </h3>
+          <p className="text-gray-600 leading-relaxed">
+            {item.desc}
+          </p>
+
+          {/* Bottom Accent */}
+          <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-amber-500 opacity-0 group-hover:opacity-100 transition" />
+
+        </motion.div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+{/* 21-DAY FREE TRIAL – MODERN TECH LOOK */}
+<section className="relative py-28 bg-white overflow-hidden">
+
+
+  <div className="relative max-w-6xl mx-auto px-6">
+
+    <motion.h2
+      initial={{ opacity: 0, y: -20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="text-center text-4xl md:text-5xl font-bold mb-20 
+      bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent"
+    >
+      Your 21–Day Free Journey
+    </motion.h2>
+
+  
+
+    <div className="grid md:grid-cols-3 gap-12 relative">
+
+      {[
+        {
+          week: "Week 1",
+          title: "Days 1–7",
+          desc: "Breath awareness, body scan, daily gratitudes",
+          icon: <FiSun />
+        },
+        {
+          week: "Week 2",
+          title: "Days 8–14",
+          desc: "Emotional observation, journaling and affirmations",
+          icon: <FiActivity />
+        },
+        {
+          week: "Week 3",
+          title: "Days 15–21",
+          desc: "Mind rewiring, abundance and compassion meditation",
+          icon: <FiZap />
+        },
+      ].map((phase, i) => (
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.9 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ delay: i * 0.15 }}
+          viewport={{ once: true }}
+          key={i}
+          className="
+            group
+            relative
+            bg-white/70
+            backdrop-blur-xl
+            p-10
+            rounded-3xl
+            border border-orange-100
+            shadow-[0_20px_40px_-15px_rgba(0,0,0,0.15)]
+            hover:shadow-[0_30px_70px_-20px_rgba(251,146,60,0.5)]
+            hover:-translate-y-2
+            transition-all 
+            duration-500
+            text-center
+          "
+        >
+
+          {/* Top Icon */}
+          <div className="mb-6 flex justify-center">
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-white text-2xl
+              bg-gradient-to-br from-orange-500 to-amber-500 shadow-lg
+              group-hover:scale-110 transition">
+              {phase.icon}
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
+
+          {/* Week Tag */}
+          <span className="inline-block mb-4 px-4 py-1 rounded-full 
+          bg-orange-100 text-orange-600 text-sm font-semibold">
+            {phase.week}
+          </span>
+
+          <h3 className="text-2xl font-semibold mb-3 text-gray-800">
+            {phase.title}
+          </h3>
+
+          <p className="text-gray-600 leading-relaxed">
+            {phase.desc}
+          </p>
+
+          {/* bottom glow line */}
+          <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-amber-500 opacity-0 group-hover:opacity-100 transition" />
+
+        </motion.div>
+      ))}
+
+    </div>
+
+  </div>
+</section>
+
+<YearLongJourney />
+
+<BeyondTrialSection />
+
+<SubscriptionPricing />
+
+
+<AboutFounder className='my-4'/>
+
+
+
+<TestimonialCarousel />
+
+<FAQJoin />
+
+<Footer />
 
     </div>
   );

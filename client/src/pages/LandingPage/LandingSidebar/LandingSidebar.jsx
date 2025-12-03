@@ -1,58 +1,62 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
-import { Link } from "react-router-dom";
-import logo from "../../assets/avaykt-ehsaas-logo.png"
-import {
-  FiUser,
-  FiVideo,
-  FiCalendar,
-  FiAward,
-  FiSettings,
-  FiLogOut,
-  FiTrendingUp,
-  FiGrid,
-  FiMenu,
-  FiX
-} from "react-icons/fi";
-import { MdDashboard } from "react-icons/md";
-import SidebarLink from "../ui/SidebarLink";
-import toast from "react-hot-toast";
-import { motion, AnimatePresence } from "framer-motion";
+import React , {useState} from 'react'
+import { Link } from 'react-router-dom'
+import logo from '../../../assets/avaykt-ehsaas-logo.png'
+import { useAuth } from '../../../hooks/useAuth'
+import SidebarLink from '../../../components/ui/SidebarLink'
+import { FiMenu , FiX , FiSettings , FiPhoneCall , FiLogOut , FiUser, FiHome, FiSearch ,  FiBook , FiSunrise} from 'react-icons/fi'
+import {BiMessageSquareDetail} from 'react-icons/bi'
+import { MdDashboard } from 'react-icons/md'
+import {motion , AnimatePresence } from 'framer-motion'
+import { useRef } from 'react'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
 
-const UserSidebar = () => {
-  const { user, logout, fetchMe } = useAuth();
-  const [openMenu, setOpenMenu] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
+const LandingSidebar = () => {
+     const { user, logout, fetchMe } = useAuth();
+      const [openMenu, setOpenMenu] = useState(false);
+      const [profileOpen, setProfileOpen] = useState(false);
 
-  const navigate = useNavigate();
+      useGSAP(() => {
+        gsap.from(sidebarRef.current,{
+          opacity:0,
+          y:20,
+          duration:1,
+          delay: 0.2,
+          ease:"power3.out",
+        })
 
-  const menu = [
-    { icon: <MdDashboard />, label: "Dashboard", path: "/user" },
-    { icon: <FiUser />, label: "My Profile", path: "/user/profile" },
-    { icon: <FiVideo />, label: "Join Meeting", path: "/join-meeting" },
-    { icon: <FiCalendar />, label: "My Attendance", path: "/attendance" },
-   // { icon: <FiTrendingUp />, label: "Tree Growth", path: "/user/tree-growth" },
-    //{ icon: <FiAward />, label: "Achievements", path: "/user/achievements" },
-      ];
+      })
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-      toast.success("User logged out");
-      await fetchMe();
-      navigate("/auth/login");
-    } catch (error) {
-      toast.error("Logout failed");
-    }
-  };
+
+      const sidebarRef = useRef(null);
+      const handleLogout = async () => {
+        try {
+          await logout();
+          profileOpen(false)
+          toast.success("User logged out");
+          await fetchMe();
+          navigate("/auth/login");
+        } catch (error) {
+          toast.error("Logout failed");
+        }
+      };
+
+    const menu = [
+         { icon: <FiHome />, label: "Home", path: "/" },
+         { icon: <MdDashboard />, label: "Program", path: "/program" },
+         { icon: <FiSearch />, label: "Research", path: "/research" },
+          { icon: <FiBook />, label: "Resources", path: "/resources" },
+         { icon: <FiSunrise />, label: "Live-session", path: "/user" },
+         { icon: <BiMessageSquareDetail />, label: "About", path: "/about" },
+         { icon: <FiPhoneCall />, label: "Contact", path: "/contact" },
+    ]
 
   return (
     <>
-      {/* TOP NAVBAR */}
-     <div className="fixed top-0 left-0 w-full backdrop-blur-xl bg-gradient-to-r from-orange-50/80 via-amber-50/80 to-orange-100/70 border-b border-orange-200/60 shadow-lg z-50">
+       {/* TOP NAVBAR */}
+     <div ref={sidebarRef} className="fixed top-0 left-0 w-full backdrop-blur-xl bg-gradient-to-r from-orange-50/80 via-amber-50/80 to-orange-100/70 border-b border-orange-200/60 shadow-lg z-50">
 
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-2 md:gap-20">
+        <div className="max-w-7xl mx-auto px-2 py-3 flex items-center justify-between gap-2 ">
 
           {/* Logo Section */}
           <Link to={"/"} className="flex items-center px-1 ">
@@ -66,11 +70,11 @@ const UserSidebar = () => {
             </Link>  
          
                    {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8 items-center">
+          <div className="hidden md:flex space-x-2 items-center">
             {menu.map((item, i) => (
               <motion.div
                 key={i}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.02 }}
                 className="flex items-center"
               >
                 <SidebarLink
@@ -84,20 +88,29 @@ const UserSidebar = () => {
 
             {/* Desktop Profile Button + Dropdown */}
             <div className="relative hidden md:block">
+              {user?.name  ? (
               <button
                 onClick={() => setProfileOpen(!profileOpen)}
                 className="ml-4 flex items-center gap-3 bg-white/10 px-3 py-2 rounded-xl 
                   backdrop-blur-lg border border-white/20 hover:bg-white/20 transition"
               >
-                <div className="w-10 h-10 rounded-full bg-orange-300 flex items-center justify-center 
+                   <div className="w-10 h-10 rounded-full bg-orange-300 flex items-center justify-center 
                   text-orange-700 font-bold text-lg">
-                  {user?.name?.charAt(0) || "U"}
+                  {user?.name?.charAt(0)}
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-orange-500">{user?.name}</p>
-                  <p className="text-xs text-orange-400">{user?.email}</p>
+                    <p className="text-sm font-semibold text-orange-500">{user?.name}</p>
+                    <p className="text-xs text-orange-400">{user?.email}</p>
                 </div>
-              </button>
+                </button>
+                ) : (
+                  <>
+                  <Link to="/auth/login">
+                  <p className="text-sm bg-orange-500 px-3 py-2 rounded-full font-semibold text-orange-100">Join us</p></Link>
+                  </>
+                )
+                }
+               
 
               {/* DROPDOWN — DESKTOP ONLY */}
               <AnimatePresence>
@@ -214,8 +227,8 @@ const UserSidebar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
-  );
-};
+    </>       
+)
+}
 
-export default UserSidebar;
+export default LandingSidebar

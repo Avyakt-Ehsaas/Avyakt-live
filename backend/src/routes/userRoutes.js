@@ -1,6 +1,9 @@
 import express from 'express';
 import { admin, protect } from '../middleware/authmiddleware.js';
-import { getAllUsers, deleteUser, getUserById } from '../controllers/userController.js';
+import { getAllUsers, deleteUser, getUserById ,
+    updateSubscription,
+    getStreakAndTree
+} from '../controllers/userController.js';
 
 const router = express.Router();
 
@@ -21,5 +24,11 @@ router.delete('/deleteUser/:userId',protect, admin, deleteUser);
 
 // Admin: Get a single user by ID
 router.get('/getUser/:userId', admin, getUserById);
+
+// Update subscription plan
+router.put("/me/subscription", protect, updateSubscription);
+
+// Get streak and current tree info
+router.get("/me/streak-tree", protect, getStreakAndTree);
 
 export default router;

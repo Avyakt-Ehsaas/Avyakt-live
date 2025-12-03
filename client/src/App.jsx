@@ -22,7 +22,7 @@ import SecurityLogs from "./pages/admin/SecurityLogs";
 import AdminLayout from "./components/layout/AdminLayout";
 import UserLayout from "./components/layout/UserLayout";
 import Sidebar from "./components/layout/Sidebar";
-import LandingPage from "./pages/LandingPage";
+import LandingPage from "./pages/LandingPage/LandingPage";
 
 function App() {
   const { user, loadingUser } = useAuth();
@@ -45,17 +45,20 @@ function App() {
             {/* Public Routes */}
             <Route
               path="/auth/login"
-              element={!user ? <Login /> : <Navigate to="/user" replace />}
+              element={!user ? <Login /> :
+                 user.role === "admin" ? <Navigate to="/admin" replace /> : <Navigate to="/" replace />}
             />
             <Route
               path="/auth/register"
               element={!user ? <Register /> : <Navigate to="/" replace />}
             />
 
-            <Route
+            {/* <Route
               path="/"
               element={<LandingPage />}
-            />
+            /> */}
+
+              
 
             {/* Root Protected Route */}
             <Route

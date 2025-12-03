@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { FiSearch, FiFilter, FiDownload, FiAlertCircle, FiUser, FiLock, FiShield, FiClock } from 'react-icons/fi';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  FiSearch, 
+  FiDownload, 
+  FiUser, 
+  FiLock, 
+  FiShield, 
+  FiAlertTriangle, 
+  FiClock,
+  FiAlertCircle,
+  FiChevronLeft,
+  FiChevronRight
+} from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
 import API from '../../utils/api';
 
@@ -7,427 +19,348 @@ const SecurityLogs = () => {
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [filters, setFilters] = useState({
-    type: 'all',
-    dateRange: '7days',
-    severity: 'all',
-  });
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-  
+  const itemsPerPage = 8;
+
   // Mock data - replace with actual API call
   const mockLogs = [
     {
       id: 1,
-      timestamp: new Date(Date.now() - 1000 * 60 * 5), // 5 minutes ago
+      timestamp: new Date(Date.now() - 1000 * 60 * 5),
       type: 'login',
       severity: 'info',
-      user: 'john.doe@example.com',
+      user: 'admin@example.com',
       ip: '192.168.1.1',
-      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-      details: 'User logged in successfully',
+      userAgent: 'Windows 10, Chrome 119',
+      details: 'Successful login from trusted device',
     },
     {
       id: 2,
-      timestamp: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago
+      timestamp: new Date(Date.now() - 1000 * 60 * 30),
       type: 'failed_login',
-      severity: 'warning',
+      severity: 'high',
       user: 'hacker@example.com',
       ip: '45.33.22.1',
-      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-      details: 'Failed login attempt - Invalid credentials',
+      userAgent: 'Linux, Firefox 120',
+      details: 'Multiple failed login attempts',
     },
     {
       id: 3,
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago
+      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2),
       type: 'password_change',
       severity: 'info',
       user: 'jane.smith@example.com',
       ip: '192.168.1.2',
-      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15',
-      details: 'Password changed successfully',
+      userAgent: 'macOS, Safari 17',
+      details: 'Password updated successfully',
     },
     {
       id: 4,
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24), // 1 day ago
+      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 5),
       type: 'account_locked',
-      severity: 'high',
+      severity: 'critical',
       user: 'user@example.com',
       ip: '45.33.22.1',
-      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-      details: 'Account locked due to multiple failed login attempts',
+      userAgent: 'Windows, Chrome 119',
+      details: 'Account locked after 5 failed attempts',
     },
     {
       id: 5,
-      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2), // 2 days ago
+      timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24),
       type: 'login',
       severity: 'info',
       user: 'admin@example.com',
-      ip: '192.168.1.100',
-      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15',
-      details: 'Admin user logged in',
+      ip: '192.168.1.1',
+      userAgent: 'Windows 10, Chrome 119',
+      details: 'Successful login from trusted device',
     },
   ];
 
   useEffect(() => {
     fetchLogs();
-  }, [filters, currentPage]);
+  }, [currentPage]);
 
   const fetchLogs = async () => {
     try {
       setLoading(true);
-      // Replace with actual API call
-      // const response = await API.get('/admin/security-logs', { params: { ...filters, page: currentPage, limit: itemsPerPage } });
-      // setLogs(response.data);
+      // Uncomment for real API
+      // const { data } = await API.get('/admin/security-logs', {
+      //   params: { page: currentPage, limit: itemsPerPage, search: searchTerm }
+      // });
+      // setLogs(data.logs);
       
-      // Mock data for now
-      setLogs(mockLogs);
+      // Mock data
+      setTimeout(() => {
+        setLogs(mockLogs);
+        setLoading(false);
+      }, 800);
     } catch (error) {
-      console.error('Error fetching security logs:', error);
       toast.error('Failed to load security logs');
-    } finally {
       setLoading(false);
     }
   };
 
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilters(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    setCurrentPage(1); // Reset to first page when filters change
-  };
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    fetchLogs();
-  };
-
-  const handleExport = (format = 'csv') => {
-    // Implement export functionality
-    toast.success(`Exporting logs as ${format.toUpperCase()}`);
-  };
-
   const getSeverityBadge = (severity) => {
     const severityClasses = {
-      info: 'bg-blue-100 text-blue-800',
-      low: 'bg-green-100 text-green-800',
-      medium: 'bg-yellow-100 text-yellow-800',
-      high: 'bg-red-100 text-red-800',
-      critical: 'bg-purple-100 text-purple-800',
+      info: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30',
+      low: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
+      medium: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30',
+      high: 'bg-orange-500/10 text-orange-400 border-orange-500/30',
+      critical: 'bg-red-500/10 text-red-400 border-red-500/30',
     };
-    
-    const severityLabels = {
-      info: 'Info',
-      low: 'Low',
-      medium: 'Medium',
-      high: 'High',
-      critical: 'Critical',
+
+    const severityIcons = {
+      info: <FiAlertCircle className="w-4 h-4" />,
+      low: <FiShield className="w-4 h-4" />,
+      medium: <FiAlertTriangle className="w-4 h-4" />,
+      high: <FiAlertTriangle className="w-4 h-4" />,
+      critical: <FiAlertCircle className="w-4 h-4" />,
     };
-    
+
     return (
-      <span className={`px-2 py-1 text-xs font-medium rounded-full ${severityClasses[severity] || 'bg-gray-100 text-gray-800'}`}>
-        {severityLabels[severity] || severity}
+      <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border ${severityClasses[severity] || 'bg-gray-800/50 text-gray-400'}`}>
+        {severityIcons[severity] || <FiAlertCircle className="w-3 h-3" />}
+        {severity.charAt(0).toUpperCase() + severity.slice(1)}
       </span>
     );
   };
 
-  const getTypeIcon = (type) => {
+  const getEventIcon = (type) => {
     const icons = {
-      login: <FiUser className="text-blue-500" />,
-      failed_login: <FiLock className="text-red-500" />,
-      password_change: <FiShield className="text-green-500" />,
-      account_locked: <FiAlertCircle className="text-yellow-500" />,
+      login: <FiUser className="w-4 h-4 text-cyan-400" />,
+      failed_login: <FiLock className="w-4 h-4 text-red-400" />,
+      password_change: <FiShield className="w-4 h-4 text-emerald-400" />,
+      account_locked: <FiAlertCircle className="w-4 h-4 text-orange-400" />,
     };
-    
-    return icons[type] || <FiAlertCircle className="text-gray-500" />;
+    return icons[type] || <FiAlertCircle className="w-4 h-4 text-gray-400" />;
   };
 
-  const formatDate = (date) => {
-    return new Date(date).toLocaleString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  };
-
-  const getTimeAgo = (date) => {
+  const formatTimeAgo = (date) => {
     const seconds = Math.floor((new Date() - new Date(date)) / 1000);
-    
-    const intervals = {
-      year: 31536000,
-      month: 2592000,
-      week: 604800,
-      day: 86400,
-      hour: 3600,
-      minute: 60,
-      second: 1
-    };
-    
-    for (const [unit, secondsInUnit] of Object.entries(intervals)) {
-      const interval = Math.floor(seconds / secondsInUnit);
-      if (interval >= 1) {
-        return interval === 1 ? `${interval} ${unit} ago` : `${interval} ${unit}s ago`;
-      }
-    }
-    
-    return 'Just now';
+    if (seconds < 60) return 'Just now';
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return `${minutes}m ago`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h ago`;
+    const days = Math.floor(hours / 24);
+    return `${days}d ago`;
+  };
+
+  // Filter logs based on search term
+  const filteredLogs = mockLogs.filter(log => 
+    log.user.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    log.details.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    log.ip.includes(searchTerm)
+  );
+
+  // Pagination
+  const totalPages = Math.ceil(filteredLogs.length / itemsPerPage);
+  const paginatedLogs = filteredLogs.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handleExport = () => {
+    toast.success('Exporting security logs...');
+    // Implement export functionality
   };
 
   return (
-    <div className="p-6 min-h-screen ml-[16rem] bg-gradient-to-br from-gray-50 to-white">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-800">Security Logs</h1>
-            <p className="text-gray-600">Monitor and review security-related events</p>
-          </div>
-          <div className="mt-4 md:mt-0">
-            <button
-              onClick={() => handleExport('csv')}
-              className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-            >
-              <FiDownload className="mr-2" />
-              Export Logs
-            </button>
-          </div>
-        </div>
+    <div className="ml-[15rem] p-8 min-h-screen bg-gray-900 text-gray-100">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="mb-8"
+      >
+        <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500">
+          Security Monitoring
+        </h1>
+        <p className="text-gray-400 mt-2">Track and monitor security events in real-time</p>
+      </motion.div>
 
-        {/* Filters */}
-        <div className="bg-white rounded-xl shadow-sm p-4 mb-6">
-          <form onSubmit={handleSearch} className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <FiSearch className="h-5 w-5 text-gray-400" />
-              </div>
-              <input
-                type="text"
-                placeholder="Search logs..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent sm:text-sm"
-              />
+      {/* Search and Controls */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="mb-8"
+      >
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="relative flex-1">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <FiSearch className="text-gray-500" />
             </div>
-            
-            <div>
-              <select
-                name="type"
-                value={filters.type}
-                onChange={handleFilterChange}
-                className="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent sm:text-sm rounded-md"
-              >
-                <option value="all">All Event Types</option>
-                <option value="login">Logins</option>
-                <option value="failed_login">Failed Logins</option>
-                <option value="password_change">Password Changes</option>
-                <option value="account_locked">Account Locks</option>
-                <option value="permission_change">Permission Changes</option>
-              </select>
-            </div>
-            
-            <div>
-              <select
-                name="severity"
-                value={filters.severity}
-                onChange={handleFilterChange}
-                className="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent sm:text-sm rounded-md"
-              >
-                <option value="all">All Severities</option>
-                <option value="info">Info</option>
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-                <option value="critical">Critical</option>
-              </select>
-            </div>
-            
-            <div>
-              <select
-                name="dateRange"
-                value={filters.dateRange}
-                onChange={handleFilterChange}
-                className="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent sm:text-sm rounded-md"
-              >
-                <option value="1h">Last hour</option>
-                <option value="24h">Last 24 hours</option>
-                <option value="7days">Last 7 days</option>
-                <option value="30days">Last 30 days</option>
-                <option value="all">All time</option>
-              </select>
-            </div>
-            
-            <div>
-              <button
-                type="submit"
-                className="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
-              >
-                <FiFilter className="mr-2" />
-                Apply Filters
-              </button>
-            </div>
-          </form>
+            <input
+              type="text"
+              placeholder="Search logs by user, IP, or details..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-4 py-2.5 bg-gray-800/50 border border-gray-700 rounded-lg focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 outline-none transition-all duration-300"
+            />
+          </div>
+          <button
+            onClick={handleExport}
+            className="flex items-center justify-center gap-2 px-6 py-2.5 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white rounded-lg transition-all duration-300 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40"
+          >
+            <FiDownload className="w-4 h-4" />
+            <span>Export Logs</span>
+          </button>
         </div>
+      </motion.div>
 
-        {/* Logs Table */}
-        <div className="bg-white shadow-sm rounded-xl overflow-hidden">
-          {loading ? (
-            <div className="flex justify-center items-center p-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
-            </div>
-          ) : logs.length === 0 ? (
-            <div className="text-center p-12">
-              <FiAlertCircle className="mx-auto h-12 w-12 text-gray-400" />
-              <h3 className="mt-2 text-sm font-medium text-gray-900">No logs found</h3>
-              <p className="mt-1 text-sm text-gray-500">
-                No security logs match your current filters.
-              </p>
-            </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Event
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      User
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Details
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      IP Address
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Time
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Severity
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {logs.map((log) => (
-                    <tr key={log.id} className="hover:bg-gray-50">
+      {/* Logs Table */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+        className="bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-xl overflow-hidden shadow-2xl"
+      >
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead className="bg-gray-800/80 border-b border-gray-700/50">
+              <tr>
+                <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Event
+                </th>
+                <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  User
+                </th>
+                <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Details
+                </th>
+                <th className="px-6 py-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  IP Address
+                </th>
+                <th className="px-6 py-4 text-right text-xs font-medium text-gray-400 uppercase tracking-wider">
+                  Time
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-700/50">
+              {loading ? (
+                <tr>
+                  <td colSpan="5" className="px-6 py-12 text-center">
+                    <div className="flex flex-col items-center justify-center">
+                      <div className="w-12 h-12 border-4 border-cyan-500/30 border-t-cyan-500 rounded-full animate-spin mb-4"></div>
+                      <p className="text-gray-400">Loading security logs...</p>
+                    </div>
+                  </td>
+                </tr>
+              ) : paginatedLogs.length === 0 ? (
+                <tr>
+                  <td colSpan="5" className="px-6 py-12 text-center text-gray-400">
+                    No security logs found
+                  </td>
+                </tr>
+              ) : (
+                <AnimatePresence>
+                  {paginatedLogs.map((log) => (
+                    <motion.tr
+                      key={log.id}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 10 }}
+                      className="hover:bg-gray-700/30 transition-colors duration-200"
+                    >
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div className="flex-shrink-0 h-10 w-10 flex items-center justify-center">
-                            {getTypeIcon(log.type)}
+                        <div className="flex items-center gap-3">
+                          <div className="p-1.5 bg-gray-700/50 rounded-lg">
+                            {getEventIcon(log.type)}
                           </div>
-                          <div className="ml-4">
-                            <div className="text-sm font-medium text-gray-900 capitalize">
+                          <div>
+                            <div className="text-sm font-medium text-white capitalize">
                               {log.type.replace('_', ' ')}
                             </div>
-                            <div className="text-sm text-gray-500">
-                              {formatDate(log.timestamp)}
+                            <div className="mt-1">
+                              {getSeverityBadge(log.severity)}
                             </div>
                           </div>
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{log.user}</div>
-                        <div className="text-xs text-gray-500 truncate max-w-xs" title={log.userAgent}>
-                          {log.userAgent}
-                        </div>
+                        <div className="text-sm font-medium text-white">{log.user}</div>
+                        <div className="text-xs text-gray-400">{log.userAgent}</div>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="text-sm text-gray-900">{log.details}</div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {log.ip}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div className="flex items-center">
-                          <FiClock className="mr-1 text-gray-400" />
-                          {getTimeAgo(log.timestamp)}
-                        </div>
+                        <div className="text-sm text-gray-300">{log.details}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        {getSeverityBadge(log.severity)}
+                        <div className="text-sm font-mono text-gray-300">{log.ip}</div>
                       </td>
-                    </tr>
+                      <td className="px-6 py-4 whitespace-nowrap text-right">
+                        <div className="flex items-center justify-end gap-2 text-sm text-gray-400">
+                          <FiClock className="w-3.5 h-3.5" />
+                          <span>{formatTimeAgo(log.timestamp)}</span>
+                        </div>
+                      </td>
+                    </motion.tr>
                   ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-          
-          {/* Pagination */}
-          <div className="bg-white px-6 py-3 flex items-center justify-between border-t border-gray-200">
-            <div className="flex-1 flex justify-between sm:hidden">
+                </AnimatePresence>
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Pagination */}
+        {!loading && totalPages > 1 && (
+          <div className="px-6 py-4 bg-gray-800/30 border-t border-gray-700/50">
+            <div className="flex items-center justify-between">
               <button
                 onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                 disabled={currentPage === 1}
-                className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className={`flex items-center gap-2 px-4 py-2 text-sm rounded-lg transition-colors ${
+                  currentPage === 1 
+                    ? 'text-gray-600 cursor-not-allowed' 
+                    : 'text-gray-300 hover:bg-gray-700/50'
+                }`}
               >
+                <FiChevronLeft className="w-4 h-4" />
                 Previous
               </button>
+              
+              <div className="flex items-center gap-1">
+                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                  let pageNum;
+                  if (totalPages <= 5) pageNum = i + 1;
+                  else if (currentPage <= 3) pageNum = i + 1;
+                  else if (currentPage >= totalPages - 2) pageNum = totalPages - 4 + i;
+                  else pageNum = currentPage - 2 + i;
+
+                  if (pageNum < 1 || pageNum > totalPages) return null;
+
+                  return (
+                    <button
+                      key={pageNum}
+                      onClick={() => setCurrentPage(pageNum)}
+                      className={`w-10 h-10 flex items-center justify-center rounded-lg text-sm font-medium transition-colors ${
+                        currentPage === pageNum
+                          ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg shadow-cyan-500/20'
+                          : 'text-gray-400 hover:bg-gray-700/50'
+                      }`}
+                    >
+                      {pageNum}
+                    </button>
+                  );
+                })}
+              </div>
+
               <button
-                onClick={() => setCurrentPage(p => p + 1)}
-                disabled={logs.length < itemsPerPage}
-                className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+                className={`flex items-center gap-2 px-4 py-2 text-sm rounded-lg transition-colors ${
+                  currentPage === totalPages
+                    ? 'text-gray-600 cursor-not-allowed' 
+                    : 'text-gray-300 hover:bg-gray-700/50'
+                }`}
               >
                 Next
+                <FiChevronRight className="w-4 h-4" />
               </button>
             </div>
-            <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-              <div>
-                <p className="text-sm text-gray-700">
-                  Showing <span className="font-medium">{(currentPage - 1) * itemsPerPage + 1}</span> to{' '}
-                  <span className="font-medium">
-                    {Math.min(currentPage * itemsPerPage, logs.length + (currentPage - 1) * itemsPerPage)}
-                  </span>{' '}
-                  of <span className="font-medium">{logs.length * 2}</span> results
-                </p>
-              </div>
-              <div>
-                <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-                  <button
-                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                    disabled={currentPage === 1}
-                    className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    <span className="sr-only">Previous</span>
-                    <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  </button>
-                  
-                  {[1, 2, 3].map((page) => (
-                    <button
-                      key={page}
-                      onClick={() => setCurrentPage(page)}
-                      className={`${
-                        currentPage === page
-                          ? 'bg-purple-50 border-purple-500 text-purple-600'
-                          : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
-                      } relative inline-flex items-center px-4 py-2 border text-sm font-medium`}
-                    >
-                      {page}
-                    </button>
-                  ))}
-                  
-                  <button
-                    onClick={() => setCurrentPage(p => p + 1)}
-                    disabled={logs.length < itemsPerPage}
-                    className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    <span className="sr-only">Next</span>
-                    <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
-                    </svg>
-                  </button>
-                </nav>
-              </div>
-            </div>
           </div>
-        </div>
-      </div>
+        )}
+      </motion.div>
     </div>
   );
 };

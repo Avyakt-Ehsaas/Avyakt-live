@@ -19,7 +19,7 @@ export default function LoginForm() {
       console.log(user)
       toast.success("Logged in successfully!");
       await fetchMe();
-      navigate("/dashboard"); // redirect after login
+      navigate("/"); // redirect after login
     } catch (err) {
       toast.error(err?.response?.data?.message || "Login failed");
     }

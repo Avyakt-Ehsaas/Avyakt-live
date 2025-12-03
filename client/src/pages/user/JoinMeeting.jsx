@@ -1,357 +1,425 @@
-// src/pages/JoinMeeting.jsx
-import React, { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
-import {
-  FiVideo,
-  FiArrowRight,
-  FiUser,
-  FiLock,
-  FiCalendar,
-  FiYoutube,
-} from "react-icons/fi";
-import { toast } from "react-hot-toast";
-import API from "../../utils/api";
-import SavedVideos from "../../components/SavedVideos";
-import { useAuth } from "../../hooks/useAuth";
-import CountdownTimer from "../../components/CountdownTimer";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import { FiVideo, FiUser, FiClock, FiCalendar, FiArrowRight } from 'react-icons/fi';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
+import API from '../../utils/api';
+import { useAuth } from '../../hooks/useAuth';
 
 const JoinMeeting = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [joining, setJoining] = useState(false);
+  const [meeting, setMeeting] = useState(null);
+  const [session, setSession] = useState(null);
+  const [userName, setUserName] = useState(user?.name || '');
+  const [isInSession, setIsInSession] = useState(false);
+  
 
-  const [meetingId, setMeetingId] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState(user?.name || "");
-  const [isJoining, setIsJoining] = useState(false);
-  const [todayMeeting, setTodayMeeting] = useState(null);
-  const [meetingStartTime, setMeetingStartTime] = useState(null);
+  const [history, setHistory] = useState([]);
+const [pagination, setPagination] = useState({
+  page: 1,
+  limit: 5,
+  total: 0,
+  pages: 1
+});
+const [loadingHistory, setLoadingHistory] = useState(false);
 
-  const [savedVideos] = useState([
-    {
-      id: 1,
-      title: "Morning Meditation for Positive Energy",
-      duration: "10:30",
-      url: "https://www.youtube.com/watch?v=inpok4MKVLM",
-      description: "Start your day with positive energy and clear your mind.",
-      thumbnail: "https://img.youtube.com/vi/inpok4MKVLM/hqdefault.jpg",
-    },
-    {
-      id: 2,
-      title: "Deep Breathing Exercise for Stress",
-      duration: "5:15",
-      url: "https://www.youtube.com/watch?v=tF7YLG4e5k0",
-      description: "Calm your mind with this simple breathing exercise.",
-      thumbnail: "https://img.youtube.com/vi/tF7YLG4e5k0/hqdefault.jpg",
-    },
-    {
-      id: 3,
-      title: "Guided Sleep Meditation",
-      duration: "15:00",
-      url: "https://www.youtube.com/watch?v=1ZYbU82GVz4",
-      description: "Fall asleep faster with this relaxing meditation.",
-      thumbnail: "https://img.youtube.com/vi/1ZYbU82GVz4/hqdefault.jpg",
-    },
-    {
-      id: 4,
-      title: "Anxiety Relief Meditation",
-      duration: "12:45",
-      url: "https://www.youtube.com/watch?v=O-6f5wQXSu8",
-      description: "Reduce anxiety and find your calm.",
-      thumbnail: "https://img.youtube.com/vi/O-6f5wQXSu8/hqdefault.jpg",
-    },
-    // ... keep rest
-  ]);
-
-  // Check meeting time: show meditation if meeting coming up
-  const checkMeetingTime = useCallback((meeting) => {
-    if (!meeting || !meeting.startTime) return false;
-    const now = new Date();
-    const today = now.toISOString().split("T")[0];
-    const [hours, minutes] = meeting.startTime.split(":").map(Number);
-    const meetingTime = new Date(today);
-    meetingTime.setHours(hours, minutes, 0, 0);
-
-    const timeUntilMeeting = meetingTime - now;
-    const oneHourInMs = 60 * 60 * 1000;
-
-    if (timeUntilMeeting > 0 && timeUntilMeeting <= oneHourInMs) {
-      setMeetingStartTime(meetingTime);
-      return true;
-    } else if (timeUntilMeeting > oneHourInMs) {
-      // meeting scheduled later today
-      setMeetingStartTime(meetingTime);
-      return true;
+// Add this effect to fetch session history
+useEffect(() => {
+  const fetchSessionHistory = async () => {
+    try {
+      setLoadingHistory(true);
+      const res = await API.get(`/meetings/history?page=${pagination.page}&limit=${pagination.limit}`);
+      setHistory(res.data.data);
+      setPagination(prev => ({
+        ...prev,
+        total: res.data.pagination.total,
+        pages: res.data.pagination.pages
+      }));
+    } catch (error) {
+      console.error('Error fetching session history:', error);
+      toast.error('Failed to load session history');
+    } finally {
+      setLoadingHistory(false);
     }
-    return false;
-  }, []);
+  };
 
-  // Fetch today's meeting
+  fetchSessionHistory();
+}, [pagination.page]);
+
+// Add these pagination handlers
+const handlePrevPage = () => {
+  if (pagination.page > 1) {
+    setPagination(prev => ({ ...prev, page: prev.page - 1 }));
+  }
+};
+
+const handleNextPage = () => {
+  if (pagination.page < pagination.pages) {
+    setPagination(prev => ({ ...prev, page: prev.page + 1 }));
+  }
+};
+
+  // Fetch today's session
   useEffect(() => {
-    const fetchTodaysMeeting = async () => {
+    const fetchTodaySession = async () => {
       try {
-        const { data } = await API.get("/meeting/today");
-        // protected route
-        if (data && data.meeting) {
-          setTodayMeeting(data.meeting);
-          if (!meetingId && data.meeting._id) setMeetingId(data.meeting._id);
-          checkMeetingTime(data.meeting);
-        } else {
-          setTodayMeeting(null);
+        const res = await API.get('/meetings/today');
+        if (res.data?.meeting) {
+          setMeeting(res.data.meeting);
+          setSession(res.data.meeting.session);
+          setLoading(false);
         }
-      } catch (err) {
-        console.error("Error fetching today's meeting:", err);
-        // Only show toast if it's an actual error (not expected 404)
-        toast.error("Failed to fetch today's meeting");
+      } catch (error) {
+        console.error('Error fetching session:', error);
+        toast.error('Failed to load session details');
+        setLoading(false);
       }
     };
 
-    fetchTodaysMeeting();
-  }, [
-    checkMeetingTime,
-     meetingId]);
+    fetchTodaySession();
+  }, []);
 
-  // Resilient leave call: try attendance leave by attendanceId, fallback to meeting/leave by meetingId
-  const callLeaveEndpoint = async () => {
-    // Try attendance leave by attendance id first
-    try {
-      const attendanceId = sessionStorage.getItem('attendanceId')
-      if(!attendanceId) return
-      if (attendanceId) {
-        await API.post(`/attendance/leave/${attendanceId}`);
-        return true;
-      }
-    } catch (err) {
-      // ignore and try fallback
-      console.warn("attendance/leave failed, trying meeting/leave:", err?.response?.data || err);
-    }
-
-    return false;
-  };
-
-  // Join meeting: POST /meeting/join with {meetingId}
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!meetingId?.trim()) {
-      toast.error("Please enter a meeting ID");
-      return;
-    }
-    if (!name?.trim()) {
-      toast.error("Please enter your name");
+  const handleJoin = async () => {
+    if (!userName.trim()) {
+      toast.error('Please enter your name');
       return;
     }
 
-    // if meeting is scheduled in future and you want to prevent early join
-    if (meetingStartTime && new Date() < meetingStartTime) {
-      const minutesLeft = Math.ceil((meetingStartTime - new Date()) / (60 * 1000));
-      if (minutesLeft > 60) {
-        toast.error(`Meeting will start in ${Math.floor(minutesLeft / 60)} hours`);
-        return;
-      }
-      toast.error(`Meeting will start in ${minutesLeft} minutes`);
-      return;
-    }
-
-    setIsJoining(true);
+    setJoining(true);
 
     try {
-      // server expects { meetingId } in body
-      const res = await API.post("/meeting/join", { meetingId });
-      if (!res?.data?.success) {
-        toast.error(res?.data?.message || "Failed to join meeting");
-        setIsJoining(false);
-        return;
-      }
+      // Join the session
+      const joinRes = await API.post('/meetings/join',{ userName: userName });
+      
+      // Open Zoom link in new tab
+      if (joinRes.data?.redirect) {
+        const meetingWindow = window.open(joinRes.data.redirect, '_blank');
+        setIsInSession(true);
+        toast.success('Joining session...');
 
-      const { redirect, attendanceId } = res.data;
-      // store attendance id to clean up & update leave
-      if (attendanceId) sessionStorage.setItem("attendanceId", attendanceId);
-
-      // open meeting link
-      if (redirect) {
-        const meetingWindow = window.open(redirect, "_blank");
-        toast.success("Joining meeting...");
-
-        window.addEventListener("beforeunload", callLeaveEndpoint);
-        document.addEventListener("visibilitychange",() => {
-          if(document.visibilityState==="hidden")callLeaveEndpoint()
-        });
-
-        // Poll for meeting window closed
-        const interval = setInterval(async () => {
-          try {
-            if (!meetingWindow || meetingWindow.closed) {
-              clearInterval(interval);
-              callLeaveEndpoint();
-            }
-          } catch (err) {
-            console.error("poll window closed err", err);
+        // Set up cleanup when window is closed
+        const checkWindow = setInterval(() => {
+          if (meetingWindow.closed) {
+            clearInterval(checkWindow);
+            handleLeave();
           }
         }, 1000);
-      } else {
-        toast.error("Meeting link not available");
       }
-    } catch (err) {
-      console.error("joinMeeting error:", err);
-      toast.error(err?.response?.data?.message || "Failed to join meeting");
-    } finally {
-      setIsJoining(false);
+    } catch (error) {
+      console.error('Error joining session:', error);
+      toast.error(error.response?.data?.message || 'Failed to join session');
+      setJoining(false);
     }
   };
 
-  // component unmount cleanup: try to send leave if still present
+  const handleLeave = async () => {
+    try {
+      if (session?._id) {
+        await API.post(`/meetings/leave/${session._id}`);
+      }
+      setIsInSession(false);
+      setJoining(false);
+    } catch (error) {
+      console.error('Error leaving session:', error);
+    }
+  };
+
+  // Handle page unload
   useEffect(() => {
-    return () => {
-      const attendanceId = sessionStorage.getItem("attendanceId");
-      if (attendanceId) {
-        // best-effort (no await in cleanup)
-        callLeaveEndpoint().finally(() => {
-          sessionStorage.removeItem("attendanceId");
-        });
+    const handleBeforeUnload = () => {
+      if (isInSession && session?._id) {
+        // Use sendBeacon for more reliable cleanup
+        const data = new FormData();
+        data.append('sessionId', session._id);
+        navigator.sendBeacon(`/api/meetings/leave/${session._id}`, data);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [isInSession, session]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
+      </div>
+    );
+  }
+
+  if (!meeting || !session) {
+    return (
+      <div className="min-h-screen  flex items-center justify-center bg-gray-50">
+        <div className="text-center p-6 max-w-md">
+          <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+            <FiCalendar className="h-6 w-6 text-red-600" />
+          </div>
+          <h3 className="mt-2 text-lg font-medium text-gray-900">No session today</h3>
+          <p className="mt-1 text-sm text-gray-500">
+            There are no meditation sessions scheduled for today.
+          </p>
+          <div className="mt-6">
+            <button
+              onClick={() => navigate('/')}
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+            >
+              Back to Home
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const sessionTime = new Date(session.startTime || `${new Date().toISOString().split('T')[0]}T${meeting.defaultTime}`);
+  const isSessionLive = session.status === 'live' || session.status === 'scheduled';
 
   return (
-    <div className="pt-[5rem] min-h-screen bg-gradient-to-br from-purple-100 via-pink-50 to-white">
-      <div className="p-6">
-        <div className="max-w-6xl mx-auto">
-          {/* Hero */}
-          <div className="mb-8 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl shadow-lg overflow-hidden">
-            <div className="p-8 text-white">
-              <div className="flex flex-col md:flex-row md:items-center justify-between">
-                <div className="mb-6 md:mb-0">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-2">{todayMeeting?.title || "Daily Meditation Session"}</h2>
-                  <div className="flex items-center text-purple-100">
-                    <FiCalendar className="mr-2" />
-                    {todayMeeting?.startTime ? (
-                      <div className="flex items-center">
-                        <span className="mr-2">Today • {todayMeeting.startTime}</span>
-                        <CountdownTimer targetTime={meetingStartTime} onComplete={() => setShowMeditation(false)} />
-                      </div>
-                    ) : (
-                      <span>No meeting scheduled for today</span>
+    <div className="min-h-screen pt-12 bg-gradient-to-br from-purple-50 to-pink-50">
+      <div className="max-w-4xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+            {meeting.title}
+          </h1>
+          <p className="mt-3 text-xl text-gray-500">
+            {session.status === 'completed' ? 'Session Completed' : 
+             session.status === 'live' ? 'Session in Progress' : 'Upcoming Session'}
+          </p>
+        </div>
+
+        <div className="bg-white shadow rounded-lg overflow-hidden">
+          <div className="px-6 py-8 sm:p-10">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              {/* Session Info */}
+              <div>
+                <h2 className="text-lg font-medium text-gray-900 mb-4">Session Details</h2>
+                <div className="space-y-4">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 h-6 w-6 text-purple-500">
+                      <FiCalendar className="h-6 w-6" />
+                    </div>
+                    <div className="ml-3">
+                      <p className="text-sm font-medium text-gray-500">Date</p>
+                      <p className="text-sm text-gray-900">
+                        {new Date(sessionTime).toLocaleDateString('en-US', {
+                          weekday: 'long',
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 h-6 w-6 text-purple-500">
+                      <FiClock className="h-6 w-6" />
+                    </div>
+                    <div className="ml-3">
+                      <p className="text-sm font-medium text-gray-500">Time</p>
+                      <p className="text-sm text-gray-900">
+                        {sessionTime.toLocaleTimeString('en-US', {
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          timeZone: meeting.timezone
+                        })}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {session.status === 'completed' && (
+                  <div className="mt-6 p-4 bg-green-50 rounded-md">
+                    <p className="text-sm text-green-700">
+                      This session has ended. Check back tomorrow for the next one!
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* Join Form */}
+              <div>
+                <h2 className="text-lg font-medium text-gray-900 mb-4">Join Session</h2>
+                
+                {!isInSession ? (
+                  <div className="space-y-4">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                        Your Name
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        value={userName}
+                        onChange={(e) => setUserName(e.target.value)}
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+                        placeholder="Enter your name"
+                      />
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={handleJoin}
+                      disabled={joining || !isSessionLive}
+                      className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+                        !isSessionLive
+                          ? 'bg-gray-400 cursor-not-allowed'
+                          : 'bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500'
+                      }`}
+                    >
+                      {joining ? 'Joining...' : 'Join Session'}
+                      <FiArrowRight className="ml-2 h-4 w-4" />
+                    </button>
+
+                    {!isSessionLive && (
+                      <p className="mt-2 text-sm text-gray-500">
+                        This session is not currently active.
+                      </p>
                     )}
                   </div>
-                  {todayMeeting?.description && <p className="mt-3 text-purple-100 max-w-2xl">{todayMeeting.description}</p>}
-                </div>
-
-                <div className="flex flex-col space-y-3">
-                  <button
-                    onClick={() => todayMeeting?.zoomLink && window.open(todayMeeting.zoomLink, "_blank")}
-                    className="px-6 py-3 bg-white text-purple-700 font-semibold rounded-lg shadow-md hover:bg-purple-50 transition-colors flex items-center justify-center"
-                    disabled={!todayMeeting?.zoomLink}
-                  >
-                    <FiVideo className="mr-2" />
-                    {todayMeeting?.zoomLink ? "Join Live Now" : "No Meeting Scheduled"}
-                  </button>
-
-                  {todayMeeting?.materials && (
-                    <a href={todayMeeting.materials} target="_blank" rel="noreferrer" className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-medium rounded-lg transition-colors text-center">
-                      View Meeting Materials
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Form + Extras */}
-          <div className="grid grid-cols-1 px-25 mb-4">
-            <div className="md:col-span-2">
-              <div className="text-center mb-10">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-100 mb-4">
-                  <FiVideo className="h-8 w-8 text-purple-600" />
-                </div>
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">Join a Meeting</h1>
-                <p className="text-gray-600">Enter the meeting ID and your name to join</p>
-              </div>
-
-              <div className="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200">
-                <form onSubmit={handleSubmit} className="p-6">
-                  <div className="space-y-6">
-                    <div>
-                      <label htmlFor="meetingId" className="block text-sm font-medium text-gray-700 mb-1">Meeting ID</label>
-                      <div className="mt-1 relative rounded-md shadow-sm">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <FiVideo className="h-5 w-5 text-gray-400" />
-                        </div>
-                        <input
-                          type="text"
-                          id="meetingId"
-                          value={meetingId}
-                          onChange={(e) => setMeetingId(e.target.value)}
-                          className="focus:ring-purple-500 focus:border-purple-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md py-3"
-                          placeholder="Enter meeting ID"
-                          autoComplete="off"
-                        />
-                      </div>
+                ) : (
+                  <div className="text-center p-6 bg-gray-50 rounded-lg">
+                    <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+                      <FiVideo className="h-6 w-6 text-green-600" />
                     </div>
-
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
-                      <div className="mt-1 relative rounded-md shadow-sm">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <FiUser className="h-5 w-5 text-gray-400" />
-                        </div>
-                        <input
-                          type="text"
-                          id="name"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          className="focus:ring-purple-500 focus:border-purple-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md py-3"
-                          placeholder="Enter your name"
-                          autoComplete="name"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex items-center justify-between">
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">Password (if required)</label>
-                        <span className="text-xs text-gray-500">Optional</span>
-                      </div>
-                      <div className="mt-1 relative rounded-md shadow-sm">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <FiLock className="h-5 w-5 text-gray-400" />
-                        </div>
-                        <input
-                          type="password"
-                          id="password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          className="focus:ring-purple-500 focus:border-purple-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-md py-3"
-                          placeholder="Enter password"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="pt-2">
+                    <h3 className="mt-2 text-sm font-medium text-gray-900">You're in the session</h3>
+                    <p className="mt-1 text-sm text-gray-500">
+                      The meeting should have opened in a new tab.
+                    </p>
+                    <div className="mt-6">
                       <button
-                        type="submit"
-                        disabled={isJoining}
-                        className={`w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 transition-colors duration-200 ${isJoining ? "opacity-70 cursor-not-allowed" : ""}`}
+                        type="button"
+                        onClick={handleLeave}
+                        className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
                       >
-                        {isJoining ? "Joining..." : (<><span>Join Meeting</span><FiArrowRight className="ml-2 h-4 w-4" /></>)}
+                        Leave Session
                       </button>
                     </div>
                   </div>
-                </form>
-              </div>
-
-              <div className="mt-6 text-center">
-                <p className="text-sm text-gray-500">Don't have a meeting ID? Ask the meeting organizer for it.</p>
+                )}
               </div>
             </div>
           </div>
         </div>
 
-        <SavedVideos
-        videos={savedVideos}
-        onBack={() => setShowMeditation(false)}
-         />
+        {/* Session History */}
+       <div className="mt-8">
+  <div className="flex items-center justify-between mb-4">
+    <h2 className="text-lg font-medium text-gray-900">Your Session History</h2>
+    <button
+      onClick={() => navigate('/me/history')}
+      className="text-sm font-medium text-purple-600 hover:text-purple-500"
+    >
+      View all history →
+    </button>
+  </div>
+  <div className="bg-white shadow overflow-hidden sm:rounded-md">
+    {loadingHistory ? (
+      <div className="flex justify-center p-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-purple-500"></div>
+      </div>
+    ) : history.length === 0 ? (
+      <div className="text-center p-8 text-gray-500">
+        No session history found
+      </div>
+    ) : (
+      <>
+        <ul className="divide-y divide-gray-200">
+          {history.map((item) => {
+            const sessionDate = new Date(item.session.startTime);
+            const duration = item.session.attendees?.duration || 0;
+            const isCompleted = item.session.status === 'completed';
+            
+            return (
+              <li key={item.session._id} className="px-6 py-4 hover:bg-gray-50">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-medium text-purple-600 truncate">
+                    {item.title}
+                  </p>
+                  <div className="ml-2 flex-shrink-0 flex">
+                    <p className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                      isCompleted 
+                        ? 'bg-green-100 text-green-800' 
+                        : 'bg-yellow-100 text-yellow-800'
+                    }`}>
+                      {isCompleted ? 'Completed' : 'Incomplete'}
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-2 flex justify-between items-center">
+                  <div className="flex text-sm text-gray-500">
+                    <span>
+                      {sessionDate.toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric'
+                      })}
+                    </span>
+                    <span className="mx-1">·</span>
+                    <span>{duration} minutes</span>
+                  </div>
+                  <div className="flex-shrink-0">
+                    <div className={`h-5 w-5 rounded-full flex items-center justify-center ${
+                      isCompleted ? 'bg-green-400' : 'bg-yellow-400'
+                    }`}>
+                      {isCompleted && (
+                        <svg className="h-3.5 w-3.5 text-white" fill="currentColor" viewBox="0 0 12 12">
+                          <path d="M10.28 2.28L3.987 8.575 1.695 6.28A1 1 0 00.28 7.695l3 3a1 1 0 001.414 0l7-7A1 1 0 0010.28 2.28z" />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+        
+        {/* Pagination */}
+        {pagination.pages > 1 && (
+          <div className="bg-gray-50 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+            <div className="flex-1 flex justify-between sm:justify-end">
+              <button
+                onClick={handlePrevPage}
+                disabled={pagination.page === 1}
+                className={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md ${
+                  pagination.page === 1 
+                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                <FiChevronLeft className="h-5 w-5" />
+                Previous
+              </button>
+              <div className="flex items-center mx-4">
+                <span className="text-sm text-gray-700">
+                  Page {pagination.page} of {pagination.pages}
+                </span>
+              </div>
+              <button
+                onClick={handleNextPage}
+                disabled={pagination.page >= pagination.pages}
+                className={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md ${
+                  pagination.page >= pagination.pages
+                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
+                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                }`}
+              >
+                Next
+                <FiChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+        )}
+      </>
+    )}
+  </div>
+</div>
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ const SidebarLink = ({ icon, label, path, onClick, isLogout = false }) => {
         to={path}
         onClick={onClick}
         className={`
-          flex items-center w-full p-3 rounded-lg transition-all duration-300
+          flex items-center w-full p-2 rounded-lg transition-all duration-300
 
           ${
             isActive

@@ -1,121 +1,225 @@
 import Meeting from "../models/MeetingModel.js";
-import Attendance from "../models/Attendance.model.js";
 import User from "../models/user.model.js";
 
-import { updateStreak } from "../util/streakEngine.js";
-
-export const createOrUpdateMeeting = async (req,res) => {
-   try {
-     const {zoomLink , startTime , title , meetingDate} = req.body;
-    console.log(zoomLink)
-    console.log(startTime)
-    console.log(title)
-    if(!zoomLink) return res.status(404).json({message : "Meeting link required"});
-
-    const date = meetingDate || new Date().toISOString().split("T")[0];
-
-    const meeting = await Meeting.findOneAndUpdate(
-        {meetingDate : date},
-        {
-            zoomLink,
-            title,
-            startTime : startTime || null,
-            createdBy : req.user._id,
-            status : "scheduled",
-            sendToWhatsApp : true
-        },
-        {upsert : true , new : true , setDefaultsOnInsert : true}
-    );
-
-    res.status(200).json({
-        success : true , meeting
-    });
-   } catch (error) {
-      console.error("createOrUpdateMeeting:", err);
-    if (err.code === 11000) {
-      return res.status(409).json({ message: "Meeting for this date already exists" });
-    }
-    res.status(500).json({ message: "Failed to create meeting" });
-   }
-}
-
-
-
 /**
- * Get today's meeting for authenticated user
+ * Create or update the single meeting (admin only)
  */
-
-export const getTodayMeeting = async (req, res) => {
+export const createOrUpdateMeeting = async (req, res) => {
   try {
-    const today = new Date().toISOString().split("T")[0];
-    const meeting = await Meeting.findOne({ meetingDate: today }).lean();
+    const { zoomLink, defaultTime, title, timezone, settings } = req.body;
+    
+    console.log(req.body)
 
-    if (!meeting) return res.status(404).json({ message: "No meeting scheduled today" });
 
-    res.json({ success: true, meeting });
-  } catch (err) {
-    console.error("getTodayMeeting:", err);
-    res.status(500).json({ message: "Failed to get today's meeting" });
+    if (!zoomLink) {
+      return res.status(400).json({ message: "Zoom link is required" });
+    }
+
+    // Find active meeting or create new one
+    let meeting = await Meeting.findOne({ isActive: true });
+
+    if (meeting) {
+      // Update existing meeting
+      meeting.zoomLink = zoomLink;
+      meeting.title = title || meeting.title;
+      meeting.defaultTime = defaultTime || meeting.defaultTime;
+      meeting.timezone = timezone || meeting.timezone;
+      if (settings) {
+        meeting.settings = { ...meeting.settings, ...settings };
+      }
+    } else {
+      // Create new meeting
+      meeting = new Meeting({
+        title: title || "Daily Meditation Session",
+        zoomLink,
+        defaultTime: defaultTime || "19:00",
+        timezone: timezone || "Asia/Kolkata",
+        host: req.user._id,
+        settings: {
+          minAttendanceDuration: 10, // minutes
+          sendReminders: true,
+          recurringDays: [0, 1, 2, 3, 4, 5, 6], // Every day
+          ...settings
+        }
+      });
+    }
+
+    await meeting.save();
+    res.status(200).json({ success: true, meeting });
+
+  } catch (error) {
+    console.error("createOrUpdateMeeting error:", error);
+    res.status(500).json({ message: "Failed to update meeting" });
   }
 };
 
+/**
+ * Get today's session
+ */
+export const getTodaySession = async (req, res) => {
+  try {
+    const meeting = await Meeting.getOrCreateToday();
+
+    const today = new Date().toLocaleDateString('en-CA', { 
+        timeZone: meeting.timezone 
+    });
+    const session = meeting.sessions.find(s => s.date === today) || {};
+if (!session) {
+         return res.status(200).json({ 
+       success: true, 
+       message: "No session scheduled for today.",
+       meeting: { 
+                _id: meeting._id, 
+                title: meeting.title, 
+                zoomLink: meeting.zoomLink 
+            }
+ }); }
+    
+
+   res.json({
+ success: true,
+ meeting: {
+ _id: meeting._id,
+ title: meeting.title,
+zoomLink: meeting.zoomLink,
+defaultTime: meeting.defaultTime, 
+timezone: meeting.timezone,
+session: session.toObject() 
+}
+    });
+  } catch (error) {
+    console.error("getTodaySession error:", error);
+    res.status(500).json({ message: "Failed to get today's session" });
+  }
+};
 
 /**
- * Join meeting: marks attendance (idempotent), updates streak/tree, returns redirect URL
+ * Join meeting session
  */
 export const joinMeeting = async (req, res) => {
   try {
-    const { meetingId } = req.body;
     const userId = req.user._id;
-    const today = new Date().toISOString().split("T")[0];
+    const meeting = await Meeting.getOrCreateToday();
+     const today = new Date().toLocaleDateString('en-CA', { 
+        timeZone: meeting.timezone 
+    });
+    
+    const session = meeting.sessions.find(s => s.date === today);
 
-    const meeting = await Meeting.findById(meetingId);
-    if (!meeting) return res.status(404).json({ message: "Meeting not found" });
-
-    let attendance = await Attendance.findOne({ user: userId, meeting: meetingId, date: today });
-
-    if (!attendance) {
-      attendance = await Attendance.create({
-        user: userId,
-        meeting: meetingId,
-        date: today,
-        joinTime: new Date()
-      });
-
-      const user = await User.findById(userId);
-      updateStreak(user, new Date());
-      user.totalMeetingsAttended++;
-      await user.save();
+    console.log(session)
+    if (!session) {
+      return res.status(404).json({ message: "Today's session not found" });
     }
+
+    // Add/update attendee
+    await session.addAttendee(userId)
+    
+    // Update user's streak and tree growth
+    const user = await User.findById(userId);
+    await user.updateStreak();
+    await user.updateTreeGrowth();
 
     res.json({
       success: true,
       redirect: meeting.zoomLink,
-      attendanceId: attendance._id
+      sessionId: session._id,
+      message: "Joined session successfully"
     });
 
   } catch (error) {
-    res.status(500).json({ message: "Join failed" });
+    console.error("joinMeeting error:", error);
+    res.status(500).json({ message: "Failed to join session" });
   }
 };
 
+/**
+ * Leave meeting session
+ */
 export const leaveMeeting = async (req, res) => {
   try {
-    const { attendanceId } = req.params;
-    const attendance = await Attendance.findById(attendanceId);
+    const { sessionId } = req.params;
+    const userId = req.user._id;
+    
+    const meeting = await Meeting.findOne({
+      "sessions._id": sessionId
+    });
 
-    if (!attendance) return res.status(404).json({ message: "Attendance not found" });
-
-    if (!attendance.leaveTime) {
-      attendance.leaveTime = new Date();
-      attendance.durationSeconds = Math.floor(
-        (attendance.leaveTime - attendance.joinTime) / 1000
-      );
-      await attendance.save();
+    if (!meeting) {
+      return res.status(404).json({ message: "Session not found" });
     }
 
-    res.json({ success: true, message: "Leave recorded" });
+    const session = meeting.sessions.id(sessionId);
+    if (!session) {
+      return res.status(404).json({ message: "Session not found" });
+    }
+
+    // Record leave time
+    await session.recordLeave(userId);
+    
+    // Check if session should be marked as completed
+    if (session.status === 'scheduled') {
+      await session.markAsLive();
+    }
+
+    // Update user's tree growth
+    const user = await User.findById(userId);
+    const attendee = session.attendees.find(a => a.user.equals(userId));
+    
+    if (attendee?.duration >= meeting.settings.minAttendanceDuration) {
+      await user.updateTreeGrowth();
+    }
+
+    res.json({ 
+      success: true, 
+      message: "Left session successfully",
+      duration: attendee?.duration
+    });
+
   } catch (error) {
-    res.status(500).json({ message: "Leave failed" });
+    console.error("leaveMeeting error:", error);
+    res.status(500).json({ message: "Failed to leave session" });
+  }
+};
+export const getUserSessionHistory = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+    const skip = (page - 1) * limit;
+
+    // Find all meetings where the user is an attendee
+    const meetings = await Meeting.aggregate([
+      { $unwind: "$sessions" },
+      { $unwind: "$sessions.attendees" },
+      { $match: { "sessions.attendees.user": req.user._id } },
+      { $sort: { "sessions.startTime": -1 } },
+      { $skip: skip },
+      { $limit: limit },
+      { 
+        $project: {
+          _id: 1,
+          title: 1,
+          "session": "$sessions"
+        }
+      }
+    ]);
+
+    // Get total count for pagination
+    const total = await Meeting.countDocuments({
+      "sessions.attendees.user": req.user._id
+    });
+
+    res.json({
+      success: true,
+      data: meetings,
+      pagination: {
+        total,
+        page,
+        pages: Math.ceil(total / limit),
+        limit
+      }
+    });
+  } catch (error) {
+    console.error("Error fetching session history:", error);
+    res.status(500).json({ message: "Failed to fetch session history" });
   }
 };

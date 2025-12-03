@@ -3,16 +3,29 @@ import express from "express";
 import { protect, admin } from "../middleware/authmiddleware.js";
 import {
   createOrUpdateMeeting,
-  getTodayMeeting,
+  getTodaySession,
   joinMeeting,
-  leaveMeeting
+  leaveMeeting,
+  getUserSessionHistory
 } from "../controllers/meetingController.js";
 
 const router = express.Router();
 
-router.post("/create", protect, admin, createOrUpdateMeeting);
-router.get("/today", protect, getTodayMeeting);
-router.post("/join", protect, joinMeeting);
-router.post("/leave/:attendanceId", protect, leaveMeeting);
+// Admin routes
+router.route("/").post(protect, admin, createOrUpdateMeeting) // Create/update meeting settings
+
+// Session management
+router.route("/today")
+  .get(protect, getTodaySession); // Get today's session
+
+router.route("/join")
+  .post(protect, joinMeeting); // Join today's session
+
+router.route("/leave/:sessionId")
+  .post(protect, leaveMeeting); // Leave a session
+
+// User history
+router.route("/history")
+  .get(protect, getUserSessionHistory); // Get user's session history
 
 export default router;

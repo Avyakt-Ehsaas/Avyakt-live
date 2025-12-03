@@ -1,26 +1,91 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
-import { FiCalendar, FiClock, FiVideo, FiSave, FiX, FiLink } from 'react-icons/fi';
+import { FiCalendar, FiClock, FiVideo, FiSave, FiX, FiLink, FiSettings } from 'react-icons/fi';
 import API from '../../utils/api';
 
 const CreateMeeting = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [meeting, setMeeting] = useState(null);
 
+  // Form state
   const [formData, setFormData] = useState({
     title: '',
-    meetingLink: '',
-    date: '',
-    startTime: ''
+    zoomLink: '',
+    defaultTime: '19:00',
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    settings: {
+      minAttendanceDuration: 10,
+      sendReminders: true,
+      recurringDays: [0, 1, 2, 3, 4, 5, 6] // Sun-Sat
+    }
   });
 
+  // Fetch existing meeting on mount
+  useEffect(() => {
+    const fetchMeeting = async () => {
+      try {
+        const res = await API.get('meetings/today');
+        console.log(res)
+        if (res.data?.meeting) {
+          setMeeting(res.data.meeting);
+          setFormData(prev => ({
+            ...prev,
+            title: res.data.meeting.title,
+            zoomLink: res.data.meeting.zoomLink,
+            defaultTime: res.data.meeting.defaultTime,
+            timezone: res.data.meeting.timezone,
+            settings: res.data.meeting.settings
+          }));
+        }
+      } catch (error) {
+        console.error('Error fetching meeting:', error);
+      }
+    };
+    fetchMeeting();
+  }, []);
+
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    const { name, value, type, checked } = e.target;
+    
+    if (name.startsWith('settings.')) {
+      const settingKey = name.split('.')[1];
+      setFormData(prev => ({
+        ...prev,
+        settings: {
+          ...prev.settings,
+          [settingKey]: type === 'checkbox' ? checked : value
+        }
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: type === 'checkbox' ? checked : value
+      }));
+    }
+  };
+
+  const handleDayToggle = (day) => {
+    setFormData(prev => {
+      const recurringDaysArray = prev?.settings?.recurringDays || [];
+      const days = [...recurringDaysArray];
+      const dayIndex = days.indexOf(day);
+      
+      if (dayIndex === -1) {
+        days.push(day);
+      } else {
+        days.splice(dayIndex, 1);
+      }
+      
+      return {
+        ...prev,
+        settings: {
+          ...prev.settings,
+          recurringDays: days.sort()
+        }
+      };
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -28,35 +93,39 @@ const CreateMeeting = () => {
     setLoading(true);
 
     try {
-      // Combine date & time → ISO datetime
-      const scheduledDate = new Date(`${formData.date}T${formData.startTime}`);
-
-      const payload = {
-        title: formData.title,
-        zoomLink: formData.meetingLink,
-        scheduledDate,
-        startTime : formData.startTime
-      };
-
-      await API.post('/meeting/create', payload);
-
-      toast.success('Meeting created successfully!');
+      console.log(formData)
+      await API.post('/meetings', formData);
+      toast.success(meeting ? 'Meeting updated successfully!' : 'Meeting created successfully!');
       navigate('/admin/dashboard');
     } catch (error) {
-      console.error('Error creating meeting:', error);
-      toast.error(error.response?.data?.message || 'Failed to create meeting');
+      console.error('Error saving meeting:', error);
+      toast.error(error.response?.data?.message || 'Failed to save meeting');
     } finally {
       setLoading(false);
     }
   };
+
+  const days = [
+    { value: 0, label: 'Sun' },
+    { value: 1, label: 'Mon' },
+    { value: 2, label: 'Tue' },
+    { value: 3, label: 'Wed' },
+    { value: 4, label: 'Thu' },
+    { value: 5, label: 'Fri' },
+    { value: 6, label: 'Sat' }
+  ];
 
   return (
     <div className="p-6 min-h-screen ml-[16rem] bg-gradient-to-br from-purple-100 via-pink-100 to-white">
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-2xl font-bold text-gray-800">Create Daily Meeting</h1>
-            <p className="text-gray-600">Add Zoom link & schedule today's meditation session</p>
+            <h1 className="text-2xl font-bold text-gray-800">
+              {meeting ? 'Update Meeting' : 'Create Daily Meeting'}
+            </h1>
+            <p className="text-gray-600">
+              {meeting ? 'Update the meeting settings' : 'Configure your daily meditation session'}
+            </p>
           </div>
           <button
             onClick={() => navigate(-1)}
@@ -68,7 +137,6 @@ const CreateMeeting = () => {
 
         <div className="bg-white rounded-xl shadow-sm p-6">
           <form onSubmit={handleSubmit} className="space-y-6">
-
             {/* Meeting Title */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -92,9 +160,9 @@ const CreateMeeting = () => {
               </label>
               <input
                 type="url"
-                name="meetingLink"
+                name="zoomLink"
                 required
-                value={formData.meetingLink}
+                value={formData.zoomLink}
                 onChange={handleChange}
                 placeholder="https://zoom.us/j/xxxxxxx"
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
@@ -102,38 +170,90 @@ const CreateMeeting = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-              {/* Date */}
+              {/* Default Time */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center">
-                  <FiCalendar className="mr-2" /> Date *
-                </label>
-                <input
-                  type="date"
-                  name="date"
-                  required
-                  value={formData.date}
-                  onChange={handleChange}
-                  min={new Date().toISOString().split('T')[0]}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
-                />
-              </div>
-
-              {/* Start Time */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center">
-                  <FiClock className="mr-2" /> Start Time *
+                  <FiClock className="mr-2" /> Default Time *
                 </label>
                 <input
                   type="time"
-                  name="startTime"
+                  name="defaultTime"
                   required
-                  value={formData.startTime}
+                  value={formData.defaultTime}
                   onChange={handleChange}
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
                 />
               </div>
 
+              {/* Timezone */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center">
+                  <FiSettings className="mr-2" /> Timezone
+                </label>
+                <select
+                  name="timezone"
+                  value={formData.timezone}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
+                >
+                  <option value="Asia/Kolkata">India (Kolkata, GMT+5:30)</option>
+                  <option value="UTC">UTC</option>
+                  {/* Add more timezones as needed */}
+                </select>
+              </div>
+            </div>
+
+            {/* Recurring Days */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Recurring Days *
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {days?.map((day) => (
+                  <button
+                    key={day.value}
+                    type="button"
+                    onClick={() => handleDayToggle(day.value)}
+                    className={`px-4 py-2 rounded-md text-sm font-medium ${
+                      formData?.settings?.recurringDays.includes(day.value)
+                        ? 'bg-purple-600 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    {day.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Minimum Attendance Duration */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Minimum Attendance Duration (minutes) *
+              </label>
+              <input
+                type="number"
+                name="settings.minAttendanceDuration"
+                min="1"
+                value={formData?.settings?.minAttendanceDuration}
+                onChange={handleChange}
+                className="w-24 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+
+            {/* Send Reminders */}
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                name="settings.sendReminders"
+                id="sendReminders"
+                checked={formData?.settings?.sendReminders}
+                onChange={handleChange}
+                className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+              />
+              <label htmlFor="sendReminders" className="ml-2 block text-sm text-gray-700">
+                Send WhatsApp reminders
+              </label>
             </div>
 
             <div className="pt-4 border-t">
@@ -146,15 +266,16 @@ const CreateMeeting = () => {
                     : 'bg-purple-600 hover:bg-purple-700'
                 }`}
               >
-                {loading ? 'Creating...' : (
+                {loading ? (
+                  'Saving...'
+                ) : (
                   <>
-                    <FiVideo className="mr-2" />
-                    Create Meeting
+                    <FiSave className="mr-2" />
+                    {meeting ? 'Update Meeting' : 'Create Meeting'}
                   </>
                 )}
               </button>
             </div>
-
           </form>
         </div>
       </div>

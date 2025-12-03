@@ -8,7 +8,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm() {
-  const { isloading } = useAuth();
+  const { isloading, register: registerUser } = useAuth();
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -24,11 +24,7 @@ export default function RegisterForm() {
         return;
       }
 
-      const res = await API.post(
-        "/auth/register",
-        { name, email, password },
-        { headers: { "Content-Type": "application/json" }, withCredentials: true }
-      );
+      const res = await registerUser({ name, email, password });
 
       console.log("RESPONSE ✅", res.data);
 
@@ -38,7 +34,7 @@ export default function RegisterForm() {
       toast.success("Registered & Logged In!");
 
       // Redirect to dashboard
-      navigate("/dashboard");
+      navigate("/");
     } catch (error) {
       toast.error(error?.response?.data?.message || "Registration failed");
     }

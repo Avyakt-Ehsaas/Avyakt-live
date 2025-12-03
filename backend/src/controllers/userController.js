@@ -1,73 +1,116 @@
-import Attendance from "../models/Attendance.model.js";
-import User from '../models/user.model.js'
+import User from '../models/user.model.js';
 
+// =====================
+// GET ALL USERS (with pagination & search)
+// =====================
 export const getAllUsers = async (req, res) => {
   try {
     const { page = 1, limit = 10, search = "", role } = req.query;
 
-    // Build query
     const query = {};
 
     if (search) {
-      // Case-insensitive search by name or email
       query.$or = [
         { name: { $regex: search, $options: "i" } },
         { email: { $regex: search, $options: "i" } },
       ];
     }
 
-    if (role) {
-      query.role = role;
-    }
+    if (role) query.role = role;
 
-    // Count total documents for pagination
     const total = await User.countDocuments(query);
 
-    // Pagination
     const users = await User.find(query)
       .skip((page - 1) * limit)
       .limit(Number(limit))
-      .select("-password"); // exclude password
+      .select("-password");
 
-    if (users.length === 0)
-      return res.status(200).json({ message: "No users are available", data: [], total });
-
-    return res.status(200).json({
-      message: "Users fetched successfully",
+    res.status(200).json({
+      message: users.length ? "Users fetched successfully" : "No users found",
       data: users,
       total,
       page: Number(page),
       limit: Number(limit),
     });
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal server error (getting all users)" });
+    console.error("Get All Users Error:", error);
+    res.status(500).json({ message: "Internal server error (getting all users)" });
   }
 };
 
-export const deleteUser = async (req, res) => {
-    try {
-        const userId = req.params.userId;
-        const isDeleted = await User.findByIdAndDelete(userId);
-        if (!isDeleted) return res.status(400).json({ message: "User not found to be deleted" });
-        return res.status(200).json({ message: "User is deleted" });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({ message: "Unable to delete user" });
-    }
-}
-
+// =====================
+// GET USER BY ID
+// =====================
 export const getUserById = async (req, res) => {
-    try {
-        const userId = req.params.userId;
-        if (!userId) return res.status(404).json({ message: "Missing user id" });
+  try {
+    const { userId } = req.params;
+    if (!userId) return res.status(400).json({ message: "Missing user id" });
 
-        const user = await User.findById(userId);
-        if (!user) return res.status(404).json({ message: "User not found" });
+    const user = await User.findById(userId).select("-password");
+    if (!user) return res.status(404).json({ message: "User not found" });
 
-        return res.status(200).json({ message: "User found", user });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({ message: "Unable to fetch user" });
+    res.status(200).json({ message: "User fetched successfully", user });
+  } catch (error) {
+    console.error("Get User By ID Error:", error);
+    res.status(500).json({ message: "Internal server error (getting user)" });
+  }
+};
+
+// =====================
+// DELETE USER
+// =====================
+export const deleteUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const deletedUser = await User.findByIdAndDelete(userId);
+    if (!deletedUser) return res.status(404).json({ message: "User not found" });
+
+    res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error("Delete User Error:", error);
+    res.status(500).json({ message: "Internal server error (delete user)" });
+  }
+};
+
+
+export const updateSubscription = async (req, res) => {
+  try {
+    const { plan, autoRenew } = req.body;
+    const user = await User.findById(req.user._id);
+
+    user.subscription.plan = plan || user.subscription.plan;
+    user.subscription.autoRenew = autoRenew !== undefined ? autoRenew : user.subscription.autoRenew;
+
+    // set new endDate if plan changed
+    if(plan && plan !== 'trial'){
+      user.subscription.startDate = new Date();
+      const end = new Date();
+      if(plan === 'monthly') end.setMonth(end.getMonth()+1);
+      if(plan === 'quarterly') end.setMonth(end.getMonth()+3);
+      if(plan === 'annual') end.setFullYear(end.getFullYear()+1);
+      user.subscription.endDate = end;
     }
-}
+
+    await user.save();
+    res.status(200).json({ message: "Subscription updated", subscription: user.subscription });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Unable to update subscription" });
+  }
+};
+
+
+export const getStreakAndTree = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    res.status(200).json({
+      currentStreak: user.currentStreak,
+      longestStreak: user.longestStreak,
+      currentTree: user.currentTree,
+      forest: user.forest
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Unable to fetch streak/tree info" });
+  }
+};
