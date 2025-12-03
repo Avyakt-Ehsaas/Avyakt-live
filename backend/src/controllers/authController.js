@@ -65,7 +65,7 @@ export const loginUser = async (req, res) => {
     if (!email || !password)
       return res.status(400).json({ message: "Email and Password are required" });
 
-    const user = await User.findOne({ email }).select("+password");
+    let user = await User.findOne({ email }).select("+password");
     if (!user) return res.status(404).json({ message: "User not found" });
 
     const isPasswordMatched = await bcrypt.compare(password, user.password);
@@ -87,6 +87,9 @@ export const loginUser = async (req, res) => {
       sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
       maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
     });
+
+    // Refresh user data after updates
+    user = await User.findById(user._id);
 
     res.status(200).json({
       message: "User logged in successfully",
@@ -235,16 +238,26 @@ export const updateProfile = async (req, res) => {
   }
 };
 
-// =====================
-// WATER TREE / UPDATE GROWTH
-// =====================
 export const waterTree = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
+    
+    // This will increment consecutiveDays and update the tree stage
     await user.updateTreeGrowth();
-    res.status(200).json({ message: "Tree watered & growth updated", currentTree: user.currentTree });
+    
+    // Refresh the user data
+    const updatedUser = await User.findById(user._id);
+    
+    res.status(200).json({ 
+      message: "Tree watered & growth updated", 
+      currentTree: updatedUser.currentTree,
+      soulPeacePoints: updatedUser.soulPeacePoints
+    });
   } catch (error) {
     console.error("Water Tree Error:", error);
-    res.status(500).json({ message: "Internal Server Error (water tree)" });
+    res.status(500).json({ 
+      message: "Internal Server Error (water tree)",
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 };

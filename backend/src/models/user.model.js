@@ -315,42 +315,35 @@ userSchema.methods.updateStreak = async function() {
 // =====================
 // UPDATE TREE GROWTH
 // =====================
+// In user.model.js
+// Remove or comment out the updateTreeGrowth method and any attendance-related code
+// Replace with a simplified version:
+
 userSchema.methods.updateTreeGrowth = async function() {
-  const today = new Date();
-  const yesterday = new Date(today);
-  yesterday.setDate(yesterday.getDate() - 1);
-  
-  const formatDate = (date) => date.toISOString().split('T')[0];
-  
-  const Attendance = mongoose.model('Attendance');
-  const yesterdayAttendance = await Attendance.findOne({
-    user: this._id,
-    date: formatDate(yesterday)
-  });
-
-  if (!yesterdayAttendance && this.currentTree.consecutiveDays > 0) {
-    this.currentTree.consecutiveDays = 0;
-    this.currentTree.daysGrown = 0;
-    this.currentTree.stage = "seed";
-    await this.save();
-    return;
-  }
-
-  this.currentTree.consecutiveDays += 1;
-  const stages = ["seed", "sprout", "baby", "growing", "full"];
-  
-  if (this.currentTree.consecutiveDays % 5 === 0 && 
-      this.currentTree.daysGrown < stages.length - 1) {
-    this.currentTree.daysGrown += 1;
-    this.currentTree.stage = stages[this.currentTree.daysGrown];
+  try {
+    // Simplified version without attendance check
+    this.currentTree.consecutiveDays = (this.currentTree.consecutiveDays || 0) + 1;
     
-    if (this.currentTree.daysGrown === stages.length - 1) {
-      this.currentTree.isReadyForForest = true;
+    // Add your tree growth logic here based on consecutiveDays
+    if(this.currentTree.consecutiveDays>=5){
+      this.currentTree.stage = "complete";
     }
+    else if (this.currentTree.consecutiveDays === 4) {
+      this.currentTree.stage = "plant";
+    } else if (this.currentTree.consecutiveDays === 3) {
+      this.currentTree.stage = "baby plant";
+    } else if (this.currentTree.consecutiveDays === 2) {
+      this.currentTree.stage = "sprout";
+    } else {
+      this.currentTree.stage = "seed";
+    }
+    
+    await this.save();
+    return true;
+  } catch (error) {
+    console.error('Error updating tree growth:', error);
+    throw error;
   }
-
-  this.currentTree.lastWatered = today;
-  await this.save();
 };
 
 // =====================
