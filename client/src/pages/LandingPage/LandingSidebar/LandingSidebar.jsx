@@ -35,8 +35,6 @@ const LandingSidebar = () => {
           await logout();
           profileOpen(false)
           toast.success("User logged out");
-          await fetchMe();
-          navigate("/auth/login");
         } catch (error) {
           toast.error("Logout failed");
         }

@@ -40,8 +40,7 @@ const UserSidebar = () => {
     try {
       await logout();
       toast.success("User logged out");
-      await fetchMe();
-      navigate("/auth/login");
+      setOpenMenu(false)
     } catch (error) {
       toast.error("Logout failed");
     }
@@ -112,6 +111,7 @@ const UserSidebar = () => {
                     <button
                       onClick={() => {
                         navigate("/user/profile");
+                        setOpenMenu(false);
                         setProfileOpen(false);
                       }}
                       className="flex items-center gap-2 w-full px-3 py-2 text-orange-700 
@@ -123,6 +123,7 @@ const UserSidebar = () => {
                     <button
                       onClick={() => {
                         navigate("/user/settings");
+                        setOpenMenu(false)
                         setProfileOpen(false);
                       }}
                       className="flex items-center gap-2 w-full px-3 py-2 text-orange-700 

@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../ui/Loader";
 
 export default function RegisterForm() {
-  const { isloading, register: registerUser } = useAuth();
+  const { isloading, register: registerUser ,fetchMe } = useAuth();
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -31,6 +31,7 @@ export default function RegisterForm() {
 
       if(success){
         toast.success("Registered & Logged In!");
+        fetchMe();
         navigate("/");
       }
       // Redirect to dashboard
