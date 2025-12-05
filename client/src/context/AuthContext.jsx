@@ -60,15 +60,27 @@ export const AuthProvider = ({ children }) => {
 
       console.log("Login response:", res);
 
-      if (res.data.token) {
+      if (res.data?.token) {
         localStorage.setItem("token",res.data.token);
+        if(res.data?.user)
         setUser(res.data.user);
+      }else{
+        await fetchMe();
       }
-
-      return res.data;
+      return {
+        success : true,
+        user : res.data?.user || user,
+        token : res.data.token
+      }
+      throw new Error(res.data?.message || 'Login failed. Please try again.');
     } catch (error) {
       console.error("LOGIN FRONTEND ERROR ", error.response?.data || error.message);
-      throw error;
+       return {
+      success: false,
+      message: error.response?.data?.message || 
+              error.message || 
+              "Login failed. Please try again."
+    };
     }
   };
 

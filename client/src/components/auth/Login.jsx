@@ -15,12 +15,17 @@ export default function LoginForm() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      const response = await login({ email, password }); // login via context
-      console.log(user)
-      toast.success("Logged in successfully!");
-      await fetchMe();
-      navigate("/"); // redirect after login
-    } catch (err) {
+       const loadingToast = toast.loading('Logging in...');
+      const response = await login({ email, password });
+      if (response?.user) {
+      toast.success("Logged in successfully!", { id: loadingToast });
+      await new Promise(resolve => setTimeout(resolve, 500));
+      navigate("/");// redirect after login
+    } 
+    else {
+      throw new Error(response?.message || "Login failed");
+    }
+  }catch (err) {
       toast.error(err?.response?.data?.message || "Login failed");
     }
   };
