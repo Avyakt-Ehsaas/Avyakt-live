@@ -20,26 +20,30 @@ export default function RegisterForm() {
 
   const submit = async (e) => {
     e.preventDefault();
+    
+    if (password !== confirm) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
     setLoading(true);
     try {
-      if (password !== confirm) {
-        toast.error("Passwords do not match");
-        return;
-      }
+      const { success, message } = await registerUser({ 
+        name, 
+        email, 
+        password 
+      });
 
-      const { success , data , message } = await registerUser({ name, email, password });
-
-      if(success){
-        toast.success("Registered & Logged In!");
-        toast.success("user Registered")
-        fetchMe();
-        navigate("/");
+      if (success) {
+        toast.success(message || 'Registration successful!');
+        navigate('/dashboard'); // Redirect to dashboard after successful registration
+      } else {
+        toast.error(message || 'Registration failed. Please try again.');
       }
-      // Redirect to dashboard
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Registration failed");
-    }
-    finally{
+      console.error('Registration error:', error);
+      toast.error(error?.response?.data?.message || 'An error occurred during registration');
+    } finally {
       setLoading(false);
     }
   };

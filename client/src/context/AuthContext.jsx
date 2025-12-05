@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (data) => {
     try {
-          const res = await API.post('/auth/register', data, {
+      const res = await API.post('/auth/register', data, {
         headers: {
           "Content-Type": "application/json"
         },
@@ -80,17 +80,26 @@ export const AuthProvider = ({ children }) => {
   
       if (res.data.success) {
         setUser(res.data.user);
-         localStorage.setItem('token', res.data.token);
-        return { success: true, data: res.data };
+        localStorage.setItem('token', res.data.token);
+        // Fetch updated user data after successful registration
+        await fetchMe();
+        return { 
+          success: true, 
+          data: res.data,
+          message: 'Registration successful! Redirecting...'
+        };
       }
-      return { success: false, message: res.data.message || 'Registration failed' };
-  } catch (error) {
-    console.log("error while registering user");
-    return {
-      success : false,
-      message : error.response?.data.message || "registration failed "
+      return { 
+        success: false, 
+        message: res.data.message || 'Registration failed' 
+      };
+    } catch (error) {
+      console.error("Registration error:", error);
+      return {
+        success: false,
+        message: error.response?.data?.message || "Registration failed. Please try again."
+      };
     }
-  }
   }
 
   const updateLocalUser = (updatedUser) => {
