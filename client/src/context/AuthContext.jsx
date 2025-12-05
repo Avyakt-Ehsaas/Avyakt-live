@@ -77,6 +77,8 @@ export const AuthProvider = ({ children }) => {
         },
         withCredentials: true
       });
+
+      console.log(res)
   
       if (res.data && res.data.success) {
         localStorage.setItem('token', res.data.token);
