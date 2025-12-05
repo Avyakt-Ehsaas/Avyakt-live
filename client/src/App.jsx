@@ -51,6 +51,7 @@ function App() {
 
             {/* Landing Page - Anyone can access */}
             <Route path="/" element={<LandingPage />} />
+            <Route path="/dashboard" element={<UserLayout><Dashboard /></UserLayout>} />
 
             <Route
               path="/auth/login"
@@ -81,17 +82,12 @@ function App() {
             <Route
               path="/dashboard"
               element={
-                user ? (
+                user &&
                   user.role === "admin" ? (
                     <AdminLayout>
                       <AdminDashboard />
                     </AdminLayout>
-                  ) : (
-                    <UserLayout>
-                      <Dashboard />
-                    </UserLayout>
-                  )
-                ) : (
+                  ) :  (
                   <Navigate to="/auth/login" replace />
                 )
               }

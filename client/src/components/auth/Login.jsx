@@ -15,7 +15,7 @@ export default function LoginForm() {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      await login({ email, password }); // login via context
+      const response = await login({ email, password }); // login via context
       console.log(user)
       toast.success("Logged in successfully!");
       await fetchMe();
