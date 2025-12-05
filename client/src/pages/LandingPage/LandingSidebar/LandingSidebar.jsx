@@ -44,8 +44,7 @@ const LandingSidebar = () => {
          { icon: <FiHome />, label: "Home", path: "/" },
          { icon: <MdDashboard />, label: "Program", path: "/program" },
          { icon: <FiSearch />, label: "Research", path: "/research" },
-          { icon: <FiBook />, label: "Resources", path: "/resources" },
-         { icon: <FiSunrise />, label: "Live-session", path: "/user" },
+         { icon: <FiSunrise />, label: "Live-session", path: "/dashboard" },
          { icon: <BiMessageSquareDetail />, label: "About", path: "/about" },
          { icon: <FiPhoneCall />, label: "Contact", path: "/contact" },
     ]
