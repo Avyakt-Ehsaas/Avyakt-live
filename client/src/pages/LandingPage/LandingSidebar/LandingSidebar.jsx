@@ -10,6 +10,7 @@ import {motion , AnimatePresence } from 'framer-motion'
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
+import {toast}  from 'react-hot-toast'
 
 const LandingSidebar = () => {
      const { user, logout, fetchMe } = useAuth();
@@ -34,6 +35,7 @@ const LandingSidebar = () => {
         try {
           await logout();
           profileOpen(false)
+          openMenu(false)
           toast.success("User logged out");
         } catch (error) {
           toast.error("Logout failed");
@@ -193,34 +195,70 @@ const LandingSidebar = () => {
                 </motion.button>
               ))}
 
- <button
-                      onClick={() => {
-                        navigate("/user/settings");
-                        setProfileOpen(false);
-                      }}
-                      className="flex items-center gap-2 w-full px-3 py-2 text-orange-700 
-                        hover:bg-white/10 rounded-lg"
-                    >
-                      <FiSettings /> Settings
-                    </button>
-              {/* Logout */}
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-3 text-red-600 p-3 rounded-lg hover:bg-white/10"
-              >
-                <FiLogOut /> Logout
-              </button>
+{user?.name ? (
+                <>
+                  {/* Mobile User Info */}
+                  <div className="flex items-center gap-3 pt-3 border-t border-white/20">
+                    <div className="w-10 h-10 bg-orange-200 text-orange-700 rounded-full flex items-center justify-center font-bold">
+                      {user?.name?.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="font-medium text-orange-700 text-md">{user?.name}</p>
+                      <p className="text-orange-600 text-xs">{user?.email}</p>
+                    </div>
+                  </div>
 
-              {/* Mobile User Info */}
-              <div className="flex items-center gap-3 pt-3 border-t border-white/20">
-                <div className="w-10 h-10 bg-orange-200 text-orange-700 rounded-full flex items-center justify-center font-bold">
-                  {user?.name?.charAt(0)}
+                  {/* Profile and Settings Buttons */}
+                  <button
+                    onClick={() => {
+                      navigate("/user/profile");
+                      setOpenMenu(false);
+                    }}
+                    className="flex items-center gap-2 w-full px-3 py-2 text-orange-700 
+                      hover:bg-white/10 rounded-lg"
+                  >
+                    <FiUser /> View Profile
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      navigate("/user/settings");
+                      setOpenMenu(false);
+                    }}
+                    className="flex items-center gap-2 w-full px-3 py-2 text-orange-700 
+                      hover:bg-white/10 rounded-lg"
+                  >
+                    <FiSettings /> Settings
+                  </button>
+
+                  {/* Logout Button */}
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setOpenMenu(false);
+                    }}
+                    className="flex items-center gap-2 w-full px-3 py-2 text-red-600 
+                      hover:bg-white/10 rounded-lg"
+                  >
+                    <FiLogOut /> Logout
+                  </button>
+                </>
+              ) : (
+                <div className="pt-3 border-t border-white/20">
+                  <button
+                    onClick={() => {
+                      navigate("/auth/login");
+                      setOpenMenu(false);
+                    }}
+                    className="w-full bg-orange-500 text-white py-2 px-4 rounded-lg 
+                      font-medium hover:bg-orange-600 transition-colors flex items-center 
+                      justify-center gap-2"
+                  >
+                    <FiUser className="text-lg" />
+                    Join Us / Sign In
+                  </button>
                 </div>
-                <div>
-                  <p className="font-medium text-orange-700 text-md">{user?.name}</p>
-                  <p className="text-orange-600 text-xs">{user?.email}</p>
-                </div>
-              </div>
+              )}
             </div>
           </motion.div>
         )}
