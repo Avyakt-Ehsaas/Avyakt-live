@@ -236,7 +236,7 @@ userSchema.pre('save', function(next) {
 userSchema.pre('save', function(next) {
   if (this.isModified('currentTree.daysGrown')) {
     const stages = ["Seedling", "Sprout", "Baby Plant", "Plant", "Tree"];
-    this.currentTree.stage = stages[this.currentTree.daysGrown] || "seed";
+    this.currentTree.stage = stages[this.currentTree.daysGrown] || "Seedling";
     this.currentTree.isReadyForForest = this.currentTree.daysGrown >= stages.length - 1;
   }
   next();
@@ -379,7 +379,8 @@ userSchema.methods.moveToForest = async function() {
 // =====================
 userSchema.methods.getTreeStage = function () {
   const stages = ["Seedling", "Sprout", "Baby Plant", "Plant", "Tree"];
-  return stages[this.currentTree.daysGrown] || "Seedling";
+   const stageIndex = Math.min(this.currentTree.daysGrown, stages.length - 1);
+  return stages[stageIndex] || "Seedling";
 };
 
 const User = mongoose.model("User", userSchema);

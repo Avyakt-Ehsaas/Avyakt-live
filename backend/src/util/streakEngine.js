@@ -32,7 +32,7 @@ export const updateStreak = (user, todayDate) => {
       // RESET CURRENT TREE
       user.currentTree = {
         treeId: crypto.randomUUID(),
-        stage: "seed",
+        stage: "Seedling",
         daysGrown: 0,
         lastWatered: null,
         startedAt: new Date()
@@ -57,7 +57,7 @@ export const updateStreak = (user, todayDate) => {
 
   if (lastTreeWatered) lastTreeWatered.setHours(0,0,0,0);
 
-  const stageMap = ["seed", "sprout", "baby", "growing", "full"];
+  const stageMap = ["Seedling", "Sprout", "Baby Plant", "Plant", "Tree"];
 
   // Prevent growth if just reset
   if (!skippedDay) {
@@ -81,12 +81,12 @@ export const updateStreak = (user, todayDate) => {
       treeId: user.currentTree.treeId,
       completedAt: new Date(),
       totalDays: 5,
-      lifecycle: "completed"
+      lifecycle: "Tree"
     });
 
     user.currentTree = {
       treeId: crypto.randomUUID(),
-      stage: "seed",
+      stage: "Seedling",
       daysGrown: 0,
       lastWatered: null,
       startedAt: new Date()

@@ -75,9 +75,10 @@ export const waterTree = async (req, res) => {
     user.currentTree.daysGrown += 1;
     user.currentTree.lastWatered = today;
 
-    const stageMap = ["seed", "sprout", "baby", "growing", "full"];
-    user.currentTree.stage =
-      stageMap[user.currentTree.daysGrown - 1] || "full";
+    const stageMap = ["Seedling", "Sprout", "Baby Plant", "Plant", "Tree"];
+    const stageIndex = Math.min(user.currentTree.daysGrown - 1, stageMap.length - 1);
+user.currentTree.stage = stageMap[stageIndex] || "Tree";
+
 
     // If tree fully grown, move to forest and reset currentTree
     if (user.currentTree.daysGrown >= 5) {
@@ -85,12 +86,12 @@ export const waterTree = async (req, res) => {
         treeId: user.currentTree.treeId,
         completedAt: today,
         totalDays: user.currentTree.daysGrown,
-        lifecycle: "completed",
+        lifecycle: "Tree",
       });
 
       user.currentTree = {
         treeId: crypto.randomUUID(),
-        stage: "seed",
+        stage: "Seedling",
         daysGrown: 0,
         lastWatered: null,
         startedAt: today,
