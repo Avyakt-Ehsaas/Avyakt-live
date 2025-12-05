@@ -26,7 +26,9 @@ export default function RegisterForm() {
       return;
     }
 
+    const loadingToast = toast.loading('Creating your account...');
     setLoading(true);
+    
     try {
       const { success, message } = await registerUser({ 
         name, 
@@ -35,14 +37,15 @@ export default function RegisterForm() {
       });
 
       if (success) {
-        toast.success(message || 'Registration successful!');
-        navigate('/dashboard'); // Redirect to dashboard after successful registration
+        toast.success(message || 'Registration successful!', { id: loadingToast });
+        navigate('/'); // Redirect to home page after successful registration
       } else {
-        toast.error(message || 'Registration failed. Please try again.');
+        toast.error(message || 'Registration failed. Please try again.', { id: loadingToast });
       }
     } catch (error) {
       console.error('Registration error:', error);
-      toast.error(error?.response?.data?.message || 'An error occurred during registration');
+      const errorMessage = error?.response?.data?.message || 'An error occurred during registration';
+      toast.error(errorMessage, { id: loadingToast });
     } finally {
       setLoading(false);
     }

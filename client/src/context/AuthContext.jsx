@@ -78,26 +78,40 @@ export const AuthProvider = ({ children }) => {
         withCredentials: true
       });
   
-      if (res.data.success) {
-        setUser(res.data.user);
+      if (res.data && res.data.success) {
+        // Store the token first
         localStorage.setItem('token', res.data.token);
-        // Fetch updated user data after successful registration
-        await fetchMe();
+        
+        // Update the user state
+        if (res.data.user) {
+          setUser(res.data.user);
+        } else {
+          // If user data isn't in the initial response, fetch it
+          await fetchMe();
+        }
+        
         return { 
           success: true, 
           data: res.data,
           message: 'Registration successful! Redirecting...'
         };
       }
+      
+      // Handle case where response is successful but success flag is false
+      const errorMessage = res.data?.message || 'Registration failed. Please try again.';
       return { 
         success: false, 
-        message: res.data.message || 'Registration failed' 
+        message: errorMessage
       };
+      
     } catch (error) {
       console.error("Registration error:", error);
+      const errorMessage = error.response?.data?.message || 
+                         error.message || 
+                         "Registration failed. Please try again.";
       return {
         success: false,
-        message: error.response?.data?.message || "Registration failed. Please try again."
+        message: errorMessage
       };
     }
   }
