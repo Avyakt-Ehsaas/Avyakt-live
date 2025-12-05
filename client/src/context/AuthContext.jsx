@@ -81,9 +81,8 @@ export const AuthProvider = ({ children }) => {
       if (res.data && res.data.success) {
         localStorage.setItem('token', res.data.token);
         
-        if (res.data.user) {
-          setUser(res.data.user);
-          fetchMe();
+        if (res?.data?.user) {
+          setUser(res?.data?.user);
         } else {
           await fetchMe();
         }

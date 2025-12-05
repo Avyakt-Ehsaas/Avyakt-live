@@ -37,6 +37,7 @@ const submit = async (e) => {
             password 
         });
 
+        console.log(responseData)
         const { success, message } = responseData; 
 
         if (success) { 
