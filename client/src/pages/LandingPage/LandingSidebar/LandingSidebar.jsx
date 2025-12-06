@@ -115,7 +115,7 @@ const LandingSidebar = () => {
               {/* DROPDOWN — DESKTOP ONLY */}
               <AnimatePresence>
             
-                profileOpen && (
+                {profileOpen && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -154,7 +154,7 @@ const LandingSidebar = () => {
                     </button>
                   </motion.div>
                 )
-            
+              }
               </AnimatePresence>
             </div>
           </div>

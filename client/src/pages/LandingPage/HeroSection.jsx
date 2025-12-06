@@ -66,13 +66,13 @@ const HeroSection = () => {
             <div className="max-w-7xl mx-auto w-full px-5 md:px-10 py-10">
                 <div className="flex flex-col md:flex-row items-center gap-12">
 
-                    {/* 🟧 LEFT SECTION */}
+                    {/*  LEFT SECTION */}
                     <div className="w-full md:w-1/2 text-center md:text-left">
 
                         {/* Google badge */}
                         <div
                             ref={Startups}
-                            className="mx-auto md:mx-0 mb-6 bg-orange-200 text-orange-600 w-fit px-5 py-2 rounded-xl text-sm font-semibold flex items-center gap-2"
+                            className="mx-auto md:mx-0 mb-6 bg-orange-200 text-orange-600 w-fit px-5 py-8 md:py-2 rounded-xl text-sm font-semibold flex items-center gap-2"
                         >
                             <BsStars />
                             Google Startups Member

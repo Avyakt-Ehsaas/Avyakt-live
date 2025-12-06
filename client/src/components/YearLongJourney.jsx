@@ -51,7 +51,7 @@ const YearLongJourney = () => {
               >
                 {/* Card */}
                 <div
-                  className={`md:w-1/2 p-6 rounded-3xl backdrop-blur-sm bg-white/40 dark:bg-gray-900/30 shadow-xl relative z-20
+                  className={`md:w-1/2 p-6 rounded-3xl backdrop-blur-sm bg-white/40 shadow-xl relative z-20
                     ${isLeft ? "md:mr-auto md:text-right" : "md:ml-auto md:text-left"}`}
                 >
                   <h3 className="text-2xl font-bold text-orange-500 mb-2"> {index + 1}. {point.title}</h3>
