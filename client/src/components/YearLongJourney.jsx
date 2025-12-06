@@ -55,7 +55,7 @@ const YearLongJourney = () => {
                     ${isLeft ? "md:mr-auto md:text-right" : "md:ml-auto md:text-left"}`}
                 >
                   <h3 className="text-2xl font-bold text-orange-500 mb-2"> {index + 1}. {point.title}</h3>
-                  <p className="text-gray-700 dark:text-gray-200">{point.description}</p>
+                  <p className="text-gray-900">{point.description}</p>
                 </div>
 
                 {/* Dot */}
