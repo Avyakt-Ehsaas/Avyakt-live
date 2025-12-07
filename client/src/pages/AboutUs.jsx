@@ -2,7 +2,7 @@ import React from "react"
 import { motion } from "framer-motion"
 import { FaBrain, FaUsers, FaLeaf, FaClock } from "react-icons/fa"
 import { Sparkles, Heart, ShieldCheck } from "lucide-react"
-import Footer from "../LandingPage/Footer"
+import Footer from "./LandingPage/Footer"
 
 const AboutUs = () => {
   return (
