@@ -33,8 +33,7 @@ const LandingSidebar = () => {
 
 
       const sidebarRef = useRef(null);
-      const handleLogout = async (e) => {
-         e.preventDefault();
+      const handleLogout = async () => {
             try {
               await logout();
               toast.success("User logged out");
