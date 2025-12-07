@@ -40,7 +40,8 @@ const LandingSidebar = () => {
               setOpenMenu(false)
               profileOpen(false)
             } catch (error) {
-              toast.error("Logout failed", error);
+              console.error("Logout error:", error);
+              toast.error(`Logout failed: ${error.message || 'Please try again'}`);
             }
       };
 
