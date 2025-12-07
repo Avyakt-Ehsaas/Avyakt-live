@@ -13,7 +13,7 @@ const meditationMessages = [
 ];
 
 // Configuration
-const INTERVAL_TIME_MS = 3000; // Change message every 3 seconds
+const INTERVAL_TIME_MS = 500; // Change message every 3 seconds
 
 const TextLoader = () => {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
@@ -33,7 +33,7 @@ const TextLoader = () => {
   const currentMessage = meditationMessages[currentMessageIndex];
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-900">
+    <div className="flex justify-center items-center h-screen bg-gray-50">
       <AnimatePresence mode="wait">
         <motion.p
           key={currentMessage} // Key is crucial for AnimatePresence to detect change
@@ -41,7 +41,7 @@ const TextLoader = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.8 }}
-          className="text-2xl font-light text-orange-300"
+          className="text-2xl font-light text-orange-500"
         >
           {currentMessage}
         </motion.p>
