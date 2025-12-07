@@ -52,7 +52,9 @@ export const registerUser = async (req, res) => {
     });
   } catch (error) {
     console.error("Register Error:", error);
-    res.status(500).json({ message: "Internal Server Error (unable to register user)" });
+    res.status(500).json({ 
+      success :  false,
+      message: "Internal Server Error (unable to register user)" });
   }
 };
 

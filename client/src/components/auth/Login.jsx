@@ -25,7 +25,7 @@ export default function LoginForm() {
     else {
         setEmail("")
         setPassword("")
-        toast.error("Invalid email or password",{id : loadingToast});
+        toast.error("User not Found",{id : loadingToast});
     }
   }catch (err) {
       toast.error(err?.response?.data?.message || "Login failed",{id : loadingToast});

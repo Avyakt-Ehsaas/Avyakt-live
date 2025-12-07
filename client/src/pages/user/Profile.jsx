@@ -50,7 +50,7 @@ useEffect(()=>{
     if(user){
       fetchUserMeetHistory()
     }
-},[user,sessions])
+},[])
 
 const calculateTotalDuration = (sessionArr) => {
   
