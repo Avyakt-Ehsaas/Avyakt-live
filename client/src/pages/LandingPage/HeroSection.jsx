@@ -72,6 +72,7 @@ const HeroSection = () => {
     });
 
     return (
+        <>
         <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden">
             {/* Background Image with Overlay */}
             <div className="absolute inset-0 z-0">
@@ -161,6 +162,7 @@ const HeroSection = () => {
                     </svg>
                 </div>
             </div>
+        </section>
               <div className="flex flex-wrap gap-4 mb-8" ref={badgesRef}>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -183,7 +185,7 @@ const HeroSection = () => {
                             IIT Mandi Incubation
                         </motion.div>
                     </div>
-        </section>
+        </>
     )
 }
 
