@@ -167,13 +167,14 @@ const HeroSection = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2, duration: 0.6 }}
-                    className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2 rounded-full text-sm font-semibold flex items-center gap-2 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+                    className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2 rounded-full text-sm font-semibold flex items-center gap-2 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 "
                     whileHover={{ y: -2 }}
                   >
                     <BsStars className="text-yellow-300" />
                     Google Startups Member
                   </motion.div>
-                  
+                  </div>
+                  <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6" ref={badgesRef}>
                   <motion.div 
                     className="bg-white/90 backdrop-blur-sm p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                     whileHover={{ y: -2 }}
