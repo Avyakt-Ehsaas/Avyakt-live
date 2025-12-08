@@ -98,7 +98,7 @@ const HeroSection = () => {
                         className="space-y-6 max-w-2xl"
                     >
                         <motion.h3 
-                            className='text-xl sm:text-2xl md:text-3xl text-amber-200 font-medium'
+                            className='text-xl sm:text-2xl md:text-3xl text-orange-400 font-medium'
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
@@ -156,8 +156,8 @@ const HeroSection = () => {
                             transition={{ delay: 0.3, duration: 0.8 }}
                             className="bg-orange-500/80 text-white w-fit px-5 py-2 rounded-full text-sm font-semibold flex items-center gap-2 backdrop-blur-sm"
                         >
-                            <img href="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Google_for_Startups_logo.svg/1200px-Google_for_Startups_logo.svg.png?20201222111427"
-                                className="text-yellow-300" />
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Google_for_Startups_logo.svg/1200px-Google_for_Startups_logo.svg.png?20201222111427"
+                                className="text-yellow-300 w-30 h-30" />
                             Google Startups Member
                         </motion.div>
                         <motion.div
@@ -166,8 +166,8 @@ const HeroSection = () => {
                             transition={{ delay: 0.5, duration: 0.8 }}
                             className="bg-blue-600/80 text-white w-fit px-5 py-2 rounded-full text-sm font-semibold flex items-center gap-2 backdrop-blur-sm"
                         >
-                            <img href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdXb6yFb5UMer8xTSJDmGH5ogfDqA3h7O6Yw&s"
-                                className="text-white" />
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdXb6yFb5UMer8xTSJDmGH5ogfDqA3h7O6Yw&s"
+                                className="text-white w-30 h-30" />
                             IIT Mandi Incubation
                         </motion.div>
                     </div>
