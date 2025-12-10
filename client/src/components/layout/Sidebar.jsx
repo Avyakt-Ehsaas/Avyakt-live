@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import './Sidebar.css';
 import {
   LayoutDashboard,
   Users,
@@ -89,7 +90,7 @@ const Sidebar = () => {
         {(open || window.innerWidth >= 768) && (
           <motion.div
             ref={sidebarRef}
-            className="fixed top-0 left-0 h-screen w-72 bg-gradient-to-b from-white to-green-50 shadow-lg border-r border-green-100 flex flex-col z-50 overflow-x-hidden overflow-y-auto scrollbar-thin scrollbar-thumb-green-200 scrollbar-track-green-50 hover:scrollbar-thumb-green-300"
+            className="fixed top-0 left-0 h-screen w-72 bg-gradient-to-b from-white to-green-50 shadow-lg border-r border-green-100 flex flex-col z-50 overflow-hidden"
             initial={{ x: -300 }}
             animate={{ x: 0 }}
             exit={{ x: -300 }}
@@ -109,7 +110,7 @@ const Sidebar = () => {
             </Link>
 
             {/* NAV */}
-            <nav className="space-y-3 mt-2 overflow-y-auto max-h-[calc(100vh-220px)] pr-2 -mr-2 scrollbar-thin scrollbar-thumb-green-200 scrollbar-track-transparent hover:scrollbar-thumb-green-300">
+            <nav className="space-y-3 mt-2 overflow-y-auto max-h-[calc(100vh-220px)] pr-2 -mr-2 custom-sidebar-scroll">
               {navItems.map((item, index) => {
                 const isActive = location.pathname === item.path;
 

@@ -93,7 +93,7 @@ const Analytics = () => {
             User Growth
           </h2>
 
-          <div className="w-full h-full bg-green-50/50 rounded-lg flex items-center justify-center text-green-500 border-2 border-dashed border-green-200">
+          <div className="w-full h-fit bg-green-50/50 rounded-lg flex items-center justify-center text-green-500 border-2 border-dashed border-green-200">
             User Growth Graph
           </div>
         </motion.div>
