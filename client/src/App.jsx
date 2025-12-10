@@ -79,14 +79,16 @@ function App() {
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/about" element={<AboutUs />} />
 
+              <Route
+              path="/admin/dashboard"
+              element={<AdminLayout><AdminDashboard /></AdminLayout>}
+               />
+
+
             {/* ===========================================
                ✅ PROTECTED DASHBOARD ROUTE
             ============================================ */}
-            <Route path="/admin/dashboard" element={
-              <AdminLayout>
-              <AdminDashboard />}
-              </AdminLayout>
-               />
+           
             <Route
               path="/dashboard"
               element={
