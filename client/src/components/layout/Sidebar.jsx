@@ -11,7 +11,8 @@ import {
   Zap,
   LogOut,
   Menu,
-  X
+  X,
+  Activity
 } from 'lucide-react';
 import { FaHome } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -23,6 +24,7 @@ const navItems = [
   { name: 'User Management', icon: Users, path: '/admin/users' },
   {name : 'Create Meeting' , icon: Video, path : '/admin/create-meeting'},
   { name: 'Analytics Hub', icon: BarChart3, path: '/admin/analytics' },
+  { name: 'Engagement Track', icon: Activity, path: '/admin/engagement'},
   { name: 'Session Control', icon: Clock, path: '/admin/security-logs' },
   { name: 'System Settings', icon: Settings, path: '/admin/settings' }
 ];
@@ -87,7 +89,7 @@ const Sidebar = () => {
         {(open || window.innerWidth >= 768) && (
           <motion.div
             ref={sidebarRef}
-            className="fixed top-0 left-0 h-screen w-72 bg-gradient-to-b from-white to-green-50 shadow-lg border-r border-green-100 flex flex-col z-50"
+            className="fixed top-0 left-0 h-screen w-72 bg-gradient-to-b from-white to-green-50 shadow-lg border-r border-green-100 flex flex-col z-50 overflow-x-hidden overflow-y-auto scrollbar-thin scrollbar-thumb-green-200 scrollbar-track-green-50 hover:scrollbar-thumb-green-300"
             initial={{ x: -300 }}
             animate={{ x: 0 }}
             exit={{ x: -300 }}
@@ -107,7 +109,7 @@ const Sidebar = () => {
             </Link>
 
             {/* NAV */}
-            <nav className="space-y-3 mt-2 overflow-y-auto max-h-[calc(100vh-220px)] pr-2 -mr-2">
+            <nav className="space-y-3 mt-2 overflow-y-auto max-h-[calc(100vh-220px)] pr-2 -mr-2 scrollbar-thin scrollbar-thumb-green-200 scrollbar-track-transparent hover:scrollbar-thumb-green-300">
               {navItems.map((item, index) => {
                 const isActive = location.pathname === item.path;
 

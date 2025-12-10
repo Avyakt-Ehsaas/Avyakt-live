@@ -116,7 +116,7 @@ const CreateMeeting = () => {
   ];
 
   return (
-    <div className="p-6 min-h-screen ml-[16rem] bg-gradient-to-br from-purple-100 via-pink-100 to-white">
+    <div className="p-6 min-h-screen ml-[18rem] bg-gradient-to-br from-green-50 via-cream-50 to-white">
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
@@ -129,13 +129,13 @@ const CreateMeeting = () => {
           </div>
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center px-4 py-2 text-sm text-gray-600 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
+            className="flex items-center px-4 py-2 text-sm text-gray-600 bg-white border border-green-200 rounded-lg hover:bg-green-50 transition-colors"
           >
             <FiX className="mr-2" /> Cancel
           </button>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm p-6">
+        <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-sm p-6 border border-green-100">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Meeting Title */}
             <div>
@@ -149,7 +149,7 @@ const CreateMeeting = () => {
                 value={formData.title}
                 onChange={handleChange}
                 placeholder="Morning Meditation Session"
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
+                className="w-full px-4 py-2.5 border border-green-200 rounded-xl focus:ring-2 focus:ring-green-300 focus:border-green-300 transition-all"
               />
             </div>
 
@@ -165,7 +165,7 @@ const CreateMeeting = () => {
                 value={formData.zoomLink}
                 onChange={handleChange}
                 placeholder="https://zoom.us/j/xxxxxxx"
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
+                className="w-full px-4 py-2.5 border border-green-200 rounded-xl focus:ring-2 focus:ring-green-300 focus:border-green-300 transition-all"
               />
             </div>
 
@@ -181,7 +181,7 @@ const CreateMeeting = () => {
                   required
                   value={formData.defaultTime}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
+                  className="w-full px-4 py-2.5 border border-green-200 rounded-xl focus:ring-2 focus:ring-green-300 focus:border-green-300 transition-all"
                 />
               </div>
 
@@ -194,7 +194,7 @@ const CreateMeeting = () => {
                   name="timezone"
                   value={formData.timezone}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-purple-500"
+                  className="w-full px-4 py-2.5 border border-green-200 rounded-xl focus:ring-2 focus:ring-green-300 focus:border-green-300 transition-all"
                 >
                   <option value="Asia/Kolkata">India (Kolkata, GMT+5:30)</option>
                   <option value="UTC">UTC</option>
@@ -214,11 +214,7 @@ const CreateMeeting = () => {
                     key={day.value}
                     type="button"
                     onClick={() => handleDayToggle(day.value)}
-                    className={`px-4 py-2 rounded-md text-sm font-medium ${
-                      formData?.settings?.recurringDays.includes(day.value)
-                        ? 'bg-purple-600 text-white'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
+                    className={`flex items-center justify-center w-10 h-10 rounded-full transition-colors ${formData.settings?.recurringDays?.includes(day.value) ? 'bg-green-100 text-green-700 border border-green-200' : 'bg-gray-50 text-gray-500 border border-gray-200'}`}
                   >
                     {day.label}
                   </button>
@@ -249,7 +245,7 @@ const CreateMeeting = () => {
                 id="sendReminders"
                 checked={formData?.settings?.sendReminders}
                 onChange={handleChange}
-                className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+                className="w-4 h-4 text-green-500 border-green-300 rounded focus:ring-green-300"
               />
               <label htmlFor="sendReminders" className="ml-2 block text-sm text-gray-700">
                 Send WhatsApp reminders

@@ -106,13 +106,13 @@ const AllUsers = () => {
 
     const getRoleBadge = (role) => {
         const roles = {
-            admin: 'bg-purple-800/50 text-purple-300 border border-purple-600/50',
-            user: 'bg-blue-800/50 text-blue-300 border border-blue-600/50',
-            moderator: 'bg-green-800/50 text-green-300 border border-green-600/50',
+            admin: 'bg-red-100 text-red-700 border border-red-200',
+            user: 'bg-green-100 text-green-700 border border-green-200',
+            moderator: 'bg-blue-100 text-blue-700 border border-blue-200',
         };
 
         return (
-            <span className={`px-3 py-1 text-xs font-semibold rounded-full backdrop-blur-sm ${roles[role] || 'bg-gray-700 text-gray-400'}`}>
+            <span className={`px-3 py-1 text-xs font-medium rounded-full ${roles[role] || 'bg-gray-100 text-gray-600'}`}>
                 {role.charAt(0).toUpperCase() + role.slice(1)}
             </span>
         );
@@ -134,22 +134,22 @@ const AllUsers = () => {
     };
 
     return (
-        <div className="p-10 min-h-screen ml-[15rem] bg-gray-900 text-gray-100">
+        <div className="p-10 min-h-screen ml-[18rem] bg-gradient-to-br from-green-50 via-cream-50 to-white text-gray-800">
             <motion.div 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 border-b border-gray-700 pb-4"
+                className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 border-b border-green-100 pb-6"
             >
                 <div>
-                    <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500">
+                    <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-600 to-green-400">
                         User Management System
                     </h2>
-                    <p className="text-gray-400 mt-1">Control access and view registered users in the core system.</p>
+                    <p className="text-gray-600 mt-1">Control access and view registered users in the core system.</p>
                 </div>
                 <motion.button
                     onClick={handleAddUser}
-                    className="mt-4 md:mt-0 flex items-center justify-center px-6 py-2 bg-purple-700/70 text-white rounded-xl shadow-lg shadow-purple-500/30 hover:bg-purple-600 transition-all duration-300 transform hover:scale-105 border border-purple-500/50"
+                    className="mt-4 md:mt-0 flex items-center justify-center px-6 py-2.5 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-all duration-300 transform hover:scale-105 border border-green-400 shadow-sm hover:shadow-md"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.98 }}
                 >
@@ -158,8 +158,8 @@ const AllUsers = () => {
                 </motion.button>
             </motion.div>
 
-            <div className="bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-2xl border border-blue-600/30 overflow-hidden">
-                <div className="p-5 border-b border-gray-700">
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-sm border border-green-100 overflow-hidden">
+                <div className="p-5 border-b border-green-100">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
                         <form onSubmit={handleSearch} className="flex-1">
                             <div className="relative">
@@ -171,16 +171,16 @@ const AllUsers = () => {
                                     placeholder="Search by name or email..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="pl-10 pr-4 py-2 w-full bg-gray-700/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-colors"
+                                    className="pl-10 pr-4 py-2.5 w-full bg-white border border-green-200 rounded-xl text-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-green-300 focus:border-green-300 transition-all"
                                 />
                             </div>
                         </form>
                         <div className="flex items-center space-x-4">
-                            <label className="text-sm text-gray-400">Filter Role:</label>
+                            <label className="text-sm text-gray-600">Filter Role:</label>
                             <select
                                 value={selectedRole}
                                 onChange={(e) => setSelectedRole(e.target.value)}
-                                className="border border-gray-600 bg-gray-700/50 rounded-lg px-3 py-2 text-white focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-colors"
+                                className="border border-green-200 bg-white rounded-xl px-3 py-2 text-gray-700 focus:ring-2 focus:ring-green-300 focus:border-green-300 transition-all"
                             >
                                 <option value="all">All Roles</option>
                                 <option value="admin">Admin</option>
@@ -193,12 +193,12 @@ const AllUsers = () => {
 
                 <div className="overflow-x-auto">
                     {loading ? (
-                        <div className="p-10 text-center text-gray-400">
-                            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-cyan-500 mx-auto"></div>
+                        <div className="p-10 text-center text-gray-600">
+                            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-green-400 border-t-green-100 mx-auto"></div>
                             <p className="mt-4 text-lg">Initializing Data Stream...</p>
                         </div>
                     ) : users.length === 0 ? (
-                        <div className="p-10 text-center text-gray-500">
+                        <div className="p-10 text-center text-gray-600">
                             <p className="text-xl">No user records found matching criteria.</p>
                         </div>
                     ) : (
@@ -233,11 +233,11 @@ const AllUsers = () => {
                                                 </div>
                                                 <div className="ml-4">
                                                     <div className="text-sm font-medium text-white">{user.name}</div>
-                                                    <div className="text-xs text-gray-400">@{user.username || 'n/a'}</div>
+                                                    <div className="text-xs text-gray-600">@{user.username || 'n/a'}</div>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">{user.email}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{user.email}</td>
                                         <td className="px-6 py-4 whitespace-nowrap">{getRoleBadge(user.role)}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm">
                                             {/* Assuming a boolean 'isActive' property exists */}
@@ -251,12 +251,12 @@ const AllUsers = () => {
                                                 </span>
                                             )}
                                         </td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{formatDate(user.createdAt)}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{formatDate(user.createdAt)}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <div className="flex justify-end space-x-3">
                                                 <motion.button
                                                     onClick={() => handleEditUser(user._id)}
-                                                    className="p-2 rounded-full text-cyan-400 hover:bg-cyan-900/50 transition duration-150 border border-transparent hover:border-cyan-500/50"
+                                                    className="px-3 py-1 text-sm text-gray-600 rounded-lg hover:bg-green-100 transition-colors"
                                                     title="Edit user"
                                                     whileHover={{ scale: 1.1, boxShadow: "0 0 10px rgba(0, 255, 255, 0.5)" }}
                                                 >
@@ -265,7 +265,7 @@ const AllUsers = () => {
                                                 {user._id !== currentUser?._id && currentUser?.role === "admin" && (
                                                     <motion.button
                                                         onClick={() => handleDeleteUser(user._id)}
-                                                        className="p-2 rounded-full text-red-500 hover:bg-red-900/50 transition duration-150 border border-transparent hover:border-red-500/50"
+                                                        className="px-3 py-1 text-sm text-red-600 rounded-lg hover:bg-red-100 transition-colors"
                                                         title="Delete user"
                                                         whileHover={{ scale: 1.1, boxShadow: "0 0 10px rgba(255, 0, 0, 0.5)" }}
                                                     >
@@ -283,25 +283,25 @@ const AllUsers = () => {
 
                 {/* Pagination */}
                 {totalPages > 1 && (
-                    <div className="bg-gray-800/80 px-4 py-4 flex items-center justify-between border-t border-gray-700 sm:px-6">
+                    <div className="flex items-center justify-between px-4 py-3 bg-green-50/50 border-t border-green-100 sm:px-6 rounded-b-xl">
                         <div className="flex-1 flex justify-between sm:hidden">
                             <button
                                 onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                                 disabled={currentPage === 1}
-                                className="relative inline-flex items-center px-4 py-2 border border-gray-600 text-sm font-medium rounded-md text-gray-300 bg-gray-700 hover:bg-gray-600 disabled:opacity-40"
+                                className="relative inline-flex items-center px-4 py-2 border border-gray-600 text-sm font-medium rounded-md text-gray-600 bg-gray-700 hover:bg-gray-600 disabled:opacity-40"
                             >
                                 Previous
                             </button>
                             <button
                                 onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                                 disabled={currentPage === totalPages}
-                                className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-600 text-sm font-medium rounded-md text-gray-300 bg-gray-700 hover:bg-gray-600 disabled:opacity-40"
+                                className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-600 text-sm font-medium rounded-md text-gray-600 bg-gray-700 hover:bg-gray-600 disabled:opacity-40"
                             >
                                 Next
                             </button>
                         </div>
                         <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                            <p className="text-sm text-gray-400">
+                            <p className="text-sm text-gray-600">
                                 Showing <span className="font-semibold text-white">{(currentPage - 1) * itemsPerPage + 1}</span> to{' '}
                                 <span className="font-semibold text-white">{Math.min(currentPage * itemsPerPage, totalUsers)}</span> of{' '}
                                 <span className="font-semibold text-white">{totalUsers}</span> records
@@ -310,7 +310,7 @@ const AllUsers = () => {
                                 <motion.button
                                     onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                                     disabled={currentPage === 1}
-                                    className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-700 bg-gray-700/50 text-gray-300 hover:bg-gray-600/70 disabled:opacity-40 transition-colors"
+                                    className="relative inline-flex items-center px-2 py-2 border border-gray-600 text-sm font-medium rounded-md text-gray-600 bg-gray-700 hover:bg-gray-600 disabled:opacity-40"
                                     whileHover={{ scale: 1.05 }}
                                 >
                                     <FiChevronLeft className="h-5 w-5" />
