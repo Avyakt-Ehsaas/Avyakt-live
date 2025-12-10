@@ -41,44 +41,47 @@ const item = {
 
 export default function AdminDashboard() {
 
-    const [totalUsers,setTotalUsers] = useState([]);
-    const [loading,setLoading] = useState(false);
+    const [totalUsers, setTotalUsers] = useState([]);
     const [activeUsers, setActiveUsers] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     const dashboardData = DUMMY_DASHBOARD_DATA;
 
-    useEffect(() =>{
-        const fetchTotalUser =  async() => {
+    // Calculate active users (users with active subscription in last 21 days)
+    const calculateActiveUsers = (users) => {
+        if (!users || !Array.isArray(users)) return 0;
+        
+        const today = new Date();
+        return users.filter(user => {
+            if (!user.subscription?.endDate) return false;
+            const endDate = new Date(user.subscription.endDate);
+            const diffTime = today - endDate;
+            const diffDays = diffTime / (1000 * 60 * 60 * 24);
+            return diffDays >= 0 && diffDays <= 21;
+        }).length;
+    };
+
+    // Fetch users and calculate active users
+    useEffect(() => {
+        const fetchUsers = async () => {
             try {
-               const response = await API.get('/user/getUsers')
-               const users = response.data.users;
-               console.log(totalUsers);
-               setTotalUsers(users)
-            toast.success("users fetched")
+                setLoading(true);
+                const response = await API.get('/user/getUsers');
+                const users = response.data.users || [];
+                setTotalUsers(users);
+                setActiveUsers(calculateActiveUsers(users));
             } catch (error) {
-                toast.error(error,"unable to fetch total users")
+                console.error('Error fetching users:', error);
+                setError('Failed to load user data');
+                toast.error('Failed to load user data');
+            } finally {
+                setLoading(false);
             }
-        }
-        fetchTotalUser();
-    },[])
+        };
 
-    const fetchCount = async(users) => {
-        try {
-            for(let i of users){
-                const endDate = new Date(i.subscription.endDate);
-                const today = new Date();
-
-                const diffM = today - endDate ;
-                const diffDays = diffM / (1000*60*60*24);
-              if (diffDays >= 0 && diffDays <= 21) {
-                setActiveUsers(prev =>  prev+1);
-            }
-        }
-    return activeUsers;
-        } catch (error) {
-            return 0;
-        }
-    }
+        fetchUsers();
+    }, []);
 
     return (
         <div className="admin-scroll ml-1 md:ml-[18rem] p-10 min-h-screen bg-gradient-to-br from-green-50 via-cream-50 to-white text-gray-800">
@@ -109,7 +112,11 @@ export default function AdminDashboard() {
                             <div>
                                 <p className="text-sm font-medium text-gray-500">Total Users</p>
                                 <p className="text-4xl font-bold text-green-700 mt-1">
-                                    {formatNumber(totalUsers || 0)}
+                                    {loading ? (
+                                        <div className="h-8 w-20 bg-gray-200 rounded animate-pulse"></div>
+                                    ) : (
+                                        formatNumber(totalUsers.length || 0)
+                                    )}
                                 </p>
                                 <p className="text-sm text-green-600 mt-2">
                                     +{formatNumber(dashboardData?.newUsersThisMonth || 0)} <span className="text-gray-500">new this month</span>
@@ -128,7 +135,11 @@ export default function AdminDashboard() {
                             <div>
                                 <p className="text-sm font-medium text-gray-500">Active Users (21D)</p>
                                 <p className="text-4xl font-bold text-green-600 mt-1">
-                                    {formatNumber(fetchCount(totalUsers)|| 0)}
+                                    {loading ? (
+                                        <div className="h-8 w-20 bg-gray-200 rounded animate-pulse"></div>
+                                    ) : (
+                                        formatNumber(activeUsers)
+                                    )}
                                 </p>
                                 <p className="text-sm text-green-500 mt-2">
                                     <TrendingUp className="inline w-4 h-4 mr-1 text-green-500" /> High Engagement Rate
