@@ -43,6 +43,7 @@ export default function AdminDashboard() {
 
     const [totalUsers,setTotalUsers] = useState([]);
     const [loading,setLoading] = useState(false);
+    const [activeUsers, setActiveUsers] = useState(0);
 
     const dashboardData = DUMMY_DASHBOARD_DATA;
 
@@ -70,12 +71,12 @@ export default function AdminDashboard() {
                 const diffM = today - endDate ;
                 const diffDays = diffM / (1000*60*60*24);
               if (diffDays >= 0 && diffDays <= 21) {
-        return true;
-      }
-    }
-    return false;
+                setActiveUsers(prev =>  prev+1);
+            }
+        }
+    return activeUsers;
         } catch (error) {
-            return false;
+            return 0;
         }
     }
 
