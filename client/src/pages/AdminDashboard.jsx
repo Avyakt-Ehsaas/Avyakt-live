@@ -41,7 +41,7 @@ const item = {
 
 export default function AdminDashboard() {
 
-    const [totalUsers,setTotalUsers] = useState(0);
+    const [totalUsers,setTotalUsers] = useState([]);
     const [loading,setLoading] = useState(false);
 
     const dashboardData = DUMMY_DASHBOARD_DATA;
@@ -52,7 +52,7 @@ export default function AdminDashboard() {
                const response = await API.get('/user/getUsers')
                const users = response.data.users;
                console.log(totalUsers);
-               setTotalUsers(users.length)
+               setTotalUsers(users)
             toast.success("users fetched")
             } catch (error) {
                 toast.error(error,"unable to fetch total users")
@@ -60,6 +60,24 @@ export default function AdminDashboard() {
         }
         fetchTotalUser();
     },[])
+
+    const fetchCount = async(users) => {
+        try {
+            for(let i of users){
+                const endDate = new Date(i.subscription.endDate);
+                const today = new Date();
+
+                const diffM = today - endDate ;
+                const diffDays = diffM / (1000*60*60*24);
+              if (diffDays >= 0 && diffDays <= 21) {
+        return true;
+      }
+    }
+    return false;
+        } catch (error) {
+            return false;
+        }
+    }
 
     return (
         <div className="admin-scroll ml-1 md:ml-[18rem] p-10 min-h-screen bg-gradient-to-br from-green-50 via-cream-50 to-white text-gray-800">
@@ -107,9 +125,9 @@ export default function AdminDashboard() {
                     <Card className="hover:border-green-200">
                         <CardContent className="flex justify-between items-center p-6">
                             <div>
-                                <p className="text-sm font-medium text-gray-500">Active Users (30D)</p>
+                                <p className="text-sm font-medium text-gray-500">Active Users (21D)</p>
                                 <p className="text-4xl font-bold text-green-600 mt-1">
-                                    {formatNumber(dashboardData?.activeUsers || 0)}
+                                    {formatNumber(fetchCount(totalUsers)|| 0)}
                                 </p>
                                 <p className="text-sm text-green-500 mt-2">
                                     <TrendingUp className="inline w-4 h-4 mr-1 text-green-500" /> High Engagement Rate
