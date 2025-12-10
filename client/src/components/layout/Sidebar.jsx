@@ -87,12 +87,13 @@ const Sidebar = () => {
         {(open || window.innerWidth >= 768) && (
           <motion.div
             ref={sidebarRef}
-            className="fixed top-0 left-0 h-screen w-72 bg-gradient-to-b from-white to-green-50 shadow-lg border-r border-green-100 p-6 z-50 overflow-y-auto"
+            className="fixed top-0 left-0 h-screen w-72 bg-gradient-to-b from-white to-green-50 shadow-lg border-r border-green-100 flex flex-col z-50"
             initial={{ x: -300 }}
             animate={{ x: 0 }}
             exit={{ x: -300 }}
             transition={{ type: 'spring', stiffness: 100, damping: 25 }}
           >
+            <div className="p-6 pb-4">
             {/* LOGO */}
             <Link
               to="/"
@@ -106,7 +107,7 @@ const Sidebar = () => {
             </Link>
 
             {/* NAV */}
-            <nav className="space-y-3 mt-2">
+            <nav className="space-y-3 mt-2 overflow-y-auto max-h-[calc(100vh-220px)] pr-2 -mr-2">
               {navItems.map((item, index) => {
                 const isActive = location.pathname === item.path;
 
@@ -139,21 +140,24 @@ const Sidebar = () => {
                 );
               })}
             </nav>
+            </div>
 
             {/* LOGOUT */}
-            <motion.div
-              className="absolute bottom-6 left-6 right-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              <button
-                onClick={handleLogout}
-                className="w-full flex items-center justify-center p-3 rounded-xl bg-white text-red-500 transition-all duration-300 hover:bg-red-50 hover:text-red-600 border border-red-200 shadow-sm"
+            <div className="mt-auto p-6 pt-4 border-t border-green-100">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
               >
-                <LogOut className="w-5 h-5 mr-2" />
-                <span className="font-semibold text-sm">Logout Session</span>
-              </button>
-            </motion.div>
+                <button
+                  onClick={handleLogout}
+                  className="w-full flex items-center justify-center p-3 rounded-xl bg-white text-red-500 transition-all duration-300 hover:bg-red-50 hover:text-red-600 border border-red-200 shadow-sm"
+                >
+                  <LogOut className="w-5 h-5 mr-2" />
+                  <span className="font-semibold text-sm">Logout Session</span>
+                </button>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

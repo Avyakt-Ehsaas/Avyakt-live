@@ -81,20 +81,20 @@ const EngagementControl = () => {
 
   const getStatusBadge = (status) => {
     const statusClasses = {
-      active: 'bg-green-100 text-green-800',
-      idle: 'bg-yellow-100 text-yellow-800',
-      inactive: 'bg-gray-100 text-gray-800',
+      active: 'bg-green-100 text-green-700',
+      idle: 'bg-amber-100 text-amber-700',
+      inactive: 'bg-gray-100 text-gray-600',
     };
     
     return (
-      <span className={`px-2 py-1 text-xs font-medium rounded-full ${statusClasses[status] || 'bg-gray-100'}`}>
+      <span className={`px-3 py-1 text-xs font-medium rounded-full ${statusClasses[status] || 'bg-gray-100'}`}>
         {status.charAt(0).toUpperCase() + status.slice(1)}
       </span>
     );
   };
 
   return (
-    <div className="p-6 min-h-screen ml-[16rem] bg-gradient-to-br from-purple-50 via-pink-50 to-white">
+    <div className="p-6 min-h-screen ml-[18rem] bg-gradient-to-br from-green-50 via-cream-50 to-white">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
@@ -107,7 +107,7 @@ const EngagementControl = () => {
               <select
                 value={timeRange}
                 onChange={(e) => setTimeRange(e.target.value)}
-                className="appearance-none bg-white border border-gray-300 rounded-lg pl-4 pr-10 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="appearance-none bg-white border border-green-200 rounded-xl pl-4 pr-10 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300 transition-all"
               >
                 <option value="7days">Last 7 days</option>
                 <option value="30days">Last 30 days</option>
@@ -118,7 +118,7 @@ const EngagementControl = () => {
             </div>
             <button
               onClick={() => handleExport('csv')}
-              className="flex items-center px-4 py-2 text-sm text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors"
+              className="flex items-center px-4 py-2 text-sm text-white bg-green-500 rounded-xl hover:bg-green-600 transition-all shadow-sm hover:shadow-md"
             >
               <FiDownload className="mr-2" /> Export
             </button>
@@ -132,8 +132,8 @@ const EngagementControl = () => {
               onClick={() => setActiveTab('overview')}
               className={`${
                 activeTab === 'overview'
-                  ? 'border-purple-500 text-purple-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  ? 'border-green-500 text-green-600 font-medium'
+                  : 'border-transparent text-gray-500 hover:text-green-600 hover:border-green-200'
               } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
             >
               Overview
@@ -142,8 +142,8 @@ const EngagementControl = () => {
               onClick={() => setActiveTab('users')}
               className={`${
                 activeTab === 'users'
-                  ? 'border-purple-500 text-purple-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  ? 'border-green-500 text-green-600 font-medium'
+                  : 'border-transparent text-gray-500 hover:text-green-600 hover:border-green-200'
               } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
             >
               User Activity
@@ -153,15 +153,15 @@ const EngagementControl = () => {
 
         {loading ? (
           <div className="flex justify-center items-center p-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-green-400"></div>
           </div>
         ) : activeTab === 'overview' ? (
           <>
             {/* Metrics Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-              <div className="bg-white rounded-xl shadow-sm p-6">
+              <div className="bg-white rounded-xl shadow-sm p-6 border border-green-50 hover:border-green-100 transition-all">
                 <div className="flex items-center">
-                  <div className="p-3 rounded-lg bg-purple-100 text-purple-600">
+                  <div className="p-3 rounded-xl bg-green-50 text-green-500">
                     <FiUsers className="text-xl" />
                   </div>
                   <div className="ml-4">
@@ -171,9 +171,9 @@ const EngagementControl = () => {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl shadow-sm p-6">
+              <div className="bg-white rounded-xl shadow-sm p-6 border border-green-50 hover:border-green-100 transition-all">
                 <div className="flex items-center">
-                  <div className="p-3 rounded-lg bg-green-100 text-green-600">
+                  <div className="p-3 rounded-xl bg-green-50 text-green-500">
                     <BsPeopleFill className="text-xl" />
                   </div>
                   <div className="ml-4">
@@ -183,9 +183,9 @@ const EngagementControl = () => {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl shadow-sm p-6">
+              <div className="bg-white rounded-xl shadow-sm p-6 border border-green-50 hover:border-green-100 transition-all">
                 <div className="flex items-center">
-                  <div className="p-3 rounded-lg bg-blue-100 text-blue-600">
+                  <div className="p-3 rounded-xl bg-blue-50 text-blue-500">
                     <FiClock className="text-xl" />
                   </div>
                   <div className="ml-4">
@@ -195,9 +195,9 @@ const EngagementControl = () => {
                 </div>
               </div>
 
-              <div className="bg-white rounded-xl shadow-sm p-6">
+              <div className="bg-white rounded-xl shadow-sm p-6 border border-green-50 hover:border-green-100 transition-all">
                 <div className="flex items-center">
-                  <div className="p-3 rounded-lg bg-yellow-100 text-yellow-600">
+                  <div className="p-3 rounded-xl bg-amber-50 text-amber-500">
                     <FiTrendingUp className="text-xl" />
                   </div>
                   <div className="ml-4">
