@@ -96,7 +96,7 @@ const Sidebar = () => {
             exit={{ x: -300 }}
             transition={{ type: 'spring', stiffness: 100, damping: 25 }}
           >
-            <div className="p-6 pb-4">
+            <div className="p-6 pb-4 overflow-x-hidden">
             {/* LOGO */}
             <Link
               to="/"
