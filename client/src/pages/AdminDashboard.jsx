@@ -51,7 +51,6 @@ export default function AdminDashboard() {
             try {
                const response = await API.get('/user/getUsers')
                const users = response.data.users;
-               console.log(users.);
                console.log(totalUsers);
                setTotalUsers(users.length)
             toast.success("users fetched")
