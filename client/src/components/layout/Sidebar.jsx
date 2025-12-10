@@ -7,6 +7,7 @@ import {
   Clock,
   Settings,
   BarChart3,
+  Video,
   Zap,
   LogOut,
   Menu,
@@ -20,6 +21,7 @@ const navItems = [
   { name: 'Home', icon: FaHome, path: '/' },
   { name: 'Dashboard Core', icon: LayoutDashboard, path: '/admin' },
   { name: 'User Management', icon: Users, path: '/admin/users' },
+  {name : 'Create Meeting' , icon: Video, path : '/admin/create-meeting'}
   { name: 'Analytics Hub', icon: BarChart3, path: '/admin/analytics' },
   { name: 'Session Control', icon: Clock, path: '/admin/security-logs' },
   { name: 'System Settings', icon: Settings, path: '/admin/settings' }
