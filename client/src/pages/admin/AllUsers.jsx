@@ -19,6 +19,18 @@ const AllUsers = () => {
     const { user: currentUser } = useAuth();
     const navigate = useNavigate();
 
+    const checkActive = (endDate) => {
+       
+        const targetDate = new Date(endDate);
+        const today = new Date();
+
+        const diffM = targetDate - today ;
+        const diffDays = diffM / (1000*60*60*24);
+
+        return diffDays >= 0 && diffDays <= 21;
+    }
+
+
     useEffect(() => {
         if (currentUser && currentUser.role !== 'admin') {
             toast.error('You are not authorized to access this page');
@@ -229,7 +241,7 @@ const AllUsers = () => {
                                         <td className="px-6 py-4 whitespace-nowrap">{getRoleBadge(user.role)}</td>
                                         <td className="px-6 py-4 whitespace-nowrap text-sm">
                                             {/* Assuming a boolean 'isActive' property exists */}
-                                            {user.isActive ? (
+                                            {checkActive(user?.subscription?.endDate) ? (
                                                 <span className="flex items-center text-lime-400 font-medium">
                                                     <FiCheckCircle className="mr-1.5 w-4 h-4" /> Active
                                                 </span>
