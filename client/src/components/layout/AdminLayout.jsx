@@ -2,11 +2,21 @@ import React from 'react';
 import Sidebar from './Sidebar';
 
 const AdminLayout = ({ children }) => {
+  // Add admin-scroll class to body when component mounts
+  React.useEffect(() => {
+    document.body.classList.add('admin-scroll');
+    return () => {
+      document.body.classList.remove('admin-scroll');
+    };
+  }, []);
+
   return (
     <div className="flex min-h-screen">
       <Sidebar />
       <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50">
-        {children}
+        <div className="admin-scroll h-full">
+          {children}
+        </div>
       </main>
     </div>
   );
