@@ -4,6 +4,20 @@ import { Users, BarChart3, Activity, Calendar, Settings, Shield, Zap, TrendingUp
 import API from "../utils/api";
 import toast from "react-hot-toast";
 import Loader from "../components/ui/Loader";
+import {
+  ResponsiveContainer,
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend
+} from "recharts";
+
+
 
 const DUMMY_DASHBOARD_DATA = {
     totalUsers: 12450,
@@ -162,7 +176,14 @@ export default function AdminDashboard() {
         const month = now.getMonth();
 
         console.log(year , month)
-        const res = await API.get(`/meetings/monthly-attendees?year=${year}&month=${month}`);
+        const res = await API.get(`/meetings/monthly-attendees`,
+             {
+            params: { 
+                year, 
+                month 
+            }
+        }
+        );
 
         if (res.data.success) {
             setMonthlyAttendees(res.data.data.totalAttendees);
