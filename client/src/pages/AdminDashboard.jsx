@@ -121,7 +121,7 @@ export default function AdminDashboard() {
             const currMonth = now.getMonth();
             const currYear = now.getFullYear();
 
-            const sessions = meetings.sessions || [];
+            const sessions = meetings[0].sessions || [];
             const monthlySessions = sessions.filter(session => {
                 if (!session || !session.date) return false;
                 
