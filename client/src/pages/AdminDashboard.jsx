@@ -110,34 +110,41 @@ export default function AdminDashboard() {
     },[])
 
     
-    const countMonthlyAttendees = async() => {
+    const countMonthlyAttendees = () => {
         try {
+            if (!meetings || !meetings.length || !meetings[0]?.sessions) {
+                return 0;
+            }
+
             const now = new Date();
             const currMonth = now.getMonth();
             const currYear = now.getFullYear();
 
-            //filter session of the month
-            const sessions = meetings[0].sessions;
+            const sessions = meetings.sessions || [];
             const monthlySessions = sessions.filter(session => {
+                if (!session || !session.date) return false;
+                
                 const sessionDate = new Date(session.date);
+                if (isNaN(sessionDate.getTime())) return false;
+                
                 return (
-                    session.Date.getMonth() === currMonth &&
-                    session.Date.getFullYear() === currYear 
-                )
+                    sessionDate.getMonth() === currMonth &&
+                    sessionDate.getFullYear() === currYear
+                );
             });
             
-            const totalAttendees = monthlySessions.reduce((count,s) => {
-                if(s.sessions?.length > 0){
-                    return count + s.sessions[0].attendees.length;
+            const totalAttendees = monthlySessions.reduce((count, session) => {
+                if (session?.sessions?.[0]?.attendees?.length > 0) {
+                    return count + session.sessions[0].attendees.length;
                 }
                 return count;
-            },0)
+            }, 0);
 
             return totalAttendees;
-
         } catch (error) {
-            console.log(error);
-            toast.error("Failed to fetch Attendees")
+            console.error('Error in countMonthlyAttendees:', error);
+            toast.error("Failed to calculate monthly attendees");
+            return 0;
         }
     }
 
