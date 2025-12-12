@@ -224,11 +224,11 @@ export const getUserSessionHistory = async (req, res) => {
   }
 };
 
-export const getAllSessions = async(req,res) => {
+export const getAllSessions = async (req,res) => {
   try {
-    const meetings = await Meeting.find({});
+    const meetings = await Meeting.find({isActive : true})
     if(!meetings){
-      return res.status(404).send({message : "No sessions found"})
+      return res.status(400).send({success : false , message : 'No Active Meetings Found'})
     }
     return res.status(200).send({success : true ,meetings})
   } catch (error) {
@@ -236,3 +236,88 @@ export const getAllSessions = async(req,res) => {
     return res.status(500).send({message : "Internal server Error While Getting all Sessions"})
   }
 }
+
+/**
+ * Get monthly session attendees count
+ * Query params: year (required), month (0-11, optional - defaults to current month)
+ */
+export const getMonthlyAttendees = async (req, res) => {
+    try {
+        const { year, month } = req.query;
+        
+        if (!year) {
+            return res.status(400).json({ 
+                success: false,
+                message: "Year is required" 
+            });
+        }
+
+        const yearNum = parseInt(year);
+        const monthNum = month !== undefined ? parseInt(month) : new Date().getMonth();
+        
+        if (isNaN(yearNum) || isNaN(monthNum) || monthNum < 0 || monthNum > 11) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid year or month. Month should be 0-11"
+            });
+        }
+
+        // Create start and end dates for the month
+        const startDate = new Date(yearNum, monthNum, 1);
+        const endDate = new Date(yearNum, monthNum + 1, 0, 23, 59, 59, 999);
+
+        // Aggregate to get session attendees count for the month
+        const result = await Meeting.aggregate([
+            // Unwind the sessions array
+            { $unwind: "$sessions" },
+            // Match sessions within the date range
+            {
+                $match: {
+                    "sessions.date": {
+                        $gte: startDate.toISOString().split('T')[0], // Format as YYYY-MM-DD
+                        $lte: endDate.toISOString().split('T')[0]
+                    },
+                    "sessions.attendees": { $exists: true, $ne: [] } // Only include sessions with attendees
+                }
+            },
+            // Project only needed fields
+            {
+                $project: {
+                    date: "$sessions.date",
+                    attendeesCount: { $size: { $ifNull: ["$sessions.attendees", []] } }
+                }
+            },
+            // Group by date and sum attendees
+            {
+                $group: {
+                    _id: "$date",
+                    date: { $first: "$date" },
+                    attendeesCount: { $sum: "$attendeesCount" }
+                }
+            },
+            // Sort by date
+            { $sort: { date: 1 } }
+        ]);
+
+        // Calculate total attendees for the month
+        const totalAttendees = result.reduce((sum, day) => sum + day.attendeesCount, 0);
+
+        res.status(200).json({
+            success: true,
+            data: {
+                year: yearNum,
+                month: monthNum,
+                totalAttendees,
+                dailyData: result
+            }
+        });
+
+    } catch (error) {
+        console.error("Error fetching monthly attendees:", error);
+        res.status(500).json({ 
+            success: false, 
+            message: "Internal server error while fetching monthly attendees",
+            error: error.message
+        });
+    }
+};

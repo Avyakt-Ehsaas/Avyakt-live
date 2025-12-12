@@ -7,7 +7,8 @@ import {
   joinMeeting,
   leaveMeeting,
   getUserSessionHistory,
-  getAllSessions
+  getAllSessions,
+  getMonthlyAttendees
 } from "../controllers/meetingController.js";
 
 const router = express.Router();
@@ -26,9 +27,11 @@ router.route("/leave/:sessionId")
   .post(protect, leaveMeeting); // Leave a session
 
 // User history
-router.route("/history")
-  .get(protect, getUserSessionHistory); // Get user's session history
+router.route("/history").get(protect, getUserSessionHistory); // Get user's session history
 
-router.route("/getAllSessions").get(protect,admin,getAllSessions) 
+router.route("/getAllSessions").get(protect, admin, getAllSessions);
+
+// Get monthly attendees
+router.route("/monthly-attendees").get(protect, admin, getMonthlyAttendees); 
 
 export default router;
