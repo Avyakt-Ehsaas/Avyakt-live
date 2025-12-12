@@ -321,3 +321,69 @@ export const getMonthlyAttendees = async (req, res) => {
         });
     }
 };
+
+export const fetchLastThreeMonthAttendances =  async (req,res) =>{
+  try {
+    const now = new Date();
+
+    const threeMonthsAgo = new Date();
+    threeMonthsAgo.setMonth(now.getMonth() - 2); // including current month → last 3 months
+    threeMonthsAgo.setDate(1); // Start from first day
+    threeMonthsAgo.setHours(0, 0, 0, 0);
+
+    const endDate = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+
+    const data = await Meeting.aggregate([
+      {
+        $unwind : "$sessions"
+      },{
+        $match : {
+          "sessions.joinTime" : {
+            $gte : threeMonthsAgo,
+            $lte : endDate
+          }
+        }
+      },
+      {
+        $project : {
+          month : {$month :  "$sessions.joinTime"},
+          year : {$year :  "$sessions.joinTime"},
+          date : {
+            $dateToString  : {
+              format : "%Y-%m-%d",
+              date : "$sessions.joinTime"
+            }
+          },
+          attendees : {
+            $size : "$sessions.attendees"
+          }
+        }
+      },{
+        $group :{
+          _id : {year : "$year" , month : "$month"},
+          totalMonthlyAttendees : { $sum : "$attendees"},
+          dailyDate : {
+            $push : {
+              date : "$date",
+              count : "$attendees"
+            }
+          }
+        }
+      },
+      {
+        $sort : {
+          "_id.year" : 1,"_id.month" : 1
+        }
+      }
+    ])
+
+    return res.status(200).json({
+      success : true,
+      message : "Last Three Month Attendees",
+      data
+    })
+  } catch (error) {
+    console.log("Internal server error ", error);
+    return res.status(500).json({message : "Internal server Error"})
+  }
+}

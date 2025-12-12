@@ -16,19 +16,8 @@ import {
   Tooltip,
   Legend
 } from "recharts";
+import LastThreeMonthsAttendanceChart from "./admin/ui/LastThreeMonthsAttendanceChart";
 
-
-
-const DUMMY_DASHBOARD_DATA = {
-    totalUsers: 12450,
-    newUsersThisMonth: 890,
-    activeUsers: 4200,
-    todaysAttendance: 1550,
-    userGrowthRate: 7.2,
-    totalSessions: 58900,
-    averageSessionDuration: 22,
-    conversionRate: 15.8,
-};
 
 const formatNumber = (num) => {
     return new Intl.NumberFormat('en-US').format(num);
@@ -71,8 +60,6 @@ export default function AdminDashboard() {
 
 
 
-    const dashboardData = DUMMY_DASHBOARD_DATA;
-
     // Calculate active users (users with active subscription in last 21 days)
    const calculateActiveUsers = (users) => {
     if (!users || !Array.isArray(users)) return 0;
@@ -113,6 +100,8 @@ export default function AdminDashboard() {
         fetchUsers();
     }, []);
 
+
+//fetch all sessions 
     useEffect(() => {
        const fetchAllSessions = async() => {
              try {
@@ -132,47 +121,7 @@ export default function AdminDashboard() {
         fetchAllSessions();
     },[])
 
-    
-    // const countMonthlyAttendees = () => {
-    //     try {
-    //         if (!meetings || !meetings.length) {
-    //             return 0;
-    //         }
-
-    //         const now = new Date();
-    //         const currMonth = now.getMonth();
-    //         const currYear = now.getFullYear();
-
-    //         // Get all sessions from all meetings
-    //         const allSessions = meetings.flatMap(meeting => meeting.sessions || []);
-            
-    //         // Filter sessions for current month and year
-    //         const monthlySessions = allSessions.filter(session => {
-    //             if (!session || !session.date) return false;
-                
-    //             const sessionDate = new Date(session.date);
-    //             if (isNaN(sessionDate.getTime())) return false;
-                
-    //             return (
-    //                 sessionDate.getMonth() === currMonth &&
-    //                 sessionDate.getFullYear() === currYear
-    //             );
-    //         });
-            
-    //         // Count total attendees across all filtered sessions
-    //         const totalAttendees = monthlySessions.reduce((count, session) => {
-    //             return count + (session.attendees?.length || 0);
-    //         }, 0);
-
-    //         return totalAttendees;
-    //     } catch (error) {
-    //         console.error('Error in countMonthlyAttendees:', error);
-    //         toast.error("Failed to calculate monthly attendees");
-    //         return 0;
-    //     }
-    // }
-
-
+    //chart fetch user monthly
     const fetchMonthlyAttendees = async () => {
     try {
        setChartLoading(true);
@@ -249,7 +198,7 @@ useEffect(() => {
                                     )}
                                 </p>
                                 <p className="text-sm text-green-600 mt-2">
-                                    +{formatNumber(dashboardData?.newUsersThisMonth || 0)} <span className="text-gray-500">new this month</span>
+                                    +{totalUsers.length} <span className="text-gray-500">new this month</span>
                                 </p>
                             </div>
                             <div className="bg-green-50 p-4 rounded-xl border border-green-100">
@@ -361,7 +310,7 @@ useEffect(() => {
                     </CardContent>
                 </Card>
 
-                <Card className="rounded-2xl shadow-xl">
+                {/* <Card className="rounded-2xl shadow-xl">
                     <CardContent className="p-6">
                         <h2 className="text-xl font-semibold mb-6 text-gray-700 flex items-center gap-2 border-b border-green-100 pb-3">
                             <Activity className="w-5 h-5 text-green-500" /> Recent Activity
@@ -393,7 +342,9 @@ useEffect(() => {
                             ))}
                         </div>
                     </CardContent>
-                </Card>
+                </Card> */}
+
+                <LastThreeMonthsAttendanceChart />
             </div>
 
 <Card className="rounded-2xl shadow-xl">

@@ -8,7 +8,8 @@ import {
   leaveMeeting,
   getUserSessionHistory,
   getAllSessions,
-  getMonthlyAttendees
+  getMonthlyAttendees,
+  LastThreeMonthAttendances
 } from "../controllers/meetingController.js";
 
 const router = express.Router();
@@ -33,5 +34,7 @@ router.route("/getAllSessions").get(protect, admin, getAllSessions);
 
 // Get monthly attendees
 router.route("/monthly-attendees").get(protect, admin, getMonthlyAttendees); 
+
+router.route("/last-Three-month-attendees").get(protect,admin,LastThreeMonthAttendances)
 
 export default router;
