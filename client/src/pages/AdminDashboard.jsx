@@ -48,6 +48,11 @@ export default function AdminDashboard() {
     const [error, setError] = useState(null);
     const [meetings, setMeetings] = useState([]);
 
+    const [monthlyAttendees, setMonthlyAttendees] = useState(0);
+    const [monthlyChartData, setMonthlyChartData] = useState([]);
+
+
+
     const dashboardData = DUMMY_DASHBOARD_DATA;
 
     // Calculate active users (users with active subscription in last 21 days)
@@ -110,44 +115,73 @@ export default function AdminDashboard() {
     },[])
 
     
-    const countMonthlyAttendees = () => {
-        try {
-            if (!meetings || !meetings.length) {
-                return 0;
-            }
+    // const countMonthlyAttendees = () => {
+    //     try {
+    //         if (!meetings || !meetings.length) {
+    //             return 0;
+    //         }
 
-            const now = new Date();
-            const currMonth = now.getMonth();
-            const currYear = now.getFullYear();
+    //         const now = new Date();
+    //         const currMonth = now.getMonth();
+    //         const currYear = now.getFullYear();
 
-            // Get all sessions from all meetings
-            const allSessions = meetings.flatMap(meeting => meeting.sessions || []);
+    //         // Get all sessions from all meetings
+    //         const allSessions = meetings.flatMap(meeting => meeting.sessions || []);
             
-            // Filter sessions for current month and year
-            const monthlySessions = allSessions.filter(session => {
-                if (!session || !session.date) return false;
+    //         // Filter sessions for current month and year
+    //         const monthlySessions = allSessions.filter(session => {
+    //             if (!session || !session.date) return false;
                 
-                const sessionDate = new Date(session.date);
-                if (isNaN(sessionDate.getTime())) return false;
+    //             const sessionDate = new Date(session.date);
+    //             if (isNaN(sessionDate.getTime())) return false;
                 
-                return (
-                    sessionDate.getMonth() === currMonth &&
-                    sessionDate.getFullYear() === currYear
-                );
-            });
+    //             return (
+    //                 sessionDate.getMonth() === currMonth &&
+    //                 sessionDate.getFullYear() === currYear
+    //             );
+    //         });
             
-            // Count total attendees across all filtered sessions
-            const totalAttendees = monthlySessions.reduce((count, session) => {
-                return count + (session.attendees?.length || 0);
-            }, 0);
+    //         // Count total attendees across all filtered sessions
+    //         const totalAttendees = monthlySessions.reduce((count, session) => {
+    //             return count + (session.attendees?.length || 0);
+    //         }, 0);
 
-            return totalAttendees;
-        } catch (error) {
-            console.error('Error in countMonthlyAttendees:', error);
-            toast.error("Failed to calculate monthly attendees");
-            return 0;
+    //         return totalAttendees;
+    //     } catch (error) {
+    //         console.error('Error in countMonthlyAttendees:', error);
+    //         toast.error("Failed to calculate monthly attendees");
+    //         return 0;
+    //     }
+    // }
+
+
+    const fetchMonthlyAttendees = async () => {
+    try {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth();
+
+        const res = await API.get(`/meetings/monthly-attendees?year=${year}&month=${month}`);
+
+        if (res.data.success) {
+            setMonthlyAttendees(res.data.data.totalAttendees);
+            setMonthlyChartData(
+                res.data.data.dailyData.map(item => ({
+                    date: item.date,
+                    count: item.attendeesCount,
+                }))
+            );
         }
+    } catch (error) {
+        console.error("Error fetching monthly attendees:", error);
+        toast.error("Failed to load monthly attendees");
     }
+};
+
+useEffect(() => {
+    fetchMonthlyAttendees();
+}, []);
+
 
 
     if(loading) {
@@ -242,24 +276,29 @@ export default function AdminDashboard() {
                     </Card>
                 </motion.div>
 
-                <motion.div variants={item}>
-                    <Card className="hover:border-green-200">
-                        <CardContent className="flex justify-between items-center p-6">
-                            <div>
-                                <p className="text-sm font-medium text-gray-500">Monthly Attendees</p>
-                                <p className="text-4xl font-bold text-green-600 mt-1">
-                                    {countMonthlyAttendees() || 0}
-                                </p>
-                                <p className="text-sm text-green-500 mt-2">
-                                    <BarChart3 className="inline w-4 h-4 mr-1 text-green-500" /> MoM Performance
-                                </p>
-                            </div>
-                            <div className="bg-green-50 p-4 rounded-xl border border-green-100">
-                                <BarChart3 className="w-7 h-7 text-green-500" />
-                            </div>
-                        </CardContent>
-                    </Card>
-                </motion.div>
+    <motion.div variants={item}>
+    <Card className="hover:border-green-200">
+        <CardContent className="flex justify-between items-center p-6">
+            <div>
+                <p className="text-sm font-medium text-gray-500">Monthly Attendees</p>
+
+                <p className="text-4xl font-bold text-green-600 mt-1">
+                    {formatNumber(monthlyAttendees)}
+                </p>
+
+                <p className="text-sm text-green-500 mt-2">
+                    <BarChart3 className="inline w-4 h-4 mr-1 text-green-500" />
+                    Based on session logs
+                </p>
+            </div>
+
+            <div className="bg-green-50 p-4 rounded-xl border border-green-100">
+                <BarChart3 className="w-7 h-7 text-green-500" />
+            </div>
+        </CardContent>
+    </Card>
+</motion.div>
+
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
@@ -331,6 +370,46 @@ export default function AdminDashboard() {
                     </CardContent>
                 </Card>
             </div>
+
+
+    <Card className="rounded-2xl shadow-xl">
+    <CardContent className="p-6">
+        <h2 className="text-xl font-semibold mb-6 text-gray-700 flex items-center gap-2 border-b border-green-100 pb-3">
+            <TrendingUp className="w-5 h-5 text-green-500" /> Monthly Attendance Trend
+        </h2>
+
+        {monthlyChartData.length === 0 ? (
+            <p className="text-center text-gray-500 py-10">No session data found for this month.</p>
+        ) : (
+            <ResponsiveContainer width="100%" height={280}>
+                <LineChart data={monthlyChartData}>
+                    <XAxis 
+                        dataKey="date" 
+                        tick={{ fontSize: 12 }} 
+                    />
+                    <YAxis tick={{ fontSize: 12 }} />
+
+                    <Tooltip 
+                        contentStyle={{
+                            borderRadius: "12px",
+                            border: "1px solid #d1fae5"
+                        }}
+                    />
+
+                    <Line 
+                        type="monotone" 
+                        dataKey="count" 
+                        stroke="#16a34a" 
+                        strokeWidth={3} 
+                        dot={false} 
+                    />
+                </LineChart>
+            </ResponsiveContainer>
+        )}
+    </CardContent>
+</Card>
+
+
         </div>
     );
 }
