@@ -45,7 +45,7 @@ export default function AdminDashboard() {
     const [activeUsers, setActiveUsers] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [meetings,setMeetings] = useState(null);
+    const [meetings, setMeetings] = useState([]);
 
     const dashboardData = DUMMY_DASHBOARD_DATA;
 
@@ -93,10 +93,13 @@ export default function AdminDashboard() {
        const fetchAllSessions = async() => {
              try {
             setLoading(true);
-            const res = API.get('/meetings/getAllSessions');
-            const sessions = res.data;
-            setMeetings(sessions);
-            toast.success("Sessions fetched successfully")
+            const res = await API.get('/meetings/getAllSessions');
+            if (res.data && res.data.success) {
+                setMeetings(res.data.meetings || []);
+                toast.success("Sessions fetched successfully");
+            } else {
+                toast.error("Failed to fetch sessions");
+            }
             setLoading(false);
         } catch (error) {
             toast.error("Failed to fetch sessions ")
