@@ -65,6 +65,10 @@ export default function AdminDashboard() {
     const [monthlyAttendees, setMonthlyAttendees] = useState(0);
     const [monthlyChartData, setMonthlyChartData] = useState([]);
 
+    const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+    const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
+    const [chartLoading, setChartLoading] = useState(false);
+
 
 
     const dashboardData = DUMMY_DASHBOARD_DATA;
@@ -171,16 +175,13 @@ export default function AdminDashboard() {
 
     const fetchMonthlyAttendees = async () => {
     try {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = now.getMonth();
+       setChartLoading(true);
 
-        console.log(year , month)
         const res = await API.get(`/meetings/monthly-attendees`,
              {
             params: { 
-                year, 
-                month 
+                year: selectedYear, 
+                month: selectedMonth 
             }
         }
         );
@@ -197,12 +198,14 @@ export default function AdminDashboard() {
     } catch (error) {
         console.error("Error fetching monthly attendees:", error);
         toast.error("Failed to load monthly attendees");
+    }finally {
+        setChartLoading(false);
     }
 };
 
 useEffect(() => {
     fetchMonthlyAttendees();
-}, []);
+}, [selectedYear, selectedMonth]);
 
 
 
@@ -393,43 +396,71 @@ useEffect(() => {
                 </Card>
             </div>
 
-
-    <Card className="rounded-2xl shadow-xl">
+<Card className="rounded-2xl shadow-xl">
     <CardContent className="p-6">
         <h2 className="text-xl font-semibold mb-6 text-gray-700 flex items-center gap-2 border-b border-green-100 pb-3">
             <TrendingUp className="w-5 h-5 text-green-500" /> Monthly Attendance Trend
         </h2>
+
+        {/* Month & Year Filters */}
+        <div className="flex items-center gap-4 mb-4">
+            <select
+                className="border border-green-200 p-2 rounded-lg bg-white text-gray-700"
+                value={selectedYear}
+                onChange={(e) => setSelectedYear(Number(e.target.value))}
+            >
+                {Array.from({ length: 5 }, (_, i) => {
+                    const year = new Date().getFullYear() - i;
+                    return <option key={year} value={year}>{year}</option>;
+                })}
+            </select>
+
+            <select
+                className="border border-green-200 p-2 rounded-lg bg-white text-gray-700"
+                value={selectedMonth}
+                onChange={(e) => setSelectedMonth(Number(e.target.value))}
+            >
+                {[
+                    "January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"
+                ].map((m, i) => (
+                    <option key={m} value={i}>{m}</option>
+                ))}
+            </select>
+
+            {chartLoading && (
+                <span className="text-green-500 text-sm animate-pulse">
+                    Loading…
+                </span>
+            )}
+        </div>
 
         {monthlyChartData.length === 0 ? (
             <p className="text-center text-gray-500 py-10">No session data found for this month.</p>
         ) : (
             <ResponsiveContainer width="100%" height={280}>
                 <LineChart data={monthlyChartData}>
-                    <XAxis 
-                        dataKey="date" 
-                        tick={{ fontSize: 12 }} 
-                    />
+                    <XAxis dataKey="date" tick={{ fontSize: 12 }} />
                     <YAxis tick={{ fontSize: 12 }} />
-
                     <Tooltip 
                         contentStyle={{
                             borderRadius: "12px",
                             border: "1px solid #d1fae5"
                         }}
                     />
-
                     <Line 
-                        type="monotone" 
-                        dataKey="count" 
-                        stroke="#16a34a" 
-                        strokeWidth={3} 
-                        dot={false} 
+                        type="monotone"
+                        dataKey="count"
+                        stroke="#16a34a"
+                        strokeWidth={3}
+                        dot={false}
                     />
                 </LineChart>
             </ResponsiveContainer>
         )}
     </CardContent>
 </Card>
+
 
 
         </div>
