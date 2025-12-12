@@ -90,7 +90,8 @@ export default function AdminDashboard() {
     }, []);
 
     useEffect(() => {
-        try {
+       const fetchAllSessions = async() => {
+             try {
             setLoading(true);
             const res = API.get('/meetings/getAllSessions');
             const sessions = res.data;
@@ -100,6 +101,7 @@ export default function AdminDashboard() {
         } catch (error) {
             toast.error("Failed to fetch sessions ")
         }
+       }
         fetchAllSessions();
     },[])
 
