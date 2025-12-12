@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Users, BarChart3, Activity, Calendar, Settings, Shield, Zap, TrendingUp, Clock } from "lucide-react";
 import API from "../utils/api";
 import toast from "react-hot-toast";
+import Loader from "../components/ui/Loader";
 
 const DUMMY_DASHBOARD_DATA = {
     totalUsers: 12450,
@@ -108,7 +109,42 @@ export default function AdminDashboard() {
         fetchAllSessions();
     },[])
 
-    console.log(meetings);
+    
+    const countMonthlyAttendees = async() => {
+        try {
+            const now = new Date();
+            const currMonth = now.getMonth();
+            const currYear = now.getFullYear();
+
+            //filter session of the month
+            const sessions = meetings[0].sessions;
+            const monthlySessions = sessions.filter(session => {
+                const sessionDate = new Date(session.date);
+                return (
+                    session.Date.getMonth() === currMonth &&
+                    session.Date.getFullYear() === currYear 
+                )
+            });
+            
+            const totalAttendees = monthlySessions.reduce((count,s) => {
+                if(s.sessions?.length > 0){
+                    return count + s.sessions[0].attendees.length;
+                }
+                return count;
+            },0)
+
+            return totalAttendees;
+
+        } catch (error) {
+            console.log(error);
+            toast.error("Failed to fetch Attendees")
+        }
+    }
+
+
+    if(loading) {
+        return <Loader />
+    }
 
     return (
         <div className="admin-scroll ml-1 md:ml-[18rem] p-10 min-h-screen bg-gradient-to-br from-green-50 via-cream-50 to-white text-gray-800">
@@ -185,10 +221,10 @@ export default function AdminDashboard() {
                             <div>
                                 <p className="text-sm font-medium text-gray-500">Total Sessions Logged</p>
                                 <p className="text-4xl font-bold text-amber-600 mt-1">
-                                    {formatNumber(dashboardData?.totalSessions || 0)}
+                                    {meetings[0]?.sessions?.length || 0}
                                 </p>
                                 <p className="text-sm text-amber-500 mt-2">
-                                    <Clock className="inline w-4 h-4 mr-1 text-amber-500" /> {dashboardData?.averageSessionDuration} min avg.
+                                    <Clock className="inline w-4 h-4 mr-1 text-amber-500" /> {(meetings[0]?.sessions?.length)*40  || 0} min avg.
                                 </p>
                             </div>
                             <div className="bg-amber-50 p-4 rounded-xl border border-amber-100">
@@ -202,9 +238,9 @@ export default function AdminDashboard() {
                     <Card className="hover:border-green-200">
                         <CardContent className="flex justify-between items-center p-6">
                             <div>
-                                <p className="text-sm font-medium text-gray-500">Growth Rate</p>
+                                <p className="text-sm font-medium text-gray-500">Monthly Attendees</p>
                                 <p className="text-4xl font-bold text-green-600 mt-1">
-                                    {formatNumber(dashboardData?.userGrowthRate || 0)}%
+                                    {countMonthlyAttendees() || 0}
                                 </p>
                                 <p className="text-sm text-green-500 mt-2">
                                     <BarChart3 className="inline w-4 h-4 mr-1 text-green-500" /> MoM Performance
