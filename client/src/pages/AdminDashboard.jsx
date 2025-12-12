@@ -112,8 +112,7 @@ export default function AdminDashboard() {
     
     const countMonthlyAttendees = () => {
         try {
-            console.log(meetings)
-            if (!meetings || !meetings.length || !meetings[0]?.sessions) {
+            if (!meetings || !meetings.length) {
                 return 0;
             }
 
@@ -121,8 +120,11 @@ export default function AdminDashboard() {
             const currMonth = now.getMonth();
             const currYear = now.getFullYear();
 
-            const sessions = meetings[0].sessions || [];
-            const monthlySessions = sessions.filter(session => {
+            // Get all sessions from all meetings
+            const allSessions = meetings.flatMap(meeting => meeting.sessions || []);
+            
+            // Filter sessions for current month and year
+            const monthlySessions = allSessions.filter(session => {
                 if (!session || !session.date) return false;
                 
                 const sessionDate = new Date(session.date);
@@ -134,11 +136,9 @@ export default function AdminDashboard() {
                 );
             });
             
+            // Count total attendees across all filtered sessions
             const totalAttendees = monthlySessions.reduce((count, session) => {
-                if (session?.sessions?.[0]?.attendees?.length > 0) {
-                    return count + session.sessions[0].attendees.length;
-                }
-                return count;
+                return count + (session.attendees?.length || 0);
             }, 0);
 
             return totalAttendees;
