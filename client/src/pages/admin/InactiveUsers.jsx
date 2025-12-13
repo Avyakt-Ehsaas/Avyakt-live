@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
-import API from '../../utils/axios';
+import API from '../../utils/api';
+
 
 const InactiveUsers = () => {
   const [inactiveUsers, setInactiveUsers] = useState([]);
