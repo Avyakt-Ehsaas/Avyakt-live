@@ -400,8 +400,7 @@ export const getMonthlyAttendees = async (req, res) => {
   }
 };
 
-
-// In meetingController.js
+// today meeting joined attendees list 
 export const getTodaysAttendance = async (req, res) => {
   try {
     const { date = new Date().toISOString().split('T')[0] } = req.query;
@@ -500,3 +499,92 @@ export const getTodaysAttendance = async (req, res) => {
     });
   }
 };
+
+
+
+// Fetched Inactive user 
+// who do not joined the sessions last 7 Days 
+
+export const getInactiveUsers = async(req,res) => {
+  try {
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+     //find users who have not joined the sessions last 7 days
+     const activeUserIds = await User.aggregate([
+      {
+        $unwind : "$sessions"
+      },
+      { $unwind : "$sessions.attendees"},
+      {
+        $match : {
+          "sessions.attendees.joinTime" : { $gte : sevenDaysAgo}
+        }
+      },
+      {
+        $group : { _id : "$sessions.attendees.user"}
+      }
+     ]);
+     //extract just the user ids 
+     const activeUserIdsArray = activeUserIds.map( u  => u._id);
+     
+     //extract users who are not joined 
+     const inactiveUsers = await User.aggregate([
+      {
+        $match : { _id : { $nin : activeUserIdsArray}}
+      },
+      {
+        $lookup : {
+          from : "meetings",
+          let: {userId : "$_id"},
+          pipeline : [
+            { $unwind : "$sessions"},
+            { $unwind : "$sessions.attendees.user"},
+            { $match: {
+              $expr : { $eq: ["$sessions.attendees.user","$$userId"]}, 
+            }},
+            { $sort : {"sessions.attendees.joinTime" : -1}},
+            { $limit : 1},
+            { $project : { 
+              lastActive : "$sessions.attendees.joinTime",
+              sessionDate : "$sessions.date"
+            }}
+          ],
+          as : "lastSession"
+        }
+      },
+      {
+        $addFields : {
+          lastActive : { $arrayElemAt :  ["$lastSession.lastActive",0]},
+          lastSessionDate : { $arrayElemAt : ["$lastSession.sessionDate",0]},
+          totalSessions: {
+            $reduce : {
+              input : "$lastSession",
+              initialValue: 0,
+              in: { $add: ["$$value",1]}
+            }
+          }
+        }
+      },
+      {
+        $project : {
+          name : 1,
+          email : 1,
+          lastActive : 1,
+          lastSessionDate : 1,
+          totalSessions : { $ifNull : ["$totalSessions",0]}
+        }
+      }
+     ]);
+
+     res.status(200).json({
+      success : true,
+      count:  inactiveUsers.length,
+      data : inactiveUsers
+     })
+  } catch (error) {
+    console.log("Internal Server error ", error)
+    return res.status(500).json({success :  false , 
+      message : "Internal Server Error while fetching Inactive Users "
+    })
+  }
+}

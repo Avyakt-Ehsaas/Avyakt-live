@@ -4,6 +4,7 @@ import { Users, Clock, Calendar, Clock3, CheckCircle, XCircle, BarChart2 } from 
 import API from '../../utils/api';
 import { toast } from 'react-hot-toast';
 import Loader from '../../components/ui/Loader';
+import InactiveUsers from './InactiveUsers';
 
 import * as XLSX from 'xlsx';
 
@@ -217,7 +218,7 @@ const exportToExcel = () => {
                 </button>
               </div> */}
 
-<div className="flex justify-between items-center mb-6">
+<div className="flex justify-between items-center ml-2 mb-6">
   <h2 className="text-2xl font-bold text-gray-800">Today's Attendance</h2>
   <button
     onClick={exportToExcel}
@@ -311,6 +312,12 @@ const exportToExcel = () => {
             </table>
           </div>
         </div>
+        
+        {/* Inactive Users Section */}
+        <div className="mt-12">
+          <InactiveUsers />
+        </div>
+        
       </div>
     </div>
   );
