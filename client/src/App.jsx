@@ -28,6 +28,7 @@ import UserLayout from "./components/layout/UserLayout";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs";
+import AttendanceList from "./pages/admin/AttendanceList";
 
 function App() {
   const { user, loadingUser } = useAuth();
@@ -175,11 +176,11 @@ function App() {
             />
 
             <Route
-              path="/admin/analytics"
+              path="/admin/attendence"
               element={
                 user?.role === "admin" ? (
                   <AdminLayout>
-                    <Analytics />
+                   <AttendanceList />
                   </AdminLayout>
                 ) : (
                   <Navigate to="/" replace />

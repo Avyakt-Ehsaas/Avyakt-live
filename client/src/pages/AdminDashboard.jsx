@@ -17,6 +17,7 @@ import {
   Legend
 } from "recharts";
 import LastThreeMonthsAttendanceChart from "./admin/ui/LastThreeMonthsAttendanceChart";
+import { Link } from "react-router-dom";
 
 
 const formatNumber = (num) => {
@@ -282,30 +283,35 @@ useEffect(() => {
                             <Settings className="w-5 h-5 text-green-500" /> Access Consoles
                         </h2>
                         <div className="grid grid-cols-3 gap-4">
-                            <Button className="flex flex-col h-28 items-center justify-center gap-2 rounded-xl text-lg hover:text-white">
-                                <Users className="w-6 h-6 text-cyan-400" />
+                            <Link 
+                            to="/admin/users"
+                            className="flex flex-col h-28 items-center justify-center gap-2 rounded-xl text-lg hover:text-stone-900">      
+                              <Users className="w-6 h-6 text-cyan-400" />
                                 <span className="text-sm font-medium">Manage Users</span>
-                            </Button>
-                            <Button className="flex flex-col h-28 items-center justify-center gap-2 rounded-xl text-lg hover:text-white">
+                            </Link>
+
+                            <Link
+                            to='/admin/create-meeting' 
+                            className="flex flex-col h-28 items-center justify-center gap-2 rounded-xl text-lg hover:text-stone-900">
                                 <Calendar className="w-6 h-6 text-purple-400" />
                                 <span className="text-sm font-medium">Schedule</span>
-                            </Button>
-                            <Button className="flex flex-col h-28 items-center justify-center gap-2 rounded-xl text-lg hover:text-white">
+                            </Link>
+                            <Link to='/admin/attendence' className="flex flex-col h-28 items-center justify-center gap-2 rounded-xl text-lg hover:text-stone-900">
                                 <BarChart3 className="w-6 h-6 text-lime-400" />
-                                <span className="text-sm font-medium">Analytics</span>
-                            </Button>
-                            <Button className="flex flex-col h-28 items-center justify-center gap-2 rounded-xl text-lg hover:text-white">
+                                <span className="text-sm font-medium">Attendance</span>
+                            </Link>
+                            <Link to='/admin/security-logs' className="flex flex-col h-28 items-center justify-center gap-2 rounded-xl text-lg hover:text-stone-900">
                                 <Shield className="w-6 h-6 text-yellow-400" />
                                 <span className="text-sm font-medium">Security Audit</span>
-                            </Button>
-                            <Button className="flex flex-col h-28 items-center justify-center gap-2 rounded-xl text-lg hover:text-white">
+                            </Link>
+                            <Link to="/admin/engagement" className="flex flex-col h-28 items-center justify-center gap-2 rounded-xl text-lg hover:text-stone-900">
                                 <Activity className="w-6 h-6 text-red-400" />
                                 <span className="text-sm font-medium">Activity Logs</span>
-                            </Button>
-                            <Button className="flex flex-col h-28 items-center justify-center gap-2 rounded-xl text-lg hover:text-white">
+                            </Link>
+                            <Link to="/admin/settings" className="flex flex-col h-28 items-center justify-center gap-2 rounded-xl text-lg hover:text-stone-900">
                                 <Settings className="w-6 h-6 text-gray-400" />
                                 <span className="text-sm font-medium">System Config</span>
-                            </Button>
+                            </Link>
                         </div>
                     </CardContent>
                 </Card>

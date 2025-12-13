@@ -399,3 +399,104 @@ export const getMonthlyAttendees = async (req, res) => {
     return res.status(500).json({ message: "Internal server Error" });
   }
 };
+
+
+// In meetingController.js
+export const getTodaysAttendance = async (req, res) => {
+  try {
+    const { date = new Date().toISOString().split('T')[0] } = req.query;
+    
+    const startDate = new Date(date);
+    startDate.setHours(0, 0, 0, 0);
+    
+    const endDate = new Date(date);
+    endDate.setHours(23, 59, 59, 999);
+
+    const sessions = await Meeting.aggregate([
+      { $unwind: "$sessions" },
+      {
+        $match: {
+          "sessions.date": {
+            $gte: startDate.toISOString().split('T')[0],
+            $lte: endDate.toISOString().split('T')[0]
+          }
+        }
+      },
+      { $unwind: "$sessions.attendees" },
+      {
+        $lookup: {
+          from: "users",
+          localField: "sessions.attendees.user",
+          foreignField: "_id",
+          as: "user"
+        }
+      },
+      { $unwind: "$user" },
+      {
+        $project: {
+          name: { $concat: ["$user.firstName", " ", "$user.lastName"] },
+          email: "$user.email",
+          joinTime: "$sessions.attendees.joinTime",
+          duration: "$sessions.attendees.duration",
+          status: { 
+            $cond: [
+              { $gt: ["$sessions.attendees.duration", 0] }, 
+              "present", 
+              "absent"
+            ] 
+          }
+        }
+      },
+      {
+        $group: {
+          _id: null,
+          total: { $sum: 1 },
+          present: { 
+            $sum: { 
+              $cond: [{ $gt: ["$duration", 0] }, 1, 0] 
+            } 
+          },
+          totalDuration: { $sum: "$duration" },
+          attendees: { $push: "$$ROOT" }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          total: 1,
+          present: 1,
+          absent: { $subtract: ["$total", "$present"] },
+          averageDuration: { 
+            $cond: [
+              { $gt: ["$present", 0] }, 
+              { $divide: ["$totalDuration", "$present"] }, 
+              0
+            ] 
+          },
+          attendees: 1
+        }
+      }
+    ]);
+
+    const result = sessions[0] || {
+      total: 0,
+      present: 0,
+      absent: 0,
+      averageDuration: 0,
+      attendees: []
+    };
+
+    res.status(200).json({
+      success: true,
+      data: result
+    });
+
+  } catch (error) {
+    console.error('Error fetching today\'s attendance:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching attendance data',
+      error: error.message
+    });
+  }
+};

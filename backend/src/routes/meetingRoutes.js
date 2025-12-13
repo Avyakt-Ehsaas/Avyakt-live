@@ -9,7 +9,8 @@ import {
   getUserSessionHistory,
   getAllSessions,
   getMonthlyAttendees,
-  LastThreeMonthAttendances
+  LastThreeMonthAttendances,
+  getTodaysAttendance
 } from "../controllers/meetingController.js";
 
 const router = express.Router();
@@ -36,5 +37,7 @@ router.route("/getAllSessions").get(protect, admin, getAllSessions);
 router.route("/monthly-attendees").get(protect, admin, getMonthlyAttendees); 
 
 router.route("/last-Three-month-attendees").get(protect,admin,LastThreeMonthAttendances)
+
+router.route("/todays-attendance").get(protect,admin,getTodaysAttendance)
 
 export default router;
