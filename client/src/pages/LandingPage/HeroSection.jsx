@@ -9,12 +9,8 @@ import { motion } from 'framer-motion'
 
 const HeroSection = () => {
 
-    const Startups = useRef(null);
     const headingRef = useRef([]);
     const imgRef = useRef(null)
-    const badgesRef = useRef(null);
-
-    const text = "Avaykt-Ehsaas";
 
     useGSAP(() => {
         gsap.from(headingRef.current, {
@@ -22,14 +18,6 @@ const HeroSection = () => {
             opacity: 0,
             duration: 0.8,
             ease: "power4.out",
-        })
-
-        gsap.from(Startups.current, {
-            opacity: 0,
-            y: 20,
-            duration: 1,
-            delay: 1.2,
-            ease: "power3.out",
         })
 
         gsap.fromTo(".btn",
@@ -52,14 +40,6 @@ const HeroSection = () => {
             delay: 1.4,
             ease: "power3.out",
         })
-
-        gsap.from(badgesRef.current,{
-            opacity : 0,
-            y : 40,
-            duration : 1,
-            delay:1,
-            ease : "power4.out"
-        })
     });
 
     return (
@@ -77,15 +57,7 @@ const HeroSection = () => {
 
             {/* Content */}
             <div className="relative z-10 max-w-7xl w-full px-5 md:px-10 py-20">
-                <div className="max-w-3xl">
-                    {/* Google badge */}
-                    <div
-                        ref={Startups}
-                        className="mb-8 bg-orange-500/80 text-white w-fit px-5 py-2 rounded-full text-sm font-semibold flex items-center gap-2 backdrop-blur-sm"
-                    >
-                        <BsStars className="text-yellow-300" />
-                        Google Startups Member
-                    </div>
+                <div className="max-w-3xl">                  
 
                     {/* Heading */}
                     <h1 
@@ -151,53 +123,17 @@ const HeroSection = () => {
                 </div>
             </div>
         </section>
-              <div className="w-full max-w-4xl mx-auto px-4 py-6">
-                <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6" ref={badgesRef}>
-                  <motion.div 
-                    className="bg-white/90 backdrop-blur-sm p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                    whileHover={{ y: -2 }}
-                  >
+              <div className="w-full flex justify-around gap-20 mx-auto px-4 py-6">
                     <img 
                       src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Google_for_Startups_logo.svg/1200px-Google_for_Startups_logo.svg.png"
                       className="h-8 w-auto object-contain"
                       alt="Google for Startups"
                     />
-                  </motion.div>
-                  
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2, duration: 0.6 }}
-                    className="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2 rounded-full text-sm font-semibold flex items-center gap-2 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 "
-                    whileHover={{ y: -2 }}
-                  >
-                    <BsStars className="text-yellow-300" />
-                    Google Startups Member
-                  </motion.div>
-                  </div>
-                  <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6" ref={badgesRef}>
-                  <motion.div 
-                    className="bg-white/90 backdrop-blur-sm p-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                    whileHover={{ y: -2 }}
-                  >
                     <img 
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdXb6yFb5UMer8xTSJDmGH5ogfDqA3h7O6Yw&s"
                       className="h-8 w-auto object-contain"
                       alt="IIT Mandi"
                     />
-                  </motion.div>
-                  
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4, duration: 0.6 }}
-                    className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-full text-sm font-semibold flex items-center gap-2 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
-                    whileHover={{ y: -2 }}
-                  >
-                    <FiAward className="text-blue-200" />
-                    IIT Mandi Incubation
-                  </motion.div>
-                </div>
               </div>
         </>
     )
