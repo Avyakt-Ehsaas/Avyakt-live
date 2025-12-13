@@ -147,7 +147,9 @@ const AllUsers = () => {
                     </h2>
                     <p className="text-gray-600 mt-2">Control access and view registered users in the core system.</p>
                 </div>
-                <motion.button
+
+                
+                {/* <motion.button
                     onClick={handleAddUser}
                     className="mt-4 md:mt-0 flex items-center justify-center px-6 py-2.5 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-all duration-300 transform hover:scale-105 border border-green-400 shadow-sm hover:shadow-md"
                     whileHover={{ scale: 1.05 }}
@@ -155,7 +157,9 @@ const AllUsers = () => {
                 >
                     <FiUserPlus className="mr-2 w-5 h-5" />
                     Add New User
-                </motion.button>
+                </motion.button> */}
+
+                
             </motion.div>
 
            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

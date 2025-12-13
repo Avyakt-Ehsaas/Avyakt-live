@@ -5,6 +5,8 @@ import API from '../../utils/api';
 import { toast } from 'react-hot-toast';
 import Loader from '../../components/ui/Loader';
 
+import * as XLSX from 'xlsx';
+
 // Color scheme matching AdminDashboard
 const colors = {
   // Background colors
@@ -40,6 +42,49 @@ const colors = {
   gradientPrimary: 'from-emerald-500 to-teal-600',
   gradientHover: 'from-emerald-600 to-teal-700'
 };
+
+
+const exportToExcel = () => {
+  try {
+    // Prepare the data for Excel export
+    const data = attendance.attendees.map(attendee => ({
+      'Name': attendee.name || 'N/A',
+      'Email': attendee.email || 'N/A',
+      'Join Time': attendee.joinTime ? new Date(attendee.joinTime).toLocaleString() : 'N/A',
+      'Duration (minutes)': attendee.duration ? (attendee.duration / 60).toFixed(2) : 'N/A',
+      'Status': attendee.status || 'N/A'
+    }));
+
+    // Create a new workbook with safe defaults
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(data, { cellDates: true });
+    
+    // Set column widths
+    const wscols = [
+      { wch: 25 }, // Name
+      { wch: 30 }, // Email
+      { wch: 25 }, // Join Time
+      { wch: 20 }, // Duration
+      { wch: 15 }  // Status
+    ];
+    ws['!cols'] = wscols;
+    
+    // Add the worksheet to the workbook
+    XLSX.utils.book_append_sheet(wb, ws, "Today's Attendance");
+    
+    // Generate Excel file and trigger download
+    const fileName = `attendance_${new Date().toISOString().split('T')[0]}.xlsx`;
+    XLSX.writeFile(wb, fileName, { bookType: 'xlsx', type: 'array' });
+    
+    toast.success('Export successful!');
+  } catch (error) {
+    console.error('Export failed:', error);
+    toast.error('Failed to export attendance data');
+  }
+};
+
+
+
 
 const StatCard = ({ title, value, icon, color }) => (
   <motion.div
@@ -155,7 +200,7 @@ const AttendanceList = () => {
                   Showing all attendance records for today
                 </p>
               </div>
-              <div className="mt-2 sm:mt-0">
+              {/* <div className="mt-2 sm:mt-0">
                 <button className="text-xs sm:text-sm px-3 py-1.5 rounded-lg font-medium transition-colors duration-200" 
                   style={{ 
                     backgroundColor: colors.primary, 
@@ -166,7 +211,22 @@ const AttendanceList = () => {
                   }}>
                   Export Data
                 </button>
-              </div>
+              </div> */}
+
+<div className="flex justify-between items-center mb-6">
+  <h2 className="text-2xl font-bold text-gray-800">Today's Attendance</h2>
+  <button
+    onClick={exportToExcel}
+    className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+    disabled={!attendance.attendees?.length}
+  >
+    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+    </svg>
+    Export to Excel
+  </button>
+</div>
+
             </div>
           </div>
 
