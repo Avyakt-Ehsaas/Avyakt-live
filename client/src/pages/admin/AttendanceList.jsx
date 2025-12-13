@@ -1,24 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Users, Clock, Calendar, Clock3, CheckCircle, XCircle } from 'lucide-react';
+import { Users, Clock, Calendar, Clock3, CheckCircle, XCircle, BarChart2 } from 'lucide-react';
 import API from '../../utils/api';
 import { toast } from 'react-hot-toast';
 import Loader from '../../components/ui/Loader';
 
+// Custom colors
+const colors = {
+  cream: '#FFF8F0',
+  pistachio: '#E0E7C5',
+  darkPistachio: '#C5D7B2',
+  textPrimary: '#2C3E50',
+  textSecondary: '#546E7A',
+  success: '#4CAF50',
+  error: '#F44336',
+  warning: '#FFC107',
+  info: '#2196F3'
+};
+
 const StatCard = ({ title, value, icon, color }) => (
   <motion.div
-    className="bg-white/90 border border-green-100 rounded-xl p-6 shadow-sm hover:shadow-md hover:border-green-200 transition-all"
+    className="bg-white/90 border border-opacity-30 border-gray-200 rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-md transition-all h-full flex flex-col justify-between"
+    style={{ backgroundColor: colors.cream, borderColor: colors.darkPistachio }}
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
+    whileHover={{ y: -2 }}
     transition={{ duration: 0.3 }}
   >
     <div className="flex justify-between items-start">
-      <div>
-        <p className="text-gray-500 text-sm font-medium mb-1">{title}</p>
-        <h2 className={`text-3xl font-bold ${color}`}>{value}</h2>
+      <div className="flex-1">
+        <p className="text-sm font-medium mb-1" style={{ color: colors.textSecondary }}>{title}</p>
+        <h2 className="text-2xl sm:text-3xl font-bold" style={{ color: colors.textPrimary }}>{value}</h2>
       </div>
-      <div className={`p-3 rounded-lg ${color} bg-opacity-10`}>
-        {React.cloneElement(icon, { className: `w-6 h-6 ${color}` })}
+      <div className="p-2 sm:p-3 rounded-lg ml-4" style={{ backgroundColor: `${color}20` }}>
+        {React.cloneElement(icon, { 
+          className: 'w-5 h-5 sm:w-6 sm:h-6',
+          style: { color: color }
+        })}
       </div>
     </div>
   </motion.div>
@@ -60,102 +78,143 @@ const AttendanceList = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <StatCard
-          title="Total Sessions"
-          value={attendance.total}
-          icon={<Calendar />}
-          color="text-blue-500"
-        />
-        <StatCard
-          title="Present"
-          value={attendance.present}
-          icon={<CheckCircle />}
-          color="text-green-500"
-        />
-        <StatCard
-          title="Absent"
-          value={attendance.absent}
-          icon={<XCircle />}
-          color="text-red-500"
-        />
-        <StatCard
-          title="Avg. Duration"
-          value={`${attendance.averageDuration}m`}
-          icon={<Clock3 />}
-          color="text-purple-500"
-        />
-      </div>
-
-      <div className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-        <div className="p-6 border-b border-gray-100">
-          <h2 className="text-xl font-semibold text-gray-800 flex items-center gap-2">
-            <Users className="w-5 h-5 text-green-500" />
-            Today's Attendance Records
-          </h2>
-          <p className="text-sm text-gray-500 mt-1">
-            {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-          </p>
+    <div className="min-h-screen p-4 sm:p-6" style={{ backgroundColor: '#FAFAF7' }}>
+      <div className="max-w-7xl mx-auto space-y-6">
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-bold" style={{ color: colors.textPrimary }}>Attendance Dashboard</h1>
+            <p className="text-sm sm:text-base mt-1" style={{ color: colors.textSecondary }}>
+              {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+            </p>
+          </div>
+          <div className="hidden sm:flex items-center space-x-2 px-4 py-2 rounded-lg" style={{ backgroundColor: colors.pistachio }}>
+            <BarChart2 className="w-5 h-5" style={{ color: colors.textPrimary }} />
+            <span className="text-sm font-medium" style={{ color: colors.textPrimary }}>Live Updates</span>
+          </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Name
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Email
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Join Time
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Duration
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {attendance.attendees.length > 0 ? (
-                attendance.attendees.map((attendee, index) => (
-                  <tr key={index} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {attendee.name}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {attendee.email}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {new Date(attendee.joinTime).toLocaleTimeString()}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {Math.floor(attendee.duration / 60)}m {attendee.duration % 60}s
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                        attendee.status === 'present' 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-red-100 text-red-800'
-                      }`}>
-                        {attendee.status.charAt(0).toUpperCase() + attendee.status.slice(1)}
-                      </span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <StatCard
+            title="Total Sessions"
+            value={attendance.total}
+            icon={<Calendar />}
+            color={colors.info}
+          />
+          <StatCard
+            title="Present"
+            value={attendance.present}
+            icon={<CheckCircle />}
+            color={colors.success}
+          />
+          <StatCard
+            title="Absent"
+            value={attendance.absent}
+            icon={<XCircle />}
+            color={colors.error}
+          />
+          <StatCard
+            title="Avg. Duration"
+            value={`${Math.round(attendance.averageDuration)}m`}
+            icon={<Clock3 />}
+            color={colors.warning}
+          />
+        </div>
+
+        <div className="bg-white rounded-xl border border-opacity-30 shadow-sm overflow-hidden" style={{ borderColor: colors.darkPistachio }}>
+          <div className="p-4 sm:p-6 border-b border-opacity-30" style={{ borderColor: colors.darkPistachio, backgroundColor: colors.cream }}>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between">
+              <div>
+                <h2 className="text-lg sm:text-xl font-semibold flex items-center gap-2" style={{ color: colors.textPrimary }}>
+                  <Users className="w-5 h-5" style={{ color: colors.textPrimary }} />
+                  Today's Attendance Records
+                </h2>
+                <p className="text-xs sm:text-sm mt-1" style={{ color: colors.textSecondary }}>
+                  Showing all attendance records for today
+                </p>
+              </div>
+              <div className="mt-2 sm:mt-0">
+                <button className="text-xs sm:text-sm px-3 py-1.5 rounded-lg font-medium" 
+                  style={{ backgroundColor: colors.pistachio, color: colors.textPrimary }}>
+                  Export Data
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-opacity-30" style={{ borderColor: colors.darkPistachio }}>
+              <thead>
+                <tr style={{ backgroundColor: colors.pistachio + '40' }}>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: colors.textPrimary }}>
+                    Name
+                  </th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider hidden sm:table-cell" style={{ color: colors.textPrimary }}>
+                    Email
+                  </th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider hidden md:table-cell" style={{ color: colors.textPrimary }}>
+                    Join Time
+                  </th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: colors.textPrimary }}>
+                    Duration
+                  </th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: colors.textPrimary }}>
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-opacity-30" style={{ backgroundColor: 'white' }}>
+                {attendance.attendees.length > 0 ? (
+                  attendance.attendees.map((attendee, index) => (
+                    <tr 
+                      key={index} 
+                      className="hover:opacity-90 transition-opacity"
+                      style={{ backgroundColor: index % 2 === 0 ? 'white' : colors.cream }}
+                    >
+                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
+                        <div className="text-sm font-medium" style={{ color: colors.textPrimary }}>{attendee.name}</div>
+                        <div className="text-xs sm:hidden" style={{ color: colors.textSecondary }}>{attendee.email}</div>
+                        <div className="text-xs md:hidden mt-1 flex items-center" style={{ color: colors.textSecondary }}>
+                          <Clock className="w-3 h-3 mr-1" />
+                          {new Date(attendee.joinTime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                        </div>
+                      </td>
+                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm hidden sm:table-cell" style={{ color: colors.textSecondary }}>
+                        {attendee.email}
+                      </td>
+                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm hidden md:table-cell" style={{ color: colors.textSecondary }}>
+                        {new Date(attendee.joinTime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                      </td>
+                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm" style={{ color: colors.textPrimary }}>
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" 
+                          style={{ backgroundColor: colors.pistachio + '80', color: colors.textPrimary }}>
+                          {Math.floor(attendee.duration / 60)}m {attendee.duration % 60}s
+                        </span>
+                      </td>
+                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
+                        <span className={`px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                          attendee.status === 'present' 
+                            ? 'bg-green-100 text-green-800' 
+                            : 'bg-red-100 text-red-800'
+                        }`}>
+                          {attendee.status.charAt(0).toUpperCase() + attendee.status.slice(1)}
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="5" className="px-6 py-8 text-center text-sm" style={{ color: colors.textSecondary }}>
+                      <div className="flex flex-col items-center justify-center">
+                        <Users className="w-10 h-10 mb-2 opacity-40" />
+                        <p>No attendance records found for today.</p>
+                        <p className="text-xs mt-1">Check back later or refresh the page.</p>
+                      </div>
                     </td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="5" className="px-6 py-4 text-center text-sm text-gray-500">
-                    No attendance records found for today.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
