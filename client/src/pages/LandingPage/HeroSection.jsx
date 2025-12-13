@@ -126,12 +126,12 @@ const HeroSection = () => {
               <div className="w-full flex justify-around mx-auto px-4 py-6">
                     <img 
                       src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Google_for_Startups_logo.svg/1200px-Google_for_Startups_logo.svg.png"
-                      className="h-8 w-auto object-contain"
+                      className="h-[30px] sm:h-[40px] mt-25px sm:mt-[30px] md:h-[50px] md:mt-[40px] w-auto object-contain"
                       alt="Google for Startups"
                     />
                     <img 
                       src="https://media.licdn.com/dms/image/v2/C4D0BAQHvqtUWXWJ8gw/company-logo_200_200/company-logo_200_200/0/1630574955442/iitmandicatalyst_logo?e=2147483647&v=beta&t=UR1165UOK9lJNy8HBEuls_BKhlbCqZ4YzktMbvQZXYs"
-                      className="h-12 w-auto object-contain"
+                      className="h-[80px] sm:h-[100px] md:h-[140px] w-auto object-contain"
                       alt="IIT Mandi catalyst"
                     />
               </div>
