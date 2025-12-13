@@ -44,6 +44,66 @@ const colors = {
 };
 
 
+const StatCard = ({ title, value, icon, color }) => (
+  <motion.div
+    className="bg-white/90 border rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-md transition-all h-full flex flex-col justify-between"
+    style={{ backgroundColor: colors.bgSecondary, borderColor: colors.border }}
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    whileHover={{ y: -2 }}
+    transition={{ duration: 0.3 }}
+  >
+    <div className="flex justify-between items-start">
+      <div className="flex-1">
+        <p className="text-sm font-medium mb-1" style={{ color: colors.textSecondary }}>{title}</p>
+        <h2 className="text-2xl sm:text-3xl font-bold" style={{ color: colors.textPrimary }}>{value}</h2>
+      </div>
+      <div className="p-2 sm:p-3 rounded-lg ml-4" style={{ backgroundColor: `${color}20` }}>
+        {React.cloneElement(icon, { 
+          className: 'w-5 h-5 sm:w-6 sm:h-6',
+          style: { color: color }
+        })}
+      </div>
+    </div>
+  </motion.div>
+);
+
+const AttendanceList = () => {
+  const [loading, setLoading] = useState(true);
+  const [attendance, setAttendance] = useState({
+    total: 0,
+    present: 0,
+    absent: 0,
+    averageDuration: 0,
+    attendees: []
+  });
+
+
+
+
+  useEffect(() => {
+    const fetchTodaysAttendance = async () => {
+      try {
+        setLoading(true);
+        const today = new Date().toISOString().split('T')[0];
+        const response = await API.get(`/meetings/todays-attendance?date=${today}`);
+        
+        if (response.data.success) {
+          setAttendance(response.data.data);
+        }
+      } catch (error) {
+        console.error('Error fetching attendance:', error);
+        toast.error('Failed to load attendance data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTodaysAttendance();
+  }, []);
+
+
+
 const exportToExcel = () => {
   try {
     // Prepare the data for Excel export
@@ -84,62 +144,6 @@ const exportToExcel = () => {
 };
 
 
-
-
-const StatCard = ({ title, value, icon, color }) => (
-  <motion.div
-    className="bg-white/90 border rounded-xl p-4 sm:p-6 shadow-sm hover:shadow-md transition-all h-full flex flex-col justify-between"
-    style={{ backgroundColor: colors.bgSecondary, borderColor: colors.border }}
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    whileHover={{ y: -2 }}
-    transition={{ duration: 0.3 }}
-  >
-    <div className="flex justify-between items-start">
-      <div className="flex-1">
-        <p className="text-sm font-medium mb-1" style={{ color: colors.textSecondary }}>{title}</p>
-        <h2 className="text-2xl sm:text-3xl font-bold" style={{ color: colors.textPrimary }}>{value}</h2>
-      </div>
-      <div className="p-2 sm:p-3 rounded-lg ml-4" style={{ backgroundColor: `${color}20` }}>
-        {React.cloneElement(icon, { 
-          className: 'w-5 h-5 sm:w-6 sm:h-6',
-          style: { color: color }
-        })}
-      </div>
-    </div>
-  </motion.div>
-);
-
-const AttendanceList = () => {
-  const [loading, setLoading] = useState(true);
-  const [attendance, setAttendance] = useState({
-    total: 0,
-    present: 0,
-    absent: 0,
-    averageDuration: 0,
-    attendees: []
-  });
-
-  useEffect(() => {
-    const fetchTodaysAttendance = async () => {
-      try {
-        setLoading(true);
-        const today = new Date().toISOString().split('T')[0];
-        const response = await API.get(`/meetings/todays-attendance?date=${today}`);
-        
-        if (response.data.success) {
-          setAttendance(response.data.data);
-        }
-      } catch (error) {
-        console.error('Error fetching attendance:', error);
-        toast.error('Failed to load attendance data');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTodaysAttendance();
-  }, []);
 
   if (loading) {
     return <Loader />;
