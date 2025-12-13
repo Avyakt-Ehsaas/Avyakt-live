@@ -191,7 +191,7 @@ const AllUsers = () => {
                     </div>
                 </div>
 
-                <div className="overflow-x-auto w-full max-w-full">
+                <div className="overflow-x-hidden w-[45rem]">
                     {loading ? (
                         <div className="p-10 text-center text-gray-600">
                             <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-green-400 border-t-green-100 mx-auto"></div>
