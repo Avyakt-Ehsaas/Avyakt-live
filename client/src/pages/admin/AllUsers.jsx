@@ -158,7 +158,7 @@ const AllUsers = () => {
                 </motion.button>
             </motion.div>
 
-           <div className="flex justify-around">
+           <div className="md:mx-[8rem]">
              <div className="bg-white/90 w-[25rem] md:w-[45rem] backdrop-blur-sm rounded-xl shadow-sm border border-green-100 overflow-hidden">
                 <div className="p-5 border-b border-green-100">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
