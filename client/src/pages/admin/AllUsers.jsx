@@ -158,7 +158,7 @@ const AllUsers = () => {
                 </motion.button>
             </motion.div>
 
-            <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-sm border border-green-100 overflow-hidden">
+            <div className="bg-white/90 w-[45rem] backdrop-blur-sm rounded-xl shadow-sm border border-green-100 overflow-hidden">
                 <div className="p-5 border-b border-green-100">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
                         <form onSubmit={handleSearch} className="flex-1">
