@@ -2,50 +2,51 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import LandingSidebar from "./LandingPage/LandingSidebar/LandingSidebar";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const programs = [
   {
     id: 1,
-    title: "Daily Meditation",
-    description: "Join our daily guided meditation sessions to cultivate mindfulness and inner peace.",
-    duration: "30 mins",
+    title: "Daily Guided Meditation Sessions",
+    description: "Live daily meditation sessions designed to build consistency, inner calm, and mindfulness as part of your everyday routine.",
+    duration: "Daily · 30 mins",
     level: "All Levels",
     image: "/assets/LakeMeditation.png",
     features: [
-      "Live sessions with expert instructors",
-      "Fresh themes every day",
-      "Live Q&A support",
-      "Session recordings"
+      "Live guided meditation every day",
+      "Theme-based mindfulness practices",
+      "Real-time instructor interaction",
+      "Session recordings for later access"
     ]
   },
   {
     id: 2,
-    title: "Mindfulness Course",
-    description: "A structured 4-week journey to master mindfulness for daily life.",
-    duration: "4 Weeks",
-    level: "Beginner",
+    title: "School Learning Management Program",
+    description: "A structured, module-based meditation learning program designed for students to develop focus, emotional balance, and mental well-being.",
+    duration: "Module Based",
+    level: "Students",
     image: "/assets/LotusMeditation.png",
     features: [
-      "Weekly live classes",
-      "Guided practices",
-      "Community accountability",
-      "Progress insights"
+      "Age-appropriate meditation modules",
+      "Progressive learning path",
+      "Focus, discipline & emotional health training",
+      "Teacher & student progress tracking"
     ]
   },
   {
     id: 3,
-    title: "Stress Management",
-    description: "Evidence-based techniques to reduce stress and improve mental clarity.",
-    duration: "6 Weeks",
-    level: "All Levels",
+    title: "Corporate Employee Wellness Program",
+    description: "A professional mindfulness and meditation program tailored for corporate employees to reduce stress, improve productivity, and enhance workplace well-being.",
+    duration: "Flexible Programs",
+    level: "Corporate",
     image: "/assets/RealMeditation.png",
     features: [
-      "Breathing techniques",
-      "Mindfulness therapy",
-      "1-on-1 guidance",
-      "Premium resource library"
+      "Stress & burnout management",
+      "Mindfulness for productivity",
+      "Live & on-demand corporate sessions",
+      "Wellness reports for HR teams"
     ]
   }
 ];
@@ -83,13 +84,14 @@ const Programs = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-orange-50 px-6 py-16">
+        <LandingSidebar />
       {/* Hero */}
       <div ref={heroRef} className="max-w-6xl mx-auto text-center mb-20">
         <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900">
           Experience <span className="text-orange-500">Mindful Living</span>
         </h1>
         <p className="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">
-          Discover beautifully crafted mindfulness programs designed to elevate your mental clarity, focus, and well-being.
+          Discover beautifully crafted mindfulness programs designed to elevate your mental clarity, focus, and well‑being.
         </p>
       </div>
 
@@ -163,6 +165,7 @@ const Programs = () => {
           <span className="text-xl">→</span>
         </Link>
       </div>
+        <Footer />
     </div>
   );
 };
