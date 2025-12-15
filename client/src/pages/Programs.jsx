@@ -1,138 +1,166 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const programs = [
   {
     id: 1,
-    title: 'Daily Meditation',
-    description: 'Join our daily guided meditation sessions to cultivate mindfulness and inner peace.',
-    duration: '30 mins',
-    level: 'All Levels',
-    image: '/assets/LakeMeditation.png',
+    title: "Daily Meditation",
+    description: "Join our daily guided meditation sessions to cultivate mindfulness and inner peace.",
+    duration: "30 mins",
+    level: "All Levels",
+    image: "/assets/LakeMeditation.png",
     features: [
-      'Live sessions with experienced instructors',
-      'Different themes each day',
-      'Q&A with meditation experts',
-      'Access to session recordings'
+      "Live sessions with expert instructors",
+      "Fresh themes every day",
+      "Live Q&A support",
+      "Session recordings"
     ]
   },
   {
     id: 2,
-    title: 'Mindfulness Course',
-    description: 'A comprehensive 4-week program to master mindfulness techniques for daily life.',
-    duration: '4 Weeks',
-    level: 'Beginner',
-    image: '/assets/LotusMeditation.png',
+    title: "Mindfulness Course",
+    description: "A structured 4-week journey to master mindfulness for daily life.",
+    duration: "4 Weeks",
+    level: "Beginner",
+    image: "/assets/LotusMeditation.png",
     features: [
-      'Weekly live sessions',
-      'Guided practices',
-      'Community support',
-      'Progress tracking'
+      "Weekly live classes",
+      "Guided practices",
+      "Community accountability",
+      "Progress insights"
     ]
   },
   {
     id: 3,
-    title: 'Stress Management',
-    description: 'Learn evidence-based techniques to manage stress and improve mental well-being.',
-    duration: '6 Weeks',
-    level: 'All Levels',
-    image: '/assets/RealMeditation.png',
+    title: "Stress Management",
+    description: "Evidence-based techniques to reduce stress and improve mental clarity.",
+    duration: "6 Weeks",
+    level: "All Levels",
+    image: "/assets/RealMeditation.png",
     features: [
-      'Breathing exercises',
-      'Mindfulness practices',
-      'One-on-one coaching',
-      'Access to resource library'
+      "Breathing techniques",
+      "Mindfulness therapy",
+      "1-on-1 guidance",
+      "Premium resource library"
     ]
   }
 ];
 
 const Programs = () => {
+  const heroRef = useRef(null);
+  const cardsRef = useRef([]);
+
+  useEffect(() => {
+    gsap.fromTo(
+      heroRef.current,
+      { opacity: 0, y: -40 },
+      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+    );
+
+    cardsRef.current.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        { opacity: 0, y: 60, scale: 0.95 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          delay: index * 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%"
+          }
+        }
+      );
+    });
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white to-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      {/* Hero Section */}
-      <div className="max-w-7xl mx-auto text-center mb-16">
-        <motion.h1 
-          className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          Our <span className="text-orange-500">Programs</span>
-        </motion.h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Transform your life with our carefully designed meditation and mindfulness programs.
-          Whether you're a beginner or an experienced practitioner, we have something for everyone.
+    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-orange-50 px-6 py-16">
+      {/* Hero */}
+      <div ref={heroRef} className="max-w-6xl mx-auto text-center mb-20">
+        <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900">
+          Experience <span className="text-orange-500">Mindful Living</span>
+        </h1>
+        <p className="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">
+          Discover beautifully crafted mindfulness programs designed to elevate your mental clarity, focus, and well-being.
         </p>
       </div>
 
-      {/* Programs Grid */}
-      <div className="max-w-7xl mx-auto grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {programs.map((program) => (
-          <motion.div
+      {/* Cards */}
+      <div className="max-w-7xl mx-auto grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+        {programs.map((program, i) => (
+          <div
             key={program.id}
-            className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-            whileHover={{ y: -5 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
+            ref={(el) => (cardsRef.current[i] = el)}
+            className="group relative bg-white/80 backdrop-blur-xl border border-gray-200 rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500"
           >
-            <div className="h-48 overflow-hidden">
-              <img 
-                src={program.image} 
+            {/* Image */}
+            <div className="relative h-56 overflow-hidden">
+              <img
+                src={program.image}
                 alt={program.title}
-                className="w-full h-full object-cover"
+                className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
             </div>
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-4">
-                <span className="text-sm font-medium text-orange-500">{program.duration}</span>
-                <span className="px-3 py-1 text-xs font-semibold bg-orange-100 text-orange-800 rounded-full">
+
+            {/* Content */}
+            <div className="p-8">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-sm font-semibold text-orange-500">{program.duration}</span>
+                <span className="text-xs px-3 py-1 rounded-full bg-orange-100 text-orange-700">
                   {program.level}
                 </span>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-2">{program.title}</h3>
-              <p className="text-gray-600 mb-4">{program.description}</p>
-              
-              <div className="mb-6">
-                <h4 className="font-semibold text-gray-900 mb-2">What's included:</h4>
-                <ul className="space-y-2">
-                  {program.features.map((feature, index) => (
-                    <li key={index} className="flex items-center">
-                      <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span className="text-gray-600">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                {program.title}
+              </h3>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                {program.description}
+              </p>
+
+              <ul className="space-y-3 mb-8">
+                {program.features.map((feature, idx) => (
+                  <li key={idx} className="flex items-start text-gray-600">
+                    <span className="mt-1 mr-3 h-2 w-2 rounded-full bg-orange-500" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
 
               <Link
                 to="/auth/register"
-                className="block w-full text-center bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300"
+                className="inline-flex w-full items-center justify-center rounded-xl bg-orange-500 px-6 py-3 font-semibold text-white transition-all duration-300 hover:bg-orange-600 hover:scale-[1.02]"
               >
                 Enroll Now
               </Link>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
 
-      {/* CTA Section */}
-      <div className="max-w-4xl mx-auto mt-20 bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl p-8 text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Not sure which program is right for you?</h2>
-        <p className="text-gray-600 mb-6">
-          Our meditation experts can help you find the perfect program based on your goals and experience level.
+      {/* CTA */}
+      <div className="mt-28 max-w-5xl mx-auto rounded-3xl bg-white border border-gray-200 shadow-xl p-12 text-center">
+        <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          Need a personalized recommendation?
+        </h2>
+        <p className="text-gray-600 max-w-2xl mx-auto mb-8">
+          Talk to our mindfulness experts and get a program tailored to your goals and lifestyle.
         </p>
         <Link
           to="/contact"
-          className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-orange-500 hover:bg-orange-600 transition duration-300"
+          className="inline-flex items-center gap-2 rounded-xl bg-gray-900 px-8 py-4 text-white font-semibold hover:bg-gray-800 transition"
         >
-          Contact Us
-          <svg className="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
+          Contact Experts
+          <span className="text-xl">→</span>
         </Link>
       </div>
     </div>
