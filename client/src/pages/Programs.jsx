@@ -84,10 +84,10 @@ const Programs = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-orange-50 px-6 py-16">
+    <div className="min-h-screen  bg-gradient-to-br from-white via-gray-50 to-orange-50 px-6 py-16">
         <LandingSidebar />
       {/* Hero */}
-      <div ref={heroRef} className="max-w-6xl mx-auto text-center mb-20">
+      <div ref={heroRef} className="max-w-6xl md:pt-6 mx-auto text-center mb-20">
         <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900">
           Experience <span className="text-orange-500">Mindful Living</span>
         </h1>
