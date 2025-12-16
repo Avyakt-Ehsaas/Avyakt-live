@@ -1,6 +1,6 @@
 import React , {useState} from 'react'
 import { Link , useNavigate } from 'react-router-dom'
-import logo from '../../../assets/avyakt-ehsaas-logo.png'
+import logo from '../../../assets/avyakt-ehsaas-logo.webp'
 import { useAuth } from '../../../hooks/useAuth'
 import SidebarLink from '../../../components/ui/SidebarLink'
 import { FiMenu , FiX , FiSettings , FiPhoneCall , FiLogOut , FiUser, FiHome, FiSearch ,  FiBook , FiSunrise} from 'react-icons/fi'

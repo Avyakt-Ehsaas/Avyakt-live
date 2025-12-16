@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import heroImage from "../../assets/hero.png";
+import heroImage from "../../assets/hero.webp";
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import ScrollTrigger from "gsap/ScrollTrigger";

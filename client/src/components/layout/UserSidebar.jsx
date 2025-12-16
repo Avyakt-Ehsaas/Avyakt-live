@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
-import logo from "../../assets/avyakt-ehsaas-logo.png";
+import logo from "../../assets/avyakt-ehsaas-logo.webp";
 
 import {
   FiUser,
