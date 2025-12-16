@@ -91,7 +91,7 @@ const ContactUs = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="flex justify-center"
+          className="flex justify-center order-1 lg:order-2"
         >
           <motion.img
             src={ContactImage}
