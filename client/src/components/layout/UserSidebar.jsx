@@ -33,12 +33,12 @@ const UserSidebar = () => {
   // -------------------------------
   const loggedInMenu = [
     { icon: <FiUser />, label: "My Profile", path: "/user/profile" },
-    { icon: <FiVideo />, label: "Schedule Meeting", path: "/join-meeting" },
+    { icon: <FiVideo />, label: "Joined Meeting", path: "/join-meeting" },
   ];
 
   const loggedOutMenu = [
     { icon: <MdDashboard />, label: "Dashboard", path: "/dashboard" },
-    { icon: <FiVideo />, label: "Schedule Meeting", path: "/join-meeting" },
+    // { icon: <FiVideo />, label: "Schedule Meeting", path: "/join-meeting" },
   ];
 
   const menu = user?.name ? loggedInMenu : loggedOutMenu;

@@ -30,6 +30,7 @@ import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs";
 import Programs from "./pages/Programs";
 import AttendanceList from "./pages/admin/AttendanceList";
+import Research from "./pages/Research";
 
 function App() {
   const { user, loadingUser } = useAuth();
@@ -81,6 +82,7 @@ function App() {
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/programs" element={<Programs />} />
+            <Route path="/research" element={<Research />} />
 
               <Route
               path="/admin/dashboard"
