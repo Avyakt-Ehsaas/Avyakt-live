@@ -101,73 +101,48 @@ const LandingSidebar = () => {
 
             {/* Desktop Profile Button + Dropdown */}
             <div className="relative hidden md:block">
-              {user?.name  ? (
-              <button
-                onClick={() => setProfileOpen(!profileOpen)}
-                className="ml-4 flex items-center gap-3 bg-white/10 px-3 py-2 rounded-xl 
-                  backdrop-blur-lg border border-white/20 hover:bg-white/20 transition"
-              >
-                   <div className="w-10 h-10 rounded-full bg-orange-300 flex items-center justify-center 
-                  text-orange-700 font-bold text-lg">
-                  {user?.name?.charAt(0)}
-                </div>
-                <div>
-                    <p className="text-sm font-semibold text-orange-500">{user?.name}</p>
-                    <p className="text-xs text-orange-400">{user?.email}</p>
-                </div>
+              {user?.name ? (
+                <button
+                  onClick={() => setProfileOpen(!profileOpen)}
+                  className="ml-4 flex items-center gap-3 bg-white/90 px-3 py-2 rounded-xl 
+                    border border-orange-100 hover:bg-white transition shadow-sm"
+                >
+                  <div className="w-10 h-10 rounded-full bg-orange-200 flex items-center justify-center 
+                    text-orange-700 font-bold text-lg">
+                    {user?.name?.charAt(0)}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-orange-700">{user?.name}</p>
+                    <p className="text-xs text-orange-500">{user?.email}</p>
+                  </div>
                 </button>
-                ) : (
-                  <>
+              ) : (
+                <>
                   <Link to="/auth/login">
-                  <p className="text-sm bg-orange-500 px-3 py-2 rounded-full font-semibold text-orange-100">Join us</p></Link>
-                  </>
-                )
-                }
-               
+                    <p className="text-sm bg-orange-500 px-3 py-2 rounded-full font-semibold text-orange-100">Join us</p></Link>
+                </>
+              )
+              }
 
               {/* DROPDOWN — DESKTOP ONLY */}
               <AnimatePresence>
-            
                 {profileOpen && (
                   <motion.div
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="absolute right-0 mt-2 w-48 bg-white/20 backdrop-blur-xl 
-                      rounded-xl border border-white/20 shadow-lg p-2 z-50"
+                    className="absolute right-0 mt-2 w-48 bg-white/95 backdrop-blur-xl 
+                      rounded-xl border border-orange-100 shadow-lg p-2 z-50"
                   >
                     <button
-                      onClick={() => {
-                        navigate("/user/profile");
-                        setProfileOpen(false);
-                      }}
-                      className="flex items-center gap-2 w-full px-3 py-2 text-orange-700 
-                        hover:bg-white/10 rounded-lg"
-                    >
-                      <FiUser /> View Profile
-                    </button>
-
-                    <button
-                      onClick={() => {
-                        navigate("/user/settings");
-                        setProfileOpen(false);
-                      }}
-                      className="flex items-center gap-2 w-full px-3 py-2 text-orange-700 
-                        hover:bg-white/10 rounded-lg"
-                    >
-                      <FiSettings /> Settings
-                    </button>
-
-                    <button
                       onClick={handleLogout}
-                      className="flex items-center gap-2 w-full px-3 py-2 text-red-400 
-                        hover:bg-white/10 rounded-lg"
+                      className="flex items-center gap-2 w-full px-3 py-2 text-red-500 
+                        hover:bg-orange-50 rounded-lg font-medium"
                     >
                       <FiLogOut /> Logout
                     </button>
                   </motion.div>
-                )
-              }
+                )}
               </AnimatePresence>
             </div>
           </div>
@@ -190,44 +165,44 @@ const LandingSidebar = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -15, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden backdrop-blur-xl bg-white/10 shadow-xl border-b 
+            className="md:hidden bg-white/95 shadow-xl border-b 
               border-white/20 fixed top-[60px] left-0 w-full z-40"
           >
-            <div className="flex flex-col p-4 space-y-3">
-
-              {menu.map((item, i) => (
+            <div className="flex flex-col p-4 space-y-2">
+              {/* Only show menu items that are not admin panel */}
+              {menu
+                .filter(item => !(user?.role !== 'admin' && item.label === 'Admin Panel'))
+                .map((item, i) => (
+                  <motion.button
+                    key={i}
+                    onClick={() => {
+                      navigate(item.path);
+                      setOpenMenu(false);
+                    }}
+                    whileHover={{ scale: 1.03 }}
+                    className="flex items-center gap-3 text-orange-700 p-3 rounded-lg hover:bg-orange-50 transition w-full text-left"
+                  >
+                    <span className="text-orange-600">{item.icon}</span>
+                    {item.label}
+                  </motion.button>
+                ))}
+              {user?.role === "admin" && (
                 <motion.button
-                  key={i}
                   onClick={() => {
-                    navigate(item.path);
+                    navigate("/admin/dashboard");
                     setOpenMenu(false);
                   }}
                   whileHover={{ scale: 1.03 }}
-                  className="flex items-center gap-3 text-orange-700 p-3 rounded-lg hover:bg-white/10 transition"
+                  className="flex items-center gap-3 text-orange-500 p-3 rounded-lg hover:bg-orange-50 transition w-full text-left"
                 >
-                  <span className="text-orange-700">{item.icon}</span>
-                  {item.label}
+                  <MdDashboard className="text-orange-600" /> Admin Panel
                 </motion.button>
-              ))}
+              )}
 
-{/* admin button*/ }
-               {user?.role === "admin" && (
-              <motion.button
-                onClick={() => {
-                  navigate("/admin/dashboard");
-                  setOpenMenu(false);
-                }}
-                whileHover={{ scale: 1.03 }}
-                className="flex items-center gap-3 text-orange-400 p-3 rounded-lg hover:bg-white/10 transition"
-              >
-                <MdDashboard /> Admin Panel
-              </motion.button>
-            )}
-
-{user?.name ? (
+              {user?.name ? (
                 <>
                   {/* Mobile User Info */}
-                  <div className="flex items-center gap-3 pt-3 border-t border-white/20">
+                  <div className="flex items-center gap-3 pt-3 border-t border-orange-100 mt-4">
                     <div className="w-10 h-10 bg-orange-200 text-orange-700 rounded-full flex items-center justify-center font-bold">
                       {user?.name?.charAt(0)}
                     </div>
@@ -237,43 +212,20 @@ const LandingSidebar = () => {
                     </div>
                   </div>
 
-                  {/* Profile and Settings Buttons */}
-                  <button
-                    onClick={() => {
-                      navigate("/user/profile");
-                      setOpenMenu(false);
-                    }}
-                    className="flex items-center gap-2 w-full px-3 py-2 text-orange-700 
-                      hover:bg-white/10 rounded-lg"
-                  >
-                    <FiUser /> View Profile
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      navigate("/user/settings");
-                      setOpenMenu(false);
-                    }}
-                    className="flex items-center gap-2 w-full px-3 py-2 text-orange-700 
-                      hover:bg-white/10 rounded-lg"
-                  >
-                    <FiSettings /> Settings
-                  </button>
-
                   {/* Logout Button */}
                   <button
                     onClick={() => {
                       handleLogout();
                       setOpenMenu(false);
                     }}
-                    className="flex items-center gap-2 w-full px-3 py-2 text-red-600 
-                      hover:bg-white/10 rounded-lg"
+                    className="flex items-center gap-2 w-full px-3 py-3 mt-2 text-red-600 
+                      hover:bg-red-50 rounded-lg font-medium"
                   >
                     <FiLogOut /> Logout
                   </button>
                 </>
               ) : (
-                <div className="pt-3 border-t border-white/20">
+                <div className="pt-3 border-t border-orange-100">
                   <button
                     onClick={() => {
                       navigate("/auth/login");
