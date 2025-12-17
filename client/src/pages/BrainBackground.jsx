@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
-import brainImg from "../assets/brain.webp"
+import brainImg from "../assets/Brain.webp"
 
 const BrainBackground = ({ ctaRef }) => {
   const brainRef = useRef(null)
