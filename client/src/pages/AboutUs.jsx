@@ -48,7 +48,7 @@ const AboutUs = () => {
       {/* ===================================== */}
       {/* 🌟 HERO SECTION */}
       {/* ===================================== */}
-      <section className="relative min-h-[95vh] flex items-center bg-white overflow-hidden">
+      <section className="relative min-h-[95vh] flex items-center overflow-hidden">
         <motion.div
           className="relative z-10 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-14 items-center"
           initial="hidden"
