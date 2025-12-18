@@ -170,8 +170,6 @@ const ContactUs = () => {
           </motion.button>
         </motion.form>
       </section>
-
-      <Footer />
     </div>
   )
 }

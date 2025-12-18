@@ -141,7 +141,7 @@ const UserSidebar = () => {
                       backdrop-blur-xl rounded-xl border border-white/20 
                       shadow-lg p-2 z-50"
                   >
-                    <button
+                    {/* <button
                       onClick={() => {
                         navigate("/user/profile");
                         setProfileOpen(false);
@@ -161,7 +161,7 @@ const UserSidebar = () => {
                         text-orange-700 hover:bg-white/10 rounded-lg"
                     >
                       <FiSettings /> Settings
-                    </button>
+                    </button> */}
 
                     <button
                       onClick={handleLogout}
@@ -218,7 +218,7 @@ const UserSidebar = () => {
               {/* Settings + Logout only for logged-in users */}
               {user?.name && (
                 <>
-                  <button
+                  {/* <button
                     onClick={() => {
                       navigate("/user/settings");
                       setOpenMenu(false);
@@ -227,7 +227,7 @@ const UserSidebar = () => {
                       text-orange-700 hover:bg-white/10 rounded-lg"
                   >
                     <FiSettings /> Settings
-                  </button>
+                  </button> */}
 
                   <button
                     onClick={handleLogout}

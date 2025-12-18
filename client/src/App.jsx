@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useState , useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { useAuth } from "./hooks/useAuth";
 import Loader from "./components/ui/Loader";
@@ -31,9 +32,11 @@ import AboutUs from "./pages/AboutUs/AboutUs";
 import Programs from "./pages/Programs";
 import AttendanceList from "./pages/admin/AttendanceList";
 import Research from "./pages/Research";
+import TextLoader from "./components/ui/TextLoader";
 
 function App() {
   const { user, loadingUser } = useAuth();
+    const [showSplash, setShowSplash] = useState(true);
 
   // ✅ Loader while checking auth
   if (loadingUser) {
@@ -44,6 +47,15 @@ function App() {
     );
   }
 
+   useEffect(() => {
+    const timer = setTimeout(() => setShowSplash(false), 8500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (showSplash) {
+    return <TextLoader />; // You can center it with full-screen styles
+  }
+  
   return (
     <>
       <BrowserRouter>
@@ -53,6 +65,8 @@ function App() {
             {/* ===========================================
                ✅ PUBLIC ROUTES
             ============================================ */}
+
+
 
             {/* Landing Page - Anyone can access */}
             <Route path="/" element={<LandingPage />} />
@@ -226,26 +240,18 @@ function App() {
             <Route
               path="/user/profile"
               element={
-                user?.role === "user" ? (
                   <UserLayout>
                     <Profile />
                   </UserLayout>
-                ) : (
-                  <Navigate to="/" replace />
-                )
               }
             />
 
             <Route
               path="/join-meeting"
               element={
-                user?.role === "user" ? (
                   <UserLayout>
                     <JoinMeeting />
                   </UserLayout>
-                ) : (
-                  <Navigate to="/" replace />
-                )
               }
             />
 

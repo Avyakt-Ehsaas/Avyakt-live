@@ -95,7 +95,7 @@ const Footer = () => {
       {/* Copyright */}
       <p className="text-center text-sm text-stone-600 mt-6">
         &copy; {" "}
-        { new Date().getFullYear()} Avyakt Ehsaas • All rights reserved • Member of Google Startups
+        { new Date().getFullYear()} Avyakt Ehsaas • All rights reserved
       </p>
     </footer>
   );

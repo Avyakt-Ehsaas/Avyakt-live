@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import API from "../utils/api";
-import { MessageSquare } from "lucide-react";
-import TextLoader from "../components/ui/TextLoader";
+import Loader from "../components/ui/Loader";
 
 export const AuthContext = createContext();
 
@@ -175,7 +174,10 @@ export const AuthProvider = ({ children }) => {
         fetchMe,
         loading: loadingUser
       }}
-    >{loadingUser ? <TextLoader /> : children}
+    >{loadingUser ? <div className="min-h-screen flex justify-center items-center">
+      <Loader />
+      </div>
+       : children}
     </AuthContext.Provider>
   )
 }

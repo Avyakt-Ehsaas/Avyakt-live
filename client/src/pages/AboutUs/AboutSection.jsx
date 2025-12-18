@@ -2,7 +2,8 @@ import React from "react"
 import { motion } from "framer-motion"
 import { FaBrain, FaUsers, FaLeaf, FaClock } from "react-icons/fa"
 import { Sparkles, Heart, ShieldCheck } from "lucide-react"
-
+import { useRef } from "react"
+import BrainImg from '../../assets/Brain.png'
 import LandingSidebar from "../LandingPage/LandingSidebar/LandingSidebar"
 
 import BrainBackground from "./BrainBackground"
@@ -28,12 +29,14 @@ const itemVariants = {
 /* ================= MAIN COMPONENT ================= */
 
 const AboutSection = () => {
+    const ctaRef = useRef(null)
+
   return (
-    <div className="relative overflow-hidden font-sans">
+    <div className="relative overflow-hidden pt-10 font-sans min-h-screen">
       <LandingSidebar />
-
-      <BrainBackground />
-
+    <div className="hidden lg:block">
+        <BrainBackground />
+    </div>
      <div className="relative z-10">
        {/* ===== GLOBAL SOFT ORANGE BLOBS ===== */}
       <div className="pointer-events-none absolute -top-[200px] -left-[200px] w-[500px] h-[500px] bg-orange-300/30 blur-[120px] rounded-full" />
@@ -54,7 +57,7 @@ const AboutSection = () => {
           <div className="text-center md:text-left">
             <motion.h1
               variants={itemVariants}
-              className="text-5xl md:text-6xl font-extrabold leading-tight
+              className="text-3xl md:text-5xl font-extrabold leading-tight
               bg-gradient-to-r from-orange-600 to-amber-500 bg-clip-text text-transparent"
             >
               A Conscious Space for Your Journey Home
@@ -62,7 +65,7 @@ const AboutSection = () => {
 
             <motion.p
               variants={itemVariants}
-              className="mt-6 text-xl text-gray-700 max-w-xl"
+              className="mt-6 text-lg text-gray-700 max-w-xl"
             >
               Avyakt Ehsaas is a conscious meditation and neuroscience platform
               designed to bring clarity, emotional healing, and deep self-awareness.
@@ -72,27 +75,27 @@ const AboutSection = () => {
               variants={itemVariants}
               className="mt-10 flex gap-5 justify-center md:justify-start flex-wrap"
             >
-              <button className="px-10 py-4 bg-orange-500 text-white rounded-full font-bold shadow-lg shadow-orange-300/50 hover:bg-orange-600 transition">
+              <button className="px-10 py-3 bg-orange-500 text-white rounded-full font-bold shadow-lg shadow-orange-300/50 hover:bg-orange-600 transition">
                 Start Your Journey
               </button>
-              <button className="px-10 py-4 border-2 border-orange-400 text-orange-600 rounded-full font-bold hover:bg-orange-50 transition">
+              <button className="px-10 py-3 border-2 border-orange-400 text-orange-600 rounded-full font-bold hover:bg-orange-50 transition">
                 Explore Programs
               </button>
             </motion.div>
           </div>
 
           {/* RIGHT IMAGE */}
-          {/* <motion.div
+          <motion.div
             variants={itemVariants}
-            className="relative flex justify-center"
+            className="md:hidden relative flex justify-center"
           >
             <img
-              src={AboutUsImage}
+              src={BrainImg}
               alt="Meditation Illustration"
-              className="w-[90%] max-w-md drop-shadow-2xl"
+              className="w-[100%]  max-w-md drop-shadow-2xl"
             />
-            <div className="absolute inset-0 bg-orange-300/20 blur-3xl rounded-full -z-10" />
-          </motion.div> */}
+            <div className="absolute inset-0 bg-blue-300/20 blur-3xl rounded-full -z-10" />
+          </motion.div>
 
         </motion.div>
       </section>
@@ -156,7 +159,10 @@ const AboutSection = () => {
       {/* 💖 BENEFITS */}
       {/* ===================================== */}
       <section className="py-28">
-        <div className="max-w-7xl mx-auto px-6 text-center">
+       <div className="max-w-6xl mx-auto px-6 text-center">
+          <motion.h2 className="text-4xl font-extrabold mb-12 text-gray-800">
+            Benifits
+          </motion.h2>
           <motion.div className="grid md:grid-cols-3 gap-10">
             <Benefit icon={<Sparkles />} title="Conscious Guidance" desc="Live & on-demand meditation sessions." />
             <Benefit icon={<Heart />} title="Authentic Healing" desc="Release stress and emotional blocks." />
@@ -168,7 +174,8 @@ const AboutSection = () => {
       {/* ===================================== */}
       {/* 📢 FINAL CTA */}
       {/* ===================================== */}
-      <section className="relative py-28 text-center overflow-hidden">
+      <section
+      className="relative md:pl-[18rem] py-28 text-center overflow-hidden">
         <div className="absolute inset-0 rounded-full" />
 
         <motion.h2 className="text-5xl font-extrabold mb-6 bg-gradient-to-r from-orange-600 to-amber-500 bg-clip-text text-transparent">
