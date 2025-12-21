@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { sendCsvEmails } from "../../services/emailApi"
+import { sendCsvEmails } from "../../services/EmailApi"
 import { useAuth } from "../../hooks/useAuth"
 import { UploadCloud, Send } from "lucide-react"
 
@@ -27,7 +27,7 @@ const SendEmailBulks = () => {
     try {
       setLoading(true)
       setStatus("")
-      const res = await sendCsvEmails(formData, token)
+      const res = await sendCsvEmails(formData)
       setStatus(`✅ Emails sent to ${res.data.totalEmails} users`)
       setCsv(null)
       setSubject("")

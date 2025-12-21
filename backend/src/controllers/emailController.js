@@ -1,6 +1,7 @@
 import fs from "fs"
 import parseCsvEmails from "../util/csvParser.js"
 import { sendMail } from "../util/mailServices.js"
+
 export const sendCsvEmails = async (req, res) => {
     const { subject, message } = req.body;
     

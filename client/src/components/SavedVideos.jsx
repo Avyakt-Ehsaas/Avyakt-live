@@ -97,7 +97,7 @@ const SavedVideos = ({ videos }) => {
   const [selectedVideo, setSelectedVideo] = useState(null);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-20">
+    <div className="min-h-screen bg-gray-50 p-4 pt-10 md:p-20">
       <div className="max-w-6xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
           <div className="p-8">
