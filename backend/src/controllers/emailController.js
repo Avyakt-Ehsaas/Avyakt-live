@@ -4,11 +4,13 @@ import { sendMail } from "../util/mailServices.js"
 export const sendCsvEmails = async (req, res) => {
     const { subject, message } = req.body;
     
+    console.log(req.file)
     if (!req.file) {
         return res.status(400).json({
             message: "CSV file is required"
         });
     }
+
 
     try {
         const emails = await parseCsvEmails(req.file.path);
