@@ -2,11 +2,19 @@ import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 import cookieParser from 'cookie-parser';
+import nodemailer from "nodemailer"
+import multer from "multer"
+import csv from "csv-parser"
+import fs from "fs"
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // routes
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import meetingRoutes from "./routes/meetingRoutes.js"
+
+import  emailRoutes from "./routes/emailRoutes.js"
 
 const app = express();
 
@@ -25,10 +33,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser()); // ✅ FIXED
 
+// multer for uploading files
+const upload = multer({ dest: "uploads/" })
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
+
 // routes
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/meetings",meetingRoutes)
 
+app.use("/api/email",emailRoutes)
 
 export default app;

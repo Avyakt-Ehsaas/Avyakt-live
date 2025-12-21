@@ -13,7 +13,8 @@ import {
   LogOut,
   Menu,
   X,
-  Activity
+  Activity,
+  Mail
 } from 'lucide-react';
 import { FaHome } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -24,6 +25,7 @@ const navItems = [
   { name: 'Dashboard Core', icon: LayoutDashboard, path: '/admin' },
   { name: 'User Management', icon: Users, path: '/admin/users' },
   { name: 'Create Meeting', icon: Video, path: '/admin/create-meeting' },
+  { name: 'Send Emails' , icon: Mail, path: "/admin/bulk-email"},
   { name: 'Attendance', icon: BarChart3, path: '/admin/attendence' },
   { name: 'Engagement', icon: Activity, path: '/admin/engagement' },
   { name: 'Session Control', icon: Clock, path: '/admin/security-logs' },

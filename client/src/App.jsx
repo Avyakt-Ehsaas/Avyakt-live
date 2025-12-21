@@ -38,6 +38,7 @@ import Feedback from "./pages/user/Feedback";
 import TermsAndConditions from "./components/TermsAndConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import SubscriptionPlanDetail from "./components/SubscriptionPlanDetail";
+import SendEmailBulks from "./pages/admin/SendEmailBulks";
 
 
 function App() {
@@ -157,6 +158,20 @@ function App() {
                 )
               }
             />
+
+           <Route
+  path="/admin/bulk-email"
+  element={
+    user?.role === "admin" ? (
+      <SendEmailBulks />
+    ) : (
+      <Navigate to="/" replace />
+    )
+  }
+/>
+
+
+
 
             <Route
               path="/admin/users"
