@@ -113,6 +113,9 @@ function App() {
               element={user ? <Feedback /> : <Navigate to="/auth/login" replace />}
             />
           
+          <Route path="/webinars" element={user ?  <Webinar /> : <Navigate to="/auth/login" replace />}
+          />
+          
               <Route path="/plans/:planId" 
               element={user ? <SubscriptionPlanDetail /> : <Navigate to="/auth/login" replace />} />
 

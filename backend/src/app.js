@@ -14,6 +14,7 @@ import meetingRoutes from "./routes/meetingRoutes.js"
 
 import emailRoutes from "./routes/emailRoutes.js"
 import feedbackRoutes  from "./routes/feedbackRoutes.js"
+import webinarRoutes from "./routes/webinaarRoutes.js"
 
 const app = express();
 
@@ -44,6 +45,7 @@ app.use("/api/meetings",meetingRoutes)
 
 app.use("/api/email", emailRoutes);
 app.use("/api/feedback", feedbackRoutes);
+app.use('api/webinar',webinarRoutes)
 
 
 
@@ -54,7 +56,8 @@ app.use("/api/feedback", feedbackRoutes);
 
 app.get("/api/zoho/callback", async (req, res) => {
   const code = req.query.code;
-
+  console.log(process.env.ZOHO_CLIENT_ID)
+  console.log(process.env.ZOHO_CLIENT_SECRET)
   const params = new URLSearchParams({
     code,
     client_id: process.env.ZOHO_CLIENT_ID,
