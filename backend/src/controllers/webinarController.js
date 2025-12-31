@@ -1,7 +1,6 @@
 import dotenv from "dotenv"
 dotenv.config();
 import getAccessToken from "../util/zohoAccessToken.js";
-
 const ZOHO_API = process.env.ZOHO_API_DOMAIN;
 
 export const createWebinar = async (req,res) => {
