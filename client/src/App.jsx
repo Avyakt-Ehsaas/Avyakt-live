@@ -39,6 +39,7 @@ import TermsAndConditions from "./components/TermsAndConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import SubscriptionPlanDetail from "./components/SubscriptionPlanDetail";
 import SendEmailBulks from "./pages/admin/SendEmailBulks";
+import Webinar from "./pages/user/Webinar";
 
 
 function App() {
