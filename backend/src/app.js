@@ -14,7 +14,7 @@ import meetingRoutes from "./routes/meetingRoutes.js"
 
 import emailRoutes from "./routes/emailRoutes.js"
 import feedbackRoutes  from "./routes/feedbackRoutes.js"
-import webinarRoutes from "./routes/webinaarRoutes.js"
+import webinaarRoutes from "./routes/webinaarRoutes.js"
 
 const app = express();
 
@@ -45,7 +45,7 @@ app.use("/api/meetings",meetingRoutes)
 
 app.use("/api/email", emailRoutes);
 app.use("/api/feedback", feedbackRoutes);
-app.use('/api/webinars',webinarRoutes)
+app.use('/api/webinars',webinaarRoutes)
 
 
 

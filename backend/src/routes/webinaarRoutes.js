@@ -19,5 +19,10 @@ router.put("/:id",protect,updateWebinar);
 
 router.delete("/:id",protect,deleteWebinarbyId)
 
+router.get("/ping", (req, res) => {
+  res.send("Webinar routes working");
+});
+
+
 export default router
 
