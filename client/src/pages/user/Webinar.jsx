@@ -28,7 +28,7 @@ const Webinar = () => {
   },[user])
 
   console.log(webinar);
-  
+
   return (
     <div>Webinar</div>
   )
