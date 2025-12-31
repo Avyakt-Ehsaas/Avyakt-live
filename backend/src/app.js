@@ -45,7 +45,7 @@ app.use("/api/meetings",meetingRoutes)
 
 app.use("/api/email", emailRoutes);
 app.use("/api/feedback", feedbackRoutes);
-app.use('api/webinars',webinarRoutes)
+app.use('/api/webinars',webinarRoutes)
 
 
 
