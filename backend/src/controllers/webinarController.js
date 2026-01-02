@@ -49,7 +49,7 @@ export const getAllWebinars = async (req, res) => {
     console.log(BASE_URL)
     console.log("access token ", accessToken)
     const response = await axios.get(
-      `${BASE_URL}`,
+      `${BASE_URL}/webinars`,
       {
         params: {
           listtype: req.query.listtype || "upcoming",
