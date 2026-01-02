@@ -46,7 +46,8 @@ export const createWebinar = async (req, res) => {
 export const getAllWebinars = async (req, res) => {
   try {
     const accessToken = await getAccessToken();
-
+    console.log(BASE_URL)
+    console.log("access token ", accessToken)
     const response = await axios.get(
       `${BASE_URL}/webinar.json`,
       {
@@ -61,7 +62,7 @@ export const getAllWebinars = async (req, res) => {
         }
       }
     );
-
+    console.log(response)
     return res.status(200).json(response.data);
   } catch (error) {
     console.error(
