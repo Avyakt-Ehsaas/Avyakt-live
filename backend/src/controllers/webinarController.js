@@ -2,7 +2,7 @@ import axios from "axios";
 import { getAccessToken } from "../util/zohoAccessToken.js";
 
 const ZSOID = process.env.ZOHO_ZSOID;
-const BASE_URL = `${process.env.ZOHO_WEBINAR_API}/${ZSOID}`;
+const BASE_URL = `${process.env.ZOHO_WEBINAR_API}`;
 
 if (!ZSOID || !process.env.ZOHO_WEBINAR_API) {
   throw new Error("Missing Zoho Webinar environment variables");
@@ -49,7 +49,7 @@ export const getAllWebinars = async (req, res) => {
     console.log(BASE_URL)
     console.log("access token ", accessToken)
     const response = await axios.get(
-      `${BASE_URL}/webinar.json`,
+      `${BASE_URL}`,
       {
         params: {
           listtype: req.query.listtype || "upcoming",
