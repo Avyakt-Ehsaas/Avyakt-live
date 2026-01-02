@@ -10,7 +10,7 @@ export async function getAccessToken() {
   try {
     const now = new Date();
 
-    // Return cached token if still valid
+    // Use cached token if still valid
     if (accessToken && tokenExpiry && now < tokenExpiry) {
       return accessToken;
     }
@@ -24,7 +24,7 @@ export async function getAccessToken() {
       throw new Error("Zoho OAuth environment variables missing");
     }
 
-    // Request new access token
+    // ✅ CORRECT: refresh_token grant
     const response = await axios.post(
       "https://accounts.zoho.in/oauth/v2/token",
       null,
@@ -33,17 +33,17 @@ export async function getAccessToken() {
           refresh_token: process.env.ZOHO_REFRESH_TOKEN,
           client_id: process.env.ZOHO_CLIENT_ID,
           client_secret: process.env.ZOHO_CLIENT_SECRET,
-          grant_type: "refresh_token",
+          grant_type: "refresh_token"
         },
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
       }
     );
 
     accessToken = response.data.access_token;
 
-    // Expiry buffer of 60 seconds
+    // Set expiry (1-minute buffer)
     tokenExpiry = new Date(
       now.getTime() + response.data.expires_in * 1000 - 60_000
     );
