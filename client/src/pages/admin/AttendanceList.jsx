@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Users, Clock, Calendar, Clock3, CheckCircle, XCircle, BarChart2 } from 'lucide-react';
+import { Users, Clock, Calendar, Clock3, CheckCircle, XCircle, BarChart2, CheckSquare } from 'lucide-react';
 import API from '../../utils/api';
 import { toast } from 'react-hot-toast';
 import Loader from '../../components/ui/Loader';
@@ -71,6 +71,9 @@ const StatCard = ({ title, value, icon, color }) => (
 
 const AttendanceList = () => {
   const [loading, setLoading] = useState(true);
+  const [activeView, setActiveView] = useState('check'); // 'check' or 'mark'
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
   const [attendance, setAttendance] = useState({
     total: 0,
     present: 0,
@@ -102,7 +105,6 @@ const AttendanceList = () => {
 
     fetchTodaysAttendance();
   }, []);
-
 
 
 const exportToExcel = () => {
@@ -144,6 +146,58 @@ const exportToExcel = () => {
   }
 };
 
+const handleFileUpload = (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    const fileExtension = file.name.split('.').pop().toLowerCase();
+    if (fileExtension === 'xlsx' || fileExtension === 'xls') {
+      setSelectedFile(file);
+    } else {
+      toast.error('Please upload a valid Excel file (.xlsx or .xls)');
+      event.target.value = '';
+    }
+  }
+};
+
+const uploadAttendanceData = async () => {
+  if (!selectedFile) {
+    toast.error('Please select a file first');
+    return;
+  }
+
+  try {
+    setUploading(true);
+    
+    const formData = new FormData();
+    formData.append('attendanceFile', selectedFile);
+
+    const response = await API.post('/meetings/upload-attendance', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    if (response.data.success) {
+      toast.success('Attendance data uploaded successfully!');
+      setSelectedFile(null);
+      document.querySelector('input[type="file"]').value = '';
+      
+      // Refresh the attendance data
+      const today = new Date().toISOString().split('T')[0];
+      const attendanceResponse = await API.get(`/meetings/todays-attendance?date=${today}`);
+      if (attendanceResponse.data.success) {
+        setAttendance(attendanceResponse.data.data);
+      }
+    } else {
+      toast.error(response.data.message || 'Upload failed');
+    }
+  } catch (error) {
+    console.error('Upload error:', error);
+    toast.error(error.response?.data?.message || 'Failed to upload attendance data');
+  } finally {
+    setUploading(false);
+  }
+};
 
 
   if (loading) {
@@ -160,160 +214,227 @@ const exportToExcel = () => {
               {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
             </p>
           </div>
-          <div className="hidden sm:flex items-center space-x-2 px-4 py-2 rounded-lg" style={{ backgroundColor: colors.primaryLight }}>
-            <BarChart2 className="w-5 h-5" style={{ color: colors.primaryDark }} />
-            <span className="text-sm font-medium" style={{ color: colors.primaryDark }}>Live Updates</span>
+
+              {/* Toggle Button */}
+        <div className="flex justify-center mb-8">
+          <div className="inline-flex rounded-lg border shadow-sm" style={{ borderColor: colors.border }}>
+            <button
+              onClick={() => setActiveView('check')}
+              className={`px-6 py-3 text-sm font-medium rounded-l-lg transition-all duration-200 flex items-center gap-2 ${
+                activeView === 'check'
+                  ? 'bg-emerald-600 text-white'
+                  : 'bg-white text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              <CheckCircle className="w-4 h-4" />
+              Check Today's Attendance
+            </button>
+            <button
+              onClick={() => setActiveView('mark')}
+              className={`px-6 py-3 text-sm font-medium rounded-r-lg transition-all duration-200 flex items-center gap-2 ${
+                activeView === 'mark'
+                  ? 'bg-emerald-600 text-white'
+                  : 'bg-white text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              <CheckSquare className="w-4 h-4" />
+              Mark Attendance
+            </button>
           </div>
         </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatCard
-            title="Total Sessions"
-            value={attendance.total}
-            icon={<Calendar />}
-            color={colors.info}
-          />
-          <StatCard
-            title="Present"
-            value={attendance.present}
-            icon={<CheckCircle />}
-            color={colors.success}
-          />
-          <StatCard
-            title="Absent"
-            value={attendance.absent}
-            icon={<XCircle />}
-            color={colors.error}
-          />
-          <StatCard
-            title="Avg. Duration"
-            value={`${attendance.averageDuration/60}m`}
-            icon={<Clock3 />}
-            color={colors.warning}
-          />
+         
         </div>
 
-        <div className="bg-white rounded-xl border shadow-sm overflow-hidden" style={{ borderColor: colors.border }}>
-          <div className="p-4 sm:p-6 border-b" style={{ borderColor: colors.border, backgroundColor: colors.bgSecondary }}>
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between">
-              <div>
-                <h2 className="text-lg sm:text-xl font-semibold flex items-center gap-2" style={{ color: colors.textPrimary }}>
-                  <Users className="w-5 h-5" style={{ color: colors.textPrimary }} />
-                  Today's Attendance Records
-                </h2>
-                <p className="text-xs sm:text-sm mt-1" style={{ color: colors.textSecondary }}>
-                  Showing all attendance records for today
-                </p>
+    
+
+        {/* Content based on active view */}
+        {activeView === 'check' ? (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <StatCard
+                title="Total Sessions"
+                value={attendance.total}
+                icon={<Calendar />}
+                color={colors.info}
+              />
+              <StatCard
+                title="Present"
+                value={attendance.present}
+                icon={<CheckCircle />}
+                color={colors.success}
+              />
+              <StatCard
+                title="Absent"
+                value={attendance.absent}
+                icon={<XCircle />}
+                color={colors.error}
+              />
+              <StatCard
+                title="Avg. Duration"
+                value={`${Math.floor(attendance.averageDuration)}m`}
+                icon={<Clock3 />}
+                color={colors.warning}
+              />
+            </div>
+
+            <div className="bg-white rounded-xl border shadow-sm overflow-hidden" style={{ borderColor: colors.border }}>
+              <div className="p-4 sm:p-6 border-b" style={{ borderColor: colors.border, backgroundColor: colors.bgSecondary }}>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between">
+                  <div>
+                    <h2 className="text-lg sm:text-xl font-semibold flex items-center gap-2" style={{ color: colors.textPrimary }}>
+                      <Users className="w-5 h-5" style={{ color: colors.textPrimary }} />
+                      Today's Attendance Records
+                    </h2>
+                    <p className="text-xs sm:text-sm mt-1" style={{ color: colors.textSecondary }}>
+                      Showing all attendance records for today
+                    </p>
+                  </div>
+                  <div className="flex justify-between items-center ml-2 mb-6 gap-6 ">
+                    <h2 className="text-2xl font-bold text-gray-800">Today's Attendance</h2>
+                    <button
+                      onClick={exportToExcel}
+                      className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                      disabled={!attendance.attendees?.length}
+                    >
+                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      Export to Excel
+                    </button>
+                  </div>
+                </div>
               </div>
-              {/* <div className="mt-2 sm:mt-0">
-                <button className="text-xs sm:text-sm px-3 py-1.5 rounded-lg font-medium transition-colors duration-200" 
-                  style={{ 
-                    backgroundColor: colors.primary, 
-                    color: 'white',
-                    ':hover': {
-                      backgroundColor: colors.primaryDark
-                    }
-                  }}>
-                  Export Data
-                </button>
-              </div> */}
 
-<div className="flex justify-between items-center ml-2 mb-6">
-  <h2 className="text-2xl font-bold text-gray-800">Today's Attendance</h2>
-  <button
-    onClick={exportToExcel}
-    className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-    disabled={!attendance.attendees?.length}
-  >
-    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-    </svg>
-    Export to Excel
-  </button>
-</div>
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-opacity-30" style={{ borderColor: colors.border }}>
+                  <thead>
+                    <tr style={{ backgroundColor: colors.primaryLight + '80' }}>
+                      <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: colors.textPrimary }}>
+                        Name
+                      </th>
+                      <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider hidden sm:table-cell" style={{ color: colors.textPrimary }}>
+                        Email
+                      </th>
+                      <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider hidden md:table-cell" style={{ color: colors.textPrimary }}>
+                        Join Time
+                      </th>
+                      <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: colors.textPrimary }}>
+                        Duration
+                      </th>
+                      <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: colors.textPrimary }}>
+                        Status
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-opacity-30" style={{ backgroundColor: 'white' }}>
+                    {attendance.attendees.length > 0 ? (
+                      attendance.attendees.map((attendee, index) => (
+                        <tr 
+                          key={index} 
+                          className="hover:opacity-90 transition-opacity"
+                          style={{ backgroundColor: index % 2 === 0 ? colors.white : colors.bgHover }}
+                        >
+                          <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm font-medium" style={{ color: colors.textPrimary }}>
+                                {(attendee.name).substring(0,1).toUpperCase() + (attendee.name).substring(1)}
+                                </div>
+                            <div className="text-xs sm:hidden" style={{ color: colors.textSecondary }}>{attendee.email}</div>
+                            <div className="text-xs md:hidden mt-1 flex items-center" style={{ color: colors.textSecondary }}>
+                              <Clock className="w-3 h-3 mr-1" />
+                              {new Date(attendee.joinTime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                            </div>
+                          </td>
+                          <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm hidden sm:table-cell" style={{ color: colors.textSecondary }}>
+                            {attendee.email}
+                          </td>
+                          <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm hidden md:table-cell" style={{ color: colors.textSecondary }}>
+                            {new Date(attendee.joinTime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                          </td>
+                          <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm" style={{ color: colors.textPrimary }}>
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" 
+                              style={{ backgroundColor: colors.primaryLight, color: colors.primaryDark }}>
+                              {Math.floor(attendee.duration / 60)}h {attendee.duration % 60}m
+                            </span>
+                          </td>
+                          <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
+                            <span className={`px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                              attendee.status === 'present' 
+                                ? 'bg-green-100 text-green-800' 
+                                : 'bg-red-100 text-red-800'
+                            }`}>
+                              {attendee.status.charAt(0).toUpperCase() + attendee.status.slice(1)}
+                            </span>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="5" className="px-6 py-8 text-center text-sm" style={{ color: colors.textSecondary }}>
+                          <div className="flex flex-col items-center justify-center">
+                            <Users className="w-10 h-10 mb-2 opacity-40" />
+                            <p>No attendance records found for today.</p>
+                            <p className="text-xs mt-1">Check back later or refresh the page.</p>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className="bg-white rounded-xl border shadow-sm p-8" style={{ borderColor: colors.border }}>
+            <div className="text-center py-12">
+              <CheckSquare className="w-16 h-16 mx-auto mb-4" style={{ color: colors.primary }} />
+              <h2 className="text-2xl font-bold mb-4" style={{ color: colors.textPrimary }}>Mark Attendance</h2>
+              <p className="text-lg mb-6" style={{ color: colors.textSecondary }}>
+                Upload an Excel sheet to mark attendance manually.
+              </p>
+              
+              <div className="max-w-md mx-auto mb-8">
+                <input 
+                  type="file" 
+                  accept=".xlsx, .xls" 
+                  onChange={handleFileUpload} 
+                  className="block w-full text-sm text-gray-500
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-full file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-emerald-50 file:text-emerald-700
+                    hover:file:bg-emerald-100
+                    cursor-pointer
+                  "
+                />
+                {selectedFile && (
+                  <p className="mt-2 text-sm text-gray-600">Selected file: <span className="font-medium">{selectedFile.name}</span></p>
+                )}
+              </div>
 
+              <button
+                onClick={uploadAttendanceData}
+                disabled={!selectedFile || uploading}
+                className={`px-8 py-3 rounded-lg text-white font-semibold transition-colors duration-200 ${
+                  selectedFile && !uploading 
+                    ? 'bg-emerald-600 hover:bg-emerald-700' 
+                    : 'bg-gray-400 cursor-not-allowed'
+                }`}
+              >
+                {uploading ? 'Uploading...' : 'Upload Attendance'}
+              </button>
+
+              <div className="max-w-md mx-auto mt-8">
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                  <p className="text-sm text-yellow-800">
+                    <strong>Note:</strong> Ensure your Excel sheet has 'First Name', 'Last Name', 'Email', 'Joined Time', and 'Duration (min)' columns.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-opacity-30" style={{ borderColor: colors.border }}>
-              <thead>
-                <tr style={{ backgroundColor: colors.primaryLight + '80' }}>
-                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: colors.textPrimary }}>
-                    Name
-                  </th>
-                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider hidden sm:table-cell" style={{ color: colors.textPrimary }}>
-                    Email
-                  </th>
-                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider hidden md:table-cell" style={{ color: colors.textPrimary }}>
-                    Join Time
-                  </th>
-                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: colors.textPrimary }}>
-                    Duration
-                  </th>
-                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{ color: colors.textPrimary }}>
-                    Status
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-opacity-30" style={{ backgroundColor: 'white' }}>
-                {attendance.attendees.length > 0 ? (
-                  attendance.attendees.map((attendee, index) => (
-                    <tr 
-                      key={index} 
-                      className="hover:opacity-90 transition-opacity"
-                      style={{ backgroundColor: index % 2 === 0 ? colors.white : colors.bgHover }}
-                    >
-                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium" style={{ color: colors.textPrimary }}>
-                            {(attendee.name).substring(0,1).toUpperCase() + (attendee.name).substring(1)}
-                            </div>
-                        <div className="text-xs sm:hidden" style={{ color: colors.textSecondary }}>{attendee.email}</div>
-                        <div className="text-xs md:hidden mt-1 flex items-center" style={{ color: colors.textSecondary }}>
-                          <Clock className="w-3 h-3 mr-1" />
-                          {new Date(attendee.joinTime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
-                        </div>
-                      </td>
-                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm hidden sm:table-cell" style={{ color: colors.textSecondary }}>
-                        {attendee.email}
-                      </td>
-                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm hidden md:table-cell" style={{ color: colors.textSecondary }}>
-                        {new Date(attendee.joinTime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
-                      </td>
-                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm" style={{ color: colors.textPrimary }}>
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" 
-                          style={{ backgroundColor: colors.primaryLight, color: colors.primaryDark }}>
-                          {Math.floor(attendee.duration / 60)}m {attendee.duration % 60}s
-                        </span>
-                      </td>
-                      <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
-                        <span className={`px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                          attendee.status === 'present' 
-                            ? 'bg-green-100 text-green-800' 
-                            : 'bg-red-100 text-red-800'
-                        }`}>
-                          {attendee.status.charAt(0).toUpperCase() + attendee.status.slice(1)}
-                        </span>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="5" className="px-6 py-8 text-center text-sm" style={{ color: colors.textSecondary }}>
-                      <div className="flex flex-col items-center justify-center">
-                        <Users className="w-10 h-10 mb-2 opacity-40" />
-                        <p>No attendance records found for today.</p>
-                        <p className="text-xs mt-1">Check back later or refresh the page.</p>
-                      </div>
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
+        )}
         
-        {/* Inactive Users Section */}
+        {/* Inactive Users Section - appears in both views */}
         <div className="mt-12">
           <InactiveUsers />
         </div>

@@ -1,5 +1,6 @@
 // routes/meetingRoutes.js
 import express from "express";
+import multer from "multer";
 import { protect, admin } from "../middleware/authMiddleware.js";
 import {
   createOrUpdateMeeting,
@@ -15,10 +16,29 @@ import {
   markSessionAsCompleted,
   markSessionAsLive,
   getSessionsList,
-  markSessionAsScheduled
+  markSessionAsScheduled,
+  uploadAttendance
 } from "../controllers/meetingController.js";
 
 const router = express.Router();
+
+// Multer configuration for file upload
+const storage = multer.memoryStorage();
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 5 * 1024 * 1024, // 5MB limit
+  },
+  fileFilter: (req, file, cb) => {
+    // Accept only Excel files
+    if (file.mimetype === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || 
+        file.mimetype === 'application/vnd.ms-excel') {
+      cb(null, true);
+    } else {
+      cb(new Error('Only Excel files are allowed'), false);
+    }
+  }
+});
 
 // Admin routes
 router.route("/").post(protect, admin, createOrUpdateMeeting) // Create/update meeting settings
@@ -53,5 +73,9 @@ router.route("/sessions/:sessionId/completed").post(protect,admin,markSessionAsC
 router.route("/sessions/:sessionId/scheduled")
   .post(protect, admin, markSessionAsScheduled);
 router.route("/sessions").get(protect,admin,getSessionsList)
+
+// Upload attendance from Excel file
+router.route("/upload-attendance")
+  .post(protect, admin, upload.single('attendanceFile'), uploadAttendance);
 
 export default router;

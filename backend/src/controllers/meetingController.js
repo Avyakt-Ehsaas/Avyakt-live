@@ -1,5 +1,7 @@
 import Meeting from "../models/MeetingModel.js";
 import User from "../models/user.model.js";
+import * as XLSX from 'xlsx';
+import multer from 'multer';
 
 /**
  * Create or update the single meeting (admin only)
@@ -752,6 +754,199 @@ export const getSessionsList = async (req, res) => {
   } catch (error) {
     console.error("getSessions error:", error);
     res.status(500).json({ message: "Failed to fetch sessions" });
+  }
+};
+
+/**
+ * Upload attendance from Excel file
+ */
+export const uploadAttendance = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: "No file uploaded"
+      });
+    }
+
+    // Read the Excel file - headers are on row 11 (0-indexed, so row 10)
+    const workbook = XLSX.read(req.file.buffer, { type: 'buffer' });
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+    
+    // Convert to JSON with headers starting from row 11 (range A11:I)
+    const data = XLSX.utils.sheet_to_json(worksheet, { 
+      range: 10, // Start from row 11 (0-indexed)
+      header: 1  // Use first row as headers
+    });
+    
+    // Convert array of arrays to array of objects using the first row as keys
+    const headers = data[0];
+    const rows = data.slice(1).map(row => {
+      const obj = {};
+      headers.forEach((header, index) => {
+        obj[header] = row[index];
+      });
+      return obj;
+    }).filter(row => row['Email'] && row['Email'].trim()); // Filter out rows without email
+
+    if (rows.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "No valid attendance data found in Excel file"
+      });
+    }
+
+    // Get today's session
+    const today = new Date().toISOString().split('T')[0];
+    const meeting = await Meeting.findOne({ isActive: true });
+    
+    if (!meeting) {
+      return res.status(404).json({
+        success: false,
+        message: "No active meeting found"
+      });
+    }
+
+    // Find or create today's session
+    let session = meeting.sessions.find(s => s.date === today);
+    if (!session) {
+      // Create today's session if it doesn't exist
+      session = {
+        date: today,
+        startTime: new Date(),
+        status: 'completed',
+        attendees: []
+      };
+      meeting.sessions.push(session);
+      await meeting.save();
+      
+      // Get the newly added session
+      session = meeting.sessions[meeting.sessions.length - 1];
+    }
+
+    let processedCount = 0;
+    let skippedCount = 0;
+    const errors = [];
+
+    // Process each row in the Excel file
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      try {
+        // Extract email from the row (handle many different column name variations)
+        const email = row['Email'] || 
+                     row['email'] || 
+                     row['Email Address'] || 
+                     row['email address'] ||
+                     row['Email_Address'] ||
+                     row['email_address'];
+        
+        if (!email) {
+          errors.push(`Row ${i + 1}: Email not found. Available columns: ${Object.keys(row).join(', ')}`);
+          skippedCount++;
+          continue;
+        }
+
+        // Find user by email
+        const user = await User.findOne({ email: email.trim().toLowerCase() });
+        
+        if (!user) {
+          errors.push(`Email ${email}: User not found in database`);
+          skippedCount++;
+          continue;
+        }
+
+        // Check if user is already in today's session
+        const existingAttendee = session.attendees.find(
+          attendee => attendee.user.toString() === user._id.toString()
+        );
+
+        if (existingAttendee) {
+          // Update existing attendee if needed
+          const duration = parseInt(
+            row['Duration (min)'] || 
+            row['duration'] || 
+            row['Duration'] || 
+            row['Duration (minutes)'] ||
+            row['Duration (Minutes)'] ||
+            row['Duration in minutes'] ||
+            0
+          ) * 60; // Convert minutes to seconds
+          
+          const joinTime = row['Joined Time'] || 
+                          row['joinTime'] || 
+                          row['Join Time'] ||
+                          row['Join time'] ||
+                          row['join time'] ||
+                          new Date();
+          
+          existingAttendee.duration = duration;
+          if (joinTime && joinTime !== new Date()) {
+            existingAttendee.joinTime = new Date(joinTime);
+          }
+          existingAttendee.leaveTime = new Date(new Date(joinTime).getTime() + duration * 1000);
+        } else {
+          // Add new attendee
+          const duration = parseInt(
+            row['Duration (min)'] || 
+            row['duration'] || 
+            row['Duration'] || 
+            row['Duration (minutes)'] ||
+            row['Duration (Minutes)'] ||
+            row['Duration in minutes'] ||
+            0
+          ) * 60; // Convert minutes to seconds
+          
+          const joinTime = row['Joined Time'] || 
+                          row['joinTime'] || 
+                          row['Join Time'] ||
+                          row['Join time'] ||
+                          row['join time'] ||
+                          new Date();
+          
+          session.attendees.push({
+            user: user._id,
+            joinTime: new Date(joinTime),
+            leaveTime: new Date(new Date(joinTime).getTime() + duration * 1000),
+            duration: duration
+          });
+
+          // Update user's streak and tree growth if duration meets minimum
+          if (duration >= (meeting.settings?.minAttendanceDuration || 10) * 60) {
+            await user.updateStreak();
+            await user.updateTreeGrowth();
+          }
+        }
+
+        processedCount++;
+      } catch (rowError) {
+        errors.push(`Row ${i + 1}: ${rowError.message}`);
+        skippedCount++;
+      }
+    }
+
+    // Save the meeting with updated attendance
+    meeting.markModified('sessions');
+    await meeting.save();
+
+    res.status(200).json({
+      success: true,
+      message: `Attendance uploaded successfully`,
+      data: {
+        totalRows: rows.length,
+        processed: processedCount,
+        skipped: skippedCount,
+        errors: errors
+      }
+    });
+
+  } catch (error) {
+    console.error("Upload attendance error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to upload attendance",
+      error: error.message
+    });
   }
 };
 
