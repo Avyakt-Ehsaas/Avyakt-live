@@ -46,40 +46,4 @@ app.use("/api/email", emailRoutes);
 app.use("/api/feedback", feedbackRoutes);
 
 
-
-// app.get("/api/zoho/callback", (req, res) => {
-//   res.status(200).send("Zoho authorization successful. You can close this tab.");
-// });
-
-
-app.get("/api/zoho/callback", async (req, res) => {
-  const code = req.query.code;
-  console.log(process.env.ZOHO_CLIENT_ID)
-  console.log(process.env.ZOHO_CLIENT_SECRET)
-  const params = new URLSearchParams({
-    code,
-    client_id: process.env.ZOHO_CLIENT_ID,
-    client_secret: process.env.ZOHO_CLIENT_SECRET,
-    redirect_uri: "https://medix-1-eoz3.onrender.com/api/zoho/callback",
-    grant_type: "authorization_code"
-  });
-
-  const response = await fetch(
-    "https://accounts.zoho.com/oauth/v2/token",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: params.toString()
-    }
-  );
-
-  const data = await response.json();
-
-  // Save refresh_token securely (DB / ENV / Vault)
-  console.log(data);
-
-  res.send("Zoho connected successfully!");
-});
-
-
 export default app;

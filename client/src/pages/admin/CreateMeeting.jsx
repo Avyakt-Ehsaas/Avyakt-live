@@ -144,7 +144,7 @@ const CreateMeeting = () => {
   if(loading) return <Loader />
 
   return  (
-  <div className="p-4 md:p-6 min-h-screen md:ml-[18rem] bg-gradient-to-br from-green-50 via-cream-50 to-white">
+  <div className="p-4 md:p-6 min-h-screen bg-gradient-to-br from-green-50 via-cream-50 to-white">
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>

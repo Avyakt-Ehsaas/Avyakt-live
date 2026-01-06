@@ -36,7 +36,7 @@ const Analytics = () => {
   });
 
   return (
-    <div className="admin-scroll min-h-screen bg-gradient-to-br from-green-50 via-cream-50 to-white p-6 sm:p-8 w-full text-gray-800 transition-all duration-300 md:ml-[18rem]">
+    <div className="admin-scroll min-h-screen bg-gradient-to-br from-green-50 via-cream-50 to-white p-6 sm:p-8 w-full text-gray-800 transition-all duration-300">
 
       {/* Title */}
       <motion.h1
