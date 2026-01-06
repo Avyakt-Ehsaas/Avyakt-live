@@ -4,20 +4,27 @@ import { createWebinar ,
     getAllWebinars ,
     getWebinarById,
     updateWebinar,
-    deleteWebinarbyId
+    deleteWebinarbyId,
+    getOngoingWebinars,
+    getWebinarAttendees,
+    registerAttendee,
+    getWebinarSessions
 } from "../controllers/webinarController.js";
 
 const router = express.Router();
 
-router.post("/create",protect,admin,createWebinar);
+// Admin routes (require admin role)
+router.post("/create", protect, admin, createWebinar);
+router.put("/:id", protect, admin, updateWebinar);
+router.delete("/:id", protect, admin, deleteWebinarbyId);
 
-router.get("/all-webinars",protect,getAllWebinars);
-
-router.get("/:id",protect,getWebinarById);
-
-router.put("/:id",protect,updateWebinar);
-
-router.delete("/:id",protect,deleteWebinarbyId)
+// Public/User routes (require authentication)
+router.get("/all-webinars", protect, getAllWebinars);
+router.get("/ongoing", protect, getOngoingWebinars);
+router.get("/:id", protect, getWebinarById);
+router.get("/:id/attendees", protect, admin, getWebinarAttendees);
+router.get("/:id/sessions", protect, getWebinarSessions);
+router.post("/:id/register", protect, registerAttendee);
 
 router.get("/ping", (req, res) => {
   res.send("Webinar routes working");

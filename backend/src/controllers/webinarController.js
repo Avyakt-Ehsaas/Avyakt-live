@@ -46,10 +46,11 @@ export const createWebinar = async (req, res) => {
 export const getAllWebinars = async (req, res) => {
   try {
     const accessToken = await getAccessToken();
+    const url = BASE_URL + '/webinars'
     console.log(BASE_URL)
     console.log("access token ", accessToken)
     const response = await axios.get(
-      `${BASE_URL}/webinars`,
+      `${url}`,
       {
         params: {
           listtype: req.query.listtype || "upcoming",
@@ -166,6 +167,140 @@ export const deleteWebinarbyId = async (req, res) => {
 
     return res.status(500).json({
       message: "Failed to delete webinar",
+      error: error.response?.data
+    });
+  }
+};
+
+/**
+ * GET ONGOING WEBINARS WITH JOINING LINKS
+ */
+export const getOngoingWebinars = async (req, res) => {
+  try {
+    const accessToken = await getAccessToken();
+
+    const response = await axios.get(
+      `${BASE_URL}/webinars`,
+      {
+        params: {
+          listtype: "ongoing",
+          index: Number(req.query.index) || 1,
+          count: Number(req.query.count) || 10
+        },
+        headers: {
+          Authorization: `Zoho-oauthtoken ${accessToken}`,
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    );
+
+    return res.status(200).json(response.data);
+  } catch (error) {
+    console.error(
+      "Get Ongoing Webinars Error:",
+      error.response?.data || error.message
+    );
+
+    return res.status(500).json({
+      message: "Failed to fetch ongoing webinars",
+      error: error.response?.data
+    });
+  }
+};
+
+/**
+ * GET WEBINAR ATTENDEES REPORT
+ */
+export const getWebinarAttendees = async (req, res) => {
+  try {
+    const accessToken = await getAccessToken();
+
+    const response = await axios.get(
+      `${BASE_URL}/webinar/${req.params.id}/attendees.json`,
+      {
+        params: {
+          index: Number(req.query.index) || 1,
+          count: Number(req.query.count) || 100
+        },
+        headers: {
+          Authorization: `Zoho-oauthtoken ${accessToken}`,
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    );
+
+    return res.status(200).json(response.data);
+  } catch (error) {
+    console.error(
+      "Get Webinar Attendees Error:",
+      error.response?.data || error.message
+    );
+
+    return res.status(500).json({
+      message: "Failed to fetch webinar attendees",
+      error: error.response?.data
+    });
+  }
+};
+
+/**
+ * REGISTER ATTENDEE FOR WEBINAR
+ */
+export const registerAttendee = async (req, res) => {
+  try {
+    const accessToken = await getAccessToken();
+
+    const response = await axios.post(
+      `${BASE_URL}/webinar/${req.params.id}/register.json`,
+      req.body,
+      {
+        headers: {
+          Authorization: `Zoho-oauthtoken ${accessToken}`,
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    );
+
+    return res.status(201).json(response.data);
+  } catch (error) {
+    console.error(
+      "Register Attendee Error:",
+      error.response?.data || error.message
+    );
+
+    return res.status(500).json({
+      message: "Failed to register attendee",
+      error: error.response?.data
+    });
+  }
+};
+
+/**
+ * GET WEBINAR SESSIONS (for recurring webinars)
+ */
+export const getWebinarSessions = async (req, res) => {
+  try {
+    const accessToken = await getAccessToken();
+
+    const response = await axios.get(
+      `${BASE_URL}/webinar/${req.params.id}/sessions.json`,
+      {
+        headers: {
+          Authorization: `Zoho-oauthtoken ${accessToken}`,
+          "Content-Type": "application/json;charset=UTF-8"
+        }
+      }
+    );
+
+    return res.status(200).json(response.data);
+  } catch (error) {
+    console.error(
+      "Get Webinar Sessions Error:",
+      error.response?.data || error.message
+    );
+
+    return res.status(500).json({
+      message: "Failed to fetch webinar sessions",
       error: error.response?.data
     });
   }
