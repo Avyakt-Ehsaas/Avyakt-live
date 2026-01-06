@@ -39,7 +39,7 @@ import TermsAndConditions from "./components/TermsAndConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import SubscriptionPlanDetail from "./components/SubscriptionPlanDetail";
 import SendEmailBulks from "./pages/admin/SendEmailBulks";
-import Webinar from "./pages/user/Webinar";
+
 
 
 function App() {
@@ -113,9 +113,6 @@ function App() {
               path="/feedback"
               element={user ? <Feedback /> : <Navigate to="/auth/login" replace />}
             />
-          
-          <Route path="/webinars" element={user ?  <Webinar /> : <Navigate to="/auth/login" replace />}
-          />
           
               <Route path="/plans/:planId" 
               element={user ? <SubscriptionPlanDetail /> : <Navigate to="/auth/login" replace />} />
