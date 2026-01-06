@@ -40,29 +40,36 @@ export const createWebinar = async (req, res) => {
   }
 };
 
-/**
- * GET ALL WEBINARS
- */export const getAllWebinars = async (req, res) => {
+export const getAllWebinars = async (req, res) => {
   try {
+    const { listtype } = req.query; // upcoming | past | live
     const accessToken = await getAccessToken();
 
-    const response = await axios.get(
-      `${process.env.ZOHO_WEBINAR_API}/webinars`,
+    const zohoResponse = await axios.get(
+      `https://meeting.zoho.in/api/v2/webinars`,
       {
-        params: {
-          listtype: req.query.listtype || "upcoming"
-        },
         headers: {
           Authorization: `Zoho-oauthtoken ${accessToken}`,
-          Accept: "application/json"
-        }
+        },
+        params: {
+          listtype: listtype || "upcoming",
+        },
       }
     );
 
-    return res.status(200).json(response.data);
+    res.status(200).json({
+      success: true,
+      webinars: zohoResponse.data,
+    });
+
   } catch (error) {
-    console.error("Zoho Error:", error.response?.data);
-    return res.status(500).json({ message: "Zoho fetch failed" });
+    console.error("Zoho Webinar API Error:", error.response?.data || error.message);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch webinars from Zoho",
+      error: error.response?.data || error.message,
+    });
   }
 };
 

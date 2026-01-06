@@ -48,6 +48,7 @@ export async function getAccessToken() {
       now.getTime() + response.data.expires_in * 1000 - 60_000
     );
 
+    console.log(accessToken)
     return accessToken;
   } catch (error) {
     console.error(
