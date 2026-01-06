@@ -42,41 +42,30 @@ export const createWebinar = async (req, res) => {
 
 /**
  * GET ALL WEBINARS
- */
-export const getAllWebinars = async (req, res) => {
+ */export const getAllWebinars = async (req, res) => {
   try {
     const accessToken = await getAccessToken();
-    const url = BASE_URL + '/webinars'
-    console.log(BASE_URL)
-    console.log("access token ", accessToken)
+
     const response = await axios.get(
-      `${url}`,
+      `${process.env.ZOHO_WEBINAR_API}/webinars`,
       {
         params: {
-          listtype: req.query.listtype || "upcoming",
-          index: Number(req.query.index) || 1,
-          count: Number(req.query.count) || 10
+          listtype: req.query.listtype || "upcoming"
         },
         headers: {
           Authorization: `Zoho-oauthtoken ${accessToken}`,
-          "Content-Type": "application/json;charset=UTF-8"
+          Accept: "application/json"
         }
       }
     );
-    console.log(response)
+
     return res.status(200).json(response.data);
   } catch (error) {
-    console.error(
-      "Get Webinars Error:",
-      error.response?.data || error.message
-    );
-
-    return res.status(500).json({
-      message: "Failed to fetch webinars",
-      error: error.response?.data
-    });
+    console.error("Zoho Error:", error.response?.data);
+    return res.status(500).json({ message: "Zoho fetch failed" });
   }
 };
+
 
 /**
  * GET WEBINAR BY ID
@@ -86,7 +75,7 @@ export const getWebinarById = async (req, res) => {
     const accessToken = await getAccessToken();
 
     const response = await axios.get(
-      `${BASE_URL}/webinar/${req.params.id}.json`,
+      `${BASE_URL}/webinar/${req.params.id}`,
       {
         headers: {
           Authorization: `Zoho-oauthtoken ${accessToken}`,
@@ -117,7 +106,7 @@ export const updateWebinar = async (req, res) => {
     const accessToken = await getAccessToken();
 
     const response = await axios.put(
-      `${BASE_URL}/webinar/${req.params.id}.json`,
+      `${BASE_URL}/webinar/${req.params.id}`,
       req.body,
       {
         headers: {
@@ -149,7 +138,7 @@ export const deleteWebinarbyId = async (req, res) => {
     const accessToken = await getAccessToken();
 
     const response = await axios.delete(
-      `${BASE_URL}/webinar/${req.params.id}.json`,
+      `${BASE_URL}/webinar/${req.params.id}`,
       {
         headers: {
           Authorization: `Zoho-oauthtoken ${accessToken}`,
@@ -216,7 +205,7 @@ export const getWebinarAttendees = async (req, res) => {
     const accessToken = await getAccessToken();
 
     const response = await axios.get(
-      `${BASE_URL}/webinar/${req.params.id}/attendees.json`,
+      `${BASE_URL}/webinar/${req.params.id}/attendees`,
       {
         params: {
           index: Number(req.query.index) || 1,
@@ -251,7 +240,7 @@ export const registerAttendee = async (req, res) => {
     const accessToken = await getAccessToken();
 
     const response = await axios.post(
-      `${BASE_URL}/webinar/${req.params.id}/register.json`,
+      `${BASE_URL}/webinar/${req.params.id}/register`,
       req.body,
       {
         headers: {
@@ -283,7 +272,7 @@ export const getWebinarSessions = async (req, res) => {
     const accessToken = await getAccessToken();
 
     const response = await axios.get(
-      `${BASE_URL}/webinar/${req.params.id}/sessions.json`,
+      `${BASE_URL}/webinar/${req.params.id}/sessions`,
       {
         headers: {
           Authorization: `Zoho-oauthtoken ${accessToken}`,
