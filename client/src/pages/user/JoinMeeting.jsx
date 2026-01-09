@@ -137,7 +137,7 @@ const JoinMeeting = () => {
       setIsInSession(false);
       setJoining(false);
 
-      window.dispatchEvent(new Event('feedback:pending'));
+      navigate('/feedback');
     } catch (error) {
       console.error('Error leaving session:', error);
     }

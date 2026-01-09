@@ -1,4 +1,6 @@
 import Feedback from '../models/Feedback.js';
+import Meeting from '../models/MeetingModel.js';
+import User from '../models/user.model.js';
 
 // @desc    Submit feedback
 // @route   POST /api/feedback
@@ -7,20 +9,59 @@ export const submitFeedback = async (req, res) => {
   const { rating, mood, recommend, message, chips, sessionId } = req.body;
   const user = req.user._id;
 
-  const feedback = await Feedback.create({
-    user,
-    rating,
-    mood,
-    recommend,
-    message,
-    chips,
-    sessionId
-  });
+  try {
+    const feedback = await Feedback.create({
+      user,
+      rating,
+      mood,
+      recommend,
+      message,
+      chips,
+      sessionId
+    });
 
-  res.status(201).json({
-    success: true,
-    data: feedback
-  });
+    // Mark attendance after successful feedback submission
+    if (sessionId) {
+      try {
+        const meeting = await Meeting.findOne({ "sessions._id": sessionId });
+        if (meeting) {
+          const session = meeting.sessions.id(sessionId);
+          if (session) {
+            // Find the attendee for this user
+            const attendee = session.attendees.find(a => a.user.equals(user));
+            if (attendee) {
+              // Mark attendance as completed
+              attendee.feedbackSubmitted = true;
+              attendee.feedbackSubmittedAt = new Date();
+              
+              // Update user's tree growth if duration meets minimum and feedback is submitted
+              if (attendee.duration >= (meeting.settings?.minAttendanceDuration || 10) * 60) {
+                const userDoc = await User.findById(user);
+                await userDoc.updateTreeGrowth();
+              }
+              
+              await meeting.save();
+            }
+          }
+        }
+      } catch (attendanceError) {
+        console.error('Error marking attendance:', attendanceError);
+        // Continue with feedback response even if attendance marking fails
+      }
+    }
+
+    res.status(201).json({
+      success: true,
+      data: feedback
+    });
+  } catch (error) {
+    console.error('Error submitting feedback:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Failed to submit feedback',
+      error: error.message
+    });
+  }
 };
 
 // @desc    Get user's feedback history

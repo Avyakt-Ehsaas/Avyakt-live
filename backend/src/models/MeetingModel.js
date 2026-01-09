@@ -26,7 +26,12 @@ const sessionSchema = new mongoose.Schema({
     duration: {
       type: Number, // in minutes
       default: 0
-    }
+    },
+    feedbackSubmitted: {
+      type: Boolean,
+      default: false
+    },
+    feedbackSubmittedAt: Date
   }]
 }, { _id: true }); // Keep _id for sessions to easily find them
 
