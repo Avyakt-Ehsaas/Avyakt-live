@@ -11,7 +11,8 @@ import {
   FiSettings,
   FiLogOut,
   FiMenu,
-  FiX
+  FiX,
+  FiTrendingUp
 } from "react-icons/fi";
 import { MdDashboard } from "react-icons/md";
 
@@ -34,7 +35,8 @@ const UserSidebar = () => {
   const loggedInMenu = [
     { icon: <FiUser />, label: "My Profile", path: "/user/profile" },
     { icon: <FiVideo />, label: "Joined Meeting", path: "/join-meeting" },
-    { icon: <FiVideo />, label: "Meditation Videos", path: "/meditation-videos" },    
+    { icon: <FiVideo />, label: "Meditation Videos", path: "/meditation-videos" },
+    { icon: <FiTrendingUp />, label: "Emotion Analytics", path: "/user/emotion-analytics" },
   ];
 
   const loggedOutMenu = [

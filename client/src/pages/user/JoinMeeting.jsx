@@ -170,10 +170,6 @@ const JoinMeeting = () => {
   const diffMs = sessionTime - now;
   let MinDiff = diffMs > 0 ? Math.floor(diffMs / (1000 * 60)) : 0;
 
-  // if (MinDiff > 15) {
-  //   return <SavedVideos videos={meditationVideos} onBack={() => navigate('/dashboard')} />;
-  // }
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
@@ -312,11 +308,13 @@ const JoinMeeting = () => {
                 </div>
 
                 {isSessionCompleted && (
-                  <div className="mt-6 p-4 bg-gray-50 rounded-md">
-                    <p className="text-sm text-gray-600">
-                      This session has ended. Check back tomorrow for the next one!
-                    </p>
-                  </div>
+                  <Link 
+                      to={"/meditation-videos"}
+                      className="p-4 border-2 border-dashed border-blue-400 bg-blue-50 text-center  hover:bg-blue-400 text-blue-700 hover:text-white rounded-3xl w-72">
+                        <button className="text-sm mt-8 w-48 md:w-72">
+                         Check Saved Videos
+                        </button>
+                      </Link>
                 )}
               </div>
 

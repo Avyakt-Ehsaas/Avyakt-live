@@ -1,12 +1,29 @@
 import Feedback from '../models/Feedback.js';
 import Meeting from '../models/MeetingModel.js';
 import User from '../models/user.model.js';
+import EmotionTracking from '../models/EmotionTracking.js';
 
 // @desc    Submit feedback
 // @route   POST /api/feedback
 // @access  Private
 export const submitFeedback = async (req, res) => {
-  const { rating, mood, recommend, message, chips, sessionId } = req.body;
+  const { 
+    rating, 
+    mood, 
+    recommend, 
+    message, 
+    chips, 
+    sessionId,
+    // Emotion tracking fields
+    preMeditationEmotion,
+    postMeditationEmotion,
+    dayMood,
+    stressLevel,
+    energyLevel,
+    focusLevel,
+    sleepQuality,
+    emotionalContext
+  } = req.body;
   const user = req.user._id;
 
   try {
@@ -20,6 +37,28 @@ export const submitFeedback = async (req, res) => {
       sessionId
     });
 
+    // Save emotion tracking data if provided
+    if (preMeditationEmotion && postMeditationEmotion) {
+      try {
+        await EmotionTracking.create({
+          user,
+          sessionId,
+          feedbackId: feedback._id,
+          preMeditationEmotion,
+          postMeditationEmotion,
+          dayMood,
+          stressLevel,
+          energyLevel,
+          focusLevel,
+          sleepQuality,
+          emotionalContext
+        });
+      } catch (emotionError) {
+        console.error('Error saving emotion tracking:', emotionError);
+        // Continue with feedback response even if emotion tracking fails
+      }
+    }
+
     // Mark attendance after successful feedback submission
     if (sessionId) {
       try {
@@ -27,7 +66,7 @@ export const submitFeedback = async (req, res) => {
         if (meeting) {
           const session = meeting.sessions.id(sessionId);
           if (session) {
-            // Find the attendee for this user
+            // Find attendee for this user
             const attendee = session.attendees.find(a => a.user.equals(user));
             if (attendee) {
               // Mark attendance as completed

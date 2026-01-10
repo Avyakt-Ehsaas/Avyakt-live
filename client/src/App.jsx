@@ -14,6 +14,7 @@ import Attendance from "./pages/user/Attendance";
 import TreeGrowth from "./pages/user/TreeGrowth";
 import Achievements from "./pages/user/Achievements";
 import Settings from "./pages/user/Settings";
+import EmotionAnalytics from "./pages/user/EmotionAnalytics";
 
 import AdminDashboard from "./pages/AdminDashboard";
 import AllUsers from "./pages/admin/AllUsers";
@@ -340,6 +341,15 @@ function App() {
                 ) : (
                   <Navigate to="/" replace />
                 )
+              }
+            />
+
+            <Route
+              path="/user/emotion-analytics"
+              element={
+               <UserLayout>
+                    <EmotionAnalytics />
+                  </UserLayout>
               }
             />
 

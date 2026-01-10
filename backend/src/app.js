@@ -2,10 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 import cookieParser from 'cookie-parser';
-import nodemailer from "nodemailer"
 import multer from "multer"
-import csv from "csv-parser"
-import fs from "fs"
 
 // routes
 import authRoutes from "./routes/authRoutes.js";
@@ -14,6 +11,7 @@ import meetingRoutes from "./routes/meetingRoutes.js"
 
 import emailRoutes from "./routes/emailRoutes.js"
 import feedbackRoutes  from "./routes/feedbackRoutes.js"
+import emotionTrackingRoutes from "./routes/emotionTrackingRoutes.js"
 
 const app = express();
 
@@ -44,6 +42,7 @@ app.use("/api/meetings",meetingRoutes)
 
 app.use("/api/email", emailRoutes);
 app.use("/api/feedback", feedbackRoutes);
+app.use("/api/emotion-tracking", emotionTrackingRoutes);
 
 
 export default app;

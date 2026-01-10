@@ -5,7 +5,7 @@ import { X, Star, Sparkles, Send, ThumbsUp, ThumbsDown } from "lucide-react";
 const chipOptions = [
   "Calming",
   "Easy to follow",
-  "Loved the guidance",
+  "Loved guidance",
   "Audio issues",
   "Video issues",
   "Too long",
@@ -18,6 +18,43 @@ const moods = [
   { value: "focused", label: "Focused" },
   { value: "energized", label: "Energized" },
   { value: "neutral", label: "Neutral" },
+];
+
+const emotions = [
+  { value: "stressed", label: "Stressed", color: "red" },
+  { value: "anxious", label: "Anxious", color: "orange" },
+  { value: "sad", label: "Sad", color: "blue" },
+  { value: "angry", label: "Angry", color: "red" },
+  { value: "neutral", label: "Neutral", color: "gray" },
+  { value: "calm", label: "Calm", color: "green" },
+  { value: "happy", label: "Happy", color: "yellow" },
+  { value: "energized", label: "Energized", color: "purple" },
+];
+
+const dayMoods = [
+  { value: "very-bad", label: "Very Bad", emoji: "😔" },
+  { value: "bad", label: "Bad", emoji: "😕" },
+  { value: "neutral", label: "Neutral", emoji: "😐" },
+  { value: "good", label: "Good", emoji: "🙂" },
+  { value: "very-good", label: "Very Good", emoji: "😊" },
+];
+
+const stressLevels = [
+  { value: "low", label: "Low" },
+  { value: "medium", label: "Medium" },
+  { value: "high", label: "High" },
+];
+
+const energyLevels = [
+  { value: "low", label: "Low" },
+  { value: "medium", label: "Medium" },
+  { value: "high", label: "High" },
+];
+
+const focusLevels = [
+  { value: "low", label: "Low" },
+  { value: "medium", label: "Medium" },
+  { value: "high", label: "High" },
 ];
 
 const backdrop = {
@@ -54,6 +91,20 @@ const FeedbackModal = ({
       recommend: Boolean(defaultValues?.recommend ?? true),
       message: defaultValues?.message || "",
       chips: Array.isArray(defaultValues?.chips) ? defaultValues.chips : [],
+      // Emotion tracking fields
+      preMeditationEmotion: defaultValues?.preMeditationEmotion || "neutral",
+      postMeditationEmotion: defaultValues?.postMeditationEmotion || "neutral",
+      dayMood: defaultValues?.dayMood || "neutral",
+      stressLevel: defaultValues?.stressLevel || 5,
+      energyLevel: defaultValues?.energyLevel || 5,
+      focusLevel: defaultValues?.focusLevel || 5,
+      sleepQuality: defaultValues?.sleepQuality || 5,
+      emotionalContext: defaultValues?.emotionalContext || {
+        workStress: 0,
+        personalStress: 0,
+        physicalWellbeing: 0,
+        mentalClarity: 0
+      }
     }),
     [defaultValues]
   );
@@ -66,6 +117,16 @@ const FeedbackModal = ({
   const [chips, setChips] = useState(initial.chips);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  
+  // Emotion tracking states
+  const [preMeditationEmotion, setPreMeditationEmotion] = useState(initial.preMeditationEmotion);
+  const [postMeditationEmotion, setPostMeditationEmotion] = useState(initial.postMeditationEmotion);
+  const [dayMood, setDayMood] = useState(initial.dayMood);
+  const [stressLevel, setStressLevel] = useState(initial.stressLevel);
+  const [energyLevel, setEnergyLevel] = useState(initial.energyLevel);
+  const [focusLevel, setFocusLevel] = useState(initial.focusLevel);
+  const [sleepQuality, setSleepQuality] = useState(initial.sleepQuality);
+  const [emotionalContext, setEmotionalContext] = useState(initial.emotionalContext);
 
   const visibleRating = hoverRating || rating;
 
@@ -85,6 +146,15 @@ const FeedbackModal = ({
     setChips(initial.chips);
     setSubmitting(false);
     setError("");
+    // Reset emotion tracking fields
+    setPreMeditationEmotion(initial.preMeditationEmotion);
+    setPostMeditationEmotion(initial.postMeditationEmotion);
+    setDayMood(initial.dayMood);
+    setStressLevel(initial.stressLevel);
+    setEnergyLevel(initial.energyLevel);
+    setFocusLevel(initial.focusLevel);
+    setSleepQuality(initial.sleepQuality);
+    setEmotionalContext(initial.emotionalContext);
   };
 
   const handleClose = () => {
@@ -112,6 +182,15 @@ const FeedbackModal = ({
       recommend,
       message: message.trim(),
       chips,
+      // Emotion tracking data
+      preMeditationEmotion,
+      postMeditationEmotion,
+      dayMood,
+      stressLevel,
+      energyLevel,
+      focusLevel,
+      sleepQuality,
+      emotionalContext,
       createdAt: new Date().toISOString(),
     };
 
@@ -250,6 +329,198 @@ const FeedbackModal = ({
                         <ThumbsDown className="h-4 w-4" />
                         No
                       </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Emotion Tracking Section */}
+                <div className="rounded-2xl border border-gray-200/70 bg-white/70 p-4">
+                  <h3 className="text-sm font-semibold text-gray-800 mb-4">Emotional Check-in</h3>
+                  
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div>
+                      <label className="text-sm font-medium text-gray-700">How did you feel BEFORE meditation?</label>
+                      <select
+                        value={preMeditationEmotion}
+                        onChange={(e) => setPreMeditationEmotion(e.target.value)}
+                        className="mt-2 w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800 outline-none transition focus:border-purple-300 focus:ring-2 focus:ring-purple-200"
+                      >
+                        {emotions.map((emotion) => (
+                          <option key={emotion.value} value={emotion.value}>
+                            {emotion.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-medium text-gray-700">How did you feel AFTER meditation?</label>
+                      <select
+                        value={postMeditationEmotion}
+                        onChange={(e) => setPostMeditationEmotion(e.target.value)}
+                        className="mt-2 w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-800 outline-none transition focus:border-purple-300 focus:ring-2 focus:ring-purple-200"
+                      >
+                        {emotions.map((emotion) => (
+                          <option key={emotion.value} value={emotion.value}>
+                            {emotion.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="mt-4">
+                    <label className="text-sm font-medium text-gray-700">Overall day mood</label>
+                    <div className="mt-2 grid grid-cols-5 gap-2">
+                      {dayMoods.map((mood) => (
+                        <button
+                          key={mood.value}
+                          type="button"
+                          onClick={() => setDayMood(mood.value)}
+                          className={`flex flex-col items-center gap-1 rounded-xl border p-2 text-xs transition ${
+                            dayMood === mood.value
+                              ? "border-purple-200 bg-purple-50 text-purple-700"
+                              : "border-gray-200 bg-white text-gray-600 hover:bg-gray-50"
+                          }`}
+                        >
+                          <span className="text-lg">{mood.emoji}</span>
+                          <span>{mood.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Level Tracking Section */}
+                <div className="rounded-2xl border border-gray-200/70 bg-white/70 p-4">
+                  <h3 className="text-sm font-semibold text-gray-800 mb-4">Personal Assessment (1-10)</h3>
+                  
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div>
+                      <label className="text-sm font-medium text-gray-700">Stress Level</label>
+                      <div className="mt-2 flex items-center gap-3">
+                        <input
+                          type="range"
+                          min="1"
+                          max="10"
+                          value={stressLevel}
+                          onChange={(e) => setStressLevel(Number(e.target.value))}
+                          className="flex-1"
+                        />
+                        <span className="text-sm font-medium text-gray-800 w-8 text-center">{stressLevel}</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-medium text-gray-700">Energy Level</label>
+                      <div className="mt-2 flex items-center gap-3">
+                        <input
+                          type="range"
+                          min="1"
+                          max="10"
+                          value={energyLevel}
+                          onChange={(e) => setEnergyLevel(Number(e.target.value))}
+                          className="flex-1"
+                        />
+                        <span className="text-sm font-medium text-gray-800 w-8 text-center">{energyLevel}</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-medium text-gray-700">Focus Level</label>
+                      <div className="mt-2 flex items-center gap-3">
+                        <input
+                          type="range"
+                          min="1"
+                          max="10"
+                          value={focusLevel}
+                          onChange={(e) => setFocusLevel(Number(e.target.value))}
+                          className="flex-1"
+                        />
+                        <span className="text-sm font-medium text-gray-800 w-8 text-center">{focusLevel}</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-medium text-gray-700">Sleep Quality</label>
+                      <div className="mt-2 flex items-center gap-3">
+                        <input
+                          type="range"
+                          min="1"
+                          max="10"
+                          value={sleepQuality}
+                          onChange={(e) => setSleepQuality(Number(e.target.value))}
+                          className="flex-1"
+                        />
+                        <span className="text-sm font-medium text-gray-800 w-8 text-center">{sleepQuality}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Emotional Context Section */}
+                <div className="rounded-2xl border border-gray-200/70 bg-white/70 p-4">
+                  <h3 className="text-sm font-semibold text-gray-800 mb-4">Additional Emotional Context (0-10)</h3>
+                  
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div>
+                      <label className="text-sm font-medium text-gray-700">Work Stress</label>
+                      <div className="mt-2 flex items-center gap-3">
+                        <input
+                          type="range"
+                          min="0"
+                          max="10"
+                          value={emotionalContext.workStress}
+                          onChange={(e) => setEmotionalContext(prev => ({ ...prev, workStress: Number(e.target.value) }))}
+                          className="flex-1"
+                        />
+                        <span className="text-sm font-medium text-gray-800 w-8 text-center">{emotionalContext.workStress}</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-medium text-gray-700">Personal Stress</label>
+                      <div className="mt-2 flex items-center gap-3">
+                        <input
+                          type="range"
+                          min="0"
+                          max="10"
+                          value={emotionalContext.personalStress}
+                          onChange={(e) => setEmotionalContext(prev => ({ ...prev, personalStress: Number(e.target.value) }))}
+                          className="flex-1"
+                        />
+                        <span className="text-sm font-medium text-gray-800 w-8 text-center">{emotionalContext.personalStress}</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-medium text-gray-700">Physical Wellbeing</label>
+                      <div className="mt-2 flex items-center gap-3">
+                        <input
+                          type="range"
+                          min="0"
+                          max="10"
+                          value={emotionalContext.physicalWellbeing}
+                          onChange={(e) => setEmotionalContext(prev => ({ ...prev, physicalWellbeing: Number(e.target.value) }))}
+                          className="flex-1"
+                        />
+                        <span className="text-sm font-medium text-gray-800 w-8 text-center">{emotionalContext.physicalWellbeing}</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-medium text-gray-700">Mental Clarity</label>
+                      <div className="mt-2 flex items-center gap-3">
+                        <input
+                          type="range"
+                          min="0"
+                          max="10"
+                          value={emotionalContext.mentalClarity}
+                          onChange={(e) => setEmotionalContext(prev => ({ ...prev, mentalClarity: Number(e.target.value) }))}
+                          className="flex-1"
+                        />
+                        <span className="text-sm font-medium text-gray-800 w-8 text-center">{emotionalContext.mentalClarity}</span>
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -1,5 +1,5 @@
 import React, { use, useEffect, useState } from 'react';
-import { FiUser, FiMail, FiPhone, FiCalendar, FiClock as FiClockIcon, FiAward, FiTrendingUp, FiActivity, FiZap } from 'react-icons/fi';
+import { FiUser, FiMail, FiPhone, FiCalendar, FiClock as FiClockIcon, FiAward, FiTrendingUp, FiActivity, FiZap, FiSmile } from 'react-icons/fi';
 import { GiTreeGrowth, GiMeditation, GiSoulVessel, GiCalendar, GiDuration } from 'react-icons/gi';
 import API from '../../utils/api';
 import { useAuth } from '../../hooks/useAuth';
@@ -307,6 +307,52 @@ console.log(sessions)
             </motion.div>
 
         </motion.div>
+
+        {/* Emotion History Section */}
+        <motion.div className="mt-8 bg-white rounded-xl shadow-lg border border-gray-200 p-6" variants={itemVariants}>
+            <div className="flex items-center mb-4">
+                <div className="p-3 rounded-lg bg-green-100 text-green-600 mr-4">
+                    <FiSmile className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-800">Recent Emotional States</h3>
+            </div>
+            <div className="space-y-3">
+                {sessions.slice(0, 5).map((session, index) => (
+                    <div key={session._id || index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div>
+                            <p className="text-sm font-medium text-gray-900">
+                                {new Date(session.session?.startTime || session.date).toLocaleDateString()}
+                            </p>
+                            <p className="text-xs text-gray-600">
+                                Session duration: {session.session?.attendees?.[0]?.duration || 0} min
+                            </p>
+                        </div>
+                        <div className="text-right">
+                            <div className="text-xs text-gray-500">Emotional State</div>
+                            <div className="text-sm font-medium text-green-600">
+                                improving
+                            </div>
+                        </div>
+                    </div>
+                ))}
+                {sessions.length === 0 && (
+                    <div className="text-center py-8 text-gray-500">
+                        <p>No emotion data available yet.</p>
+                        <p className="text-sm mt-2">Complete meditation sessions with feedback to see your emotional trends.</p>
+                    </div>
+                )}
+            </div>
+            <div className="mt-4 text-center">
+                <button
+                  onClick={() => navigate('/user/emotion-analytics')}
+                  className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition"
+                >
+                  <FiTrendingUp className="mr-2" />
+                  View Detailed Analytics
+                </button>
+              </div>
+        </motion.div>
+
       </div>
     </motion.div>
   );
