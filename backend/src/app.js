@@ -41,4 +41,10 @@ app.use("/api/feedback", feedbackRoutes);
 app.use("/api/emotion-tracking", emotionTrackingRoutes);
 
 
+app.get("/health", (req, res) => {
+  res.status(200).send("Server is running 🚀");
+});
+
+
+
 export default app;
