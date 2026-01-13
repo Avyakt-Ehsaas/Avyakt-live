@@ -20,14 +20,10 @@ const AllUsers = () => {
     const navigate = useNavigate();
 
     const checkActive = (endDate) => {
-       
+        if (!endDate) return false;
         const targetDate = new Date(endDate);
         const today = new Date();
-
-        const diffM = targetDate - today ;
-        const diffDays = diffM / (1000*60*60*24);
-
-        return diffDays >= 0 && diffDays <= 21;
+        return targetDate > today;
     }
 
 
@@ -91,6 +87,10 @@ const AllUsers = () => {
 
     const handleEditUser = (userId) => navigate(`/admin/users/edit/${userId}`);
     const handleAddUser = () => navigate('/admin/users/add');
+
+    const handleViewUser = (userId) => {
+        navigate(`/admin/users/${userId}`);
+    };
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -228,9 +228,10 @@ const AllUsers = () => {
                                 {users?.map((user, index) => (
                                     <motion.tr 
                                         key={user._id} 
-                                        className="hover:bg-green-700/50 transition duration-150"
+                                        className="hover:bg-green-700/50 transition duration-150 cursor-pointer"
                                         variants={itemVariants}
                                         custom={index}
+                                        onClick={() => handleViewUser(user._id)}
                                     >
                                         <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500 overflow-hidden text-ellipsis max-w-[200px] sm:max-w-none">
                                             <span className="block truncate">{user.email}</span>
@@ -252,7 +253,7 @@ const AllUsers = () => {
                                         <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                             <div className="flex justify-end space-x-3">
                                                 <motion.button
-                                                    onClick={() => handleEditUser(user._id)}
+                                                    onClick={(e) => { e.stopPropagation(); handleEditUser(user._id); }}
                                                     className="px-3 py-1 text-sm text-gray-600 rounded-lg hover:bg-green-100 transition-colors"
                                                     title="Edit user"
                                                     whileHover={{ scale: 1.1, boxShadow: "0 0 10px rgba(0, 255, 255, 0.5)" }}
@@ -261,7 +262,7 @@ const AllUsers = () => {
                                                 </motion.button>
                                                 {user._id !== currentUser?._id && currentUser?.role === "admin" && (
                                                     <motion.button
-                                                        onClick={() => handleDeleteUser(user._id)}
+                                                        onClick={(e) => { e.stopPropagation(); handleDeleteUser(user._id); }}
                                                         className="px-3 py-1 text-sm text-red-600 rounded-lg hover:bg-red-100 transition-colors"
                                                         title="Delete user"
                                                         whileHover={{ scale: 1.1, boxShadow: "0 0 10px rgba(255, 0, 0, 0.5)" }}

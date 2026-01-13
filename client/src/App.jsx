@@ -40,6 +40,7 @@ import TermsAndConditions from "./components/TermsAndConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import SubscriptionPlanDetail from "./components/SubscriptionPlanDetail";
 import SendEmailBulks from "./pages/admin/SendEmailBulks";
+import UserProfile from "./pages/admin/UserProfile";
 
 
 
@@ -187,6 +188,20 @@ function App() {
                 )
               }
             />
+
+
+             <Route 
+             path="/admin/users/:userId" 
+             element={
+              user?.role === "admin" ? (
+                <AdminLayout>
+                  <UserProfile />
+                </AdminLayout>
+              ) : (
+                <Navigate to="/" replace />
+              )
+             } />
+
 
             <Route
               path="/admin/create-meeting"

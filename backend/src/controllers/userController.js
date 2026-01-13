@@ -1,4 +1,8 @@
 import User from '../models/user.model.js';
+import Meeting from '../models/MeetingModel.js';
+import Feedback from '../models/Feedback.js';
+import EmotionTracking from '../models/EmotionTracking.js';
+import mongoose from 'mongoose';
 
 // =====================
 // GET ALL USERS (with pagination & search)
@@ -49,7 +53,45 @@ export const getUserById = async (req, res) => {
     const user = await User.findById(userId).select("-password");
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    res.status(200).json({ message: "User fetched successfully", user });
+    // Fetch recent sessions (last 10)
+    const sessions = await Meeting.aggregate([
+      { $unwind: "$sessions" },
+      { $unwind: "$sessions.attendees" },
+      { $match: { "sessions.attendees.user": new mongoose.Types.ObjectId(userId) } },
+      { $sort: { "sessions.startTime": -1 } },
+      { $limit: 10 },
+      {
+        $project: {
+          _id: "$sessions._id",
+          meetingTitle: "$title",
+          date: "$sessions.date",
+          startTime: "$sessions.startTime",
+          duration: "$sessions.attendees.duration",
+          status: "$sessions.status"
+        }
+      }
+    ]);
+
+    // Fetch recent feedback (last 10)
+    const feedbacks = await Feedback.find({ user: userId })
+      .sort({ createdAt: -1 })
+      .limit(10);
+
+    // Fetch emotional tracking (last 30 entries for trends)
+    const emotionalAnalytics = await EmotionTracking.find({ user: userId })
+      .sort({ date: -1 })
+      .limit(30);
+
+    res.status(200).json({ 
+      success: true, 
+      message: "User fetched successfully", 
+      data: {
+        user,
+        sessions,
+        feedbacks,
+        emotionalAnalytics
+      } 
+    });
   } catch (error) {
     console.error("Get User By ID Error:", error);
     res.status(500).json({ message: "Internal server error (getting user)" });

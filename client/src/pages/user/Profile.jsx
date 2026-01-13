@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiUser, FiMail, FiPhone, FiCalendar, FiClock as FiClockIcon, FiAward, FiTrendingUp, FiActivity, FiZap, FiSmile } from 'react-icons/fi';
 import { GiTreeGrowth, GiMeditation, GiSoulVessel, GiCalendar, GiDuration } from 'react-icons/gi';
 import API from '../../utils/api';
@@ -41,8 +41,11 @@ useEffect(()=>{
    const res = await API.get("/meetings/history")
 
     const session =  res?.data.data;
-    setSessions(session);
-    setAttendance(session[0].length);
+    if (Array.isArray(session)) {
+      setSessions(session);
+      // Ensure session[0] exists before accessing properties
+      setAttendance(session.length > 0 ? session.length : 0);
+    }
     } catch (error) {
       toast.error("failed to fetch user meeting sessions")
     }

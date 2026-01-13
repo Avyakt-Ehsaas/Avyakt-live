@@ -321,6 +321,18 @@ userSchema.methods.updateStreak = async function() {
 
 userSchema.methods.updateTreeGrowth = async function() {
   try {
+    // 1. Check if already watered/grown today to prevent abuse
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    if (this.currentTree.lastWatered) {
+      const lastWatered = new Date(this.currentTree.lastWatered);
+      lastWatered.setHours(0, 0, 0, 0);
+      if (lastWatered.getTime() === today.getTime()) {
+        return false; // Already updated today
+      }
+    }
+
     // Simplified version without attendance check
     this.currentTree.consecutiveDays = (this.currentTree.consecutiveDays || 0) + 1;
     
@@ -338,6 +350,7 @@ userSchema.methods.updateTreeGrowth = async function() {
       this.currentTree.stage = "Seedling";
     }
     
+    this.currentTree.lastWatered = new Date(); // Update last watered time
     await this.save();
     return true;
   } catch (error) {

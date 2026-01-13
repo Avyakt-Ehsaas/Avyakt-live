@@ -26,7 +26,7 @@ router.get('/getUsers',protect,admin,getUsers)
 router.delete('/deleteUser/:userId',protect, admin, deleteUser);
 
 // Admin: Get a single user by ID
-router.get('/getUser/:userId', admin, getUserById);
+router.get('/getUser/:userId', protect, admin, getUserById);
 
 // Update subscription plan
 router.put("/me/subscription", protect, updateSubscription);

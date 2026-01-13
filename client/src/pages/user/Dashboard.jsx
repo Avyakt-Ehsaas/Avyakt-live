@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FiPlus } from 'react-icons/fi';
 import { motion , AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -16,6 +16,7 @@ import { useAuth } from '../../hooks/useAuth';
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
+  const particlesRef = useRef(null);
 
   const {fetchMe} =useAuth();
 
@@ -47,7 +48,7 @@ const Dashboard = () => {
 
   /* -------- PARTICLES EFFECT -------- */
   useEffect(() => {
-    const container = document.getElementById('particles');
+    const container = particlesRef.current;
     if (!container) return;
 
     container.innerHTML = '';
@@ -74,7 +75,7 @@ const Dashboard = () => {
 
         {/* Particles */}
         <div
-          id="particles"
+          ref={particlesRef}
           className="absolute inset-0 overflow-hidden pointer-events-none"
         />
 

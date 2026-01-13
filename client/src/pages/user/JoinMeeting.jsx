@@ -161,7 +161,7 @@ const JoinMeeting = () => {
 
   // Calculate time until session
   const sessionTime = new Date(session?.startTime || new Date().toISOString().split('T')[0]);
-  if (meeting?.defaultTime) {
+  if (meeting?.defaultTime && meeting.defaultTime.includes(':')) {
     const [hours, minutes] = meeting.defaultTime.split(':');
     sessionTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
   }
