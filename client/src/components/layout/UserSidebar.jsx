@@ -20,6 +20,7 @@ import SidebarLink from "../ui/SidebarLink";
 import toast from "react-hot-toast";
 import Loader from "../ui/Loader";
 import { motion, AnimatePresence } from "framer-motion";
+import { Zap } from "lucide-react";
 
 const UserSidebar = () => {
   const { user, logout } = useAuth();
@@ -33,10 +34,11 @@ const UserSidebar = () => {
   // Menus Based on Login Status
   // -------------------------------
   const loggedInMenu = [
-    { icon: <FiUser />, label: "My Profile", path: "/user/profile" },
-    { icon: <FiVideo />, label: "Joined Meeting", path: "/join-meeting" },
-    { icon: <FiVideo />, label: "Meditation Videos", path: "/meditation-videos" },
-    { icon: <FiTrendingUp />, label: "Emotion Analytics", path: "/user/emotion-analytics" },
+    { label: "My Profile", path: "/user/profile" },
+    { label: "Joined Meeting", path: "/join-meeting" },
+    { label: "Meditation Videos", path: "/meditation-videos" },
+    { label: "Emotion Analytics", path: "/user/emotion-analytics" },
+    {label : "Surveys" , path: "/surveys"}
   ];
 
   const loggedOutMenu = [
@@ -75,7 +77,7 @@ const UserSidebar = () => {
         border-b border-orange-200/60 shadow-lg z-50">
 
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center 
-          justify-between gap-2 md:gap-20">
+          justify-between gap-2 md:gap-12">
 
           {/* Logo */}
           <Link to="/" className="flex items-center px-1">
@@ -91,11 +93,11 @@ const UserSidebar = () => {
           {/* ============================= */}
           {/* DESKTOP MENU */}
           {/* ============================= */}
-          <div className="hidden md:flex space-x-8 items-center">
+          <div className="hidden md:flex space-x-4 items-center">
             {menu.map((item, i) => (
               <motion.div key={i} whileHover={{ scale: 1.05 }}>
                 <SidebarLink
-                  icon={item.icon}
+                  // icon={item.icon}
                   label={item.label}
                   path={item.path}
                   className="text-orange-500 hover:orange-600 transition font-medium"

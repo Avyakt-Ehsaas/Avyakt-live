@@ -2,11 +2,14 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState , useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { useAuth } from "./hooks/useAuth";
+//loader
 import Loader from "./components/ui/Loader";
 
+//auth 
 import Login from "./components/auth/Login";
 import Register from "./components/auth/RegisterForm";
 
+//user
 import Dashboard from "./pages/user/Dashboard";
 import Profile from "./pages/user/Profile";
 import JoinMeeting from "./pages/user/JoinMeeting";
@@ -15,7 +18,13 @@ import TreeGrowth from "./pages/user/TreeGrowth";
 import Achievements from "./pages/user/Achievements";
 import Settings from "./pages/user/Settings";
 import EmotionAnalytics from "./pages/user/EmotionAnalytics";
+import UserLayout from "./components/layout/UserLayout";
 
+
+import Feedback from "./pages/user/Feedback";
+
+
+//admin
 import AdminDashboard from "./pages/AdminDashboard";
 import AllUsers from "./pages/admin/AllUsers";
 import CreateMeeting from "./pages/admin/CreateMeeting";
@@ -24,23 +33,30 @@ import EngagementControl from "./pages/admin/EngagementControl";
 import Analytics from "./pages/admin/Analytics";
 import SystemSettings from "./pages/admin/SystemSettings";
 import SecurityLogs from "./pages/admin/SecurityLogs";
-
 import AdminLayout from "./components/layout/AdminLayout";
-import UserLayout from "./components/layout/UserLayout";
+import AttendanceList from "./pages/admin/AttendanceList";
+import SendEmailBulks from "./pages/admin/SendEmailBulks";
+import UserProfile from "./pages/admin/UserProfile";
+import SurveyLayout from "./pages/admin/Surveys/SurveyLayout";
+
+
+//public
 import LandingPage from "./pages/LandingPage/LandingPage";
 import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import Programs from "./pages/Programs";
-import AttendanceList from "./pages/admin/AttendanceList";
 import Research from "./pages/Research";
 import TextLoader from "./components/ui/TextLoader";
 import MeditationVideos from "./pages/user/MeditationVideos";
-import Feedback from "./pages/user/Feedback";
 import TermsAndConditions from "./components/TermsAndConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import SubscriptionPlanDetail from "./components/SubscriptionPlanDetail";
-import SendEmailBulks from "./pages/admin/SendEmailBulks";
-import UserProfile from "./pages/admin/UserProfile";
+import CreateSurvey from "./pages/admin/Surveys/CreateSurvey";
+import GetSurvey from "./pages/admin/Surveys/getSurvey";
+import ActiveSurveys from "./pages/Surveys/ActiveSurveys";
+import PreviewSurvey from "./pages/Surveys/PreviewSurvey";
+import ThankYouPage from "./pages/Surveys/ThankYouPage";
+
 
 
 
@@ -111,6 +127,12 @@ function App() {
             <Route path="/meditation-videos" element={<MeditationVideos />} />
             <Route path="/terms" element={<TermsAndConditions />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
+            
+            <Route path="/surveys" element={<ActiveSurveys />} />
+            <Route path="/surveys/preview/:id" element={<PreviewSurvey />} />
+            <Route path="/surveys/thank-you" element={<ThankYouPage />} />
+
+
             <Route
               path="/feedback"
               element={user ? <Feedback /> : <Navigate to="/auth/login" replace />}
@@ -172,8 +194,38 @@ function App() {
     )
   }
 />
+          <Route
+          path="/admin/surveys"
+          element={
+            user && user?.role === "admin" ? (
+              <AdminLayout>
+                <SurveyLayout />
+              </AdminLayout>
+            ) : (
+              <Navigate to="/" replace/>
+            )
+          }
+           />
 
+        <Route
+          path="/admin/surveys/create"
+          element={
+            user && user?.role === "admin" ? (
+              <AdminLayout>
+                <CreateSurvey />
+              </AdminLayout>
+            ) : (
+              <Navigate to="/" replace/>
+            )
+          }
+           />
 
+            <Route
+          path="/surveys/:id"
+          element={
+              <GetSurvey />           
+          }
+           />
 
 
             <Route

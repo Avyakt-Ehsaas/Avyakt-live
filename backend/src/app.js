@@ -11,6 +11,7 @@ import meetingRoutes from "./routes/meetingRoutes.js"
 import emailRoutes from "./routes/emailRoutes.js"
 import feedbackRoutes  from "./routes/feedbackRoutes.js"
 import emotionTrackingRoutes from "./routes/emotionTrackingRoutes.js"
+import SurveyRoutes from "./routes/surveyRoutes.js"
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use("/api/meetings",meetingRoutes)
 app.use("/api/email", emailRoutes);
 app.use("/api/feedback", feedbackRoutes);
 app.use("/api/emotion-tracking", emotionTrackingRoutes);
+app.use("/api/surveys",SurveyRoutes)
 
 
 app.get("/health", (req, res) => {

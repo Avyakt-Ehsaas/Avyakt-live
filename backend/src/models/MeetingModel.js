@@ -35,6 +35,8 @@ const sessionSchema = new mongoose.Schema({
   }]
 }, { _id: true }); // Keep _id for sessions to easily find them
 
+
+
 const meetingSchema = new mongoose.Schema({
   title: {
     type: String,
