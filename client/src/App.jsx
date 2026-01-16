@@ -52,7 +52,7 @@ import TermsAndConditions from "./components/TermsAndConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import SubscriptionPlanDetail from "./components/SubscriptionPlanDetail";
 import CreateSurvey from "./pages/admin/Surveys/CreateSurvey";
-import GetSurvey from "./pages/admin/Surveys/getSurvey";
+import GetSurvey from "./pages/admin/Surveys/GetSurvey";
 import ActiveSurveys from "./pages/Surveys/ActiveSurveys";
 import PreviewSurvey from "./pages/Surveys/PreviewSurvey";
 import ThankYouPage from "./pages/Surveys/ThankYouPage";
