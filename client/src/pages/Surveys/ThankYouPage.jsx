@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { FiCheckCircle, FiClock, FiArrowRight, FiGift, FiStar, FiAward } from 'react-icons/fi'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { FiCheckCircle, FiClock, FiArrowRight, FiGift, FiStar, FiAward, FiTrendingUp, FiTarget, FiBarChart2 } from 'react-icons/fi'
 
 const ThankYouPage = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const [countdown, setCountdown] = useState(10)
   const [progress, setProgress] = useState(0)
   const [showConfetti, setShowConfetti] = useState(true)
+
+  // Get result data from navigation state
+  const { result, scoreMap, surveyTitle } = location.state || {}
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -16,7 +20,7 @@ const ThankYouPage = () => {
           navigate('/surveys')
           return 0
         }
-        return prev 
+        return prev - 1
       })
     }, 1000)
 
@@ -182,10 +186,63 @@ const ThankYouPage = () => {
               We appreciate your time and valuable feedback.
             </p>
 
+            {/* Result Section */}
+            {result && (
+              <div className="mb-8 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl border border-blue-200">
+                <div className="flex items-center justify-center mb-4">
+                  <FiTarget className="w-8 h-8 text-blue-600 mr-3" />
+                  <h2 className="text-2xl font-bold text-blue-800">Your Result</h2>
+                </div>
+                
+                <div className="text-center mb-4">
+                  <div className="inline-block px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-bold text-lg mb-3">
+                    {result.title}
+                  </div>
+                  <p className="text-gray-700 text-base md:text-lg max-w-md mx-auto">
+                    {result.description}
+                  </p>
+                </div>
+
+                {/* Score Breakdown */}
+                {scoreMap && Object.keys(scoreMap).length > 0 && (
+                  <div className="mt-6">
+                    <h3 className="text-lg font-semibold text-gray-800 mb-3 flex items-center justify-center">
+                      <FiBarChart2 className="w-5 h-5 mr-2" />
+                      Score Breakdown
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-2xl mx-auto">
+                      {Object.entries(scoreMap).map(([key, score]) => (
+                        <div key={key} className="flex items-center justify-between bg-white rounded-lg p-3 border border-gray-200">
+                          <span className="text-sm font-medium text-gray-600 capitalize">
+                            {key.replace(/_/g, ' ')}
+                          </span>
+                          <div className="flex items-center">
+                            <div className="w-16 bg-gray-200 rounded-full h-2 mr-2">
+                              <div 
+                                className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-500"
+                                style={{ 
+                                  width: `${Math.min((score / Math.max(...Object.values(scoreMap))) * 100, 100)}%` 
+                                }}
+                              />
+                            </div>
+                            <span className="text-sm font-bold text-blue-600 w-8 text-right">
+                              {score}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* Achievement Badge */}
             <div className="inline-flex items-center bg-gradient-to-r from-amber-100 to-yellow-100 border border-amber-300 rounded-full px-6 py-3 mb-8">
               <FiAward className="w-5 h-5 text-amber-600 mr-2" />
-              <span className="text-amber-800 font-semibold">Survey Completed Successfully!</span>
+              <span className="text-amber-800 font-semibold">
+                {result ? `Result: ${result.title}` : 'Survey Completed Successfully!'}
+              </span>
             </div>
 
             {/* Countdown Section */}

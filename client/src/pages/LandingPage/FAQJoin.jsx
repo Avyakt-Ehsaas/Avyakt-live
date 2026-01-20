@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaChevronDown, FaCheckCircle } from "react-icons/fa";
 
 const faqs = [
@@ -32,6 +32,18 @@ const joinSteps = [
 ];
 
 const FAQJoin = () => {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const handleToggle = (index) => {
+    // if clicking the same open question → close it
+    if (openIndex === index) {
+      setOpenIndex(null);
+    } else {
+      // close previous & open current
+      setOpenIndex(index);
+    }
+  };
+
   return (
     <section className="bg-white py-16">
       <div className="max-w-6xl mx-auto px-4">
@@ -43,12 +55,28 @@ const FAQJoin = () => {
           {/* FAQ */}
           <div className="space-y-4">
             {faqs.map((faq, index) => (
-              <details key={index} className="p-4 border rounded-lg bg-orange-50 cursor-pointer group">
-                <summary className="flex justify-between items-center font-semibold">
-                  {faq.q} <FaChevronDown className="ml-2 transition-transform group-open:rotate-180" />
-                </summary>
-                <p className="mt-2 text-gray-700">{faq.a}</p>
-              </details>
+              <div
+                key={index}
+                className="border rounded-lg bg-orange-50"
+              >
+                <button
+                  onClick={() => handleToggle(index)}
+                  className="w-full flex justify-between items-center p-4 font-semibold text-left"
+                >
+                  {faq.q}
+                  <FaChevronDown
+                    className={`transition-transform ${
+                      openIndex === index ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {openIndex === index && (
+                  <div className="px-4 pb-4 text-gray-700">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
 
@@ -58,7 +86,8 @@ const FAQJoin = () => {
             <ul className="space-y-3">
               {joinSteps.map((step, index) => (
                 <li key={index} className="flex items-center gap-3">
-                  <FaCheckCircle className="text-orange-500" /> {step}
+                  <FaCheckCircle className="text-orange-500" />
+                  {step}
                 </li>
               ))}
             </ul>

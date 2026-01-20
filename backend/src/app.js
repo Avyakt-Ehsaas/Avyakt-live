@@ -12,6 +12,7 @@ import emailRoutes from "./routes/emailRoutes.js"
 import feedbackRoutes  from "./routes/feedbackRoutes.js"
 import emotionTrackingRoutes from "./routes/emotionTrackingRoutes.js"
 import SurveyRoutes from "./routes/surveyRoutes.js"
+import MediaRoutes from "./routes/mediaRoutes.js"
 
 const app = express();
 
@@ -41,7 +42,7 @@ app.use("/api/email", emailRoutes);
 app.use("/api/feedback", feedbackRoutes);
 app.use("/api/emotion-tracking", emotionTrackingRoutes);
 app.use("/api/surveys",SurveyRoutes)
-
+app.use("/api/media",MediaRoutes)
 
 app.get("/health", (req, res) => {
   res.status(200).send("Server is running 🚀");

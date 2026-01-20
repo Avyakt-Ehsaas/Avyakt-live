@@ -36,7 +36,17 @@ const responseSchema = new mongoose.Schema(
           required: true
         }
       }
-    ]
+    ],
+       result: {
+      key: String,        
+      title: String,      
+      description: String,
+      score: Number       
+    },
+      scoreMap: {
+      type: Map,
+      of: Number
+    }
   },
   {
     timestamps: true

@@ -22,7 +22,24 @@ export default function LoginForm() {
       if (response?.user) {
         toast.success("Welcome back ✨", { id: loadingToast })
         await new Promise((r) => setTimeout(r, 500))
-        navigate("/join-meeting")
+        
+        console.log(response)
+        // Check subscription status and redirect accordingly
+        const subscriptionStatus = response.subscriptionStatus;
+        const planCheckResult = response.planCheckResult;
+        
+        if (subscriptionStatus && (subscriptionStatus.plan === 'expired' || planCheckResult?.wasExpired)) {
+          // Redirect to plans page for expired subscriptionsm
+          toast.error("Plan Expired. Please renew it soon..")
+          navigate('/plans')
+        } else if (subscriptionStatus && !subscriptionStatus.isActive) {
+          // Redirect to plans page for inactive subscriptions
+          toast.error("Plan Expired. Please renew it soon..")
+            navigate('/plans')
+        } else {
+          // Normal flow for active users
+          navigate("/join-meeting")
+        }
       } else {
         setEmail("")
         setPassword("")

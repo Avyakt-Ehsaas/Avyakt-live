@@ -32,16 +32,30 @@ const ActiveSurveys = () => {
   }, [hasFetchedSurveys]);
   return (
     <>
-      <div className="py-8 px-2  ">
+      <div className="relative py-8 px-2  ">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000"></div>
         </div>
 
-        <h1 className="text-5xl  text-center font-bold bg-gradient-to-r from-orange-600 via-amber-600 to-orange-600 bg-clip-text text-transparent mb-4">
-          Active Surveys
-        </h1>
+        <div className="relative ">
+          <div className="flex items-center justify-between mb-6">
+            <button
+              onClick={() => navigate('/dashboard')}
+              className="flex items-center px-4 py-2 bg-gradient-to-r from-orange-600 to-amber-400 text-white rounded-lg hover:from-orange-700 hover:to-amber-500 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+            >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Back to Dashboard
+            </button>
+          </div>
+
+          <h1 className="text-3xl md:text-5xl mb-5 text-center font-bold bg-gradient-to-r from-orange-600 via-amber-600 to-orange-600 bg-clip-text text-transparent">
+            Active Surveys
+          </h1>
+        </div>
 
         {loadingSurveys ? (
           <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 flex items-center justify-center">

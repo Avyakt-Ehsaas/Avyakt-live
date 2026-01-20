@@ -168,7 +168,15 @@ const renderContent = () => {
               ))}
             </div> */}
             {loadingSurveys ? (
-  <p className="text-center text-gray-500">Loading Surveys...</p>
+  <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 flex items-center justify-center">
+        <div className="relative">
+          <div className="w-20 h-20 border-4 border-purple-200 rounded-full animate-pulse"></div>
+          <div className="absolute top-0 left-0 w-20 h-20 border-4 border-transparent border-t-purple-600 border-r-pink-600 rounded-full animate-spin"></div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full animate-ping"></div>
+          </div>
+        </div>
+      </div>
 ) : surveys.length === 0 ? (
   <p className="text-center text-gray-500">No survey found.</p>
 ) : (
@@ -188,7 +196,7 @@ const renderContent = () => {
             <p className="text-xs text-gray-500">Responses</p>
           </div>
           <button
-            onClick={() => navigate(`/surveys/${survey._id}`)}
+            onClick={() => navigate(`/admin/surveys/${survey._id}`)}
             className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
           >
             View Details

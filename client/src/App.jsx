@@ -52,10 +52,11 @@ import TermsAndConditions from "./components/TermsAndConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import SubscriptionPlanDetail from "./components/SubscriptionPlanDetail";
 import CreateSurvey from "./pages/admin/Surveys/CreateSurvey";
-import GetSurvey from "./pages/admin/Surveys/GetSurvey";
 import ActiveSurveys from "./pages/Surveys/ActiveSurveys";
 import PreviewSurvey from "./pages/Surveys/PreviewSurvey";
 import ThankYouPage from "./pages/Surveys/ThankYouPage";
+import SurveyResponses from "./pages/admin/Surveys/SurveyResponses_backup";
+import SubscriptionPricing from "./components/SubscriptionPricing";
 
 
 
@@ -138,8 +139,12 @@ function App() {
               element={user ? <Feedback /> : <Navigate to="/auth/login" replace />}
             />
           
+              <Route
+              path="/plans" 
+              element={<SubscriptionPricing />} 
+              />
               <Route path="/plans/:planId" 
-              element={user ? <SubscriptionPlanDetail /> : <Navigate to="/auth/login" replace />} />
+              element={<SubscriptionPlanDetail />} />
 
               <Route
               path="/admin/dashboard"
@@ -221,9 +226,13 @@ function App() {
            />
 
             <Route
-          path="/surveys/:id"
+          path="/admin/surveys/:id"
           element={
-              <GetSurvey />           
+            user && user?.role === "admin" ? (
+              <AdminLayout>
+            <SurveyResponses />
+              </AdminLayout>
+          ) : ( <Navigate to="/" replace />)       
           }
            />
 
@@ -231,7 +240,7 @@ function App() {
             <Route
               path="/admin/users"
               element={
-                user?.role === "admin" ? (
+                user && user?.role === "admin" ? (
                   <AdminLayout>
                     <AllUsers />
                   </AdminLayout>

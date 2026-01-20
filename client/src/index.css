@@ -85,6 +85,160 @@ body {
 }
 
 
+/* ====== LIGHTER ADMIN DASHBOARD COLOR SHADES ====== */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+}
+
+.glass-effect-light {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 16px rgba(31, 38, 135, 0.1);
+}
+
+.glass-button {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15));
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.glass-button:hover {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(59, 130, 246, 0.25));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.2);
+}
+
+/* Lighter Purple Shades */
+.bg-purple-light {
+  background: linear-gradient(135deg, #f3f0ff, #ede9fe);
+}
+
+.bg-purple-lighter {
+  background: linear-gradient(135deg, #faf9ff, #f5f3ff);
+}
+
+.text-purple-light {
+  color: #8b5cf6;
+}
+
+.text-purple-lighter {
+  color: #a78bfa;
+}
+
+.border-purple-light {
+  border-color: rgba(139, 92, 246, 0.2);
+}
+
+/* Lighter Blue Shades */
+.bg-blue-light {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+}
+
+.bg-blue-lighter {
+  background: linear-gradient(135deg, #f8faff, #f0f9ff);
+}
+
+.text-blue-light {
+  color: #3b82f6;
+}
+
+.text-blue-lighter {
+  color: #60a5fa;
+}
+
+.border-blue-light {
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+/* Lighter Green Shades */
+.bg-green-light {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+}
+
+.bg-green-lighter {
+  background: linear-gradient(135deg, #f7fee7, #f0fdf4);
+}
+
+.text-green-light {
+  color: #10b981;
+}
+
+.text-green-lighter {
+  color: #34d399;
+}
+
+.border-green-light {
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+/* Lighter Pink/Coral Shades */
+.bg-pink-light {
+  background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+}
+
+.bg-pink-lighter {
+  background: linear-gradient(135deg, #fef7f0, #fdf2f8);
+}
+
+.text-pink-light {
+  color: #ec4899;
+}
+
+.text-pink-lighter {
+  color: #f472b6;
+}
+
+.border-pink-light {
+  border-color: rgba(236, 72, 153, 0.2);
+}
+
+/* Lighter Cyan Shades */
+.bg-cyan-light {
+  background: linear-gradient(135deg, #ecfeff, #cffafe);
+}
+
+.bg-cyan-lighter {
+  background: linear-gradient(135deg, #f0fdfa, #ecfeff);
+}
+
+.text-cyan-light {
+  color: #06b6d4;
+}
+
+.text-cyan-lighter {
+  color: #22d3ee;
+}
+
+.border-cyan-light {
+  border-color: rgba(6, 182, 212, 0.2);
+}
+
+/* Neutral Light Shades for Admin */
+.bg-neutral-light {
+  background: linear-gradient(135deg, #fafafa, #f5f5f5);
+}
+
+.bg-neutral-lighter {
+  background: linear-gradient(135deg, #ffffff, #fafafa);
+}
+
+.text-neutral-light {
+  color: #6b7280;
+}
+
+.text-neutral-lighter {
+  color: #9ca3af;
+}
+
+.border-neutral-light {
+  border-color: rgba(107, 114, 128, 0.1);
+}
+
 /*  brain css for about page*/
 
 .brain-bg {

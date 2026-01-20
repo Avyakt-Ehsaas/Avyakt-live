@@ -10,7 +10,7 @@ import {
     getSurveyResponses,
     SubmitSurveyResponse,
     deleteQuestion,
-    addQuestionsToSurvey,
+    addQuestionToSurvey,
     updateQuestion,
     publishSurvey,
 } from "../controllers/SurveyController.js"
@@ -21,7 +21,7 @@ router.route("/create").post(protect,admin,createSurvey);
 router.route("/:id").put(protect,admin,updateSurvey);
 router.route("/:id/publish").put(protect,admin,publishSurvey);
 router.route("/:id/surveyResponses").get(protect,admin,getSurveyResponses);
-router.route("/:id/add-questions").post(protect,admin,addQuestionsToSurvey);
+router.route("/:id/add-questions").post(protect,admin,addQuestionToSurvey);
 router.route("/:id/update-questions").put(protect,admin,updateQuestion);
 router.route("/:id/delete-question").delete(protect,admin,deleteQuestion);
 

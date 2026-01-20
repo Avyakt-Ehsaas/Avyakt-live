@@ -75,13 +75,15 @@ export const loginUser = async (req, res) => {
     if (!isPasswordMatched)
       return res.status(401).json({ message: "Invalid credentials" });
 
-    if (!user.hasActiveSubscription())
-      return res.status(403).json({ message: "Subscription expired. Please renew." });
+    // Check and update expired plan (but don't block login)
+    const planCheckResult = await user.checkAndUpdateExpiredPlan();
+    
+    // Get subscription status for response
+    const subscriptionStatus = user.getSubscriptionStatus();
 
     // Update streak & tree
     await user.updateStreak();
-    await user.updateTreeGrowth();
-
+    
     const token = generateToken(user._id);
 
     res.cookie("token", token, {
@@ -112,6 +114,8 @@ export const loginUser = async (req, res) => {
         soulPeacePoints: user.soulPeacePoints,
       },
       token,
+      subscriptionStatus: subscriptionStatus,
+      planCheckResult: planCheckResult
     });
   } catch (error) {
     console.error("Login Error:", error);

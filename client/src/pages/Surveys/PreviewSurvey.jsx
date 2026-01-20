@@ -14,7 +14,7 @@ const PreviewSurvey = () => {
   const [submitting, setSubmitting] = useState(false)
   const [email, setEmail] = useState('')
 
-  const questionsPerPage = 5
+  const questionsPerPage = 1
   const totalPages = Math.ceil(questions.length / questionsPerPage)
   const startIndex = (currentPage - 1) * questionsPerPage
   const endIndex = startIndex + questionsPerPage
@@ -123,7 +123,13 @@ const PreviewSurvey = () => {
       
       if (response.data.success) {
         toast.success('Survey submitted successfully!')
-        navigate('/surveys/thank-you')
+        navigate('/surveys/thank-you', { 
+          state: { 
+            result: response.data.result,
+            scoreMap: response.data.scoreMap,
+            surveyTitle: survey.title
+          } 
+        })
       } else {
         toast.error(response.data.message || 'Failed to submit survey')
       }
@@ -346,10 +352,10 @@ const PreviewSurvey = () => {
         <div className="absolute bottom-20 right-20 w-72 h-72 bg-green-300 rounded-full mix-blend-multiply filter blur-xl opacity-25 animate-blob animation-delay-3000"></div>
       </div>
       <div className="min-h-screen py-8 relative">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="glass-effect rounded-2xl shadow-2xl p-8">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className=" glass-effect rounded-2xl shadow-2xl p-8">
             <div className="mb-6">
-              <h1 className="text-3xl font-bold text-gray-800 mb-2">{survey.title}</h1>
+              <h1 className="text-2xl font-bold text-gray-800 mb-2">{survey.title}</h1>
               {survey.description && (
                 <p className="text-gray-600">{survey.description}</p>
               )}
@@ -373,6 +379,19 @@ const PreviewSurvey = () => {
             </div>
 
             <div className="space-y-6 mb-8">
+              <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Email Address <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="glass-input w-full p-3 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+                placeholder="Enter your email address"
+                required
+              />
+            </div>
               {currentQuestions.map((question, index) => (
                 <div key={question._id} className="border-b border-gray-200 pb-6 last:border-b-0">
                   <div className="mb-3">
@@ -389,20 +408,6 @@ const PreviewSurvey = () => {
                   {renderQuestion(question)}
                 </div>
               ))}
-            </div>
-
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="glass-input w-full p-3 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
-                placeholder="Enter your email address"
-                required
-              />
             </div>
 
             <div className="flex justify-between">

@@ -72,9 +72,10 @@ export const AuthProvider = ({ children }) => {
       return {
         success : true,
         user : res.data?.user || user,
-        token : res.data.token
+        token : res.data.token,
+        subscriptionStatus: res.data?.subscriptionStatus,
+        planCheckResult: res.data?.planCheckResult
       }
-      throw new Error(res.data?.message || 'Login failed. Please try again.');
     } catch (error) {
       console.error("LOGIN FRONTEND ERROR ", error.response?.data || error.message);
        return {

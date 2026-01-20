@@ -169,6 +169,11 @@ export const leaveMeeting = async (req, res) => {
     
     if (attendee?.duration >= meeting.settings.minAttendanceDuration) {
       await user.updateTreeGrowth();
+      
+      // Check if tree is ready to move to forest (5 consecutive days)
+      if (user.currentTree.isReadyForForest) {
+        await user.moveToForest();
+      }
     }
 
     res.json({ 

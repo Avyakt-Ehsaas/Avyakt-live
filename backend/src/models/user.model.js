@@ -16,7 +16,7 @@ const avatarSchema = new mongoose.Schema({
 const subscriptionSchema = new mongoose.Schema({
   plan: {
     type: String,
-    enum: ['trial', 'monthly', 'quarterly', 'annual'],
+    enum: ['trial', 'monthly', 'quarterly', 'annual', 'expired'],
     default: 'trial'
   },
   isActive: {
@@ -98,7 +98,7 @@ const userSchema = new mongoose.Schema(
     // =====================
     // SUBSCRIPTION & TRIAL
     // =====================
-   subscription: {
+  subscription: {
   type: subscriptionSchema,
   default: () => ({ plan: "trial", isActive: true })
 },
@@ -234,10 +234,10 @@ userSchema.pre('save', function(next) {
 // UPDATE TREE STAGE
 // =====================
 userSchema.pre('save', function(next) {
-  if (this.isModified('currentTree.daysGrown')) {
+  if (this.isModified('currentTree.consecutiveDays')) {
     const stages = ["Seedling", "Sprout", "Baby Plant", "Plant", "Tree"];
-    this.currentTree.stage = stages[this.currentTree.daysGrown] || "Seedling";
-    this.currentTree.isReadyForForest = this.currentTree.daysGrown >= stages.length - 1;
+    this.currentTree.stage = stages[Math.min(this.currentTree.consecutiveDays - 1, stages.length - 1)] || "Seedling";
+    this.currentTree.isReadyForForest = this.currentTree.consecutiveDays >= 5;
   }
   next();
 });
@@ -284,6 +284,58 @@ userSchema.methods.hasActiveSubscription = function() {
 };
 
 // =====================
+// CHECK AND UPDATE EXPIRED PLAN
+// =====================
+userSchema.methods.checkAndUpdateExpiredPlan = async function() {
+  const now = new Date();
+  const endDate = new Date(this.subscription.endDate);
+  
+  // Check if plan is expired and not already marked as expired
+  if (now > endDate && this.subscription.plan !== 'expired') {
+    // Store previous plan before marking as expired
+    const previousPlan = this.subscription.plan;
+    
+    // Update subscription to expired
+    this.subscription.plan = 'expired';
+    this.subscription.isActive = false;
+    
+    // Save the updated subscription
+    await this.save();
+    
+    return {
+      wasExpired: true,
+      previousPlan: previousPlan,
+      expiredAt: endDate
+    };
+  }
+  
+  return {
+    wasExpired: false,
+    currentPlan: this.subscription.plan,
+    endDate: endDate
+  };
+};
+
+// =====================
+// GET SUBSCRIPTION STATUS DETAILS
+// =====================
+userSchema.methods.getSubscriptionStatus = function() {
+  const now = new Date();
+  const endDate = new Date(this.subscription.endDate);
+  const isExpired = now > endDate;
+  
+  return {
+    plan: this.subscription.plan,
+    isActive: this.subscription.isActive,
+    isExpired: isExpired,
+    startDate: this.subscription.startDate,
+    endDate: this.subscription.endDate,
+    daysRemaining: isExpired ? 0 : Math.ceil((endDate - now) / (1000 * 60 * 60 * 24)),
+    autoRenew: this.subscription.autoRenew
+  };
+};
+
+// =====================
 // UPDATE USER STREAK
 // =====================
 userSchema.methods.updateStreak = async function() {
@@ -315,9 +367,6 @@ userSchema.methods.updateStreak = async function() {
 // =====================
 // UPDATE TREE GROWTH
 // =====================
-// In user.model.js
-// Remove or comment out the updateTreeGrowth method and any attendance-related code
-// Replace with a simplified version:
 
 userSchema.methods.updateTreeGrowth = async function() {
   try {
@@ -333,12 +382,13 @@ userSchema.methods.updateTreeGrowth = async function() {
       }
     }
 
-    // Simplified version without attendance check
+    // 2. Increment consecutive days
     this.currentTree.consecutiveDays = (this.currentTree.consecutiveDays || 0) + 1;
     
-    // Add your tree growth logic here based on consecutiveDays
-    if(this.currentTree.consecutiveDays>=5){
+    // 3. Update tree stage based on consecutive days
+    if(this.currentTree.consecutiveDays >= 5){
       this.currentTree.stage = "Tree";
+      this.currentTree.isReadyForForest = true;
     }
     else if (this.currentTree.consecutiveDays === 4) {
       this.currentTree.stage = "Plant";
@@ -350,7 +400,8 @@ userSchema.methods.updateTreeGrowth = async function() {
       this.currentTree.stage = "Seedling";
     }
     
-    this.currentTree.lastWatered = new Date(); // Update last watered time
+    // 4. Update last watered time
+    this.currentTree.lastWatered = new Date();
     await this.save();
     return true;
   } catch (error) {

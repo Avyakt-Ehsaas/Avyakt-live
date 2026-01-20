@@ -3,77 +3,120 @@ import Question from "../models/Question.js";
 import SurveyResponse from "../models/SurveyResponse.js";
 
 // route post api/surveys/create
+export const createSurvey = async (req, res) => {
+  try {
+    const { title, description, isActive, questions, results } = req.body;
 
-export const createSurvey = async(req,res) => {
-    try {
-        const {title , description , isActive , questions} = req.body;
-
-        if(!title) {
-            return res.status(400).json({message : "Survey title is missing"});
-        }
-        console.log(title)
-        console.log(description);
-        console.log(questions);
-        console.log(isActive)
-        const survey = await Survey.create({
-            title,
-            description,
-            isActive: isActive ? true : false,
-            createdBy : req.user._id
-        });
-
-        let createdQuestions = []
-
-        if(questions && Array.isArray(questions) && questions.length > 0){
-            const allowedTypes = ["mcq", "multi", "text", "rating", "scale", "yesno", "dropdown"];
-
-            const formattedQuestions = questions.map( (q,index) => {
-                if(!q.questionText || !q.type){
-                    throw new Error("Each question must have a question text and type");
-                }
-
-                if(!allowedTypes.includes(q.type)){
-                    throw new Error(`Invalid question type ${q.type}`);
-                }
-               if (
-  ['mcq','multi','dropdown','rating','scale'].includes(q.type) &&
-  (!q.options || !q.options.length)
-) {
-   throw new Error("Options are required...");
-}
-
-                // Format options to match the Question model schema
-                const formattedOptions = q.options ? q.options.map(option => ({
-                    label: option.text || '',
-                    value: option.text || ''
-                })) : [];
-                
-                return {
-                    survey : survey._id,
-                    questionText : q.questionText,
-                    type : q.type,
-                    options : formattedOptions,
-                    required : q.required || false,
-                    order : q.order ??  index+1
-                }
-            }
-        )
-        createdQuestions = await Question.insertMany(formattedQuestions);
-        }
-
-        res.status(200).json({
-            success : true,
-            message : "Survey Created",
-            survey,
-            questions : createdQuestions
-        })        
-    } catch (error) {
-        res.status(500).json({
-            success : false,
-            message : "Internal Server Error, Unable to create survey"
-        })
+    //  Basic validations
+    if (!title || !description) {
+      return res.status(400).json({
+        success: false,
+        message: "Title and description are required"
+      });
     }
-}
+
+    //  Validate results (VERY IMPORTANT)
+    if (!results || !Array.isArray(results) || results.length === 0) {
+      return res.status(400).json({
+        success: false,
+        message: "At least one result keyword is required"
+      });
+    }
+
+    // 🔹 Create survey
+    const survey = await Survey.create({
+      title,
+      description,
+      isActive: Boolean(isActive),
+      createdBy: req.user._id,
+      results
+    });
+
+    let createdQuestions = [];
+
+    //  Create questions if provided
+    if (questions && Array.isArray(questions) && questions.length > 0) {
+
+      const allowedTypes = [
+        "mcq",
+        "multi",
+        "text",
+        "rating",
+        "scale",
+        "yesno",
+        "dropdown"
+      ];
+
+      const resultKeys = results.map(r => r.key);
+
+      const formattedQuestions = questions.map((q, index) => {
+
+        if (!q.questionText || !q.type) {
+          throw new Error("Each question must have text and type");
+        }
+
+        if (!allowedTypes.includes(q.type)) {
+          throw new Error(`Invalid question type: ${q.type}`);
+        }
+
+        if (
+          ["mcq", "multi", "dropdown", "rating", "scale"].includes(q.type) &&
+          (!q.options || !q.options.length)
+        ) {
+          throw new Error("Options are required for this question type");
+        }
+
+        //  Format options with scoring
+        const formattedOptions = q.options
+          ? q.options.map(option => {
+
+              // Validate scores
+              if (option.scores) {
+                Object.keys(option.scores).forEach(key => {
+                  if (!resultKeys.includes(key)) {
+                    throw new Error(
+                      `Invalid score key '${key}' in question '${q.questionText}'`
+                    );
+                  }
+                });
+              }
+
+              return {
+                label: option.text || option.label,
+                value : option.value || option.text,
+                scores: option.scores || {}
+              };
+            })
+          : [];
+
+        return {
+          survey: survey._id,
+          questionText: q.questionText,
+          type: q.type,
+          options: formattedOptions,
+          required: q.required || false,
+          order: q.order ?? index + 1
+        };
+      });
+
+      createdQuestions = await Question.insertMany(formattedQuestions);
+    }
+
+    res.status(201).json({
+      success: true,
+      message: "Survey created successfully",
+      survey,
+      questions: createdQuestions
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: error.message || "Internal Server Error"
+    });
+  }
+};
 
 // update survey 
 // put  /api/surveys/:id
@@ -86,7 +129,7 @@ export const updateSurvey = async (req,res) => {
             return res.status(400).json({message : "Survey id is missing"});
         }
         
-        const {title,description,isActive} = req.body;
+        const {title,description,isActive, results} = req.body;
 
         if(!title){
             return res.status(400).json({message : "Survey title is missing"});
@@ -112,6 +155,27 @@ export const updateSurvey = async (req,res) => {
         survey.title = title ?? survey.title;
         survey.description = description ?? survey.description;
         survey.isActive = isActive ?? survey.isActive;
+
+         if (results !== undefined) {
+      if (!Array.isArray(results) || results.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "Results must be a non-empty array"
+        });
+      }
+
+      // Validate result structure
+      results.forEach(r => {
+        if (!r.key || !r.title || !r.description) {
+          throw new Error(
+            "Each result must contain key, title and description"
+          );
+        }
+      });
+
+      survey.results = results;
+    }
+
 
         const updated = await survey.save();
 
@@ -221,66 +285,151 @@ export const getServeyById = async(req,res) => {
 
 
 //    Question Controller 
-
-// add Questions to a survey
-// post /api/surveys/:id/add-questions
-
-export const addQuestionsToSurvey = async(req,res) => {
-    try {
-        const surveyId = req.params.id;
-        const { questionText , type , options , required , order } = req.body;
-
-        if(!surveyId) return res.status(400).json({success : false,message : "Survey id is missing"})
-
-        const survey = await Survey.findById(surveyId);
-        if (!survey) {
-          return res.status(404).json({ success: false, message: "Survey not found" });
-        }
-
-        const allowedTypes = ["mcq", "multi", "text", "rating", "scale", "yesno", "dropdown"];
-
-        if(!allowedTypes.includes(type)){
-            return res.status(400).json({success : false,message : "Invalid question type"})
-        }
-
-      if (
-  ['mcq','multi','dropdown','rating','scale'].includes(type) &&
-  (!options || !options.length)
-) {
-  return res.status(400).json({
-    success: false,
-    message: "Options are required for this question type"
-  });
-}
-
-
-        let finalOrder = order;
-        if(!finalOrder){
-            const last = await Question.findOne({survey : surveyId}).sort({order : -1})
-            finalOrder = last ? last.order + 1 : 1;
-        }
-
-        const question = await Question.create({
-            survey : surveyId,
-            questionText,
-            type,
-            options : options || [] ,
-            required :  required || false,
-            order : finalOrder
-        })
-        return res.status(200).json({
-            success : true,
-            message : "Question added successfully",
-            question
-        })
-    } catch (error) {
-     return res.status(500).json({
-        success : false,
-        message : "Internal Server Error, Unable to add questions to survey",
-        error : error.message
-     })   
+// POST /api/surveys/:id/questions
+export const addQuestionToSurvey = async (req, res) => {
+  try {
+    const surveyId = req.params.id;
+    if (!surveyId) {
+      return res.status(400).json({
+        success: false,
+        message: "Survey ID is required"
+      });
     }
-}
+
+    const {
+      questionText,
+      type,
+      options,
+      required,
+      order
+    } = req.body;
+
+    /* =============================
+       VALIDATIONS
+    ============================== */
+
+    if (!questionText || !type) {
+      return res.status(400).json({
+        success: false,
+        message: "Question text and type are required"
+      });
+    }
+
+    const allowedTypes = [
+      "mcq",
+      "multi",
+      "dropdown",
+      "rating",
+      "scale",
+      "text",
+      "yesno"
+    ];
+
+    if (!allowedTypes.includes(type)) {
+      return res.status(400).json({
+        success: false,
+        message: `Invalid question type: ${type}`
+      });
+    }
+
+    const survey = await Survey.findById(surveyId);
+
+    if (!survey) {
+      return res.status(404).json({
+        success: false,
+        message: "Survey not found"
+      });
+    }
+
+    // ❌ Prevent editing live surveys (best practice)
+    if (survey.isActive) {
+      return res.status(400).json({
+        success: false,
+        message: "Cannot add questions to an active survey"
+      });
+    }
+
+    /* =============================
+       OPTION + SCORING VALIDATION
+    ============================== */
+
+    let formattedOptions = [];
+
+    if (["mcq", "multi", "dropdown", "rating", "scale"].includes(type)) {
+      if (!options || !Array.isArray(options) || options.length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: "Options are required for this question type"
+        });
+      }
+
+      // Validate scores against survey result keys
+      const resultKeys = survey.results?.map(r => r.key) || [];
+
+      formattedOptions = options.map((opt, index) => {
+        if (!opt.text) {
+          throw new Error(`Option text missing at index ${index}`);
+        }
+
+        if (opt.scores) {
+          Object.keys(opt.scores).forEach(scoreKey => {
+            if (!resultKeys.includes(scoreKey)) {
+              throw new Error(
+                `Invalid score key '${scoreKey}' in option '${opt.text}'`
+              );
+            }
+          });
+        }
+
+        return {
+          label: opt.text,
+          value: opt.value ?? opt.text,
+          scores: opt.scores || {}
+        };
+      });
+    }
+
+    /* =============================
+       AUTO ORDERING
+    ============================== */
+
+    let questionOrder = order;
+
+    if (!questionOrder) {
+      const lastQuestion = await Question.findOne({ survey: surveyId })
+        .sort({ order: -1 });
+
+      questionOrder = lastQuestion ? lastQuestion.order + 1 : 1;
+    }
+
+    /* =============================
+       CREATE QUESTION
+    ============================== */
+
+    const question = await Question.create({
+      survey: surveyId,
+      questionText,
+      type,
+      options: formattedOptions,
+      required: required || false,
+      order: questionOrder
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: "Question added successfully",
+      question
+    });
+
+  } catch (error) {
+    console.error("Add Question Error:", error);
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Internal Server Error"
+    });
+  }
+};
+
 
 // update questions to a survey
 // put /api/surveys/update-questions/:id
@@ -296,7 +445,14 @@ export const updateQuestion = async(req,res) => {
 
     question.questionText = questionText ?? question.questionText;
     question.type = type ?? question.type;
-    question.options = options ?? question.options;
+
+    if (options) {
+  question.options = options.map(opt => ({
+    label: opt.label,
+    value: opt.value,
+    scores: opt.scores || {}
+  }));
+}
     question.required = required ?? question.required;
 
     const updated = await question.save();
@@ -345,27 +501,30 @@ export const deleteQuestion = async(req,res) => {
 
 // submitting survey response
 // post api/surveys/:id/submit 
-export const SubmitSurveyResponse = async(req,res)=> {
+
+export const SubmitSurveyResponse = async (req, res) => {
   try {
     const surveyId = req.params.id;
     const { answers, email } = req.body;
 
+    //  Validate survey
     const survey = await Survey.findById(surveyId);
     if (!survey || !survey.isActive) {
       return res.status(400).json({
         success: false,
-        message: "Survey not found or not active",
+        message: "Survey not found or not active"
       });
     }
 
-    if (!answers || !Array.isArray(answers)) {
+    //  Validate answers
+    if (!answers || !Array.isArray(answers) || answers.length === 0) {
       return res.status(400).json({
         success: false,
-        message: "Answers are required"
+        message: "Answers must be a non-empty array"
       });
     }
 
-    // Anonymous user email validation
+    //  Anonymous email check
     if (!req.user && !email) {
       return res.status(400).json({
         success: false,
@@ -373,10 +532,25 @@ export const SubmitSurveyResponse = async(req,res)=> {
       });
     }
 
-    // Fetch all questions for validation
+    //  Prevent duplicate submissions (optional but recommended)
+    if (req.user) {
+      const alreadySubmitted = await SurveyResponse.findOne({
+        survey: surveyId,
+        user: req.user._id
+      });
+
+      if (alreadySubmitted) {
+        return res.status(400).json({
+          success: false,
+          message: "You have already submitted this survey"
+        });
+      }
+    }
+
+    //  Fetch questions
     const questions = await Question.find({ survey: surveyId });
 
-    // Check required questions
+    //  Required question validation
     const requiredQuestions = questions.filter(q => q.required);
     const answeredQuestionIds = answers.map(a => a.question.toString());
 
@@ -389,22 +563,92 @@ export const SubmitSurveyResponse = async(req,res)=> {
       }
     }
 
+    //  Initialize score map
+    const scoreMap = {};
+    if (survey.results && Array.isArray(survey.results)) {
+      survey.results.forEach(r => {
+        scoreMap[r.key] = 0;
+      });
+    }
+
+    //  Calculate scores
+    for (let ans of answers) {
+      const question = questions.find(
+        q => q._id.toString() === ans.question.toString()
+      );
+
+      if (!question || !question.options || question.options.length === 0) {
+        continue;
+      }
+
+      // Multi-select answers
+      if (Array.isArray(ans.answer)) {
+        ans.answer.forEach(val => {
+          const option = question.options.find(
+            o => o.value === val
+          );
+          if (option?.scores) {
+            for (const [key, value] of option.scores.entries()) {
+              scoreMap[key] += value;
+            }
+          }
+        });
+      }
+      // Single answer
+      else {
+        const option = question.options.find(
+          o => o.value === ans.answer
+        );
+        if (option?.scores) {
+          for (const [key, value] of option.scores.entries()) {
+            scoreMap[key] += value;
+          }
+        }
+      }
+    }
+
+    //  Determine final result
+    let finalResult = null;
+
+    if (Object.keys(scoreMap).length > 0) {
+      const sortedResults = Object.entries(scoreMap).sort(
+        (a, b) => b[1] - a[1]
+      );
+
+      const resultKey = sortedResults[0][0];
+
+      finalResult = survey.results.find(r => r.key === resultKey);
+    }
+
+    //  Save response
     const response = await SurveyResponse.create({
       survey: surveyId,
       user: req.user ? req.user._id : null,
-      email: email,
-      answers
+      email: req.user ? null : email,
+      answers,
+      result: finalResult ? {
+        key: finalResult.key,
+        title: finalResult.title,
+        description: finalResult.description,
+        score: scoreMap[finalResult.key] || 0
+      } : null,
+      scoreMap: scoreMap
     });
 
+    // Final response
     return res.status(200).json({
       success: true,
-      message: "Survey Response Submitted Successfully",
-      response
+      message: "Survey submitted successfully",
+      responseId: response._id,
+      result: finalResult,
+      scoreMap
     });
+
   } catch (error) {
+    console.error("Submit Survey Error:", error);
     return res.status(500).json({
       success: false,
-      message: "Internal Server Error, Unable to Submit Survey Response",
+      message: "Internal Server Error, Unable to submit survey",
       error: error.message
     });
   }

@@ -1,5 +1,27 @@
 import mongoose from "mongoose";
 
+const resultSchema = new mongoose.Schema(
+  {
+    key: {
+      type: String,
+      required: true,
+      trim: true,
+      lowercase: true // "distracted_mind"
+    },
+    title: {
+      type: String,
+      required: true,
+      trim: true // "Distracted Mind"
+    },
+    description: {
+      type: String,
+      required: true,
+      trim: true // Explanation shown to user
+    }
+  },
+  { _id: false }
+);
+
 const surveySchema = new mongoose.Schema(
   {
     title: {
@@ -19,6 +41,10 @@ const surveySchema = new mongoose.Schema(
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true
+    },
+      results: {
+      type: [resultSchema],
       required: true
     }
   },

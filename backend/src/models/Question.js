@@ -21,7 +21,12 @@ const questionSchema = new mongoose.Schema(
     options: [
       {
         label: { type: String, trim: true },
-        value: { type: String, trim: true }
+        value: { type: String, trim: true },
+         scores: {
+          type: Map,
+          of: Number,
+          default: {}
+        }
       }
     ],
     required: {

@@ -13,6 +13,26 @@ const JoinMeeting = () => {
   const [loading, setLoading] = useState(true);
   const [joining, setJoining] = useState(false);
 
+  // Check subscription status and redirect if needed
+  useEffect(() => {
+    const checkSubscription = () => {
+      console.log(user)
+      if (!user) {
+        navigate('/auth/login');
+        return;
+      }
+
+      const subscription = user.subscription;
+      if (!subscription || subscription.plan === 'expired' || !subscription.isActive) {
+        toast.error('Active subscription required to join meetings');
+        navigate('/plans');
+        return;
+      }
+    };
+
+    checkSubscription();
+  });
+
   const [meeting, setMeeting] = useState(null);
   const [session, setSession] = useState(null);
   const [userName, setUserName] = useState(user?.name || '');
