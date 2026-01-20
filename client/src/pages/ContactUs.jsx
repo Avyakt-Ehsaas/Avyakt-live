@@ -82,7 +82,7 @@ const ContactUs = () => {
         >
           <ContactCard icon={<FiMail />} title="Email" value="support@avyaktehsaas.com" />
           <ContactCard icon={<FiPhone />} title="Phone" value="+91 98765 43210" />
-          <ContactCard icon={<FiMapPin />} title="Office" value="Gurgaon, Haryana, India" />
+          <ContactCard icon={<FiMapPin />} title="Office" value="15th floor Ocus Quantum, Gurgaon, Haryana, India" />
         </motion.div>
 
         {/* Right: Animated Image */}
@@ -111,13 +111,7 @@ const ContactUs = () => {
           viewport={{ once: true }}
           className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm h-[420px]"
         >
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d877.1040859706244!2d77.11484605038952!3d28.436863216602035!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1f4f89848ec1%3A0x148665ba85b67df2!2sAvyakt%20Ehsaas!5e0!3m2!1sen!2sin!4v1765907719727!5m2!1sen!2sin"
-            className="w-full h-full border-0"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            allowFullScreen
-          />
+         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.8210031821345!2d77.06623457549323!3d28.42465747577892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d2277f766242f%3A0xc932b58d70526b94!2sOcus%20Quantum!5e0!3m2!1sen!2sin!4v1768907097682!5m2!1sen!2sin" width="800" height="600" style={{border:0}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </motion.div>
 
         {/* Form */}

@@ -8,7 +8,7 @@ const emotionTrackingSchema = new mongoose.Schema({
   },
   sessionId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Meeting.sessions"
+    ref: "Meeting"
   },
   date: {
     type: Date,

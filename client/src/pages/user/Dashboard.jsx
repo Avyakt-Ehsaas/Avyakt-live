@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FiPlus } from 'react-icons/fi';
 import { motion , AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 import TestimonialCarousel from '../LandingPage/TestimonialCarousel';
 import FAQJoin from '../LandingPage/FAQJoin';
@@ -18,6 +18,8 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const particlesRef = useRef(null);
 
+  const navigate = useNavigate();
+  
   const {fetchMe} =useAuth();
 
   const phrases = [
@@ -247,13 +249,13 @@ const Dashboard = () => {
     </div>
 
     {/* CTA */}
-    <motion.a
-      href="#pricing"
+    <motion.button
+      onClick={() => navigate('/plans')}
       whileHover={{ scale: 1.05 }}
       className="inline-block mt-20 px-10 py-4 text-lg rounded-full font-medium bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-xl hover:shadow-orange-500/40 transition-all"
     >
       View Pricing Plans
-    </motion.a>
+    </motion.button>
 
   </div>
 </section>

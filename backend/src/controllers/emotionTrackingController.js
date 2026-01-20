@@ -73,7 +73,7 @@ export const getEmotionHistory = async (req, res) => {
       .sort({ date: -1 })
       .skip(skip)
       .limit(parseInt(limit))
-      .populate('sessionId', 'title startTime')
+      .populate('sessionId', 'title sessions')
       .populate('feedbackId', 'rating message');
 
     const total = await EmotionTracking.countDocuments(query);
