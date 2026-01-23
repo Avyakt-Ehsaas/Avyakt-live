@@ -57,7 +57,8 @@ import PreviewSurvey from "./pages/Surveys/PreviewSurvey";
 import ThankYouPage from "./pages/Surveys/ThankYouPage";
 import SurveyResponses from "./pages/admin/Surveys/SurveyResponses_backup";
 import SubscriptionPricing from "./components/SubscriptionPricing";
-
+import VideoPageLayout from "./pages/admin/Videos/VideoPageLayout";
+import PlayVideo from "./pages/VideoPlay/PlayVideo";
 
 
 
@@ -132,6 +133,8 @@ function App() {
             <Route path="/surveys" element={<ActiveSurveys />} />
             <Route path="/surveys/preview/:id" element={<PreviewSurvey />} />
             <Route path="/surveys/thank-you" element={<ThankYouPage />} />
+
+            <Route path="/meditation-video/play/:id" element={<PlayVideo />} />
 
 
             <Route
@@ -236,6 +239,18 @@ function App() {
           }
            />
 
+           <Route 
+           path="/admin/meditation-videos"
+           element={
+            user && user?.role === "admin" ? (
+              <AdminLayout>
+                <VideoPageLayout />
+              </AdminLayout>
+            ) : (
+              <Navigate to="/" replace />
+            )
+           }
+           />
 
             <Route
               path="/admin/users"

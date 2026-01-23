@@ -1,40 +1,56 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const mediaSchema = new mongoose.Schema(
-    {
+  {
     title: {
       type: String,
-      required: true
+      required: true,
+      trim: true
     },
 
-    type: {
+    description: {
       type: String,
-      enum: ["audio", "video"],
+      trim: true
+    },
+
+    youtubeUrl: {
+      type: String,
       required: true
     },
 
-    // IMPORTANT: This matches surveyResponse.result.key
-    resultKey: {
+    youtubeVideoId: {
+      type: String,
+      required: true
+    },
+
+    thumbnail: {
+      type: String, // YouTube thumbnail URL
+      required: true
+    },
+
+    category: {
       type: String,
       required: true,
-      lowercase: true,
-      index: true
+      enum: [
+        "anxiety",
+        "stress",
+        "depression",
+        "distracted_mind",
+        "focus",
+        "sleep",
+        "relaxation"
+      ]
     },
-
-    mediaUrl: {
-      type: String,
-      required: true
-    },
-
-    backgroundImageUrl: {
-      type: String // used only for audio
-    },
-
-    thumbnailUrl: String,
 
     isActive: {
       type: Boolean,
       default: true
+    },
+
+    uploadedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true
     }
   },
   { timestamps: true }

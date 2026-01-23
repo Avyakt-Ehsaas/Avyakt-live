@@ -14,7 +14,8 @@ import {
   Menu,
   X,
   Activity,
-  Mail
+  Mail,
+  Youtube,
 } from 'lucide-react';
 import { FaHome } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -27,6 +28,7 @@ const navItems = [
   { name: 'Create Meeting', icon: Video, path: '/admin/create-meeting' },
   { name: 'Send Emails' , icon: Mail, path: "/admin/bulk-email"},
   { name: 'Surveys' , icon : Zap, path: "/admin/surveys"},
+  { name : "Meditation Videos", icon: Youtube ,path: "/admin/meditation-videos"},
   { name: 'Attendance', icon: BarChart3, path: '/admin/attendence' },
   { name: 'Engagement', icon: Activity, path: '/admin/engagement' },
   { name: 'Session Control', icon: Clock, path: '/admin/security-logs' },
