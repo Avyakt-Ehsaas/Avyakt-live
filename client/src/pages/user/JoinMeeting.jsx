@@ -4,8 +4,6 @@ import { toast } from 'react-hot-toast';
 import { FiVideo, FiClock, FiCalendar, FiArrowRight, FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import API from '../../utils/api';
 import { useAuth } from '../../hooks/useAuth';
-import SavedVideos from '../../components/SavedVideos';
-import { meditationVideos } from '../../data/meditationVideos';
 
 const JoinMeeting = () => {
   const { user } = useAuth();
@@ -302,7 +300,7 @@ const JoinMeeting = () => {
                       to={"/meditation-videos"}
                       className="p-4 border-2 border-dashed border-blue-400 bg-blue-50 text-center  hover:bg-blue-400 text-blue-700 hover:text-white rounded-3xl w-72">
                         <button className="text-sm mt-4  w-48 md:w-72">
-                         Check Saved Videos
+                         Browse Meditation Videos
                         </button>
                       </Link>
                     )}
@@ -332,7 +330,7 @@ const JoinMeeting = () => {
                       to={"/meditation-videos"}
                       className="p-4 border-2 border-dashed border-blue-400 bg-blue-50 text-center  hover:bg-blue-400 text-blue-700 hover:text-white rounded-3xl w-72">
                         <button className="text-sm mt-8 w-48 md:w-72">
-                         Check Saved Videos
+                         Browse Meditation Videos
                         </button>
                       </Link>
                 )}

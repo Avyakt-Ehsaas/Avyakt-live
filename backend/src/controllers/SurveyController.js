@@ -1,6 +1,7 @@
 import Survey from "../models/Survey.js";
 import Question from "../models/Question.js";
 import SurveyResponse from "../models/SurveyResponse.js";
+import Category from "../models/Category.js";
 
 // route post api/surveys/create
 export const createSurvey = async (req, res) => {
@@ -690,6 +691,212 @@ export const getSurveyResponses = async(req,res) => {
             success :  false ,
              message :  "Internal server error , Unable to get servey reposnse"
         })
+    }
+}
+
+// get survey analytics 
+// get /api/surveys/analytics
+export const getSurveyAnalytics = async(req,res) => {
+    try {
+        const { timeRange = '7d', surveyId = 'all' } = req.query;
+        
+        // Calculate date range based on timeRange
+        const now = new Date();
+        let startDate = new Date();
+        
+        switch(timeRange) {
+            case '24h':
+                startDate.setHours(now.getHours() - 24);
+                break;
+            case '7d':
+                startDate.setDate(now.getDate() - 7);
+                break;
+            case '30d':
+                startDate.setDate(now.getDate() - 30);
+                break;
+            case '90d':
+                startDate.setDate(now.getDate() - 90);
+                break;
+            case '1y':
+                startDate.setFullYear(now.getFullYear() - 1);
+                break;
+            default:
+                startDate.setDate(now.getDate() - 7);
+        }
+
+        // Build query
+        const surveyQuery = surveyId === 'all' ? {} : { _id: surveyId };
+        
+        // Get all surveys
+        const allSurveys = await Survey.find(surveyQuery).sort({ createdAt: -1 });
+        const totalSurveys = allSurveys.length;
+        
+        // Get previous period data for comparison
+        const previousStartDate = new Date(startDate);
+        const previousEndDate = new Date(startDate);
+        const currentStartDate = new Date(startDate);
+        const currentEndDate = new Date(now);
+        
+        if (timeRange === '24h') {
+            previousStartDate.setHours(previousStartDate.getHours() - 24);
+            previousEndDate.setHours(previousEndDate.getHours() - 24);
+        } else if (timeRange === '7d') {
+            previousStartDate.setDate(previousStartDate.getDate() - 7);
+            previousEndDate.setDate(previousEndDate.getDate() - 7);
+        } else if (timeRange === '30d') {
+            previousStartDate.setDate(previousStartDate.getDate() - 30);
+            previousEndDate.setDate(previousEndDate.getDate() - 30);
+        } else if (timeRange === '90d') {
+            previousStartDate.setDate(previousStartDate.getDate() - 90);
+            previousEndDate.setDate(previousEndDate.getDate() - 90);
+        } else if (timeRange === '1y') {
+            previousStartDate.setFullYear(previousStartDate.getFullYear() - 1);
+            previousEndDate.setFullYear(previousEndDate.getFullYear() - 1);
+        }
+
+        // Get previous period surveys
+        const previousSurveys = await Survey.find({
+            ...surveyQuery,
+            createdAt: { $gte: previousStartDate, $lt: previousEndDate }
+        });
+        
+        // Calculate growth percentages
+        const totalSurveysGrowth = previousSurveys.length > 0 
+            ? ((totalSurveys - previousSurveys.length) / previousSurveys.length * 100).toFixed(1)
+            : totalSurveys > 0 ? 100 : 0;
+
+        // Get all survey responses for the time period
+        const responseQuery = {
+            createdAt: { $gte: currentStartDate, $lte: currentEndDate }
+        };
+        
+        if (surveyId !== 'all') {
+            responseQuery.surveyId = surveyId;
+        }
+
+        const responses = await SurveyResponse.find(responseQuery);
+        const totalResponses = responses.length;
+
+        // Get previous period responses
+        const previousResponseQuery = {
+            createdAt: { $gte: previousStartDate, $lt: previousEndDate }
+        };
+        
+        if (surveyId !== 'all') {
+            previousResponseQuery.surveyId = surveyId;
+        }
+
+        const previousResponses = await SurveyResponse.find(previousResponseQuery);
+        const totalResponsesGrowth = previousResponses.length > 0
+            ? ((totalResponses - previousResponses.length) / previousResponses.length * 100).toFixed(1)
+            : totalResponses > 0 ? 100 : 0;
+
+        // Get top performing surveys
+        const topSurveys = await Promise.all(
+            allSurveys.slice(0, 10).map(async (survey) => {
+
+                const surveyResponses = await SurveyResponse.find({ survey: survey._id });
+                
+                return {
+                    _id: survey._id,
+                    title: survey.title,
+                    responses: surveyResponses.length,
+                };
+            })
+        );
+
+        // Sort by responses
+        topSurveys.sort((a, b) => b.responses - a.responses);
+
+        // Calculate category distribution
+        const categoryDistribution = await Promise.all(
+            allSurveys.map(async (survey) => {
+                // Get the category details
+                let categoryName = 'Uncategorized';
+                if (survey.category && typeof survey.category === 'object') {
+                    categoryName = survey.category.name || 'Uncategorized';
+                } else if (survey.category) {
+                    // If it's just an ID, we need to fetch the category
+                    try {
+                        const categoryDoc = await Category.findById(survey.category);
+                        categoryName = categoryDoc ? categoryDoc.name : 'Uncategorized';
+                    } catch (err) {
+                        categoryName = 'Uncategorized';
+                    }
+                }
+                
+                const surveyResponses = await SurveyResponse.find({ survey: survey._id });
+                return {
+                    categoryId: survey.category,
+                    categoryName: categoryName,
+                    responses: surveyResponses.length
+                };
+            })
+        );
+
+        // Group by category and sum responses
+        const categoryMap = new Map();
+        categoryDistribution.forEach(item => {
+            const existing = categoryMap.get(item.categoryId) || { name: item.categoryName, responses: 0 };
+            existing.responses += item.responses;
+            categoryMap.set(item.categoryId, existing);
+        });
+
+        // Convert to array and calculate percentages
+        const totalCategoryResponses = Array.from(categoryMap.values()).reduce((sum, cat) => sum + cat.responses, 0);
+        const categories = Array.from(categoryMap.values()).map(cat => ({
+            name: cat.name,
+            responses: cat.responses,
+            percentage: totalCategoryResponses > 0 ? Math.round((cat.responses / totalCategoryResponses) * 100) : 0
+        })).sort((a, b) => b.responses - a.responses);
+
+        // Calculate daily response trends for the last 7 days
+        const dailyTrends = [];
+        const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        
+        for (let i = 6; i >= 0; i--) {
+            const date = new Date();
+            date.setDate(date.getDate() - i);
+            const startOfDay = new Date(date.setHours(0, 0, 0, 0));
+            const endOfDay = new Date(date.setHours(23, 59, 59, 999));
+            
+            const dayResponses = await SurveyResponse.find({
+                createdAt: { $gte: startOfDay, $lte: endOfDay },
+                ...(surveyId !== 'all' && { survey: surveyId })
+            });
+            
+            dailyTrends.push({
+                day: days[date.getDay()],
+                date: date.toISOString().split('T')[0],
+                responses: dayResponses.length
+            });
+        }
+
+        const analytics = {
+            totalSurveys,
+            totalSurveysGrowth: parseFloat(totalSurveysGrowth),
+            totalResponses,
+            totalResponsesGrowth: parseFloat(totalResponsesGrowth),
+            categories,
+            dailyTrends,
+            topSurveys: topSurveys.slice(0, 5),
+            timeRange,
+            surveyFilter: surveyId,
+            generatedAt: new Date().toISOString()
+        };
+
+        res.status(200).json({
+            success: true,
+            message: "Survey analytics fetched successfully",
+            analytics
+        });
+
+    } catch (error) {
+        console.error("Analytics Error:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error, Unable to fetch survey analytics"
+        });
     }
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { FiPlus, FiTrash2, FiSave, FiEye, FiSettings, FiType, FiList, FiCalendar, FiUsers, FiCheckCircle, FiTarget, FiAward } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
@@ -9,6 +9,8 @@ const CreateSurvey = () => {
   const navigate = useNavigate()
   const [surveyTitle, setSurveyTitle] = useState('')
   const [surveyDescription, setSurveyDescription] = useState('')
+  const [categories, setCategories] = useState([])
+  const [categoriesLoading, setCategoriesLoading] = useState(true)
   const [questions, setQuestions] = useState([
     { id: 1, type: 'text', questionText: '', required: true, options: [] }
   ])
@@ -22,6 +24,25 @@ const CreateSurvey = () => {
     isActive: true,
     targetAudience: 'all'
   })
+
+  useEffect(() => {
+    fetchCategories()
+  }, [])
+
+  const fetchCategories = async () => {
+    try {
+      setCategoriesLoading(true)
+      const response = await API.get('/categories/active')
+      const activeCategories = response.data.categories || []
+      setCategories(activeCategories)
+    } catch (error) {
+      toast.error('Failed to fetch categories')
+      console.error('Fetch categories error:', error)
+      setCategories([])
+    } finally {
+      setCategoriesLoading(false)
+    }
+  }
 
   const questionTypes = [
     { type: 'text', icon: FiType, label: 'Text', hasOptions: false },
@@ -101,7 +122,7 @@ const CreateSurvey = () => {
       const updatedOptions = question.options.map(o => {
         if (o.id === optionId) {
           if (field === 'text') {
-            return { ...o, text: value, value: o.value || value.toLowerCase().replace(/\s+/g, '_') }
+            return { ...o, text: value, value: value.toLowerCase().replace(/\s+/g, '_') }
           } else if (field === 'scores') {
             return { ...o, scores: value }
           } else {
@@ -455,13 +476,28 @@ const CreateSurvey = () => {
                             <div className="flex items-center gap-2 mb-3">
                               <span className="text-sm font-bold text-purple-600 bg-purple-100 px-3 py-1 rounded-lg">Result {index + 1}</span>
                             </div>
-                            <input
-                              type="text"
-                              value={result.key}
-                              onChange={(e) => updateResult(result.id, 'key', e.target.value)}
-                              className="w-full px-4 py-3 bg-white/70 backdrop-blur-sm border border-purple-200/50 rounded-xl focus:border-purple-400 focus:ring-4 focus:ring-purple-400/20 transition-all duration-300 text-sm font-mono font-bold mb-3"
-                              placeholder="result_key"
-                            />
+                            <div>
+                              <label className="block text-sm font-bold text-slate-700 mb-2 flex items-center gap-2">
+                                <span className="w-1 h-4 bg-gradient-to-r from-purple-500 to-blue-500 rounded"></span>
+                                Category Key
+                              </label>
+                              <select
+                                value={result.key}
+                                onChange={(e) => updateResult(result.id, 'key', e.target.value)}
+                                className="w-full px-4 py-3 bg-white/70 backdrop-blur-sm border border-purple-200/50 rounded-xl focus:border-purple-400 focus:ring-4 focus:ring-purple-400/20 transition-all duration-300 text-sm font-mono font-bold mb-3"
+                                disabled={categoriesLoading}
+                              >
+                                <option value="">Select a category</option>
+                                {categories.map((category) => (
+                                  <option key={category._id} value={category._id}>
+                                    {category.name}
+                                  </option>
+                                ))}
+                              </select>
+                              {categoriesLoading && (
+                                <p className="text-xs text-purple-600 mb-3">Loading categories...</p>
+                              )}
+                            </div>
                             <input
                               type="text"
                               value={result.title}

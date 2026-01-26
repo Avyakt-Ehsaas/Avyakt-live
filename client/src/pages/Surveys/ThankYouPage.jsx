@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, data } from 'react-router-dom'
 import { FiCheckCircle, FiClock, FiArrowRight, FiGift, FiStar, FiAward, FiTrendingUp, FiTarget, FiBarChart2 } from 'react-icons/fi'
+import API from '../../utils/api'
 
 const ThankYouPage = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const [countdown, setCountdown] = useState(10)
+  const [countdown, setCountdown] = useState(15)
   const [progress, setProgress] = useState(0)
   const [showConfetti, setShowConfetti] = useState(true)
+  const [mediaURL,setMediaURL] = useState('')
 
   // Get result data from navigation state
   const { result, scoreMap, surveyTitle } = location.state || {}
@@ -17,7 +19,12 @@ const ThankYouPage = () => {
       setCountdown((prev) => {
         if (prev <= 1) {
           clearInterval(timer)
-          navigate('/surveys')
+          // Only navigate if mediaURL is available, otherwise navigate to home
+          if (mediaURL) {
+            navigate(`/meditation-video/play/${mediaURL}`)
+          } else {
+            navigate('/')
+          }
           return 0
         }
         return prev - 1
@@ -25,14 +32,14 @@ const ThankYouPage = () => {
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [navigate])
+  }, [navigate, mediaURL])
 
   useEffect(() => {
     const progressTimer = setInterval(() => {
       setProgress((prev) => {
-        if (prev >= 100) {
+        if (prev >= 150) {
           clearInterval(progressTimer)
-          return 100
+          return 150
         }
         return prev + 10
       })
@@ -46,10 +53,33 @@ const ThankYouPage = () => {
     return () => clearTimeout(confettiTimer)
   }, [])
 
+const fetchSurveyResultVideo = async(surveyResult) => {
+  try {
+    const response = await API.get(`/media/category/${surveyResult}/surveyResult`)
+    console.log(response.data)
+    const media = response.data.media._id
+    setMediaURL(media)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+
+  useEffect(() => {
+    try {
+      const surveyResult = result.key
+      fetchSurveyResultVideo(surveyResult)
+    } catch (error) {
+      console.log(error)
+    }
+  },[result])
+
   const handleRedirectNow = () => {
-    navigate('/surveys')
+    navigate(`/meditation-video/play/${mediaURL}`)
   }
 
+  console.log(mediaURL)
   return (
     <div className='relative min-h-screen overflow-hidden bg-gradient-to-br from-purple-50 via-blue-50 to-pink-50'>
       <style>{`
@@ -135,8 +165,8 @@ const ThankYouPage = () => {
               className="absolute animate-confetti"
               style={{
                 left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${3 + Math.random() * 2}s`
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${3 + Math.random() * 3}s`
               }}
             >
               <div 
@@ -163,6 +193,15 @@ const ThankYouPage = () => {
         <div className="max-w-4xl w-full">
           {/* Main Content Card */}
           <div className="glass-effect rounded-3xl shadow-2xl p-8 md:p-12 text-center relative overflow-hidden">
+            
+            {/* Avyakt-Ehsaas Logo */}
+            <div className="mb-6">
+              <img 
+                src="/avyakt-ehsaas-logo.webp" 
+                alt="Avyakt-Ehsaas Logo" 
+                className="w-24 h-24 md:w-32 md:h-32 mx-auto animate-float"
+              />
+            </div>
             
             {/* Success Icon with Stars */}
             <div className="mb-8 relative">

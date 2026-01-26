@@ -13,6 +13,7 @@ import feedbackRoutes  from "./routes/feedbackRoutes.js"
 import emotionTrackingRoutes from "./routes/emotionTrackingRoutes.js"
 import SurveyRoutes from "./routes/surveyRoutes.js"
 import MediaRoutes from "./routes/mediaRoutes.js"
+import categoryRoutes from "./routes/categoryRoutes.js"
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use("/api/feedback", feedbackRoutes);
 app.use("/api/emotion-tracking", emotionTrackingRoutes);
 app.use("/api/surveys",SurveyRoutes)
 app.use("/api/media",MediaRoutes)
+app.use("/api/categories", categoryRoutes)
 
 app.get("/health", (req, res) => {
   res.status(200).send("Server is running 🚀");

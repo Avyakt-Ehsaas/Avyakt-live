@@ -35,9 +35,9 @@ import SystemSettings from "./pages/admin/SystemSettings";
 import SecurityLogs from "./pages/admin/SecurityLogs";
 import AdminLayout from "./components/layout/AdminLayout";
 import AttendanceList from "./pages/admin/AttendanceList";
-import SendEmailBulks from "./pages/admin/SendEmailBulks";
 import UserProfile from "./pages/admin/UserProfile";
 import SurveyLayout from "./pages/admin/Surveys/SurveyLayout";
+import EmailCampaign from "./pages/admin/EmailCampaign";
 
 
 //public
@@ -192,16 +192,6 @@ function App() {
               }
             />
 
-           <Route
-  path="/admin/bulk-email"
-  element={
-    user?.role === "admin" ? (
-      <SendEmailBulks />
-    ) : (
-      <Navigate to="/" replace />
-    )
-  }
-/>
           <Route
           path="/admin/surveys"
           element={
@@ -221,6 +211,19 @@ function App() {
             user && user?.role === "admin" ? (
               <AdminLayout>
                 <CreateSurvey />
+              </AdminLayout>
+            ) : (
+              <Navigate to="/" replace/>
+            )
+          }
+           />
+
+        <Route
+          path="/admin/email-campaign"
+          element={
+            user && user?.role === "admin" ? (
+              <AdminLayout>
+                <EmailCampaign />
               </AdminLayout>
             ) : (
               <Navigate to="/" replace/>

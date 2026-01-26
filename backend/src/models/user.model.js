@@ -202,6 +202,9 @@ const userSchema = new mongoose.Schema(
     // =====================
     resetPasswordToken: String,
     resetPasswordExpire: Date,
+    // OTP for password reset
+    passwordResetOTP: String,
+    passwordResetExpires: Date,
   },
   {
     timestamps: true,
@@ -263,6 +266,38 @@ userSchema.methods.getResetPasswordToken = function () {
   this.resetPasswordExpire = Date.now() + 15 * 60 * 1000;
 
   return resetToken;
+};
+
+// =====================
+// PASSWORD RESET OTP METHODS
+// =====================
+userSchema.methods.setPasswordResetOTP = function () {
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+  
+  this.passwordResetOTP = otp;
+  this.passwordResetExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
+  
+  return otp;
+};
+
+userSchema.methods.verifyPasswordResetOTP = function (enteredOTP) {
+  // Check if OTP exists and is not expired
+  if (!this.passwordResetOTP || !this.passwordResetExpires) {
+    return false;
+  }
+  
+  // Check if OTP has expired
+  if (Date.now() > this.passwordResetExpires) {
+    return false;
+  }
+  
+  // Check if OTP matches
+  return this.passwordResetOTP === enteredOTP;
+};
+
+userSchema.methods.clearPasswordResetOTP = function () {
+  this.passwordResetOTP = undefined;
+  this.passwordResetExpires = undefined;
 };
 
 // =====================

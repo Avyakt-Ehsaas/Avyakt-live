@@ -268,3 +268,110 @@ export const waterTree = async (req, res) => {
     });
   }
 };
+
+// =====================
+// REQUEST PASSWORD RESET
+// =====================
+export const requestPasswordReset = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ 
+        success: false,
+        message: "Email is required" 
+      });
+    }
+
+    // Check if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      // Don't reveal if email exists or not for security
+      return res.status(200).json({ 
+        success: true,
+        message: "If an account with this email exists, a password reset OTP has been sent" 
+      });
+    }
+
+    // Import email controller function
+    const { sendPasswordResetOTP } = await import('./emailController.js');
+    
+    // Send OTP
+    await sendPasswordResetOTP(req, res);
+
+  } catch (error) {
+    console.error("Request Password Reset Error:", error);
+    res.status(500).json({ 
+      success: false,
+      message: "Internal Server Error (request password reset)",
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+};
+
+// =====================
+// RESET PASSWORD WITH OTP
+// =====================
+export const resetPasswordWithOTP = async (req, res) => {
+  try {
+    const { email, otp, newPassword } = req.body;
+
+    if (!email || !otp || !newPassword) {
+      return res.status(400).json({ 
+        success: false,
+        message: "Email, OTP, and new password are required" 
+      });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({ 
+        success: false,
+        message: "Password must be at least 6 characters long" 
+      });
+    }
+
+    // Check if user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ 
+        success: false,
+        message: "User not found" 
+      });
+    }
+
+    // Verify OTP using database method
+    const isValidOTP = user.verifyPasswordResetOTP(otp);
+    if (!isValidOTP) {
+      return res.status(400).json({ 
+        success: false,
+        message: "Invalid or expired OTP" 
+      });
+    }
+
+    // Hash new password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    // Update password and clear OTP
+    await User.findByIdAndUpdate(user._id, { 
+      password: hashedPassword
+    });
+
+    // Clear OTP using the model method
+    user.clearPasswordResetOTP();
+    await user.save({ validateBeforeSave: false });
+
+    res.status(200).json({ 
+      success: true,
+      message: "Password reset successfully" 
+    });
+
+  } catch (error) {
+    console.error("Reset Password Error:", error);
+    res.status(500).json({ 
+      success: false,
+      message: "Internal Server Error (reset password)",
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+};

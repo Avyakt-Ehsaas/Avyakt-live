@@ -26,33 +26,65 @@ import { Link } from 'react-router-dom';
 
 const VideoPageLayout = () => {
   const [videos, setVideos] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [categoriesLoading, setCategoriesLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [editingVideo, setEditingVideo] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
     youtubeUrl: '',
-    category: 'anxiety'
+    category: ''
+  });
+  const [categoryFormData, setCategoryFormData] = useState({
+    name: '',
+    description: ''
   });
   const [formErrors, setFormErrors] = useState({});
-
-  const categories = [
-    { value: 'all', label: 'All Categories', color: 'bg-gray-500' },
-    { value: 'anxiety', label: 'Anxiety', color: 'bg-blue-500' },
-    { value: 'stress', label: 'Stress', color: 'bg-red-500' },
-    { value: 'depression', label: 'Depression', color: 'bg-purple-500' },
-    { value: 'distracted_mind', label: 'Distracted Mind', color: 'bg-yellow-500' },
-    { value: 'focus', label: 'Focus', color: 'bg-green-500' },
-    { value: 'sleep', label: 'Sleep', color: 'bg-indigo-500' },
-    { value: 'relaxation', label: 'Relaxation', color: 'bg-teal-500' }
-  ];
+  const [categoryFormErrors, setCategoryFormErrors] = useState({});
 
   useEffect(() => {
+    fetchCategories();
     fetchVideos();
   }, []);
+
+  const fetchCategories = async () => {
+    try {
+      setCategoriesLoading(true);
+      const response = await API.get('/categories/active');
+      const activeCategories = response.data.categories || [];
+      // Add "All Categories" option at the beginning
+      setCategories([
+        { _id: 'all', name: 'All Categories', color: 'bg-gray-500' },
+        ...activeCategories.map((cat, index) => ({
+          ...cat,
+          color: getCategoryColor(index)
+        }))
+      ]);
+    } catch (error) {
+      toast.error('Failed to fetch categories');
+      console.error('Fetch categories error:', error);
+      // Fallback to default categories if API fails
+      setCategories([
+        { _id: 'all', name: 'All Categories', color: 'bg-gray-500' }
+      ]);
+    } finally {
+      setCategoriesLoading(false);
+    }
+  };
+
+  const getCategoryColor = (index) => {
+    const colors = [
+      'bg-blue-500', 'bg-red-500', 'bg-purple-500', 'bg-yellow-500',
+      'bg-green-500', 'bg-indigo-500', 'bg-teal-500', 'bg-pink-500',
+      'bg-orange-500', 'bg-cyan-500'
+    ];
+    return colors[index % colors.length];
+  };
 
   const fetchVideos = async () => {
     try {
@@ -164,18 +196,45 @@ const VideoPageLayout = () => {
   const filteredVideos = videos.filter(video => {
     const matchesSearch = video.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          (video.description && video.description.toLowerCase().includes(searchTerm.toLowerCase()));
-    const matchesCategory = selectedCategory === 'all' || video.category === selectedCategory;
+    const matchesCategory = selectedCategory === 'all' || video.category?._id === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
-  const getCategoryColor = (category) => {
-    const cat = categories.find(c => c.value === category);
-    return cat ? cat.color : 'bg-gray-500';
+  const getCategoryLabel = (categoryId) => {
+    const cat = categories.find(c => c._id === categoryId);
+    return cat ? cat.name : 'Unknown';
   };
 
-  const getCategoryLabel = (category) => {
-    const cat = categories.find(c => c.value === category);
-    return cat ? cat.label : category;
+  const validateCategoryForm = () => {
+    const errors = {};
+    if (!categoryFormData.name.trim()) errors.name = 'Category name is required';
+    
+    setCategoryFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleCategorySubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!validateCategoryForm()) return;
+
+    try {
+      const payload = {
+        name: categoryFormData.name.trim(),
+        description: categoryFormData.description.trim()
+      };
+
+      await API.post('/categories/create', payload);
+      toast.success('Category created successfully');
+      
+      setShowCategoryModal(false);
+      setCategoryFormData({ name: '', description: '' });
+      setCategoryFormErrors({});
+      fetchCategories(); // Refresh categories
+    } catch (error) {
+      toast.error(error.response?.data?.message || 'Failed to create category');
+      console.error('Create category error:', error);
+    }
   };
 
   return (
@@ -193,20 +252,35 @@ const VideoPageLayout = () => {
                 <p className="text-sm text-gray-600">Manage your meditation video library</p>
               </div>
             </div>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => {
-                setEditingVideo(null);
-                setFormData({ title: '', description: '', youtubeUrl: '', category: 'anxiety' });
-                setFormErrors({});
-                setShowCreateModal(true);
-              }}
-              className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-200 flex items-center space-x-2"
-            >
-              <FiPlus className="w-5 h-5" />
-              <span>Add Video</span>
-            </motion.button>
+            <div className="flex items-center space-x-3">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  setCategoryFormData({ name: '', description: '' });
+                  setCategoryFormErrors({});
+                  setShowCategoryModal(true);
+                }}
+                className="px-6 py-3 bg-gradient-to-r from-teal-500 to-cyan-600 text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-200 flex items-center space-x-2"
+              >
+                <FiTag className="w-5 h-5" />
+                <span>Add Category</span>
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  setEditingVideo(null);
+                  setFormData({ title: '', description: '', youtubeUrl: '', category: 'anxiety' });
+                  setFormErrors({});
+                  setShowCreateModal(true);
+                }}
+                className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition-all duration-200 flex items-center space-x-2"
+              >
+                <FiPlus className="w-5 h-5" />
+                <span>Add Video</span>
+              </motion.button>
+            </div>
           </div>
         </div>
       </div>
@@ -307,23 +381,24 @@ const VideoPageLayout = () => {
           <div className="flex gap-2 flex-wrap">
             {categories.map((category) => (
               <motion.button
-                key={category.value}
+                key={category._id}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => handleCategoryChange(category.value)}
+                onClick={() => handleCategoryChange(category._id)}
                 className={`px-4 py-2 rounded-xl font-medium transition-all ${
-                  selectedCategory === category.value
+                  selectedCategory === category._id
                     ? `${category.color} text-white shadow-lg`
                     : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
                 }`}
               >
-                {category.label}
+                {category.name}
               </motion.button>
             ))}
           </div>
         </div>
       </div>
 
+       
       {/* Videos Grid */}
       <div className="px-6 pb-6">
         {loading ? (
@@ -374,8 +449,10 @@ const VideoPageLayout = () => {
                     </div>
                   </div>
                   <div className="absolute top-3 right-3">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium text-white ${getCategoryColor(video.category)}`}>
-                      {getCategoryLabel(video.category)}
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium text-white ${
+                      video.category?.color || 'bg-gray-500'
+                    }`}>
+                      {video.category?.name || getCategoryLabel(video.category)}
                     </span>
                   </div>
                 </div>
@@ -486,6 +563,7 @@ const VideoPageLayout = () => {
                   {formErrors.title && (
                     <p className="mt-1 text-sm text-red-600">{formErrors.title}</p>
                   )}
+
                 </div>
 
                 <div>
@@ -530,9 +608,10 @@ const VideoPageLayout = () => {
                       formErrors.category ? 'border-red-500' : 'border-gray-300'
                     }`}
                   >
-                    {categories.filter(c => c.value !== 'all').map((category) => (
-                      <option key={category.value} value={category.value}>
-                        {category.label}
+                    <option value="">Select a category</option>
+                    {categories.filter(c => c._id !== 'all').map((category) => (
+                      <option key={category._id} value={category._id}>
+                        {category.name}
                       </option>
                     ))}
                   </select>
@@ -561,8 +640,87 @@ const VideoPageLayout = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Category Modal */}
+      <AnimatePresence>
+        {showCategoryModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => setShowCategoryModal(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white rounded-2xl p-6 w-full max-w-md"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold text-gray-900">Add New Category</h2>
+                <button
+                  onClick={() => setShowCategoryModal(false)}
+                  className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-all"
+                >
+                  <FiX className="w-5 h-5" />
+                </button>
+              </div>
+
+              <form onSubmit={handleCategorySubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Category Name *
+                  </label>
+                  <input
+                    type="text"
+                    value={categoryFormData.name}
+                    onChange={(e) => setCategoryFormData({ ...categoryFormData, name: e.target.value })}
+                    className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 ${
+                      categoryFormErrors.name ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                    placeholder="Enter category name"
+                  />
+                  {categoryFormErrors.name && (
+                    <p className="mt-1 text-sm text-red-600">{categoryFormErrors.name}</p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    value={categoryFormData.description}
+                    onChange={(e) => setCategoryFormData({ ...categoryFormData, description: e.target.value })}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    rows={3}
+                    placeholder="Enter category description"
+                  />
+                </div>
+
+                <div className="flex gap-3 pt-4">
+                  <button
+                    type="button"
+                    onClick={() => setShowCategoryModal(false)}
+                    className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-all"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="flex-1 px-4 py-2 bg-gradient-to-r from-teal-500 to-cyan-600 text-white rounded-lg hover:shadow-lg transition-all"
+                  >
+                    Add Category
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
-
 export default VideoPageLayout;

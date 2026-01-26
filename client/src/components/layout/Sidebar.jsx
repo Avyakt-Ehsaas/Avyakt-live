@@ -26,7 +26,7 @@ const navItems = [
   { name: 'Dashboard Core', icon: LayoutDashboard, path: '/admin' },
   { name: 'User Management', icon: Users, path: '/admin/users' },
   { name: 'Create Meeting', icon: Video, path: '/admin/create-meeting' },
-  { name: 'Send Emails' , icon: Mail, path: "/admin/bulk-email"},
+  { name: 'Email Campaign' , icon: Mail, path: "/admin/email-campaign"},
   { name: 'Surveys' , icon : Zap, path: "/admin/surveys"},
   { name : "Meditation Videos", icon: Youtube ,path: "/admin/meditation-videos"},
   { name: 'Attendance', icon: BarChart3, path: '/admin/attendence' },

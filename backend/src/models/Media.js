@@ -29,17 +29,9 @@ const mediaSchema = new mongoose.Schema(
     },
 
     category: {
-      type: String,
-      required: true,
-      enum: [
-        "anxiety",
-        "stress",
-        "depression",
-        "distracted_mind",
-        "focus",
-        "sleep",
-        "relaxation"
-      ]
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true
     },
 
     isActive: {

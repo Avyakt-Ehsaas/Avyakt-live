@@ -1,10 +1,15 @@
 import express from "express";
 import upload from "../config/multer.js";
 import { admin, protect } from "../middleware/authMiddleware.js";
-import { sendCsvEmails } from "../controllers/emailController.js";
+import { sendEmail, sendPasswordResetOTP, verifyPasswordResetOTP } from "../controllers/emailController.js"
 
 const router = express.Router();
 
-router.route("/send-csv").post(protect,admin , upload.single("csv"),sendCsvEmails);
+// General email sending
+router.route("/send").post(sendEmail)
+
+// Password reset endpoints
+router.route("/send-reset-otp").post(sendPasswordResetOTP)
+router.route("/verify-reset-otp").post(verifyPasswordResetOTP)
 
 export default router

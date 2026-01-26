@@ -13,11 +13,13 @@ import {
     addQuestionToSurvey,
     updateQuestion,
     publishSurvey,
+    getSurveyAnalytics,
 } from "../controllers/SurveyController.js"
 const router = express.Router();
 
 //admin routes
 router.route("/create").post(protect,admin,createSurvey);
+router.route("/analytics").get(protect,admin,getSurveyAnalytics);
 router.route("/:id").put(protect,admin,updateSurvey);
 router.route("/:id/publish").put(protect,admin,publishSurvey);
 router.route("/:id/surveyResponses").get(protect,admin,getSurveyResponses);

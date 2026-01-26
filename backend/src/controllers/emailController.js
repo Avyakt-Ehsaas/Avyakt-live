@@ -1,117 +1,292 @@
-import fs from "fs"
-import parseCsvEmails from "../util/csvParser.js"
-import { sendMail } from "../util/mailServices.js"
+// Generate OTP
+const generateOTP = () => {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+};
 
-export const sendCsvEmails = async (req, res) => {
-    const { subject, message } = req.body;
-    
-    console.log(req.file)
-    if (!req.file) {
-        return res.status(400).json({
-            message: "CSV file is required"
-        });
+// Send OTP for password reset
+export const sendPasswordResetOTP = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: "Email is required"
+      });
     }
 
+    const apiKey = process.env.BREVO_API_KEY;
+    const url = "https://api.brevo.com/v3/smtp/email";
 
-    try {
-        const emails = await parseCsvEmails(req.file.path);
-        
-        for (const email of emails) {
-            const username = email.split("@")[0];
-            const formattedName = username.charAt(0).toUpperCase() + username.slice(1);
+    // Import User model to interact with database
+    const User = (await import('../models/user.model.js')).default;
+
+    // Find user and generate OTP
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found"
+      });
+    }
+
+    // Generate and store OTP in database
+    const otp = user.setPasswordResetOTP();
+    await user.save({ validateBeforeSave: false });
+
+    console.log(`Password Reset OTP for ${email}: ${otp}`); // For development
+
+    const emailData = {
+      sender: {
+        name: "Avyakt Ehsaas",
+        email: "avyaktehsaas1@gmail.com"
+      },
+      to: [{ email }],
+      subject: "Password Reset OTP - Avyakt Ehsaas",
+      htmlContent: `
+        <html>
+          <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 10px; text-align: center;">
+              <h1 style="color: white; margin: 0; font-size: 28px;">Avyakt Ehsaas</h1>
+              <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0;">Password Reset Request</p>
+            </div>
             
-            const emailTemplate = `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <style>
-                        body {
-                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                            line-height: 1.6;
-                            color: #333333;
-                            max-width: 600px;
-                            margin: 0 auto;
-                            padding: 20px;
-                        }
-                        .header {
-                            text-align: center;
-                            padding: 20px 0;
-                            border-bottom: 2px solid #f0f0f0;
-                            margin-bottom: 20px;
-                        }
-                        .logo {
-                            font-size: 24px;
-                            font-weight: bold;
-                            color: #3b82f6;
-                            margin-bottom: 10px;
-                        }
-                        .content {
-                            padding: 20px 0;
-                        }
-                        .button {
-                            display: inline-block;
-                            padding: 12px 24px;
-                            margin: 20px 0;
-                            background-color: #3b82f6;
-                            color: white !important;
-                            text-decoration: none;
-                            border-radius: 5px;
-                            font-weight: 500;
-                        }
-                        .contact-info {
-                            margin-top: 20px;
-                            font-size: 14px;
-                        }
-                        .contact-item {
-                            margin: 5px 0;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="header">
-                        <div class="logo">Avyakt-Ehsaas 🧘</div>
-                    </div>
-                    
-                    <div class="content">
-                        <p>Dear ${formattedName},</p>
-                        
-                        <p>${message.replace(/\n/g, '<br/>')}</p>
-                        
-                        <div class="contact-info">
-                            <p>If you need any assistance or information, feel free to reach out to us:</p>
-                            <div class="contact-item">📧 Email: amrit@avyaktehsaas.com</div>
-                            <div class="contact-item">📱 WhatsApp: 8847825095</div>
-                        </div>
-                        
-                        <p>We look forward to meditating with you!</p>
-                        <div >
-                            <p>Warm regards,<br>Team Avyakt Ehsaas</p>
-                        </div>
-                    </div>
-                    
-                </body>
-                </html>
-            `;
+            <div style="background: #f9f9f9; padding: 30px; border-radius: 10px; margin-top: 20px;">
+              <h2 style="color: #333; margin-top: 0;">Your Password Reset OTP</h2>
+              <p style="color: #666; font-size: 16px; line-height: 1.5;">
+                You requested to reset your password. Use the OTP below to proceed:
+              </p>
+              
+              <div style="background: white; border: 2px dashed #667eea; padding: 20px; margin: 20px 0; text-align: center; border-radius: 8px;">
+                <span style="font-size: 32px; font-weight: bold; color: #667eea; letter-spacing: 5px;">${otp}</span>
+              </div>
+              
+              <p style="color: #666; font-size: 14px;">
+                <strong>Important:</strong>
+              </p>
+              <ul style="color: #666; font-size: 14px; padding-left: 20px;">
+                <li>This OTP will expire in <strong>10 minutes</strong></li>
+                <li>Do not share this OTP with anyone</li>
+                <li>If you didn't request this, please ignore this email</li>
+              </ul>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px; padding: 20px; background: #f0f0f0; border-radius: 10px;">
+              <p style="color: #666; font-size: 14px; margin: 0;">
+                Need help? Contact us at <a href="mailto:support@avyaktehsaas.com" style="color: #667eea;">support@avyaktehsaas.com</a>
+              </p>
+            </div>
+          </body>
+        </html>
+      `
+    };
 
-            await sendMail({
-                to: email,
-                subject: subject,
-                html: emailTemplate
-            });
-            await new Promise(r => setTimeout(r, 700));
-        }
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "api-key": apiKey
+      },
+      body: JSON.stringify(emailData)
+    });
 
-        fs.unlinkSync(req.file.path);
+    const result = await response.json();
 
-        res.status(200).json({
-            success: true,
-            totalEmails: emails.length,
-        });
-    } catch (error) {
-        console.error("Error sending emails:", error);
-        res.status(500).json({ 
-            error: "Failed to send emails",
-            details: error.message 
-        });
+    if (response.ok) {
+      res.status(200).json({
+        success: true,
+        message: "Password reset OTP sent successfully",
+        // In production, don't return the OTP. This is just for demo
+        otp: process.env.NODE_ENV === 'development' ? otp : undefined,
+        expiresIn: "10 minutes"
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        message: "Failed to send password reset OTP",
+        error: result
+      });
     }
+
+  } catch (error) {
+    console.error("Password Reset OTP Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error, Failed to send password reset OTP"
+    });
+  }
+};
+
+// Verify OTP for password reset
+export const verifyPasswordResetOTP = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+
+    if (!email || !otp) {
+      return res.status(400).json({
+        success: false,
+        message: "Email and OTP are required"
+      });
+    }
+
+    // Import User model to interact with database
+    const User = (await import('../models/user.model.js')).default;
+
+    // Find user
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found"
+      });
+    }
+
+    // Verify OTP using database method
+    const isValidOTP = user.verifyPasswordResetOTP(otp);
+
+    if (isValidOTP) {
+      res.status(200).json({
+        success: true,
+        message: "OTP verified successfully",
+        verified: true
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        message: "Invalid or expired OTP"
+      });
+    }
+
+  } catch (error) {
+    console.error("OTP Verification Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error, Failed to verify OTP"
+    });
+  }
+};
+
+
+export const sendEmail = async (req, res) => {
+  try {
+    const apiKey = process.env.BREVO_API_KEY;
+    const url = "https://api.brevo.com/v3/smtp/email";
+
+    const { email, emails, subject, htmlContent } = req.body;
+
+    // 1 Normalize emails
+    let allEmails = [];
+
+    if (Array.isArray(emails) && emails.length > 0) {
+      allEmails = emails;
+    } else if (email) {
+      allEmails = [email];
+    } else {
+      return res.status(400).json({
+        success: false,
+        message: "No email or emails array provided"
+      });
+    }
+
+    // Import User model to fetch user data
+    const User = (await import('../models/user.model.js')).default;
+
+    // 2 Fetch user data for personalization
+    const users = await User.find({ email: { $in: allEmails } });
+    const userMap = new Map();
+    users.forEach(user => {
+      userMap.set(user.email, user.name || user.firstName || user.email.split('@')[0] || 'User');
+    });
+
+    // 3 Batch helper
+    const BATCH_SIZE = 50;
+    const batches = [];
+
+    for (let i = 0; i < allEmails.length; i += BATCH_SIZE) {
+      batches.push(allEmails.slice(i, i + BATCH_SIZE));
+    }
+
+    // 4 Results tracking
+    const results = {
+      totalEmails: allEmails.length,
+      totalBatches: batches.length,
+      successBatches: 0,
+      failedBatches: 0,
+      errors: []
+    };
+
+    // 5 Send batches sequentially with personalization
+    for (let i = 0; i < batches.length; i++) {
+      const batch = batches[i];
+
+      // Send personalized emails one by one for better personalization
+      for (const email of batch) {
+        try {
+          // Get user name for personalization
+          const userName = userMap.get(email) || 'User';
+          
+          // Replace {{name}} placeholder with actual user name
+          const personalizedContent = htmlContent.replace(/\{\{name\}\}/g, userName);
+          
+          const emailData = {
+            sender: {
+              name: "Avyakt Ehsaas",
+              email: "avyaktehsaas1@gmail.com"
+            },
+            to: [{ email }],
+            subject: subject || "Welcome to Avyakt Ehsaas",
+            htmlContent: personalizedContent
+          };
+
+          const response = await fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "api-key": apiKey
+            },
+            body: JSON.stringify(emailData)
+          });
+
+          const result = await response.json();
+
+          if (!response.ok) {
+            results.failedBatches++;
+            results.errors.push({
+              email,
+              error: result
+            });
+          } else {
+            results.successBatches++;
+          }
+
+          // Small delay to be extra safe (rate limit)
+          await new Promise(resolve => setTimeout(resolve, 300));
+
+        } catch (err) {
+          results.failedBatches++;
+          results.errors.push({
+            email,
+            error: err.message
+          });
+        }
+      }
+    }
+
+    // 6 Final response
+    res.status(200).json({
+      success: results.failedBatches === 0,
+      message:
+        results.failedBatches === 0
+          ? "All emails sent successfully"
+          : "Some email batches failed",
+      report: results
+    });
+
+  } catch (error) {
+    console.error("Email Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error, Failed to send Email"
+    });
+  }
 };
