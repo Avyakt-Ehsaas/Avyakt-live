@@ -17,18 +17,18 @@ const HeroSection = () => {
         alt="Hero"
         className='absolute -bottom-25 right-0  w-auto h-auto min-w-full min-h-full object-cover z-0'
       />
-      <div className="absolute inset-0 bg-black/50 opacity-[62%] z-10"></div>
+      <div className="absolute inset-0 bg-gray-900/95 opacity-[65%] z-10"></div>
     
       <div className="absolute inset-0 flex items-center justify-center z-40">
 
-        <div className="text-white text-center md:mt-[3rem]">
+        <div className="text-white text-center md:mt-[1rem]">
               <h1 className='mb-3 mx-18 md:mx-0 md:text-5xl text-3xl/12 font-semibold font-rubik'>Discover Your {" "}
-                <span className='text-[#C2E0BA]'>Avyakt Potential</span> 
+                <span className='text-greenbase'>Avyakt Potential</span> 
                 <br />
-                Through <span className='text-[#C2E0BA]'>Meditation</span></h1>
+                Through <span className='text-greenbase'>Meditation</span></h1>
                 <p className='text-lg mb-4 font-medium font-dm'>Whether you want to stay focused, feel calmer, or simply feel better — we <br /> help you build a healthier relationship with your mind.</p>
-                <p className='text-[#C2E0BA] text-[1.1rem] font-medium font-dm'>Join the 21-Day Live Meditation Journey</p>
-                <button className='bg-greenbasebg mb-2 text-white font-medium font-dm mt-6 px-4 py-3 rounded-full'>Start Your Journey</button>
+                <p className='text-amber-500 text-[1.1rem] font-medium font-dm'>Join the 21-Day Live Meditation Journey</p>
+                <button className='bg-greenbasebg mb-2 text-white font-medium font-dm mt-4 px-4 py-3 rounded-full'>Start Your Journey</button>
                 <div className='flex justify-center'>
                  <div className=" flex justify-center items-center">
           {[1, 2, 3, 4].map((i) => (
