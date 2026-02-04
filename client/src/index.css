@@ -1,13 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 @import "tailwindcss";
 
 
+
 body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: var(--font-rubik);
+  /* font-family: var(--font-dm); */
 }
 
 
+ 
 
 
 /* ====== GLOBAL ORANGE SCROLLBAR ====== */
@@ -15,7 +18,13 @@ body {
   --scrollbar-track: #fff7ed;
   --scrollbar-thumb: linear-gradient(180deg, #fb923c, #f97316);
   --scrollbar-thumb-hover: linear-gradient(180deg, #f97316, #ea580c);
+  --font-dm: "DM Sans", sans-serif;
+  --font-rubik: "Rubik", sans-serif;
+  --text-greenbase : #71AC61;
+  --bg-greenbase : #C2E0BA;
+
 }
+
 
 /* WebKit (Chrome, Edge, Safari) */
 ::-webkit-scrollbar {
@@ -174,6 +183,27 @@ body {
 
 .border-green-light {
   border-color: rgba(16, 185, 129, 0.2);
+}
+
+/* Greenbase Custom Colors */
+.text-greenbase {
+  color: var(--text-greenbase);
+}
+
+.bg-greenbase {
+  background-color: var(--bg-greenbase);
+}
+
+.bg-greenbasebg {
+  background-color: var(--text-greenbase);
+}
+
+.border-greenbase {
+  border-color: var(--text-greenbase);
+}
+
+.text-greenbase-light {
+  color: var(--bg-greenbase);
 }
 
 /* Lighter Pink/Coral Shades */

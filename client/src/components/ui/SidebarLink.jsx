@@ -8,8 +8,8 @@ const SidebarLink = ({ label, path, onClick, isLogout = false }) => {
 
   return (
     <motion.div
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.98 }}
+    whileHover={{textDecoration : "underline" , color: "#71AC61"}}
+    style={{textDecoration : "none" , color : "#71AC61"}}
       className="w-full"
     >
       <NavLink
@@ -18,8 +18,8 @@ const SidebarLink = ({ label, path, onClick, isLogout = false }) => {
         className={`
           block w-full px-4 py-2.5 transition-all duration-300
           ${isActive 
-            ? 'text-orange-500 font-medium' 
-            : 'text-gray-800 hover:text-orange-500'
+            ? 'text-white font-medium' 
+            : 'text-white underline'
           }
           ${isLogout ? 'mt-auto text-red-500 hover:bg-red-50' : ''}
           relative group
@@ -28,14 +28,12 @@ const SidebarLink = ({ label, path, onClick, isLogout = false }) => {
         <span className={`
           relative inline-block
           ${isActive ? 'text-lg' : 'text-base'}
-          group-hover:text-lg group-hover:font-medium
-          transition-all duration-300
         `}>
           {label}
           <span className={`
             absolute -bottom-1 left-0 w-full h-0.5 
-            ${isActive ? 'bg-orange-500' : 'bg-transparent group-hover:bg-orange-300'}
             transition-all duration-300
+            ${isActive ? '' : ''}
           `}></span>
         </span>
       </NavLink>

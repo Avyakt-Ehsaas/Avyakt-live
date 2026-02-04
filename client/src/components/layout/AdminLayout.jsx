@@ -1,5 +1,5 @@
 import React from 'react';
-import Sidebar from './Sidebar';
+import Sidebar from './Sidebar/Sidebar';
 
 const AdminLayout = ({ children }) => {
   // Add admin-scroll class to body when component mounts

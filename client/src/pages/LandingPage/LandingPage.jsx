@@ -1,30 +1,25 @@
 import LandingSidebar from './LandingSidebar/LandingSidebar'
 import React from 'react'
-import { Link } from 'react-router-dom'
-import HeroSection from './HeroSection'
-import AboutAvyakt from './AboutAvyakt'
-import HowItWorks from './HowItsWork'
-import ProgramsAndBenefits from './ProgramsAndBenefits'
-import TestimonialCarousel from './TestimonialCarousel'
-import Mentors from './Mentors'
-import FAQJoin from './FAQJoin'
-import Footer from './Footer'
+import { useEffect,useState } from 'react'
+import HeroSection from './HeroSection.jsx'
+import HeroText from './HeroToText.jsx'
+import KidsRestlessSection from './KidsRestlessSection.jsx'
+import LoginModal from '../../components/ui/Modal/LoginModal.jsx'
 
 const LandingPage = () => {
   return (
     <>
-    <div className='bg-gradient-to-r from-white/90 to-white/80 min-h-screen '>
-      <LandingSidebar />
-      <HeroSection />
-      <AboutAvyakt />
-      <HowItWorks />
-      <ProgramsAndBenefits />
-      <TestimonialCarousel />
-      {/* <Mentors /> */}
-      <FAQJoin />
-      <Footer />
-    </div>
-    
+      <div className='bg-[#FFF6EF] min-h-screen'>
+        <div>
+            <div className='flex justify-around'>
+            <LandingSidebar />
+            <HeroSection />
+             </div>
+            <HeroText />
+            <LoginModal />
+            <KidsRestlessSection />
+        </div>
+      </div>
     </>
   )
 }

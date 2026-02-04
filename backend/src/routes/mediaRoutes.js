@@ -22,7 +22,7 @@ router.delete("/:id/deactivate", protect, admin, deactivateMedia);
 // =============================
 router.get("/all", getAllMedia);
 
-// 👇 categoryId instead of category string
+//  categoryId instead of category string
 router.get("/category/:categoryId", getMediaByCategory);
 router.get("/category/:categoryId/surveyResult",getSingleMediaByCategory)
 router.get("/:id", getSingleMedia);

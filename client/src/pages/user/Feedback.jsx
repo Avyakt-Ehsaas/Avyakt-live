@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-hot-toast";
-import FeedbackModal from "../../components/ui/FeedbackModal";
+import FeedbackModal from '../../components/ui/Modal/FeedbackModal'
 import API from "../../utils/api";
 
 const Feedback = () => {

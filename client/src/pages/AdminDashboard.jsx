@@ -25,7 +25,9 @@ const formatNumber = (num) => {
 };
 
 const Card = ({ children, className }) => <div className={`bg-white/90 backdrop-blur-sm border border-green-100 rounded-2xl shadow-sm hover:shadow-md transition-all ${className}`}>{children}</div>;
+
 const CardContent = ({ children, className }) => <div className={`p-6 ${className}`}>{children}</div>;
+
 const Button = ({ children, className }) => <div className={`bg-green-50/80 border border-green-200 text-green-700 hover:bg-green-100/80 transition-all shadow-sm hover:shadow ${className}`}>{children}</div>;
 
 
