@@ -7,7 +7,7 @@ const AvyaktModal = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowModal(true);
-    }, 8000); // 8000 ms = 8 seconds
+    }, 10000); // 8000 ms = 8 seconds
 
     return () => clearTimeout(timer); // cleanup on unmount
   }, []);

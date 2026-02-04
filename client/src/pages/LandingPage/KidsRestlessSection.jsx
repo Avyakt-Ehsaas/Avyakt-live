@@ -2,7 +2,7 @@ import React from "react";
 
 const KidsRestlessSection = () => {
   return (
-    <section className="min-h-screen w-full bg-white flex items-center justify-center px-6 py-16">
+    <section className="pt-[8rem] w-full bg-white flex items-center justify-center px-6 py-16">
       <div className="w-full max-w-3xl text-center">
         {/* Top pill */}
         <div className="flex justify-center">

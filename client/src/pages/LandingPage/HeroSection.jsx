@@ -15,15 +15,14 @@ const HeroSection = () => {
       <img
         src={heroSectionImage}
         alt="Hero"
-        // className="absolute bottom-0 left-1/2 -translate-x-1/2 h-auto min-h-full w-auto min-w-full object-cover z-0"
         className='absolute -bottom-25 right-0  w-auto h-auto min-w-full min-h-full object-cover z-0'
       />
       <div className="absolute inset-0 bg-black/50 opacity-[62%] z-10"></div>
     
       <div className="absolute inset-0 flex items-center justify-center z-40">
 
-        <div className="text-white text-center mt-[3rem]">
-              <h1 className='mb-3 text-5xl font-semibold font-rubik'>Discover Your {" "}
+        <div className="text-white text-center md:mt-[3rem]">
+              <h1 className='mb-3 mx-18 md:mx-0 md:text-5xl text-3xl/12 font-semibold font-rubik'>Discover Your {" "}
                 <span className='text-[#C2E0BA]'>Avyakt Potential</span> 
                 <br />
                 Through <span className='text-[#C2E0BA]'>Meditation</span></h1>
