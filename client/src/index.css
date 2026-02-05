@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @import "tailwindcss";
 
 
@@ -9,20 +11,16 @@ body {
   /* font-family: var(--font-dm); */
 }
 
-
- 
-
-
 /* ====== GLOBAL ORANGE SCROLLBAR ====== */
 :root {
   --scrollbar-track: #fff7ed;
-  --scrollbar-thumb: linear-gradient(180deg, #fb923c, #f97316);
-  --scrollbar-thumb-hover: linear-gradient(180deg, #f97316, #ea580c);
+  --scrollbar-thumb: linear-gradient(180deg, #71AC61,#C2E0BA);
+  --scrollbar-thumb-hover: linear-gradient(180deg, #71AC61,#C2E0BA);
   --font-dm: "DM Sans", sans-serif;
   --font-rubik: "Rubik", sans-serif;
   --text-greenbase : #71AC61;
   --bg-greenbase : #C2E0BA;
-
+  --font-inter : "Inter", sans-serif;
 }
 
 

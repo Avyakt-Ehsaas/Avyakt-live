@@ -101,11 +101,13 @@ const LandingSidebar = () => {
       shadow-[0_10px_40px_rgba(0,0,0,0.05)]
       '
     >
-      <div className={`px-6 py-3 flex items-center justify-between ${user ? "gap-10" : "gap-30"} ${user && user.role==='admin' ? "gap-10" : "gap-35"} `}>
+      <div className={`px-6 py-2 flex items-center justify-around ${user ? "gap-25" : "gap-25"} ${user && user.role==='admin' ? "gap-10" : "gap-30"} `}>
+
         <h1 className="text-xl font-semibold tracking-wide">
           <img src={Logo} alt="Avyakt-ehsaas-logo" className='w-[40xpx] h-[40px]'/>
         </h1>
-        <div className='hidden md:flex md:gap-18 text-medium font-medium'>
+
+        <div className='hidden md:flex md:gap-12 text-medium font-medium'>
         {menu.map((item, i) => (
             <Link
               key={i}
@@ -116,8 +118,9 @@ const LandingSidebar = () => {
             </Link>
           ))}
         </div>
+
         <button
-        className='px-4 py-3 bg-[#71AC61] text-white rounded-2xl hover:bg-[#71AD69]'
+        className='px-4 py-3 bg-[#71AC61] text-white rounded-[50px] hover:bg-[#71AD69]'
         >
           Join us
         </button>

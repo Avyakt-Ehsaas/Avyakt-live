@@ -98,6 +98,7 @@ function App() {
 
             {/* Landing Page - Anyone can access */}
             <Route path="/" element={<LandingPage />} />
+            
             <Route path="/dashboard" element={<UserLayout><Dashboard /></UserLayout>} />
 
             <Route

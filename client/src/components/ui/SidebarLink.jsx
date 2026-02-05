@@ -19,7 +19,7 @@ const SidebarLink = ({ label, path, onClick, isLogout = false }) => {
           block w-full px-4 py-2.5 transition-all duration-300
           ${isActive 
             ? 'text-white font-medium' 
-            : 'text-white underline'
+            : 'text-white '
           }
           ${isLogout ? 'mt-auto text-red-500 hover:bg-red-50' : ''}
           relative group
