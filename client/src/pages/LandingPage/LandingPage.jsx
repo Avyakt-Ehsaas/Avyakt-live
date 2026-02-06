@@ -5,6 +5,7 @@ import HeroSection from './HeroSection.jsx'
 import HeroText from './HeroToText.jsx'
 import KidsRestlessSection from './KidsRestlessSection.jsx'
 import LoginModal from '../../components/ui/Modal/LoginModal.jsx'
+import YoungAdultSection from './YoungAdultSection.jsx'
 
 const LandingPage = () => {
   return (
@@ -18,6 +19,7 @@ const LandingPage = () => {
             <HeroText />
             <LoginModal />
             <KidsRestlessSection />
+            <YoungAdultSection />
         </div>
       </div>
     </>

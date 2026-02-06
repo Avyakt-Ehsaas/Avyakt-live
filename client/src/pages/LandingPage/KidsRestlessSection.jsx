@@ -5,6 +5,7 @@ import Kid3 from '../../assets/images/Kid3.svg'
 import Kid4 from '../../assets/images/Kid4.svg'
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
+import { EyeOff } from "lucide-react";
 
 const KidsRestlessSection = () => {
   const [isToggled , setIsToggled] = useState(false)
@@ -22,14 +23,14 @@ const KidsRestlessSection = () => {
       position === 'left' ? 'rounded-r-none' : 'rounded-l-none'
     }`}>
       <div className="flex items-start space-x-4 ">
-        <div className="flex-shrink-0 w-[6rem]  rounded-lg flex items-center justify-center">
+        <div className="flex-shrink-0 w-[6rem]  rounded-lg flex items-center justify-evenly">
           <img
             src={image}
             alt={title}
             className="w-full h-full object-contain"
           />
         </div>
-        <div className="mr-2 mt-[1rem]">
+        <div className="mr-2 mt-[1rem] flex flex-col self-center">
           <p className="text-gray-600 text-[12px] leading-relaxed font-inter">
             {description}
           </p>
@@ -43,7 +44,7 @@ const KidsRestlessSection = () => {
 
   return (
     <>
-    <section className="relative pt-[8rem] w-full bg-white flex items-center justify-center px-6 py-16 overflow-hidden">
+    <section className="relative h-[60vh] md:min-h-screen pt-[8rem] w-full bg-white flex items-center justify-center px-6 py-16 overflow-hidden">
      {/* animated cards */}
     
     <AnimatePresence>
@@ -52,7 +53,7 @@ const KidsRestlessSection = () => {
               initial={{ x: -400, y: -200, opacity: 0 }}
               animate={{ x: -210, y: -200, opacity: 1 }}
               exit={{ x: -400, y: -200, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
               className="mt-8"
             >
              <div className="absolute">
@@ -74,7 +75,7 @@ const KidsRestlessSection = () => {
               initial={{ x: -400 , y: 50, opacity: 0 }}
               animate={{ x: -210,y: 50, opacity: 1 }}
               exit={{ x: -400, y: 50, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
               className="mt-8"
             >
              <div className="absolute">
@@ -95,7 +96,7 @@ const KidsRestlessSection = () => {
               initial={{ x: 750, y: -280, opacity: 0, }}
               animate={{ x: 620, y: -280, opacity: 1 }}
               exit={{ x: 750, y: -280, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
               
               className="mt-8"
             >
@@ -117,7 +118,7 @@ const KidsRestlessSection = () => {
               initial={{ x: 750, y: 50, opacity: 0 }}
               animate={{ x: 620, y: 50, opacity: 1 }}
               exit={{ x: 750, y: 50, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              transition={{ type: "spring", stiffness: 200, damping: 20 }}
               className="mt-8"
             >
              <div className="absolute">
@@ -135,20 +136,20 @@ const KidsRestlessSection = () => {
       <div className="w-full max-w-3xl text-center">
         {/* Top pill */}
         <div className="flex justify-center">
-          <h3 className="inline-flex items-center rounded-full bg-greenbase px-8 py-3 text-lg font-rubik text-[18px]">
+          <h3 className="inline-flex items-center rounded-full bg-greenbase px-8 py-3 text-lg font-rubik">
             For Kids (6–12 years)
           </h3>
         </div>
 
         {/* Heading */}
-        <h1 className="mt-1 font-medium text-[56px] leading-[70px] tracking-tight" >
+        <h1 className="mt-1 font-medium text-[36px] md:text-[56px] leading-[60px] md:leading-[70px] tracking-tight" >
           Feeling <span className="text-greenbase">restless</span> or
           <br />
           easily <span className="text-greenbase">distracted?</span>
         </h1>
 
         {/* Body */}
-        <p className="mt-4 text-gray-700 text-base " style={{ fontFamily: "DM Sans, sans-serif" }}>
+        <p className="mt-4 text-[12px] md:text-[16px] text-gray-700 text-base " style={{ fontFamily: "DM Sans, sans-serif" }}>
           Screens, constant stimulation, and early pressure are shaping
           <br className="hidden sm:block" />
           young minds faster than they can process.
@@ -165,7 +166,10 @@ const KidsRestlessSection = () => {
           onClick={() => handleToogle()}
           className="mt-6 inline-block text-sm  text-gray-900 underline underline-offset-4 decoration-1 decoration-black"
         >
-          {isToggled ? "Hide me" : "See what we mean"}
+          {isToggled ?( 
+            <div className="flex gap-3"> <EyeOff size={16} className="mt-[1px]" /> Hide me</div>
+            ) 
+            : "See what we mean"}
         </button>
       </div>
     </section>

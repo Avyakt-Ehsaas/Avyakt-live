@@ -11,9 +11,9 @@ body {
   /* font-family: var(--font-dm); */
 }
 
-/* ====== GLOBAL ORANGE SCROLLBAR ====== */
+/* ====== GLOBAL GREEN SCROLLBAR ====== */
 :root {
-  --scrollbar-track: #fff7ed;
+  --scrollbar-track: #f0fdf4;
   --scrollbar-thumb: linear-gradient(180deg, #71AC61,#C2E0BA);
   --scrollbar-thumb-hover: linear-gradient(180deg, #71AC61,#C2E0BA);
   --font-dm: "DM Sans", sans-serif;
@@ -23,6 +23,10 @@ body {
   --font-inter : "Inter", sans-serif;
 }
 
+/* Font utility classes */
+.font-inter {
+  font-family: var(--font-inter);
+}
 
 /* WebKit (Chrome, Edge, Safari) */
 ::-webkit-scrollbar {
@@ -39,7 +43,7 @@ body {
   background: var(--scrollbar-thumb);
   border-radius: 10px;
   border: 2px solid var(--scrollbar-track);
-  box-shadow: 0 0 8px rgba(249, 115, 22, 0.6);
+  box-shadow: 0 0 8px rgba(113, 172, 97, 0.3);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -49,7 +53,7 @@ body {
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #f97316 #fff7ed;
+  scrollbar-color: #71AC61 #f0fdf4;
 }
 
 /* ====== ADMIN GREEN SCROLLBAR ====== */

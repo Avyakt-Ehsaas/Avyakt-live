@@ -17,7 +17,7 @@ const HeroSection = () => {
         // src={heroSectionImage}
         src={HeroImage}
         alt="Hero"
-        className='absolute -bottom-10 right-0 bg-[#191919] w-auto h-auto min-w-full min-h-full object-cover z-0'
+        className='absolute bottom-0 md:-bottom-0 lg:-bottom-0 xl:-bottom-10 right-0 bg-[#191919] w-auto h-auto min-w-full min-h-full object-cover z-0'
       />
       <div className=" z-10"></div>
     

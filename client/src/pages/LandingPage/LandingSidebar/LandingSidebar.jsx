@@ -91,7 +91,7 @@ const LandingSidebar = () => {
      return (
     <>
      <nav 
-     className='fixed  mt-4 z-50  
+     className='fixed mt-4 z-50  
      font-dm
      rounded-full
       bg-white/1
