@@ -1,5 +1,5 @@
 import React from 'react'
-import YouthSectionBg from '../../assets/images/YouthSectionBg.svg'
+import YouthSectionBg from '../../assets/images/YouthSectionBG.svg'
 
 const YoungAdultSection = () => {
   return (
