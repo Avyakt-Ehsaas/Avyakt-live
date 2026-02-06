@@ -4,7 +4,7 @@ import YouthSectionBg from '../../assets/images/YouthSectionBG.svg'
 const YoungAdultSection = () => {
   return (
     <>
-        <section className='min-h-screen md:pt-[4rem] pt-[2rem] relative bg-white overflow-hidden' >
+        <section className='min-h-screen  relative bg-white overflow-hidden' >
             <div 
                 className="absolute  inset-0 w-full h-full bg-no-repeat bg-center"
                 style={{ 
@@ -16,9 +16,9 @@ const YoungAdultSection = () => {
             </div>
             
             <div className="relative z-10 flex items-center justify-center min-h-screen px-6">
-                <div className="absolute left-[2rem] bottom-4 md:min-w-5xl text-left">
+                <div className="absolute left-[5rem] bottom-4 md:min-w-5xl text-left">
                     {/* Top pill */}
-                    <div className="flex justify-start mb-2 ">
+                    <div className="flex justify-start mb-2">
                         <h3 className="inline-flex items-center rounded-full bg-greenbase px-8 py-3 font-rubik text-[18px] text-[#191919]">
                             For young adults (12–25 years)
                         </h3>

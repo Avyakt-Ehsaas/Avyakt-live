@@ -1,17 +1,12 @@
 
 import React,{ useEffect, useRef } from 'react'
-import Hero from '../../assets/images/hero.png'
-import heroImage from '../../assets/images/heroImage.png'
-import heroSectionImage from '../../assets/images/heroSectionImage.png'
 import HeroImage from '../../assets/images/HeroImage.svg'
-import { ChevronRight , Plus ,Star } from 'lucide-react'
-import { FaStar } from "react-icons/fa";
 
 const HeroSection = () => {
 
   return (
    <>
-  <div className="relative w-screen h-screen overflow-hidden">
+  <div className="relative w-full h-screen overflow-hidden">
  
       <img
         // src={heroSectionImage}

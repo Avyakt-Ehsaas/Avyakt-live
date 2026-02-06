@@ -1,29 +1,41 @@
-import LandingSidebar from './LandingSidebar/LandingSidebar'
-import React from 'react'
-import { useEffect,useState } from 'react'
-import HeroSection from './HeroSection.jsx'
-import HeroText from './HeroToText.jsx'
-import KidsRestlessSection from './KidsRestlessSection.jsx'
-import LoginModal from '../../components/ui/Modal/LoginModal.jsx'
-import YoungAdultSection from './YoungAdultSection.jsx'
+import React, { useRef, useState, useEffect } from "react";
+import LandingSidebar from "./LandingSidebar/LandingSidebar";
+import HeroSection from "./HeroSection.jsx";
+import HeroText from "./HeroToText.jsx";
+import KidsRestlessSection from "./KidsRestlessSection.jsx";
+import LoginModal from "../../components/ui/Modal/LoginModal.jsx";
+import YoungAdultSection from "./YoungAdultSection.jsx";
 
 const LandingPage = () => {
-  return (
-    <>
-      <div className='bg-[#FFF6EF] min-h-screen'>
-        <div>
-            <div className='flex justify-around'>
-            <LandingSidebar />
-            <HeroSection />
-             </div>
-            <HeroText />
-            <LoginModal />
-            <KidsRestlessSection />
-            <YoungAdultSection />
-        </div>
-      </div>
-    </>
-  )
-}
+  const heroRef = useRef(null);
+  const [isHeroVisible, setIsHeroVisible] = useState(true);
 
-export default LandingPage
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHeroVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    if (heroRef.current) observer.observe(heroRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="bg-[#FFF6EF] min-h-screen">
+      <LandingSidebar isDarkBg={isHeroVisible} />
+
+      <div ref={heroRef}>
+        <HeroSection />
+      </div>
+
+      <HeroText />
+      <LoginModal />
+      <KidsRestlessSection />
+      <YoungAdultSection />
+    </div>
+  );
+};
+
+export default LandingPage;

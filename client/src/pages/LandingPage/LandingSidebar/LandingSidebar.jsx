@@ -13,16 +13,18 @@ import gsap from 'gsap'
 import {toast}  from 'react-hot-toast'
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Logo from '../../../assets/images/Logo.svg'
+import LogoDark from '../../../assets/images/LogoDark.svg'
 
 gsap.registerPlugin(ScrollTrigger);
 
-const LandingSidebar = () => {
+const LandingSidebar = ({ isDarkBg }) => {
    
       const { user, logout, fetchMe } = useAuth();
       const [openMenu, setOpenMenu] = useState(false);
       const [profileOpen, setProfileOpen] = useState(false);
       const navRef = useRef(null);
       const navigate = useNavigate();
+      const [isHeroSection , setIsHeroSection] = useState(true)
 
       useGSAP(() => {
         gsap.from(sidebarRef.current,{
@@ -90,6 +92,7 @@ const LandingSidebar = () => {
 
      return (
     <>
+    <div className='flex justify-around'>
      <nav 
      className='fixed mt-4 z-50  
      font-dm
@@ -104,18 +107,25 @@ const LandingSidebar = () => {
       <div className={`px-6 py-2 flex items-center justify-around ${user ? "gap-25" : "gap-25"} ${user && user.role==='admin' ? "gap-10" : "gap-30"} `}>
 
         <h1 className="text-xl font-semibold tracking-wide">
-          <img src={Logo} alt="Avyakt-ehsaas-logo" className='w-[40xpx] h-[40px]'/>
+          <img src={isDarkBg ? Logo : LogoDark} alt="Avyakt-ehsaas-logo" className={`w-[40xpx] h-[40px] ${isDarkBg ? "text-greenbase" : "text-white"}`} />
         </h1>
 
         <div className='hidden md:flex md:gap-12 text-medium font-medium'>
         {menu.map((item, i) => (
-            <Link
-              key={i}
-              to={item.path}
-              className="text-white font-medium hover:text-[#71AC61] transition-colors duration-300 hover:underline underline-offset-8 decoration-[#71AC61]"
-            >
-              {item.label}
-            </Link>
+           <Link
+  className={`
+    transition-colors duration-300
+    hover:underline underline-offset-8 decoration-[#71AC61]
+    ${
+      isDarkBg
+        ? "text-white hover:text-[#71AC61]"
+        : "text-[#191919] hover:text-[#71AC61]"
+    }
+  `}
+>
+  {item.label}
+</Link>
+
           ))}
         </div>
 
@@ -126,6 +136,7 @@ const LandingSidebar = () => {
         </button>
       </div>
     </nav>
+      </div>
     </>   
 )
 }
