@@ -20,7 +20,7 @@ const AvyaktModal = () => {
         {/* Close Button */}
         <button
           onClick={() => setShowModal(false)}
-          className="absolute top-4 right-4 text-gray-600 hover:text-red-600 text-xl font-bold"
+          className="absolute top-4 right-4 text-gray-600 hover:text-[#71AC61] transition-transform duration-300 hover:rotate-180 text-xl font-bold"
         >
           ×
         </button>

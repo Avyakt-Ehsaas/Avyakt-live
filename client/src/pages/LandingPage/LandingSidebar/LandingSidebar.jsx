@@ -74,7 +74,7 @@ const LandingSidebar = ({ isDarkBg }) => {
          {  label: "Home", path: "/" },
           {  label: "The Science", path: "/" },
          {  label: "Programs", path: "/programs" },
-        //  {  label: "Live-session", path: "/dashboard" },
+         {  label: "Live-session", path: "/dashboard" },
           { label: "About", path: "/about" },
          { label: "Contact", path: "/contact" },
           { label: "Blogs", path: "/" },
@@ -113,6 +113,7 @@ const LandingSidebar = ({ isDarkBg }) => {
         <div className='hidden md:flex md:gap-12 text-medium font-medium'>
         {menu.map((item, i) => (
            <Link
+           to={item.path}
   className={`
     transition-colors duration-300
     hover:underline underline-offset-8 decoration-[#71AC61]

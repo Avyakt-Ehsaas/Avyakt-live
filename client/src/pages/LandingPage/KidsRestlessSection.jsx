@@ -19,8 +19,8 @@ const KidsRestlessSection = () => {
   }
 
   const Card = ({ image, title, description, position }) => (
-    <div className={`bg-[#C2E0BA]/20 w-[22rem] rounded-xl shadow-sm border border-gray-100 text-[#1c1c1c] hover:shadow-md transition-shadow duration-300 ${
-      position === 'left' ? 'rounded-r-none' : 'rounded-l-none'
+    <div className={`bg-[#C2E0BA]/20 w-[22rem] rounded-xl shadow-sm border border-gray-100 text-[#1c1c1c] hover:shadow-md transition-shadow mr-[2rem] duration-300 ${
+      position === 'left' ? 'rounded-r-none ml-[1.5rem] mr-0' : 'rounded-l-none '
     }`}>
       <div className="flex items-start space-x-4 ">
         <div className="flex-shrink-0 w-[6rem]  rounded-lg flex items-center justify-evenly">
@@ -44,14 +44,14 @@ const KidsRestlessSection = () => {
 
   return (
     <>
-    <section className="relative h-[60vh] md:min-h-screen pt-[8rem] w-full bg-white flex items-center justify-center px-6 py-16 overflow-hidden">
+    <section className="relative h-[60vh] md:h-[70vh] pb-[18rem] pt-[18rem] w-full bg-white flex items-center justify-center px-6 py-16 overflow-hidden">
      {/* animated cards */}
     
     <AnimatePresence>
           {isToggled && (
             <motion.div
               initial={{ x: -400, y: -200, opacity: 0 }}
-              animate={{ x: -210, y: -200, opacity: 1 }}
+              animate={{ x: -250, y: -200, opacity: 1 }}
               exit={{ x: -400, y: -200, opacity: 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
               className="mt-8"
@@ -73,7 +73,7 @@ const KidsRestlessSection = () => {
           {isToggled && (
             <motion.div
               initial={{ x: -400 , y: 50, opacity: 0 }}
-              animate={{ x: -210,y: 50, opacity: 1 }}
+              animate={{ x: -250,y: 50, opacity: 1 }}
               exit={{ x: -400, y: 50, opacity: 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
               className="mt-8"
@@ -94,7 +94,7 @@ const KidsRestlessSection = () => {
           {isToggled && (
             <motion.div
               initial={{ x: 750, y: -280, opacity: 0, }}
-              animate={{ x: 620, y: -280, opacity: 1 }}
+              animate={{ x: 640, y: -280, opacity: 1 }}
               exit={{ x: 750, y: -280, opacity: 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
               
@@ -116,7 +116,7 @@ const KidsRestlessSection = () => {
           {isToggled && (
             <motion.div
               initial={{ x: 750, y: 50, opacity: 0 }}
-              animate={{ x: 620, y: 50, opacity: 1 }}
+              animate={{ x: 640, y: 50, opacity: 1 }}
               exit={{ x: 750, y: 50, opacity: 0 }}
               transition={{ type: "spring", stiffness: 200, damping: 20 }}
               className="mt-8"
@@ -142,14 +142,14 @@ const KidsRestlessSection = () => {
         </div>
 
         {/* Heading */}
-        <h1 className="mt-1 font-medium text-[36px] md:text-[56px] leading-[60px] md:leading-[70px] tracking-tight" >
+        <h1 className="mt-1 font-medium text-[36px] md:text-[44px] xl:text-[56px] leading-[60px] lg:leading-[70px] tracking-tight" >
           Feeling <span className="text-greenbase">restless</span> or
           <br />
           easily <span className="text-greenbase">distracted?</span>
         </h1>
 
         {/* Body */}
-        <p className="mt-4 text-[12px] md:text-[16px] text-gray-700 text-base " style={{ fontFamily: "DM Sans, sans-serif" }}>
+        <p className="mt-4 text-[12px] lg:text-[16px] text-gray-700 text-base " style={{ fontFamily: "DM Sans, sans-serif" }}>
           Screens, constant stimulation, and early pressure are shaping
           <br className="hidden sm:block" />
           young minds faster than they can process.

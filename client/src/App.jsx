@@ -64,7 +64,7 @@ import PlayVideo from "./pages/VideoPlay/PlayVideo";
 
 function App() {
   const { user, loadingUser } = useAuth();
-    const [showSplash, setShowSplash] = useState(true);
+    // const [showSplash, setShowSplash] = useState(true);
 
   // ✅ Loader while checking auth
   if (loadingUser) {
@@ -75,14 +75,14 @@ function App() {
     );
   }
 
-   useEffect(() => {
-    const timer = setTimeout(() => setShowSplash(false), 8500);
-    return () => clearTimeout(timer);
-  }, []);
+  //  useEffect(() => {
+  //   const timer = setTimeout(() => setShowSplash(false), 8500);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
-  if (showSplash) {
-    return <TextLoader />; // You can center it with full-screen styles
-  }
+  // if (showSplash) {
+  //   return <TextLoader />; // You can center it with full-screen styles
+  // }
   
   return (
     <>

@@ -80,7 +80,7 @@ const UserSidebar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center px-1">
             <div className="w-12 h-12 rounded-xl">
-              <img src={logo} alt="logo" className="rounded-xl" />
+              {/* <img src={logo} alt="logo" className="rounded-xl" /> */}
             </div>
             <h1 className="text-lg ml-3 font-extrabold bg-gradient-to-r 
               from-amber-600 to-orange-600 bg-clip-text text-transparent">

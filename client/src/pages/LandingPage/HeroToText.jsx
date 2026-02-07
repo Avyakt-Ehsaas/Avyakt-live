@@ -2,7 +2,7 @@ import React from "react";
 
 const HeroText = () => {
   return (
-    <div className="pt-[8rem] h-[60vh] md:min-h-screen flex items-center justify-center bg-white">
+    <div className="py-[18rem] h-[60vh] md:h-[70vh]  flex items-center justify-center bg-white">
       <div className="text-center w-[732px]">
         <h1 className="font-[600] mx-15 md:text-6xl md:mx-1 text-4xl leading-[70px] text-center font-rubik ">
           Build <span className="text-[#71AC61]">focus.</span> Build{" "}
