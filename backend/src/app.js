@@ -19,6 +19,7 @@ const app = express();
 
 const allowedOrigins = [
   "https://avaykt-ehsaas.netlify.app",
+  "https://avyaktehsaas.netlify.app",
   "http://localhost:5173"
 ];
 
