@@ -74,10 +74,10 @@ const LandingSidebar = ({ isDarkBg }) => {
          {  label: "Home", path: "/" },
           {  label: "The Science", path: "/" },
          {  label: "Programs", path: "/programs" },
-         {  label: "Live-session", path: "/dashboard" },
+        //  {  label: "Live-session", path: "/dashboard" },
           { label: "About", path: "/about" },
          { label: "Contact", path: "/contact" },
-          { label: "Blogs", path: "/" },
+          { label: "Spritual", path: "/spiritual-edu/genai" },
 
            ...(user?.role === "admin"
       ? [

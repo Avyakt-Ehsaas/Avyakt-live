@@ -59,6 +59,7 @@ import SurveyResponses from "./pages/admin/Surveys/SurveyResponses_backup";
 import SubscriptionPricing from "./components/SubscriptionPricing";
 import VideoPageLayout from "./pages/admin/Videos/VideoPageLayout";
 import PlayVideo from "./pages/VideoPlay/PlayVideo";
+import SpritualGenAi from "./pages/Spritual/SpritualGenAi";
 
 
 
@@ -101,6 +102,7 @@ function App() {
             
             <Route path="/dashboard" element={<UserLayout><Dashboard /></UserLayout>} />
 
+              <Route path='/spiritual-edu/genai' element={<SpritualGenAi />} />
             <Route
               path="/auth/login"
               element={
