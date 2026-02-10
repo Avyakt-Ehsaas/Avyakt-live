@@ -1,122 +1,92 @@
 import React from "react";
 import {
-  FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
   FaTwitter,
-  FaEnvelope,
-  FaPhoneAlt,
-  FaMapMarkerAlt
+  FaEnvelope
 } from "react-icons/fa";
-import { ShieldCheck} from "lucide-react"
+import { ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-tr from-orange-50 via-white to-orange-100 text-stone-800 pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
+    <footer className="bg-[#FAFAF8] text-stone-800">
 
-        {/* Brand info */}
-        <div>
-          <h2 className="text-2xl font-bold mb-4">
-            Avyakt <span className="text-orange-600">Ehsaas</span>
-          </h2>
+      {/* Top calm divider */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-stone-300 to-transparent" />
 
-          <p className="text-sm leading-relaxed text-stone-600">
-            Meditation backed by neuroscience.  
-            Heal your mind, awaken your soul, and align your energy with the
-            universe.
+      <div className="max-w-5xl mx-auto px-6 py-20 text-center">
+
+        {/* Brand */}
+        <h2 className="text-3xl font-semibold tracking-tight">
+          Avyakt <span className="text-orange-500">Ehsaas</span>
+        </h2>
+
+        <p className="mt-4 max-w-2xl mx-auto text-sm text-stone-600 leading-relaxed">
+          A mindful space for inner stillness — blending meditation,
+          neuroscience, and ancient wisdom to help you reconnect with
+          yourself.
+        </p>
+
+        {/* Navigation */}
+        <nav className="mt-10">
+          <ul className="flex flex-wrap justify-center gap-8 text-sm font-medium">
+            {[
+              "Home",
+              "About",
+              "Programs",
+              "Testimonials",
+              "Contact"
+            ].map((item, i) => (
+              <li
+                key={i}
+                className="hover:text-orange-500 transition cursor-pointer"
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Social */}
+        <div className="mt-10 flex justify-center gap-6 text-lg">
+          {[FaInstagram, FaLinkedinIn, FaTwitter].map((Icon, i) => (
+            <a
+              key={i}
+              href="#"
+              className="hover:text-orange-500 transition"
+            >
+              <Icon />
+            </a>
+          ))}
+        </div>
+
+        {/* Legal */}
+        <div className="mt-14 pt-8 border-t border-stone-300 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-stone-500">
+          <p>
+            © {new Date().getFullYear()} Avyakt Ehsaas
           </p>
 
-          <div className="flex gap-4 mt-6 text-xl">
-            {[
-              <FaFacebookF />,
-              <FaInstagram />,
-              <FaLinkedinIn />,
-              <FaTwitter />
-            ].map((icon, i) => (
-              <span
-                key={i}
-                className="p-2 bg-white rounded-full shadow hover:bg-orange-500 hover:text-white transition cursor-pointer"
-              >
-                {icon}
-              </span>
-            ))}
-          </div>
-        </div>
+          <div className="flex gap-6">
+            <Link to="/terms" className="hover:text-orange-500 transition">
+              Terms
+            </Link>
 
-        {/* Quick Links */}
-        <div>
-          <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
-          <ul className="space-y-3 text-sm text-stone-700">
-            <li className="hover:text-orange-600 cursor-pointer">Home</li>
-            <li className="hover:text-orange-600 cursor-pointer">About</li>
-            <li className="hover:text-orange-600 cursor-pointer">Programs</li>
-            <li className="hover:text-orange-600 cursor-pointer">Testimonials</li>
-            <li className="hover:text-orange-600 cursor-pointer">Contact</li>
-          </ul>
-        </div>
+            <Link
+              to="/privacy"
+              className="flex items-center gap-2 hover:text-orange-500 transition"
+            >
+              <ShieldCheck className="w-4 h-4" />
+              Privacy
+            </Link>
 
-        {/* Programs */}
-        <div>
-          <h3 className="font-semibold text-lg mb-4">Our Programs</h3>
-          <ul className="space-y-3 text-sm text-stone-700">
-            <li className="hover:text-orange-600 cursor-pointer">Live Meditation</li>
-            <li className="hover:text-orange-600 cursor-pointer">Breath Healing</li>
-            <li className="hover:text-orange-600 cursor-pointer">Chakra Activation</li>
-            <li className="hover:text-orange-600 cursor-pointer">Stress Detox</li>
-            <li className="hover:text-orange-600 cursor-pointer">1 on 1 Guidance</li>
-          </ul>
-        </div>
-
-        {/* Contact */}
-        <div>
-          <h3 className="font-semibold text-lg mb-4">Contact Us</h3>
-
-          <div className="flex items-center gap-3 mb-3 text-sm">
-            <FaEnvelope className="text-orange-500" />
-            <span>support@avyaktehsaas.com</span>
-          </div>
-
-          <div className="flex items-center gap-3 mb-3 text-sm">
-            <FaPhoneAlt className="text-orange-500" />
-            <span>+91 98765 43210</span>
-          </div>
-
-          <div className="flex items-center gap-3 text-sm">
-            <FaMapMarkerAlt className="text-orange-500" />
-            <span>India</span>
-          </div>
-        </div>
-
-      </div>
-
-       <div className="md:flex md:gap-10 md:justify-center">
-                   <Link 
-  to="/terms" 
-  className="text-stone-600 hover:text-orange-500  transition-colors duration-200 flex items-center justify-center gap-2 text-sm font-medium mt-4"
->
-  <span>📜</span>
-  Terms and Conditions
-</Link>
-
-<Link 
-  to="/privacy" 
-  className="text-stone-600 hover:text-orange-500 transition-colors duration-200 flex items-center justify-center gap-2 text-sm font-medium mt-4"
->
-  <ShieldCheck className="w-4 h-4" />
-  Privacy Policy
-</Link>
+            <div className="flex items-center gap-2">
+              <FaEnvelope />
+              support@avyaktehsaas.com
             </div>
-
-      {/* Divider */}
-      <div className="border-t border-orange-200 mt-6"></div>
-
-      {/* Copyright */}
-      <p className="text-center text-sm text-stone-600 mt-6">
-        &copy; {" "}
-        { new Date().getFullYear()} Avyakt Ehsaas • All rights reserved
-      </p>
+          </div>
+        </div>
+      </div>
     </footer>
   );
 };
