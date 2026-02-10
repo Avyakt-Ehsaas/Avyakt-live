@@ -5,6 +5,7 @@ import HeroText from "./HeroToText.jsx";
 import KidsRestlessSection from "./KidsRestlessSection.jsx";
 import LoginModal from "../../components/ui/Modal/LoginModal.jsx";
 import YoungAdultSection from "./YoungAdultSection.jsx";
+import Footer from "./Footer.jsx";
 
 const LandingPage = () => {
   const heroRef = useRef(null);
@@ -34,6 +35,7 @@ const LandingPage = () => {
       <LoginModal />
       <KidsRestlessSection />
       <YoungAdultSection />
+      <Footer />
     </div>
   );
 };
