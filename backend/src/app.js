@@ -14,6 +14,7 @@ import emotionTrackingRoutes from "./routes/emotionTrackingRoutes.js"
 import SurveyRoutes from "./routes/surveyRoutes.js"
 import MediaRoutes from "./routes/mediaRoutes.js"
 import categoryRoutes from "./routes/categoryRoutes.js"
+import zoomRoutes from "./routes/zoomRoutes.js"
 
 const app = express();
 
@@ -21,7 +22,7 @@ const allowedOrigins = [
   "https://avaykt-ehsaas.netlify.app",
   "https://avyaktehsaas.netlify.app",
   "http://localhost:5173",
-  "http://avyaktehsaas.com"
+  "https://avyaktehsaas.com"
 ];
 
 app.use(cors({
@@ -46,7 +47,9 @@ app.use("/api/feedback", feedbackRoutes);
 app.use("/api/emotion-tracking", emotionTrackingRoutes);
 app.use("/api/surveys",SurveyRoutes)
 app.use("/api/media",MediaRoutes)
-app.use("/api/categories", categoryRoutes)
+app.use("/api/categories", categoryRoutes);
+
+app.use("/api/zoom", zoomRoutes);
 
 app.get("/health", (req, res) => {
   res.status(200).send("Server is running 🚀");

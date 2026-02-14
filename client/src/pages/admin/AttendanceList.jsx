@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 import Loader from '../../components/ui/Loader';
 import InactiveUsers from './InactiveUsers';
 
-import * as XLSX from 'xlsx';
+import ExcelJS from 'exceljs';
 
 // Color scheme matching AdminDashboard
 const colors = {
@@ -107,37 +107,54 @@ const AttendanceList = () => {
   }, []);
 
 
-const exportToExcel = () => {
+const exportToExcel = async () => {
   try {
-    // Prepare the data for Excel export
-    const data = attendance.attendees.map(attendee => ({
-      'Name': attendee.name || 'N/A',
-      'Email': attendee.email || 'N/A',
-      'Join Time': attendee.joinTime ? new Date(attendee.joinTime).toLocaleString() : 'N/A',
-      'Duration (minutes)': attendee.duration ? (attendee.duration / 60).toFixed(2) : 'N/A',
-      'Status': attendee.status || 'N/A'
-    }));
-
-    // Create a new workbook with safe defaults
-    const wb = XLSX.utils.book_new();
-    const ws = XLSX.utils.json_to_sheet(data, { cellDates: true });
+    // Create a new workbook and worksheet
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Today's Attendance");
+    
+    // Add headers
+    const headers = ['Name', 'Email', 'Join Time', 'Duration (minutes)', 'Status'];
+    worksheet.addRow(headers);
+    
+    // Style header row
+    const headerRow = worksheet.getRow(1);
+    headerRow.font = { bold: true };
+    headerRow.fill = { type: 'pattern', pattern: 'solid', fgColor: { rgb: 'FF10B981' } };
+    headerRow.font = { bold: true, color: { rgb: 'FFFFFFFF' } };
     
     // Set column widths
-    const wscols = [
-      { wch: 25 }, // Name
-      { wch: 30 }, // Email
-      { wch: 25 }, // Join Time
-      { wch: 20 }, // Duration
-      { wch: 15 }  // Status
+    worksheet.columns = [
+      { width: 25 }, // Name
+      { width: 30 }, // Email
+      { width: 25 }, // Join Time
+      { width: 20 }, // Duration
+      { width: 15 }  // Status
     ];
-    ws['!cols'] = wscols;
     
-    // Add the worksheet to the workbook
-    XLSX.utils.book_append_sheet(wb, ws, "Today's Attendance");
+    // Add data rows
+    attendance.attendees.forEach(attendee => {
+      worksheet.addRow([
+        attendee.name || 'N/A',
+        attendee.email || 'N/A',
+        attendee.joinTime ? new Date(attendee.joinTime).toLocaleString() : 'N/A',
+        attendee.duration ? (attendee.duration / 60).toFixed(2) : 'N/A',
+        attendee.status || 'N/A'
+      ]);
+    });
     
     // Generate Excel file and trigger download
     const fileName = `attendance_${new Date().toISOString().split('T')[0]}.xlsx`;
-    XLSX.writeFile(wb, fileName, { bookType: 'xlsx', type: 'array' });
+    const buffer = await workbook.xlsx.writeBuffer();
+    const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
     
     toast.success('Export successful!');
   } catch (error) {
