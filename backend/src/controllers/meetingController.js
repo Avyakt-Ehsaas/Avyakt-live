@@ -1,6 +1,6 @@
 import Meeting from "../models/MeetingModel.js";
 import User from "../models/user.model.js";
-import ExcelJS from 'exceljs';
+import * as XLSX from 'xlsx';
 import multer from 'multer';
 
 /**
@@ -118,8 +118,8 @@ export const joinMeeting = async (req, res) => {
     
     // Update user's streak and tree growth
     const user = await User.findById(userId);
-    // await user.updateStreak();
-    // await user.updateTreeGrowth();
+    await user.updateStreak();
+    await user.updateTreeGrowth();
 
     res.json({
       success: true,
@@ -327,8 +327,7 @@ export const getMonthlyAttendees = async (req, res) => {
             error: error.message
         });
     }
-};
-export const LastThreeMonthAttendances = async (req, res) => {
+};export const LastThreeMonthAttendances = async (req, res) => {
   try {
     const now = new Date();
 
@@ -776,41 +775,25 @@ export const uploadAttendance = async (req, res) => {
     }
 
     // Read the Excel file - headers are on row 11 (0-indexed, so row 10)
-    const workbook = new ExcelJS.Workbook();
-    await workbook.xlsx.load(req.file.buffer);
+    const workbook = XLSX.read(req.file.buffer, { type: 'buffer' });
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
     
-    const worksheet = workbook.worksheets[0];
-    if (!worksheet) {
-      return res.status(400).json({
-        success: false,
-        message: "No worksheet found in Excel file"
-      });
-    }
-    
-    // Get headers from row 11 (row index 11)
-    const headerRow = worksheet.getRow(11);
-    const headers = [];
-    headerRow.eachCell((cell, colNumber) => {
-      if (cell.value) headers.push(cell.value);
+    // Convert to JSON with headers starting from row 11 (range A11:I)
+    const data = XLSX.utils.sheet_to_json(worksheet, { 
+      range: 10, // Start from row 11 (0-indexed)
+      header: 1  // Use first row as headers
     });
     
-    // Get data rows starting from row 12
-    const rows = [];
-    for (let rowNum = 12; rowNum <= worksheet.rowCount; rowNum++) {
-      const row = worksheet.getRow(rowNum);
+    // Convert array of arrays to array of objects using the first row as keys
+    const headers = data[0];
+    const rows = data.slice(1).map(row => {
       const obj = {};
-      let hasEmail = false;
-      
       headers.forEach((header, index) => {
-        const cell = row.getCell(index + 1);
-        obj[header] = cell.value;
-        if (header === 'Email' && cell.value) hasEmail = true;
+        obj[header] = row[index];
       });
-      
-      if (hasEmail && obj['Email'] && String(obj['Email']).trim()) {
-        rows.push(obj);
-      }
-    }
+      return obj;
+    }).filter(row => row['Email'] && row['Email'].trim()); // Filter out rows without email
 
     if (rows.length === 0) {
       return res.status(400).json({
