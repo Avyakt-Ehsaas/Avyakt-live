@@ -3,7 +3,7 @@ import { FiPlus } from 'react-icons/fi';
 import { motion , AnimatePresence } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import './Dashboard.css';
-import TestimonialCarousel from '../LandingPage/TestimonialCarousel';
+import TestimonialCarousel from '../LandingPage/Testimonials/TestimonialCarousel';
 import FAQJoin from '../LandingPage/FAQJoin';
 import Footer from '../LandingPage/Footer';
 import AboutFounder from '../../components/AboutFounder';

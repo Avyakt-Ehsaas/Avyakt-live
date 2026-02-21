@@ -23,6 +23,15 @@ body {
   --font-inter : "Inter", sans-serif;
 }
 
+.font-dm {
+  font-family: var(--font-dm);
+}
+
+.font-rubik {
+  font-family: var(--font-rubik);
+}
+
+
 /* Font utility classes */
 .font-inter {
   font-family: var(--font-inter);
