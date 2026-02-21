@@ -6,6 +6,11 @@ import KidsRestlessSection from "./KidsRestlessSection.jsx";
 import LoginModal from "../../components/ui/Modal/LoginModal.jsx";
 import YoungAdultSection from "./YoungAdultSection.jsx";
 import Footer from "./Footer.jsx";
+import ModernProblem from "./ModernProblem.jsx";
+import TestimonialCarousel from "./Testimonials/TestimonialCarousel.jsx";
+import SponsorPage from "./SponserPage.jsx";
+import BlogSection from "./BlogSection.jsx";
+import Carousel from "./Testimonials/Carousel.jsx";
 
 const LandingPage = () => {
   const heroRef = useRef(null);
@@ -33,8 +38,10 @@ const LandingPage = () => {
 
       <HeroText />
       <LoginModal />
-      <KidsRestlessSection />
-      <YoungAdultSection />
+      <ModernProblem />
+      <SponsorPage />
+      <TestimonialCarousel />
+      <BlogSection />
       <Footer />
     </div>
   );

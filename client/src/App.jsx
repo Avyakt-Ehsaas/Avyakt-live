@@ -60,6 +60,8 @@ import SubscriptionPricing from "./components/SubscriptionPricing";
 import VideoPageLayout from "./pages/admin/Videos/VideoPageLayout";
 import PlayVideo from "./pages/VideoPlay/PlayVideo";
 import SpritualGenAi from "./pages/Spritual/SpritualGenAi";
+import Room from "./pages/user/Room";
+import SessionsAndRoom from "./pages/user/SessionsAndRoom";
 
 
 
@@ -382,7 +384,7 @@ function App() {
               element={
                 user ? ( 
                    <UserLayout>
-                    <JoinMeeting />
+                  <SessionsAndRoom />
                   </UserLayout>) : (
                     <Navigate to="/auth/login" replace />
                   )
