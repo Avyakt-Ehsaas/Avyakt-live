@@ -24,8 +24,6 @@ const HeroText = () => {
 
  useEffect(() => {
     const el = textRef.current;
-
-
     gsap.fromTo(
       el,
       {
@@ -38,7 +36,7 @@ const HeroText = () => {
         ease: "power3.out",
         scrollTrigger: {
           trigger: el,
-          start: "top 20%",
+          start: "top 10%",
           end: "bottom 150%",
           scrub: true,   
            onLeave: () => {

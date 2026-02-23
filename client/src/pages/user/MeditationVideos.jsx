@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { FiPlay, FiMusic, FiHeadphones, FiClock, FiTrendingUp, FiMoreHorizontal, FiSearch, FiGrid, FiList } from 'react-icons/fi'
-import UserSidebar from '../../components/layout/Sidebar/UserSidebar'
+import UserNavbar from '../../components/layout/Sidebar/UserNavbar'
 import API from '../../utils/api'
 
 const MeditationVideos = () => {
@@ -80,7 +80,7 @@ const MeditationVideos = () => {
       </div>
 
       <div className="relative z-10">
-        <UserSidebar />
+        <UserNavbar />
         
         {/* Main Content */}
         <div className="p-8">

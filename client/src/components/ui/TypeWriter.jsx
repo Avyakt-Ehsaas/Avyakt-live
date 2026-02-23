@@ -9,7 +9,7 @@ export function Typewriter({ texts }) {
 
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % texts.length);
-    }, 2500); // change every 3 seconds
+    }, 1500); 
 
     return () => clearInterval(interval);
   }, [texts]);
