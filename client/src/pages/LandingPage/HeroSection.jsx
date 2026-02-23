@@ -1,8 +1,20 @@
 
 import React,{ useEffect, useRef } from 'react'
 import HeroImage from '../../assets/images/HeroImage.svg'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 const HeroSection = () => {
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    try {
+      navigate("/dashboard");
+       } catch (error) {
+      toast.error("Something went wrong. Please try again later.");
+    }
+  }
 
   return (
    <>
@@ -25,7 +37,9 @@ const HeroSection = () => {
                 Through <span className='text-greenbase-light'>Meditation</span></h1>
                 <p className='text-lg mb-4 font-medium font-dm'>Whether you want to stay focused, feel calmer, or simply feel better — we <br /> help you build a healthier relationship with your mind.</p>
                 <p className='text-greenbase-light text-[1.1rem] font-medium font-dm'>Join the 21-Day Live Meditation Journey</p>
-                <button className='bg-greenbasebg mb-2 text-white font-medium font-dm mt-4 px-4 py-3 rounded-full'>Start Your Journey</button>
+                <button 
+                onClick={handleClick}
+                className='bg-greenbasebg mb-2 text-white font-medium font-dm mt-4 px-4 py-3 rounded-full'>Start Your Journey</button>
                 <div className='flex justify-center'>
                  <div className=" flex justify-center items-center">
           {[1, 2, 3].map((i) => (

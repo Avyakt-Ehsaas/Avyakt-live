@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 import './Testimonial.css';
-import invertedComma from '../../../assets/images/invertedComma.png';
+import invertedComma from '../../../assets/images/InvertedComma.png';
 
 import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules';
 

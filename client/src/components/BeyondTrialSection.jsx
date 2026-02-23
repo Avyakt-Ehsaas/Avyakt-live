@@ -44,10 +44,10 @@ const BeyondTrialSection = () => {
       </div>
 
       <div className="relative max-w-6xl mx-auto px-6 text-center">
-        <h2 className="text-4xl md:text-5xl font-extrabold mb-16 text-gray-900">
-          What to Expect <span className="text-orange-500">Beyond the Trial</span>
+        <h2 className="text-4xl font-inter md:text-5xl font-bold mb-4 text-gray-900">
+          What to Expect <span className="text-greenbase">Beyond the Trial</span>
         </h2>
-        <p className="text-gray-700 mb-12 max-w-3xl mx-auto">
+        <p className="text-gray-700 font-dm leading-[28px] mb-8 max-w-3xl mx-auto">
           After the initial 21 days, the subscription continues with more in-depth exploration of emotional regulation, relationships, creativity, advanced mindfulness techniques, contemplation practices and purposeful living. Participants will practice daily meditations alongside exercises in gratitude, affirmations, and journaling, ensuring a comprehensive transformation of mind and soul.
         </p>
 
@@ -59,11 +59,11 @@ const BeyondTrialSection = () => {
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              className="group relative bg-white/70 backdrop-blur-xl p-8 rounded-3xl border border-orange-100 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_70px_-20px_rgba(251,146,60,0.5)] hover:-translate-y-2 transition-all duration-500 w-full md:w-1/3 text-center"
+              className="group relative bg-white/70 backdrop-blur-xl p-8 rounded-3xl border border-[#C2E0BA] shadow-[0_20px_40px_-15px_rgba(0,0,0,0.15)] hover:shadow-[0_30px_70px_-20px_rgba(0,112,10,0.5)] hover:-translate-y-2 transition-all duration-500 w-full md:w-1/3 text-center"
             >
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-br from-orange-300/20 via-transparent to-amber-300/20 pointer-events-none rounded-3xl"></div>
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-br from-[#71AC61]/30 via-transparent to-[#C2E0BA]/40 opacity-40 pointer-events-none rounded-3xl"></div>
 
-              <h3 className="text-xl font-bold text-orange-500 mb-2">{point.title}</h3>
+              <h3 className="text-xl font-bold text-greenbase mb-2">{point.title}</h3>
               <p className="text-gray-700">{point.description}</p>
             </motion.div>
           ))}
