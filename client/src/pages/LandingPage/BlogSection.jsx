@@ -41,11 +41,11 @@ function BlogSection() {
         }}
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1100px] px-8 sm:px-6 flex flex-col justify-between h-full py-1">
+      <div className="relative z-10 mx-auto w-full max-w-[1100px] px-8 sm:px-6 flex flex-col justify-between h-full py-28">
         
         {/* Heading */}
         <div>
-          <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-medium text-[#191919] leading-tight">
+          <h2 className="text-center text-2xl sm:text-3xl md:text-5xl font-medium text-[#191919] leading-tight">
             Stories & science of{" "}
             <span className="text-greenbase">calm living</span>
           </h2>
@@ -56,19 +56,19 @@ function BlogSection() {
         </div>
 
         {/* TOP ROW */}
-        <div className="flex mt-4 flex-col items-center gap-4 md:flex-row md:justify-center">
+        <div className="flex mt-8 flex-col items-center gap-4 md:flex-row md:justify-center">
           {blogs.slice(0, 2).map((blog, index) => (
             <div
               key={index}
-             className="flex w-[320px] max-w-[380px] overflow-hidden rounded-xl bg-white shadow-sm"
+             className="flex h-[200px] max-w-[380px] overflow-hidden rounded-xl bg-white shadow-sm"
             >
               {/* Content */}
-              <div className="flex flex-col justify-center py-0 px-3 pr-4 flex-1">
+              <div className="flex flex-col justify-center py-0 px-4 pr-12 flex-1">
                 <p className="text-xs font-dm font-medium text-greenbase">
                   {blog.tag}
                 </p>
 
-                <h3 className="mt-1 font-dm text-medium font-semibold text-primary">
+                <h3 className="mt-1 font-dm text-medium font-semibold text-primary leading-[32px]">
                   {blog.title}
                 </h3>
 
@@ -78,7 +78,7 @@ function BlogSection() {
               </div>
 
               {/* Image */}
-              <div className="w-28 h-full">
+              <div className="w-32 h-full">
                 <img
                   src={blog.image}
                   alt="blog"
@@ -90,16 +90,16 @@ function BlogSection() {
         </div>
 
         {/* BOTTOM CARD */}
-        <div className="flex justify-center mt-2">
-          <div className="flex w-[320px] max-w-[380px] overflow-hidden rounded-xl bg-white shadow-sm">
+        <div className="flex justify-center mt-8">
+          <div className="flex h-[200px] max-w-[380px] overflow-hidden rounded-xl bg-white shadow-sm">
             
             {/* Content */}
-            <div className="flex flex-col justify-center py-0 px-3 pr-4 flex-1">
+            <div className="flex flex-col justify-center py-0 pl-4 pr-10 flex-1">
               <p className="text-xs font-dm font-medium text-greenbase">
                 {blogs[2].tag}
               </p>
 
-              <h3 className="mt-1 font-dm text-medium font-semibold text-primary">
+              <h3 className="mt-1 font-dm text-medium font-semibold text-primary leading-[32px]">
                 {blogs[2].title}
               </h3>
 
@@ -109,7 +109,7 @@ function BlogSection() {
             </div>
 
             {/* Image */}
-            <div className="w-28 h-full">
+            <div className="w-32 h-full">
               <img
                 src={blogs[2].image}
                 alt="blog"
@@ -121,7 +121,7 @@ function BlogSection() {
 
         {/* Button */}
         <div className="flex justify-center mt-4">
-          <button className="rounded-full font-dm bg-greenbase-primary px-5 py-2 text-xs text-white transition hover:scale-105">
+          <button className="rounded-full font-dm bg-greenbase-primary px-5 py-3 text-sm text-white transition hover:scale-105">
             See more
           </button>
         </div>
