@@ -25,7 +25,7 @@ function ProgramCard({
       </div>
 
       {/* Right Content */}
-      <div className="flex-1 flex flex-col justify-between mx-4">
+      <div className="flex-1 flex flex-col justify-start py-10 mx-4">
         <div>
           <div className="mt-5">
             <h3 className="font-dm font-semibold text-[22px] leading-[30px] text-primary">
@@ -50,7 +50,7 @@ function ProgramCard({
         </div>
 
         {/* CTA Button */}
-        <button className="w-fit mb-4 font-dm bg-greenbasebg text-white text-[16px] font-medium px-6 py-3 rounded-full hover:opacity-90 transition tracking-wide">
+        <button className="w-fit mt-8 font-dm bg-greenbasebg text-white text-[16px] font-medium px-6 py-3 rounded-full hover:opacity-90 transition tracking-wide">
           {buttonText}
         </button>
       </div>
