@@ -60,7 +60,7 @@ function BlogSection() {
           {blogs.slice(0, 2).map((blog, index) => (
             <div
               key={index}
-             className="flex w-[320px] max-w-[380px] overflow-hidden rounded-xl bg-white shadow-sm"
+             className="flex max-w-[380px] h-[200px] overflow-hidden rounded-xl bg-white shadow-sm"
             >
               {/* Content */}
               <div className="flex flex-col justify-center py-0 px-3 pr-4 flex-1">
@@ -91,7 +91,7 @@ function BlogSection() {
 
         {/* BOTTOM CARD */}
         <div className="flex justify-center mt-2">
-          <div className="flex w-[320px] max-w-[380px] overflow-hidden rounded-xl bg-white shadow-sm">
+          <div className="flex max-w-[380px] h-[200px] overflow-hidden rounded-xl bg-white shadow-sm">
             
             {/* Content */}
             <div className="flex flex-col justify-center py-0 px-3 pr-4 flex-1">
