@@ -16,16 +16,16 @@ function ProgramCard({
      shadow-sm flex flex-col md:flex-row gap-6 mt-[16px] ">
 
       {/* Left Image */}
-      <div className="w-full md:w-[260px] h-[60vh] overflow-hidden" style={{borderRadius : "16px 0 0 16px"}}>
+      <div className="w-full md:w-[260px] h-[450px] overflow-hidden" style={{borderRadius : "16px 0 0 16px"}}>
         <img
           src={image}
           alt="program"
-          className="w-[260px] h-[60vh] object-cover"
+          className="w-[260px] h-[450px] object-cover"
         />
       </div>
 
       {/* Right Content */}
-      <div className="flex-1 flex flex-col justify-between mx-4">
+      <div className="flex-1 flex flex-col justify-start py-10 mx-4">
         <div>
           <div className="mt-5">
             <h3 className="font-dm font-semibold text-[22px] leading-[30px] text-primary">
@@ -50,7 +50,7 @@ function ProgramCard({
         </div>
 
         {/* CTA Button */}
-        <button className="w-fit mb-4 font-dm bg-greenbasebg text-white text-[16px] font-medium px-6 py-3 rounded-full hover:opacity-90 transition tracking-wide">
+        <button className="w-fit mt-8 font-dm bg-greenbasebg text-white text-[16px] font-medium px-6 py-3 rounded-full hover:opacity-90 transition tracking-wide">
           {buttonText}
         </button>
       </div>

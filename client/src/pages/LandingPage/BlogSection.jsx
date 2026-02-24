@@ -60,7 +60,7 @@ function BlogSection() {
           {blogs.slice(0, 2).map((blog, index) => (
             <div
               key={index}
-             className="flex h-[200px] max-w-[380px] overflow-hidden rounded-xl bg-white shadow-sm"
+             className="flex max-w-[380px] h-[200px] overflow-hidden rounded-xl bg-white shadow-sm"
             >
               {/* Content */}
               <div className="flex flex-col justify-center py-0 px-4 pr-12 flex-1">
@@ -91,7 +91,7 @@ function BlogSection() {
 
         {/* BOTTOM CARD */}
         <div className="flex justify-center mt-8">
-          <div className="flex h-[200px] max-w-[380px] overflow-hidden rounded-xl bg-white shadow-sm">
+          <div className="flex max-w-[380px] h-[200px] overflow-hidden rounded-xl bg-white shadow-sm">
             
             {/* Content */}
             <div className="flex flex-col justify-center py-0 pl-4 pr-10 flex-1">
@@ -121,7 +121,7 @@ function BlogSection() {
 
         {/* Button */}
         <div className="flex justify-center mt-4">
-          <button className="rounded-full font-dm bg-greenbase-primary px-5 py-3 text-sm text-white transition hover:scale-105">
+          <button className="rounded-full font-dm bg-greenbase-primary px-5 py-3 text-medium text-white transition hover:scale-105">
             See more
           </button>
         </div>
