@@ -16,11 +16,11 @@ function ProgramCard({
      shadow-sm flex flex-col md:flex-row gap-6 mt-[16px] ">
 
       {/* Left Image */}
-      <div className="w-full md:w-[260px] h-[60vh] overflow-hidden" style={{borderRadius : "16px 0 0 16px"}}>
+      <div className="w-full md:w-[260px] h-[450px] overflow-hidden" style={{borderRadius : "16px 0 0 16px"}}>
         <img
           src={image}
           alt="program"
-          className="w-[260px] h-[60vh] object-cover"
+          className="w-[260px] h-[450px] object-cover"
         />
       </div>
 
