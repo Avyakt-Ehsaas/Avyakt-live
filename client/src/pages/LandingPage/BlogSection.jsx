@@ -121,7 +121,7 @@ function BlogSection() {
 
         {/* Button */}
         <div className="flex justify-center mt-4">
-          <button className="rounded-full font-dm bg-greenbase-primary px-5 py-2 text-xs text-white transition hover:scale-105">
+          <button className="rounded-full font-dm bg-greenbase-primary px-5 py-3 text-medium text-white transition hover:scale-105">
             See more
           </button>
         </div>
