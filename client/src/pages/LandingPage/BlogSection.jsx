@@ -56,7 +56,7 @@ function BlogSection() {
         </div>
 
         {/* TOP ROW */}
-        <div className="flex mt-4 flex-col items-center gap-4 md:flex-row md:justify-center">
+        <div className="flex mt-8 flex-col items-center gap-4 md:flex-row md:justify-center">
           {blogs.slice(0, 2).map((blog, index) => (
             <div
               key={index}
@@ -90,7 +90,7 @@ function BlogSection() {
         </div>
 
         {/* BOTTOM CARD */}
-        <div className="flex justify-center mt-2">
+        <div className="flex justify-center mt-8">
           <div className="flex max-w-[380px] h-[200px] overflow-hidden rounded-xl bg-white shadow-sm">
             
             {/* Content */}
