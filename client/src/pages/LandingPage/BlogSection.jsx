@@ -41,7 +41,7 @@ function BlogSection() {
         }}
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1100px] px-8 sm:px-6 flex flex-col justify-between h-full py-1">
+      <div className="relative z-10 mx-auto w-full max-w-[1100px] px-8 sm:px-6 flex flex-col justify-between h-full py-28">
         
         {/* Heading */}
         <div>
