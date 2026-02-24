@@ -67,7 +67,7 @@ const CTAFooter = () => {
         </div>
             </div>
          <div className="h-20 flex items-center justify-center mt-4 ml-3">
-           <button className="bg-[#6DBE7B]  hover:bg-[#5cad6a] transition px-8 py-3 rounded-full font-medium whitespace-nowrap">
+           <button className="bg-[#71AC61] font-dm hover:bg-[#5cad6a] transition px-8 py-3 rounded-full font-medium whitespace-nowrap">
             Sign up
           </button>
          </div>
