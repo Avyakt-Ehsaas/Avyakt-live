@@ -78,10 +78,10 @@ function SponsorPage() {
     };
 
     return (
-        <div className="pt-[64px] pb-[50px] min-h-screen bg-white">
+        <div className="pt-14 pb-8 bg-white min-h-screen">
 
             {/* Tabs */}
-            <div className="flex gap-[30px] justify-center rounded-[12px] px-6 py-4 w-fit mx-auto relative text-[18px]">
+            <div className="flex gap-[30px] justify-center rounded-[12px] px-6 py-2 w-fit mx-auto relative text-[18px]">
                 {[
                     { id: "school", label: "For school" },
                     { id: "organisation", label: "For Organisation" },
@@ -108,18 +108,18 @@ function SponsorPage() {
             </div>
 
             <div className="sponsor-page">
-                <h1 className="font-[Season_Mix-TRIAL] font-medium text-center text-[56px] leading-[70px] tracking-[0%]">
+                <h1 className="font-season-medium text-center text-[36px] md:text-[48px] leading-[70px] tracking-[0%]">
                     Meditation designed for{" "}
                     <span className="text-greenbase">every stage of life</span>
                 </h1>
 
-                <p className="font-dm text-center text-[20px] leading-[30px] tracking-[0%]">
+                <p className="font-dm text-center text-[18px] 2xl:text-[20px] leading-[24px] tracking-[0%]">
                     Personalized mindfulness journeys for kids, youth, and adults — helping build <br />
                     focus, emotional balance, and lasting calm.
                 </p>
             </div>
             {/* Dynamic Card */}
-            <div className="mt-6">
+            <div className="mt-4">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={activeTab}

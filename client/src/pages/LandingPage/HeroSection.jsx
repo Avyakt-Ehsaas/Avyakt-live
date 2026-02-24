@@ -30,16 +30,16 @@ const HeroSection = () => {
     
       <div className="absolute inset-0 flex items-center justify-center z-40">
 
-        <div className="text-white text-center md:mt-[1rem]">
-              <h1 className='mb-3 mx-18 md:mx-0 md:text-5xl text-3xl/12 font-semibold font-rubik'>Discover Your {" "}
+        <div className="text-white font-season-medium text-center md:mt-[1rem]">
+              <h1 className='mb-3 mx-18 md:mx-0 md:text-5xl text-3xl/12'>Discover Your {" "}
                 <span className='text-greenbase-light'>Avyakt Potential</span> 
                 <br />
                 Through <span className='text-greenbase-light'>Meditation</span></h1>
-                <p className='text-lg mb-4 font-medium font-dm'>Whether you want to stay focused, feel calmer, or simply feel better — we <br /> help you build a healthier relationship with your mind.</p>
+                <p className='text-lg mb-4 font-medium font-dm'>Whether you want to stay focused, feel calmer, or simply feel better we <br /> help you build a healthier relationship with your mind.</p>
                 <p className='text-greenbase-light text-[1.1rem] font-medium font-dm'>Join the 21-Day Live Meditation Journey</p>
                 <button 
                 onClick={handleClick}
-                className='bg-greenbasebg mb-2 text-white font-medium font-dm mt-4 px-4 py-3 rounded-full'>Start Your Journey</button>
+                className='bg-greenbasebg mb-2 text-white font-semibold font-dm mt-4 px-4 py-3 rounded-full'>Start Your Journey</button>
                 <div className='flex justify-center'>
                  <div className=" flex justify-center items-center">
           {[1, 2, 3].map((i) => (

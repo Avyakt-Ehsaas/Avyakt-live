@@ -1,15 +1,6 @@
-import React, { useState, useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-
-import './Testimonial.css';
-import invertedComma from '../../../assets/images/InvertedComma.png';
-
-import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules';
+import React, { useState } from "react";
+import Slider from "react-slick";
+import invertedComma from "../../../assets/images/InvertedComma.png";
 
 const testimonials = [
   {
@@ -39,134 +30,159 @@ const testimonials = [
     text:
       "The mindfulness techniques have been a game-changer for my focus and stress levels.",
     author: "Emily, USA",
-  }
+  },
+  {
+    id: 6,
+    text: "Your app brings so much peace and tolerance to our home.",
+    author: "Rachael, UK",
+  },
+  {
+    id: 7,
+    text: "I came to learn that the storyline in my head was holding me back.",
+    author: "Peter, Belgium",
+  },
+  {
+    id: 8,
+    text:
+      "Headspace provides me with a connection to myself and a disconnection from negative thoughts.",
+    author: "Keri, UK",
+  },
+  {
+    id: 9,
+    text:
+      "Changing my daily habits has allowed me to grow and change my life.",
+    author: "David, London",
+  },
+  {
+    id: 10,
+    text:
+      "The mindfulness techniques have been a game-changer for my focus and stress levels.",
+    author: "Emily, USA",
+  },
 ];
 
 function TestimonialCarousel() {
-  const [activeCard, setActiveCard] = useState(2);
+  const [activeCard, setActiveCard] = useState(0);
 
-  const prevRef = useRef(null);
-  const nextRef = useRef(null);
+  //circular distance between two indexes in an array of given length
+  const getDistance = (index, active, length) => {
+    const diff = Math.abs(index - active);
+    return Math.min(diff, length - diff);
+  };
+
+  const settings = {
+    className: "center",
+    centerMode: true,
+    infinite: true,
+    centerPadding: "0px",
+    dots: false,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    arrows: false,
+
+    autoplay: true,
+    autoplaySpeed: 2500,
+    speed: 700,
+    cssEase: "ease-in-out",
+
+    pauseOnHover: true,
+    pauseOnFocus: true,
+
+    beforeChange: (oldIndex, newIndex) => {
+      setActiveCard(newIndex % testimonials.length);
+    },
+  };
 
   return (
-    <div className="bg-white min-h-screen py-12 text-[#191919]">
-
+    <div className="bg-white min-h-screen py-12 pt-20 text-[#191919]">
       {/* Heading */}
-      <div className="text-center max-w-3xl mx-auto px-4">
-        <h1 className="text-3xl md:text-5xl mb-6">
+      <div className="text-center max-w-3xl mx-auto px-4 font-season-medium">
+        <h1 className="text-3xl md:text-5xl mb-3">
           Stories from our <span className="text-greenbase">community.</span>
         </h1>
-        <p className="font-dm leading-[30px]">
-          From students to working professionals, thousands are using small <br />
+        <p className="font-dm leading-[24px]">
+          From students to working professionals, thousands are using small{" "}
+          <br />
           daily practices to improve focus and emotional wellbeing.
         </p>
       </div>
 
-      {/* Swiper */}
-      <Swiper
-        effect={'coverflow'}
-        centeredSlides={true}
-        centeredSlidesBounds={true}
-        slidesPerView={5}
-        spaceBetween={-40}
-        loop={true}
-        speed={1000}
+      {/* Carousel */}
+      <div className="slider-container max-w-7xl mx-auto mt-8 px-4 overflow-hidden">
+        <Slider {...settings}>
+          {testimonials.map((testimonial, index) => {
+            const distance = getDistance(
+              index,
+              activeCard,
+              testimonials.length
+            );
 
-        // Mouse + touch support
-        simulateTouch={true}
-        touchRatio={1.5}
-        touchAngle={45}
-        resistanceRatio={0.85}
-        followFinger={true}
-        threshold={5}
+            const clamped = Math.min(distance, 3);
+            const isActive = distance === 0;
 
-        // Bind navigation refs before init
-        onBeforeInit={(swiper) => {
-          swiper.params.navigation.prevEl = prevRef.current;
-          swiper.params.navigation.nextEl = nextRef.current;
-        }}
+            // proportional lift (far = more up)
+            const translateY = -clamped * 12;
 
-        // Fix navigation after mount
-        onInit={(swiper) => {
-          swiper.slideToLoop(2, 0);
+            //  scale + opacity
+            const scale = 1 - clamped * 0.08;
+            const opacity = 1 - clamped * 0.25;
 
-          setTimeout(() => {
-            if (swiper.params.navigation) {
-              swiper.params.navigation.prevEl = prevRef.current;
-              swiper.params.navigation.nextEl = nextRef.current;
+            return (
+              <div key={testimonial.id} className="px-2">
+                <div
+                  style={{
+                    transform: `translateY(${translateY}px) scale(${scale})`,
+                    opacity: opacity,
+                  }}
+                  className={`
+                    transition-all duration-500 rounded-2xl py-6 px-4 h-[260px]
+                    flex flex-col justify-between mb-4 mt-4
+                    ${isActive
+                      ? "bg-[#A7CFA2] shadow-xl z-10"
+                      : "bg-[#F3F6F2]"}
+                  `}
+                >
+                  {/* Quote */}
+                  <img
+                    src={invertedComma}
+                    alt=""
+                    className={`w-10 ${isActive ? "" : "opacity-40"}`}
+                  />
 
-              swiper.navigation.destroy();
-              swiper.navigation.init();
-              swiper.navigation.update();
-            }
-          });
-        }}
+                  {/* Text */}
+                  <p
+                    className={`
+                      font-inter text-sm font-semibold leading-[20px]
+                      ${isActive ? "text-primary" : "text-gray-400"}
+                    `}
+                  >
+                    {testimonial.text}
+                  </p>
 
-        navigation={{
-          prevEl: prevRef.current,
-          nextEl: nextRef.current,
-        }}
+                  {/* Author */}
+                  <div className="mt-4">
+                    <p
+                      className={`text-sm ${
+                        isActive
+                          ? "text-[#1E1E1E] font-semibold"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      {testimonial.author}
+                    </p>
 
-        onSlideChange={(swiper) => setActiveCard(swiper.realIndex)}
-
-        autoplay={{
-          delay: 2800,
-          disableOnInteraction: false,
-        }}
-
-        coverflowEffect={{
-          rotate: 0,
-          stretch: 0,
-          depth: 250,
-          modifier: 1.6,
-          slideShadows: false,
-        }}
-
-        pagination={{
-          el: '.swiper-pagination',
-          clickable: true,
-        }}
-
-        modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
-        className="swiper_container"
-      >
-        {testimonials.map((testimonial, index) => (
-          <SwiperSlide key={testimonial.id}>
-            <div
-              className={`testimonial-card ${
-                activeCard === index
-                  ? 'bg-greenbase'
-                  : 'bg-[#C2E0BA]/50'
-              }`}
-            >
-              <img
-                src={invertedComma}
-                alt="quote"
-                className="h-16 w-16 opacity-40"
-              />
-
-              <p className="testimonial-text">{testimonial.text}</p>
-
-              <p className="testimonial-author">
-                — {testimonial.author}
-              </p>
-            </div>
-          </SwiperSlide>
-        ))}
-
-        {/* Custom Controls */}
-        <div className="slider-controler">
-          <div ref={prevRef} className="slider-arrow custom-prev">
-            <ion-icon name="arrow-back-outline"></ion-icon>
-          </div>
-
-          <div className="swiper-pagination"></div>
-
-          <div ref={nextRef} className="slider-arrow custom-next">
-            <ion-icon name="arrow-forward-outline"></ion-icon>
-          </div>
-        </div>
-      </Swiper>
+                    {isActive && (
+                      <p className="text-[10px] text-primary font-inter">
+                        on what he learned when sitting with himself
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </Slider>
+      </div>
     </div>
   );
 }
