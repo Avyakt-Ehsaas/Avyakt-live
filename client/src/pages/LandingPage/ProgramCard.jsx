@@ -12,15 +12,15 @@ function ProgramCard({
 
 }) {
   return (
-    <div className="max-w-[1118px] mx-auto bg-white border border-gray-200 rounded-[20px]
-     shadow-sm p-6 flex flex-col md:flex-row gap-6 mt-[20px] ">
+    <div className="max-w-[85%] mx-auto bg-white border border-gray-200 rounded-[20px]
+     shadow-sm flex flex-col md:flex-row gap-6 mt-[16px] ">
 
       {/* Left Image */}
-      <div className="w-full md:w-[280px] h-[380px] overflow-hidden rounded-[16px]">
+      <div className="w-full md:w-[260px] h-[60vh] overflow-hidden" style={{borderRadius : "16px 0 0 16px"}}>
         <img
           src={image}
           alt="program"
-          className="w-[280px] h-[380px] object-cover"
+          className="w-[260px] h-[60vh] object-cover"
         />
       </div>
 
@@ -28,29 +28,29 @@ function ProgramCard({
       <div className="flex-1 flex flex-col justify-between mx-4">
         <div>
           <div className="mt-5">
-            <h3 className="font-rubik text-[24px] font-[400] leading-[40px] text-[#191919]">
+            <h3 className="font-dm font-semibold text-[22px] leading-[30px] text-primary">
               {title}
             </h3>
 
-            <p className="mt-0 text-[16px] leading-[26px] text-gray-600">
+            <p className="mt-2 font-dm text-[16px] leading-[24px] text-primary">
               {description}
             </p>
           </div>
 
           {/* Bullet Points */}
-          <ul className="font-dm mt-7 space-y-2 text-[16px] leading-[20px] text-gray-800">
+          <ul className="font-dm mt-5 space-y-2 text-[16px] leading-[16px] text-primary">
             {points.map((point, index) => (
               <li key={index}>• {point}</li>
             ))}
           </ul>
 
-          <p className="mt-8 text-[15px] leading-[24px] text-gray-600">
+          <p className=" mt-10 font-dm  text-[16px] leading-[24px] text-primary">
             {footerText}
           </p>
         </div>
 
         {/* CTA Button */}
-        <button className="w-fit bg-greenbasebg text-white text-[16px] font-medium px-6 py-3 rounded-full hover:opacity-90 transition">
+        <button className="w-fit mb-4 font-dm bg-greenbasebg text-white text-[16px] font-medium px-6 py-3 rounded-full hover:opacity-90 transition tracking-wide">
           {buttonText}
         </button>
       </div>

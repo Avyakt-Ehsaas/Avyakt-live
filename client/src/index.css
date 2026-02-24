@@ -5,10 +5,9 @@
 @import "tailwindcss";
 @import "./Fonts.css";
 
-
 body {
-  font-family: var(--font-rubik);
-  /* font-family: var(--font-dm); */
+   font-family: 'SeasonMix', serif;  
+   /* font-family: var(--font-dm); */
 }
 
 /* ====== GLOBAL GREEN SCROLLBAR ====== */
@@ -21,11 +20,19 @@ body {
   --text-greenbase : #71ac61;
   --bg-greenbase : #C2E0BA;
   --font-inter : "Inter", sans-serif;
+  --bg-greenbase-primary : #71ac61;
 
   /* Custom colors */
   --secondary-Text: #696969;
   --primary-Text: #191919;
 }
+
+
+.bg-greenbase-primary {
+  background-color: var(--bg-greenbase-primary);
+}
+
+
 
 .text-secondary {
   color: var(--secondary-Text);

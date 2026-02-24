@@ -56,7 +56,7 @@ const HeroText = () => {
       <div className="text-center w-[732px]">
         <h1 
         ref={textRef}
-        className="text-2xl md:text-6xl font-semibold z-50 text-[#191919] tracking-tight">
+        className="text-2xl md:text-6xl font-semibold z-50 text-[#191919] tracking-tight font-season-medium">
           Introducing
         </h1>
 
