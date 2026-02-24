@@ -72,7 +72,7 @@ const CTAFooter = () => {
           </button>
          </div>
           </div>
-
+ </div>
         {/* Footer */}
         <div className="absolute bottom-4 w-full flex flex-col items-center">
 
@@ -109,6 +109,7 @@ const CTAFooter = () => {
           <img src={avyaktFooter} alt="Avyakt Footer Logo" className="w-full -z-15 absolute bottom-0 left-1/2 transform -translate-x-1/2" />
          </div>
       </div>
+     
     </section>
   );
 };
