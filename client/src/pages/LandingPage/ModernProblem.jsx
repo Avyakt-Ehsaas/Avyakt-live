@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import Earth from "../../assets/images/earth.png";
+import Group24 from "../../assets/images/Group 24.svg"
+import Group26 from "../../assets/images/Group 26.svg"
+import Group27 from "../../assets/images/Group 27.svg"
+
+
 
 const ModernProblem = () => {
   const [showCards, setShowCards] = useState(false);
 
   return (
-    <section className="w-full h-[110vh] bg-white overflow-hidden flex items-center border-2">
-      <div className="relative mx-auto w-full grid grid-cols-2 h-full border-2 border-amber-500">
+    <section className="w-full h-[110vh] bg-white overflow-hidden flex items-center">
+      <div className="relative mx-auto w-full grid grid-cols-2 h-full">
 
         {/* LEFT SIDE */}
         <div className=" overflow-hidden ">
@@ -35,6 +40,9 @@ const ModernProblem = () => {
               </div>
             </div>
           </div>
+         {showCards && <div className="absolute left-[28%] top-[15%]">
+            <img src={Group24} className="h-80" />
+          </div>}
           <img
             src={Earth}
             alt="Earth"
@@ -118,6 +126,12 @@ const ModernProblem = () => {
           </div>
 
         </div>
+       {showCards &&<> <div className="absolute left-[38%] top-[20%]">
+          <img src={Group26} className="h-90" />
+        </div>
+        <div className="absolute left-[45%] top-[52%]">
+          <img src={Group27} className="h-70" />
+        </div></>}
       </div>
     </section>
   );
