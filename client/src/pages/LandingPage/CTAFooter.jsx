@@ -1,6 +1,6 @@
 import React from "react";
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
-import bgImg from "../../assets/images/BGFooterImage.png";
+import LowerCTA from '../../assets/images/LowerCTA.png'
 import DarkLogo from "../../assets/images/LogoDark.svg";
 import avyaktFooter from '../../assets/images/avyaktFooterWatermark.svg';
 
@@ -10,22 +10,21 @@ const CTAFooter = () => {
 
       {/* Background Image */}
       <div
-        className="absolute -bottom-[280px] inset-0 bg-cover bg-center"
+        className="absolute -bottom-[240px] inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url(${bgImg})`,
+          backgroundImage: `url(${LowerCTA})`,
         }}
-      />
-      <div
-        className="absolute inset-0"
+      /> 
+       {/* <div
+        className="absolute inset-0 top-[-280px]"
         style={{
-          background:
-            "linear-gradient(180deg, rgba(196, 197, 195, 0.1) 0%, rgba(216, 223, 214, 0.12) 0%, transparent 90%)",
+          background: "linear-gradient(to bottom, rgba(235, 244, 232, 0.1) 0%, rgba(244, 249, 244, 2) 5%, transparent 80%)",
         }}
-      />
+      /> */}
       <div
         className="absolute inset-0 bottom-[-200px]"
         style={{
-          background: "linear-gradient(to top, rgba(235, 244, 232, 0.1) 0%, rgba(244, 249, 244, 2) 25%, transparent 80%)",
+          background: "linear-gradient(to top, rgba(235, 244, 232, 0.1) 0%, rgba(244, 249, 244, 2) 25%, transparent 100%)",
         }}
       />
 

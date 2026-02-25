@@ -91,7 +91,7 @@ function SponsorPage() {
                     <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
-                        className={`relative text-[18px] font-dm text-gray-700 pb-2 ${activeTab === tab.id ? "text-greenbase" : ""}`}
+                        className={`relative text-[16px] font-semibold font-dm text-gray-700 pb-2 ${activeTab === tab.id ? "text-greenbase" : ""}`}
 
                     >
                         {tab.label}

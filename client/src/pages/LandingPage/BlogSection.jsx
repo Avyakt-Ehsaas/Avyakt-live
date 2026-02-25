@@ -4,6 +4,7 @@ import kidImg from "../../assets/images/schoolblog2.png";
 import youthImg from "../../assets/images/organisationblog2.png";
 import calmImg from "../../assets/images/individualblog2.png";
 import bgImg from "../../assets/images/blog_background_image.png";
+import UpperCta from '../../assets/images/upperCTA.png'
 
 function BlogSection() {
   const blogs = [
@@ -30,17 +31,24 @@ function BlogSection() {
   return (
     <section
       className="relative w-full min-h-screen flex items-center bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${bgImg})` }}
+      style={{ backgroundImage: `url(${UpperCta})` }}
     >
       {/* Overlay */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, rgba(246, 249, 245, 0.8) 0%, rgba(250, 245, 245, 0.1) 90%)",
+            "linear-gradient(180deg, rgba(246, 249, 245, 0.8) 0%, rgba(250, 245, 245, 0.1) 100%)",
         }}
-      />
+      /> <div className="absolute bottom-0 left-0 w-full h-8 pointer-events-none backdrop-blur-[1px] bg-gradient-to-b from-transparent via-white/1 to-transparent" />
 
+          {/* <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(1, 1, 1, 0.1) 80%, rgba(216, 223, 214, 0.12) 0%, transparent 90%)",
+        }}
+      /> */}
       <div className="relative z-10 mx-auto w-full max-w-[1100px] px-8 sm:px-6 flex flex-col justify-between h-full py-28">
         
         {/* Heading */}
