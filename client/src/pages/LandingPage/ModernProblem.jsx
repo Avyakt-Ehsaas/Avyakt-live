@@ -11,7 +11,8 @@ const ModernProblem = () => {
 
   return (
     <section className="w-full h-[110vh] bg-white overflow-hidden flex items-center">
-      <div className="relative mx-auto w-full grid grid-cols-2 h-full">
+
+      <div className="relative  mx-auto w-[1180px] grid grid-cols-2 h-full">
 
         {/* LEFT SIDE */}
         <div className=" overflow-hidden ">
@@ -43,11 +44,13 @@ const ModernProblem = () => {
          {showCards && <div className="absolute left-[28%] top-[15%]">
             <img src={Group24} className="h-80" />
           </div>}
-          <img
+         <div className="w-40 h-40">
+           <img
             src={Earth}
             alt="Earth"
             className="max-w-none object-cover"
           />
+         </div>
 
           {/* LEFT CARD */}
         </div>
