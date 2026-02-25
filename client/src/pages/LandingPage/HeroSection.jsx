@@ -31,7 +31,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 flex items-center justify-center z-40">
 
         <div className="text-white font-season-medium text-center md:mt-[1rem]">
-              <h1 className='mb-3 mx-18 md:mx-0 md:text-5xl text-3xl/12'>Discover Your {" "}
+              <h1 className='mb-3 mx-18 md:mx-0 md:text-5xl 3xl:text-6xl text-3xl/12'>Discover Your {" "}
                 <span className='text-greenbase-light'>Avyakt Potential</span> 
                 <br />
                 Through <span className='text-greenbase-light'>Meditation</span></h1>

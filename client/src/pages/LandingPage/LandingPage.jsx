@@ -12,6 +12,7 @@ import SponsorPage from "./SponserPage.jsx";
 import BlogSection from "./BlogSection.jsx";
 import Carousel from "./Testimonials/Carousel.jsx";
 import CTAFooter from "./CTAFooter.jsx";
+import FinalCTA from "./FinalCTA.jsx";
 
 const LandingPage = () => {
   const heroRef = useRef(null);
@@ -42,8 +43,9 @@ const LandingPage = () => {
       <ModernProblem />
       <SponsorPage />
       <TestimonialCarousel />
-      <BlogSection />
-      <CTAFooter />
+      {/* <BlogSection />
+      <CTAFooter /> */}
+      <FinalCTA />
     </div>
   );
 };
