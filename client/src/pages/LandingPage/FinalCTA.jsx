@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn ,FaYoutube } from "react-icons/fa";
 
 import FullCTA from '../../assets/images/FullCTA.png'
 import kidImg from "../../assets/images/schoolblog2.png";
@@ -206,7 +206,7 @@ const FinalCTA = () => {
 
                                 <div className="flex justify-center gap-16">
                                     {/* Nav */}
-                                    <div className="flex justify-center text-[#191919]  font-dm font-semibold gap-8 md:gap-16 text-xs md:text-sm mb-6 flex-wrap tracking-wide">
+                                    <div className="flex justify-center text-[#191919]  font-dm font-semibold gap-8 md:gap-24 text-xs md:text-sm mb-6 flex-wrap tracking-wide">
                                         <a href="#" className="hover:text-[#71AC61]">HOME</a>
                                         <a href="#" className="hover:text-[#71AC61]">THE SCIENCE</a>
                                         <a href="#" className="hover:text-[#71AC61]">PROGRAMS</a>
@@ -216,7 +216,8 @@ const FinalCTA = () => {
                                     </div>
 
                                     {/* Social Icons */}
-                                    <div className="flex gap-6 mb-3 text-lg text-[#191919] ">
+                                    <div className="flex gap-6 mb-3 text-xl text-[#191919] ">
+                                        <FaYoutube className="cursor-pointer hover:text-[#71AC61]" />
                                         <FaFacebookF className="cursor-pointer hover:text-[#71AC61]" />
                                         <FaTwitter className="cursor-pointer hover:text-[#71AC61]" />
                                         <FaInstagram className="cursor-pointer hover:text-[#71AC61]" />

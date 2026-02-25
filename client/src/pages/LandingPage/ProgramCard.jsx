@@ -12,8 +12,8 @@ function ProgramCard({
 
 }) {
   return (
-    <div className="max-w-[85%] mx-auto bg-white border border-gray-200 rounded-[20px]
-     shadow-sm flex flex-col md:flex-row gap-6 mt-[16px] ">
+    <div className="max-w-[1180px] mx-auto bg-white border border-gray-200 rounded-[20px]
+     shadow-sm flex flex-col md:flex-row gap-6 mt-[20px] hover:scale-[1.02] transition-transform duration-300 ease-in-out">
 
       {/* Left Image */}
       <div className="w-full md:w-[260px] h-[450px] overflow-hidden" style={{borderRadius : "16px 0 0 16px"}}>
