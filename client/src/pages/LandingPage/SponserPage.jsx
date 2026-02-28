@@ -78,7 +78,8 @@ function SponsorPage() {
     };
 
     return (
-        <div className="pt-14 pb-8 bg-white min-h-screen">
+        <div className="w-full pt-24 pb-18 bg-white min-h-screen mb-10">
+            <div className="max-w-[1280px] max-h-[450px]  mx-auto px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-24">
 
             {/* Tabs */}
             <div className="flex gap-[30px] justify-center rounded-[12px] px-6 py-2 w-fit mx-auto relative text-[18px]">
@@ -91,7 +92,7 @@ function SponsorPage() {
                     <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
-                        className={`relative text-[16px] font-semibold font-dm text-gray-700 pb-2 ${activeTab === tab.id ? "text-greenbase" : ""}`}
+                        className={`relative cursor-pointer text-[16px] font-semibold font-dm text-primary tracking-wide pb-2 ${activeTab === tab.id ? "text-greenbase" : ""}`}
 
                     >
                         {tab.label}
@@ -101,14 +102,14 @@ function SponsorPage() {
                                 layoutId="activeTabLine"
                                 className="absolute left-0 right-0 -bottom-1 h-[3px] border-b-2 border-greenbase rounded-full"
                                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                            />
+                                />
                         )}
                     </button>
                 ))}
             </div>
 
             <div className="sponsor-page">
-                <h1 className="font-season-medium text-center text-[36px] md:text-[48px] leading-[70px] tracking-[0%]">
+                <h1 className="font-season-medium text-center text-[36px] md:text-[42px] 2xl:text-[48px] leading-[60px] 2xl:leading-[72px] text-primary tracking-[0%]">
                     Meditation designed for{" "}
                     <span className="text-greenbase">every stage of life</span>
                 </h1>
@@ -128,6 +129,7 @@ function SponsorPage() {
                     </motion.div>
                 </AnimatePresence>
             </div>
+        </div>
         </div>
     );
 }
