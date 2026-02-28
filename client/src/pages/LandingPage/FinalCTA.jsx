@@ -235,9 +235,6 @@ const FinalCTA = () => {
                             </div>
                         </div>
 
-
-
-
                     </div>
 
                 </div>

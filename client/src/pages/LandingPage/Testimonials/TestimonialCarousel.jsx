@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 import invertedComma from "../../../assets/images/InvertedComma.png";
 
+
 const testimonials = [
   {
     id: 1,
@@ -94,8 +95,12 @@ function TestimonialCarousel() {
   };
 
   return (
-    <div className="bg-white min-h-screen py-12 pt-20 text-[#191919]">
+    <div className="bg-white min-h-screen pt-20 text-[#191919]" 
+    >
+      <div className="mt-10 relative py-12">
+   <div className="absolute inset-0 bg-[linear-gradient(to_right,#9ca3af12_1px,transparent_1px),linear-gradient(to_bottom,#9ca3af12_1px,transparent_1px)] bg-[size:60px_60px]" />
       {/* Heading */}
+
       <div className="text-center max-w-3xl mx-auto px-4 font-season-medium">
         <h1 className="text-3xl md:text-5xl mb-3">
           Stories from our <span className="text-greenbase">community.</span>
@@ -183,6 +188,9 @@ function TestimonialCarousel() {
           })}
         </Slider>
       </div>
+    
+      </div>
+    
     </div>
   );
 }
