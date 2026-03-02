@@ -17,17 +17,17 @@ const ModernProblem = () => {
       title: "Growing Minds Under Constant Stimulation",
       description: "Young nervous systems are overloaded before they learn to regulate themselves.",
       image: GlobeCard1,
-      style: { top: "-40px", left: "15px" }  
+      style: { top: "-4rem", left: "47px" }  
     },{
       title: "Carrying Stress everyday",
       description: "Stress accumulates faster than it’s released. Peace becomes harder to access with age.",
       image: GlobeCard2 ,
-      style: { top: "2%", right: "20%" }
+      style: { top: "-5px", right: "11%" }
     },{
       title: "Minds That Never Switch Off",
       description: "Mental noise has become the new normal. The stress, pressure creates anxiety and decision fatigue. ",
       image: GlobeCard3,
-      style: { bottom: "0", right: "15%" }
+      style: { bottom: "-33px", right: "5%" }
     }
   ];
 
@@ -66,14 +66,14 @@ const ModernProblem = () => {
         </div>
       {showCards && (
         <>
-          <div className="absolute left-[25%] top-[7%]"> 
+          <div className="absolute rotate-[20deg] left-[26%] top-[2%]"> 
             <img src={Group24} className="h-42" />
           </div>
-          <div className="absolute rotate-[12deg] left-[32%] top-[10%]"> 
-            <img src={Group26} className="h-55" />
+          <div className="absolute rotate-[8deg] left-[34%] top-[7%]"> 
+            <img src={Group26} className="h-69" />
           </div>  
-          <div className="absolute left-[38%] top-[60%]">
-            <img src={Group27} className="h-40" />
+          <div className="absolute left-[41%] top-[65%]">
+            <img src={Group27} className="h-50" />
           </div>
         </>
       )}
