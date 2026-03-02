@@ -44,7 +44,7 @@ import EmailCampaign from "./pages/admin/EmailCampaign";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import ContactUs from "./pages/ContactUs";
 import AboutUs from "./pages/AboutUs/AboutUs";
-import Programs from "./pages/Programs";
+import Programs from "./pages/ProgramsPage/Programs"
 import Research from "./pages/Research";
 import TextLoader from "./components/ui/TextLoader";
 import MeditationVideos from "./pages/user/MeditationVideos";
@@ -62,6 +62,7 @@ import PlayVideo from "./pages/VideoPlay/PlayVideo";
 import SpritualGenAi from "./pages/Spritual/SpritualGenAi";
 import Room from "./pages/user/Room";
 import SessionsAndRoom from "./pages/user/SessionsAndRoom";
+import ProgramPage from "./pages/ProgramsPage/ProgramPage";
 
 
 
@@ -129,7 +130,7 @@ function App() {
             />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/about" element={<AboutUs />} />
-            <Route path="/programs" element={<Programs />} />
+            <Route path="/programs" element={<ProgramPage /> } />
             <Route path="/research" element={<Research />} />
 
             <Route path="/meditation-videos" element={<MeditationVideos />} />
