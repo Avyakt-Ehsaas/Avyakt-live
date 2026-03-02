@@ -1,143 +1,121 @@
 import React, { useState } from "react";
 import Earth from "../../assets/images/earth.png";
+import Globe from "../../assets/images/Globe.png";
 import Group24 from "../../assets/images/Group 24.svg"
 import Group26 from "../../assets/images/Group 26.svg"
 import Group27 from "../../assets/images/Group 27.svg"
-
+import GlobeCard1 from "../../assets/images/GlobeCard1.png"
+import GlobeCard2 from "../../assets/images/GlobeCard2.png"
+import GlobeCard3 from "../../assets/images/GlobeCard3.png"
 
 
 const ModernProblem = () => {
   const [showCards, setShowCards] = useState(false);
+  
+  const cards = [
+    {
+      title: "Growing Minds Under Constant Stimulation",
+      description: "Young nervous systems are overloaded before they learn to regulate themselves.",
+      image: GlobeCard1,
+      style: { top: "-40px", left: "15px" }  
+    },{
+      title: "Carrying Stress everyday",
+      description: "Stress accumulates faster than it’s released. Peace becomes harder to access with age.",
+      image: GlobeCard2 ,
+      style: { top: "2%", right: "20%" }
+    },{
+      title: "Minds That Never Switch Off",
+      description: "Mental noise has become the new normal. The stress, pressure creates anxiety and decision fatigue. ",
+      image: GlobeCard3,
+      style: { bottom: "0", right: "15%" }
+    }
+  ];
 
   return (
-    <section className="w-full h-[110vh] bg-white overflow-hidden flex items-center">
-
-      <div className="relative  mx-auto w-[1180px] grid grid-cols-2 h-full">
-
-        {/* LEFT SIDE */}
-        <div className=" overflow-hidden ">
-          <div
-            className={`max-w-[520px] bg-green-50 rounded-3xl h-60 border-green-300 ml-16 border-1
-              transition-all duration-700
-              ${showCards ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10 pointer-events-none"}`}
-          >
-            <div className="flex items-center gap-4 pr-4">
-
-              {/* LEFT IMAGE */}
-              <img
-                src="https://images.unsplash.com/photo-1761839258045-6ef373ab82a7?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"   // replace with your image
-                alt="Stimulation"
-                className="w-40 h-60 rounded-2xl object-cover shrink-0"
-              />
-
-              {/* RIGHT TEXT */}
-              <div className="">
-                <h3 className="font-semibold text-xl leading-tight text-right">
-                  Growing Minds Under Constant Stimulation
-                </h3>
-                <p className="text-lg text-gray-600 mt-4 text-right">
-                  Young nervous systems are overloaded before they learn to regulate themselves.
+  <>
+    <div className="min-h-screen py-10 overflow-hidden">
+      <div className="mt-[2rem] h-[480px] w-[1280px] px-[2rem] mx-auto rounded-3xl relative">
+        <div className="flex justify-around relative">
+          <div className="w-[45%]">
+            <div className=" absolute top-30 left-[5%] scale-140 ">
+              <img src={Earth} alt="earth image"  className="h-[320px] w-[380px]"/>
+            </div>
+          </div>
+          <div className="w-[55%] px-4 ">
+              <div className="w-[100%] mt-[10rem] px-8 text-right">
+                <h1 className="text-[48px] font-season leading-[1.05] text-primary">
+                  Modern life overwhelms <br />
+                  <h1 className=""><span className="text-greenbase">every mind.</span></h1>
+                </h1>
+              <div>
+                <p className="mt-2 font-dm text-lg text-primary leading-[20px]">
+                  From early childhood to adulthood, constant stimulation, pressure,
+                  and emotional overload are affecting focus, wellbeing, and inner calm.
                 </p>
+                  <div className="text-right">
+                  <button
+                  onClick={() => setShowCards(!showCards)}
+                  className="mt-2 font-dm  text-right  font-medium underline hover:scale-105 transition-all duration-300 "
+                >
+                  {showCards ? " Hide" : "See what we mean"}
+                </button>
+                  </div>
               </div>
-            </div>
-          </div>
-         {showCards && <div className="absolute left-[28%] top-[15%]">
-            <img src={Group24} className="h-80" />
-          </div>}
-         <div className="w-40 h-40">
-           <img
-            src={Earth}
-            alt="Earth"
-            className="max-w-none object-cover"
-          />
-         </div>
-
-          {/* LEFT CARD */}
-        </div>
-
-        {/* RIGHT SIDE */}
-        <div className="text-right px-8 relative">
-          <div
-            className={`max-w-[520px] bg-green-50 rounded-3xl h-60 border-green-300 ml-32 border-1
-              transition-all duration-700
-              ${showCards ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10 pointer-events-none"}`}
-          >
-            <div className="flex items-center gap-4 pr-4">
-
-              {/* LEFT IMAGE */}
-              <img
-                src="https://images.unsplash.com/photo-1761839258045-6ef373ab82a7?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"   // replace with your image
-                alt="Stimulation"
-                className="w-40 h-60 rounded-2xl object-cover shrink-0"
-              />
-
-              {/* RIGHT TEXT */}
-              <div className="">
-                <h3 className="font-semibold text-xl leading-tight text-right">
-                  Growing Minds Under Constant Stimulation
-                </h3>
-                <p className="text-lg text-gray-600 mt-4 text-right">
-                  Young nervous systems are overloaded before they learn to regulate themselves.
-                </p>
               </div>
-            </div>
           </div>
-          <h1 className="text-6xl leading-[1.05] text-[#0F172A] mt-8">
-            Modern life overwhelms <br />
-            <span className="text-[#16A34A]">every mind.</span>
-          </h1>
-
-          <p className="mt-8 text-lg text-gray-600 leading-relaxed">
-            From early childhood to adulthood, constant stimulation, pressure,
-            and emotional overload are affecting focus, wellbeing, and inner calm.
-          </p>
-
-          {/* BUTTON */}
-          <button
-            onClick={() => setShowCards(!showCards)}
-            className="mt-6 inline-flex items-center gap-2 text-base font-medium underline
-                       hover:scale-105 transition-all duration-300"
-          >
-            {showCards ? "Hide details" : "See what we mean"}
-          </button>
-          <div className="flex justify-end w-full mt-16">
-            <div
-              className={`max-w-[520px] bg-green-50 rounded-3xl h-60 border-green-300 border-1
-              transition-all duration-700
-              ${showCards ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10 pointer-events-none"}`}
-            >
-              <div className="flex items-center gap-4 pr-4">
-
-                {/* LEFT IMAGE */}
-                <img
-                  src="https://images.unsplash.com/photo-1761839258045-6ef373ab82a7?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"   // replace with your image
-                  alt="Stimulation"
-                  className="w-40 h-60 rounded-2xl object-cover shrink-0"
-                />
-
-                {/* RIGHT TEXT */}
-                <div className="">
-                  <h3 className="font-semibold text-xl leading-tight text-right">
-                    Growing Minds Under Constant Stimulation
-                  </h3>
-                  <p className="text-lg text-gray-600 mt-4 text-right">
-                    Young nervous systems are overloaded before they learn to regulate themselves.
-                  </p>
-                </div>
-              </div>
-            </div>
+        </div>
+      {showCards && (
+        <>
+          <div className="absolute left-[25%] top-[7%]"> 
+            <img src={Group24} className="h-42" />
           </div>
+          <div className="absolute rotate-[12deg] left-[32%] top-[10%]"> 
+            <img src={Group26} className="h-55" />
+          </div>  
+          <div className="absolute left-[38%] top-[60%]">
+            <img src={Group27} className="h-40" />
+          </div>
+        </>
+      )}
 
-        </div>
-       {showCards &&<> <div className="absolute left-[38%] top-[20%]">
-          <img src={Group26} className="h-90" />
-        </div>
-        <div className="absolute left-[45%] top-[52%]">
-          <img src={Group27} className="h-70" />
-        </div></>}
+      {showCards && (
+        <>
+          {cards.map((card, index) => (
+            <Card 
+              key={index}
+              title={card.title}
+              description={card.description}
+              image={card.image}
+              style={card.style}
+            />
+          ))}
+        </>
+        )
+        }
+
       </div>
-    </section>
+    </div>
+
+  </>
   );
 };
+
+
+const Card = ({ title, description, image, style }) => {
+  return (
+    <div className="absolute w-[370px] bg-[#C2E0BA]/40 rounded-lg shadow-lg" style={style}>  
+      <div className="flex">
+        <div className="w-[30%]" >
+          <img src={image} alt={title} className="h-[135px]"/>
+        </div>
+      <div className="text-right w-[70%] pr-4"> 
+         <h2 className="text-lg font-semibold mb-4 mt-4">{title}</h2>
+      <p className="text-sm text-gray-600">{description}</p></div>
+      </div>
+
+    </div>
+  );
+} 
+
 
 export default ModernProblem;
