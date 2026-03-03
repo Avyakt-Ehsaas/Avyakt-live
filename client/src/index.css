@@ -21,12 +21,20 @@ body {
   --bg-greenbase : #C2E0BA;
   --font-inter : "Inter", sans-serif;
   --bg-greenbase-primary : #71ac61;
+  --border-greenbase: "#71ac61";
 
   /* Custom colors */
   --secondary-Text: #696969;
   --primary-Text: #191919;
 }
 
+.border-top{
+  border-top: 12px dashed var(--border-greenbase);
+}
+
+.border-greenbase{
+  border-color: var(--border-greenbase);
+}
 
 .bg-greenbase-primary {
   background-color: var(--bg-greenbase-primary);

@@ -27,7 +27,12 @@ const AvyaktSystem = () => {
     <div className="relative w-full overflow-hidden bg-[#F8F9F8]">
 
       {/* Top Background */}
-     <div > <img src={ProgramLowerBg} alt="programbg" className='h-24 w-full' /> </div>
+     <div> 
+        <img src={ProgramLowerBg} alt="programbg" className='h-24 w-full' /> 
+        </div>
+
+      
+
 
       {/* Content */}
       <div className="max-w-6xl mx-auto px-4 py-16 text-center">
@@ -42,30 +47,38 @@ const AvyaktSystem = () => {
         </p>
 
         {/* Steps */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-12">
+        <div className="relative mt-16">
 
-          {steps.map((step, index) => (
-            <div key={index} className="flex flex-col items-center text-center">
+  {/* Dashed Center Line */}
+  <div className="hidden md:block absolute top-[40px] left-[16.66%] right-[16.66%] border-t-2 border-dashed border-[#71ac61]/20 z-0"></div>
 
-              {/* Icon Circle */}
-              <div className="w-20 h-20 rounded-full bg-[#C2E0BA]/20 flex items-center justify-center mb-6">
-                <img src={step.icon} alt={step.title} className="w-10 h-10 object-contain" />
-              </div>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
 
-              {/* Title */}
-              <h3 className="text-xl md:text-2xl font-season font-semibold text-primary">
-                {step.title}
-              </h3>
+    {steps.map((step, index) => (
+      <div key={index} className="flex flex-col items-center text-center">
 
-              {/* Description */}
-              <p className="mt-3 font-dm text-primary text-sm md:text-base max-w-xs">
-                {step.desc}
-              </p>
-
-            </div>
-          ))}
-
+        {/* Circle */}
+        <div className="relative z-10 w-20 h-20 rounded-full bg-[#EAF4E6] flex items-center justify-center mb-6">
+          <img
+            src={step.icon}
+            alt={step.title}
+            className="w-10 h-10 object-contain"
+          />
         </div>
+
+        <h3 className="text-xl md:text-2xl font-season font-semibold text-primary">
+          {step.title}
+        </h3>
+
+        <p className="mt-3 font-dm text-primary text-sm md:text-base max-w-xs">
+          {step.desc}
+        </p>
+
+      </div>
+    ))}
+
+  </div>
+</div>
 
         {/* Button */}
         <button className="mt-16 font-dm bg-greenbase-primary text-white px-8 py-4 rounded-full hover:scale-105 transition-all duration-300">
