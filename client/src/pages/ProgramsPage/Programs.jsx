@@ -3,7 +3,7 @@ import ProgramBg from "../../assets/images/ProgramBg.png";
 
 const Programs = () => {
   return (
-    <div className="relative w-full min-h-screen overflow-hidden">
+    <div className="relative w-full min-h-screen overflow-hidden z-1">
 
       {/* Background Image */}
       <img        
