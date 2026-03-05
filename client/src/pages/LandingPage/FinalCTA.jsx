@@ -9,6 +9,8 @@ import calmImg from "../../assets/images/individualblog2.png";
 import DarkLogo from "../../assets/images/LogoDark.svg";
 import avyaktFooter from '../../assets/images/avyaktFooterWatermark.svg';
 
+import { IoSearch } from "react-icons/io5";
+
 const FinalCTA = () => {
     const blogs = [
         {
@@ -79,19 +81,19 @@ const FinalCTA = () => {
                             {blogs.slice(0, 2).map((blog, index) => (
                                 <div
                                     key={index}
-                                    className="flex max-w-[420px] h-[220px] overflow-hidden rounded-xl bg-white shadow-sm"
+                                    className="flex max-w-[430px] h-[220px] overflow-hidden rounded-xl bg-white shadow-sm"
                                 >
                                     {/* Content */}
-                                    <div className="flex flex-col justify-center py-4 px-4 pr-12 flex-1">
+                                    <div className="flex flex-col justify-center py-4 pl-4 pr-6 flex-1">
                                         <p className="text-[16px] font-dm font-medium text-greenbase">
                                             {blog.tag}
                                         </p>
 
-                                        <h3 className="mt-1 font-dm text-lg font-semibold text-primary leading-[32px]">
+                                        <h3 className="mt-1 pr-10 font-dm text-lg font-semibold text-primary leading-[32px]">
                                             {blog.title}
                                         </h3>
 
-                                        <p className="mt-1 text-[16px] text-[#696969] line-clamp-4">
+                                        <p className="mt-1 text-[16px] font-dm text-[#696969] line-clamp-4">
                                             {blog.desc}
                                         </p>
                                     </div>
@@ -110,10 +112,10 @@ const FinalCTA = () => {
 
                         {/* BOTTOM CARD */}
                         <div className="flex justify-center mt-8">
-                            <div className="flex max-w-[420px] h-[200px] overflow-hidden rounded-xl bg-white shadow-sm">
+                            <div className="flex max-w-[430px] h-[220px] overflow-hidden rounded-xl bg-white shadow-sm">
 
                                 {/* Content */}
-                                <div className="flex flex-col justify-center py-0 pl-4 pr-10 flex-1">
+                                <div className="flex flex-col justify-center py-0 pl-4 pr-6 flex-1">
                                     <p className="text-[16px] font-dm font-medium text-greenbase">
                                         {blogs[2].tag}
                                     </p>
@@ -156,23 +158,23 @@ const FinalCTA = () => {
                             </h1>
 
                             {/* Subtext */}
-                            <p className="max-w-3xl font-dm text-gray-200 mb-8 text-sm md:text-sm leading-relaxed">
+                            <p className="max-w-5xl font-dm text-white mb-8 text-lg leading-[30px]">
                                 Sign up to receive simple and effective meditation, yoga, and other wellness tips from experts with decades of experience. Occasionally, we’ll let you know about our upcoming retreats, too.
                             </p>
 
                             <div className="flex flex-col items-center">
-                                <div className="">
+                                <form>
                                     {/* Form Row 1 */}
                                     <div className="flex flex-col md:flex-row gap-4 w-xl max-w-2xl">
                                         <input
                                             type="text"
                                             placeholder="First Name"
-                                            className="px-5 py-3 rounded-full bg-white/90 text-primary w-full outline-none"
+                                            className="px-5 py-3 rounded-full font-dm font-medium bg-white text-primary w-full outline-none placeholder-[#191919]"
                                         />
                                         <input
                                             type="text"
                                             placeholder="Last Name"
-                                            className="px-5 py-3 rounded-full bg-white/90 text-primary w-full outline-none"
+                                            className="px-5 py-3 rounded-full font-dm font-medium bg-white text-primary w-full outline-none placeholder-[#191919]"
                                         />
                                     </div>
 
@@ -180,8 +182,9 @@ const FinalCTA = () => {
                                     <div className="flex flex-col md:flex-row gap-4 w-xl max-w-2xl mt-4">
                                         <input
                                             type="email"
-                                            placeholder="Enter your email"
-                                            className="px-5 py-3 rounded-full bg-white/90 text-primary w-full outline-none"
+                                            placeholder={`Enter your Email `}
+                                            className="px-5 py-3 rounded-full font-dm font-medium bg-white text-primary w-full outline-none placeholder-[#191919]"
+                                            required
                                         />
                                     </div>
                                     <div className="h-20 flex items-center justify-center mt-4 ml-3">
@@ -189,7 +192,7 @@ const FinalCTA = () => {
                                             Sign up
                                         </button>
                                     </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
 
@@ -226,7 +229,7 @@ const FinalCTA = () => {
                                 </div>
 
                                 {/* Copyright */}
-                                <p className="text-[14px] font-dm mb-8 text-[#191919] font-medium tracking-wide">
+                                <p className="text-[16px] font-dm mb-8 text-[#191919] tracking-wide">
                                     Avyakt©2026. All rights reserved.
                                 </p>
                             </div>

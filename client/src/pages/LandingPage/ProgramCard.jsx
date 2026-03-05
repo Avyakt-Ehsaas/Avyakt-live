@@ -12,20 +12,20 @@ function ProgramCard({
 
 }) {
   return (
-    <div className="max-w-[1180px] h-[350px] mx-auto bg-white border border-gray-200 rounded-[20px]
-     shadow-sm flex flex-col md:flex-row gap-6 mt-[20px] ">
+<div className="max-w-[1180px] mx-auto bg-white border border-gray-200 rounded-[20px]
+shadow-sm flex flex-col md:flex-row mt-[20px] overflow-hidden">
 
-      {/* Left Image */}
-      <div className="w-full md:w-[220px] h-[350px] overflow-hidden" style={{borderRadius : "16px 0 0 16px"}}>
-        <img
-          src={image}
-          alt="program"
-          className="w-[220px] h-[350px] object-cover"
-        />
-      </div>
+     {/* Left Image */}
+<div className="w-full md:w-[220px] " style={{borderRadius: "16px 0 16px 0"}}>
+  <img
+    src={image}
+    alt="program"
+    className="w-full h-full object-cover"
+  />
+</div>
 
       {/* Right Content */}
-      <div className="flex-1 flex flex-col justify-start py-6 mx-4">
+      <div className="flex-1 flex flex-col  justify-start py-6 px-6">
         <div>
           <div className="mt-2">
             <h3 className="font-dm  text-[22px] leading-[30px] text-primary" 
@@ -39,13 +39,13 @@ function ProgramCard({
           </div>
 
           {/* Bullet Points */}
-          <ul className="font-dm font-medium mt-4 space-y-2 text-[20px] leading-[16px] text-primary">
+          <ul className="font-dm font-medium mt-[20px] space-y-2 text-[20px] leading-[30px] text-primary">
             {points.map((point, index) => (
               <li key={index}>• {point}</li>
             ))}
           </ul>
 
-          <p className="mt-4 font-dm font-medium text-[20px] leading-[24px] text-primary">
+          <p className="mt-4 font-dm font-medium text-[20px] mt-6 leading-[30px] text-primary">
             {footerText}
           </p>
         </div>

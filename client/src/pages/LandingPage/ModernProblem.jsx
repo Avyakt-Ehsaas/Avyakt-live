@@ -86,7 +86,7 @@ const Card = ({ title, description, image, style }) => {
       <img
         src={image}
         alt={title}
-        className="w-[120px] h-[180px] max-h-[200px] object-cover rounded-lg"
+        className="w-[120px] max-h-[200px] object-cover rounded-lg"
       />
 
       <div>
@@ -94,7 +94,7 @@ const Card = ({ title, description, image, style }) => {
           {title}
         </h3>
 
-        <p className="text-[16px] text-primary leading-relaxed">
+        <p className="text-[16px] font-dm text-primary leading-relaxed">
           {description}
         </p>
       </div>
