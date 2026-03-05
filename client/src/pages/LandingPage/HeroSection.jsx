@@ -1,27 +1,11 @@
-import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React from "react";
 import HeroImage from "../../assets/images/HeroImage.svg";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import { Typewriter } from "../../components/ui/TypeWriter";
+import LandingSidebar from "./LandingSidebar/LandingSidebar";
 
 const HeroSection = () => {
-
-  const avyaktText = [
-    "अव्यक्त-अहसास",
-    "অব্যক্ত এহসাস",
-    "અવ્યક્ત એહસાસ",
-    "அவ்யக்த் எஹ்ஸாஸ்",
-    "అవ్యక్త్ ఎహ్సాస్",
-    "അവ്യക്ത് എഹ്സാസ്",
-    "اویکت احساس",
-    "অৱ্যক্ত এহসাস",
-    "Avyakt Ahsaas",
-  ];
-
   const navigate = useNavigate();
-  const sectionRef = useRef(null);
-  const [startTyping, setStartTyping] = useState(false);
 
   const handleClick = () => {
     try {
@@ -31,41 +15,16 @@ const HeroSection = () => {
     }
   };
 
-  // 🔥 Scroll animation (Motion replacement for ScrollTrigger)
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start 99%", "start start"],
-  });
-
-  const scale = useTransform(scrollYProgress, [0, 1], [10, 1]);
-  const y = useTransform(scrollYProgress, [0, 1], ["-100%", "0%"]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
-  // Typing trigger like onLeave / onLeaveBack
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.on("change", (value) => {
-      if (value > 0.95) {
-        setStartTyping(true);
-      } else {
-        setStartTyping(false);
-      }
-    });
-
-    return () => unsubscribe();
-  }, [scrollYProgress]);
-
   return (
-    <div className="relative h-[190vh] w-full bg-white overflow-hidden">
-
-      {/* Sticky Hero Section */}
-      <div className="sticky top-0 w-full h-screen overflow-hidden z-10">
+    <div className="relative h-screen w-full bg-white overflow-hidden">
+      <div className="relative w-full h-screen overflow-hidden z-10">
         <img
           src={HeroImage}
           alt="Hero"
-          className="absolute bottom-0 md:-bottom-0 lg:-bottom-0 xl:-bottom-10 right-0 bg-[#191919] w-auto h-auto min-w-full min-h-full object-cover z-0"
+          className="absolute bottom-0 md:-bottom-0 lg:-bottom-0 xl:-bottom-10 right-0 bg-[#191919] w-auto h-auto min-w-full min-h-full object-cover -z-10 pointer-events-none"
         />
 
-        <div className="absolute inset-0 flex items-center justify-center z-40">
+        <div className="absolute inset-0 flex items-center justify-center z-50 cursor-pointer">
 
           <div className="text-white font-season-medium text-center md:mt-[1rem]">
             <h1 className="mb-3 mx-18 md:mx-0 md:text-5xl 3xl:text-6xl text-3xl/12">
@@ -90,7 +49,7 @@ const HeroSection = () => {
 
             <button
               onClick={handleClick}
-              className="bg-greenbasebg mb-2 text-white font-semibold font-dm mt-4 px-4 py-3 rounded-full"
+              className="bg-greenbasebg mb-2 text-white font-semibold font-dm mt-4 px-4 py-3 rounded-full hover:scale-105 transition-transform duration-300"
             >
               Start Your Journey
             </button>
@@ -122,25 +81,6 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-
-      {/* Animated Reveal Section */}
-      <motion.div
-        ref={sectionRef}
-        style={{ scale, y, opacity }}
-        className="relative z-30 min-h-screen overflow-hidden"
-      >
-        <div className="py-[18rem] h-[60vh] md:h-[70vh] flex items-center justify-center bg-white overflow-hidden">
-          <div className="text-center w-[732px]">
-            <h1 className="text-2xl md:text-6xl font-semibold z-50 text-[#191919] tracking-tight font-season-medium">
-              Introducing
-            </h1>
-
-            <h2 className="text-3xl text-greenbase md:text-5xl mt-[3rem]">
-              {startTyping && <Typewriter texts={avyaktText} />}
-            </h2>
-          </div>
-        </div>
-      </motion.div>
     </div>
   );
 };

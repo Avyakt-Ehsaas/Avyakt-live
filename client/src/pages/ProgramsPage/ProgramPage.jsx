@@ -4,6 +4,7 @@ import Programs from './Programs'
 import AvyaktSystem from './AvyaktSystem'
 import ProgramSections from './ProgramSections'
 import StudentPressureSection from './StudentPressureSection'
+import StructureProgram from './StructureProgram'
 
 const ProgramPage = () => {
   return (
@@ -15,6 +16,7 @@ const ProgramPage = () => {
         <AvyaktSystem />
         <ProgramSections />
         <StudentPressureSection />
+        <StructureProgram />
     </>
   )
 }
