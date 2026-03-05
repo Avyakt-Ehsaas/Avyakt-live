@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import LandingSidebar from "./LandingSidebar/LandingSidebar";
 import HeroSection from "./HeroSection.jsx";
 import KidsRestlessSection from "./KidsRestlessSection.jsx";
@@ -9,35 +9,42 @@ import ModernProblem from "./ModernProblem.jsx";
 import TestimonialCarousel from "./Testimonials/TestimonialCarousel.jsx";
 import SponsorPage from "./SponserPage.jsx";
 import FinalCTA from "./FinalCTA.jsx";
+import HeroText from "./HeroText.jsx";
 
 const LandingPage = () => {
-  const heroRef = useRef(null);
   const [isHeroVisible, setIsHeroVisible] = useState(true);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsHeroVisible(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      // If user has scrolled more than 100px, they're past HeroSection
+      if (scrollPosition > 100) {
+        setIsHeroVisible(false);
+      } else {
+        setIsHeroVisible(true);
+      }
+    };
 
-    if (heroRef.current) observer.observe(heroRef.current);
-    return () => observer.disconnect();
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen overflow-hidden ">
       <LandingSidebar isDarkBg={isHeroVisible} />
 
-      <div ref={heroRef}>
+      <div className="fixed w-full min-h-screen">
         <HeroSection />
       </div>
-      <LoginModal />
+      
+        <HeroText  />
+      <div className="relative bg-white">
+     <LoginModal />
       <ModernProblem />
       <SponsorPage />
       <TestimonialCarousel />
       <FinalCTA />
+      </div>
     </div>
 
   );

@@ -39,12 +39,12 @@ const FinalCTA = () => {
 
                 {/* Overlay */}
                 <div
-                    className="absolute inset-0"
-                    style={{
-                        background:
-                            "linear-gradient(180deg, rgba(246, 249, 245, 0.9) 20%, rgba(250, 245, 245, 0.1) 30%)",
-                    }}
-                />
+  className="absolute inset-0 pointer-events-none"
+  style={{
+    background:
+      "linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 15%, rgba(255,255,255,0.6) 35%, rgba(255,255,255,0) 60%)",
+  }}
+/>
 
 
                 {/* Bottom Overlay */}
@@ -64,12 +64,12 @@ const FinalCTA = () => {
 
                         {/* Heading */}
                         <div>
-                            <h2 className="text-center text-2xl sm:text-3xl md:text-5xl font-medium text-[#191919] leading-tight">
+                            <h2 className="text-center text-2xl sm:text-4xl md:text-5xl font-medium text-[#191919] leading-tight">
                                 Stories & science of{" "}
                                 <span className="text-greenbase">calm living</span>
                             </h2>
 
-                            <p className="mt-2 text-center text-primary font-dm">
+                            <p className="mt-2 text-[18px] font-medium text-center text-primary font-dm">
                                 Short reads on mindfulness, emotional wellbeing, and modern life for every age.
                             </p>
                         </div>
@@ -79,19 +79,19 @@ const FinalCTA = () => {
                             {blogs.slice(0, 2).map((blog, index) => (
                                 <div
                                     key={index}
-                                    className="flex max-w-[380px] h-[200px] overflow-hidden rounded-xl bg-white shadow-sm"
+                                    className="flex max-w-[420px] h-[220px] overflow-hidden rounded-xl bg-white shadow-sm"
                                 >
                                     {/* Content */}
-                                    <div className="flex flex-col justify-center py-0 px-4 pr-12 flex-1">
-                                        <p className="text-xs font-dm font-medium text-greenbase">
+                                    <div className="flex flex-col justify-center py-4 px-4 pr-12 flex-1">
+                                        <p className="text-[16px] font-dm font-medium text-greenbase">
                                             {blog.tag}
                                         </p>
 
-                                        <h3 className="mt-1 font-dm text-medium font-semibold text-primary leading-[32px]">
+                                        <h3 className="mt-1 font-dm text-lg font-semibold text-primary leading-[32px]">
                                             {blog.title}
                                         </h3>
 
-                                        <p className="mt-1 text-xs text-[#696969] line-clamp-3">
+                                        <p className="mt-1 text-[16px] text-[#696969] line-clamp-4">
                                             {blog.desc}
                                         </p>
                                     </div>
@@ -110,19 +110,19 @@ const FinalCTA = () => {
 
                         {/* BOTTOM CARD */}
                         <div className="flex justify-center mt-8">
-                            <div className="flex max-w-[380px] h-[200px] overflow-hidden rounded-xl bg-white shadow-sm">
+                            <div className="flex max-w-[420px] h-[200px] overflow-hidden rounded-xl bg-white shadow-sm">
 
                                 {/* Content */}
                                 <div className="flex flex-col justify-center py-0 pl-4 pr-10 flex-1">
-                                    <p className="text-xs font-dm font-medium text-greenbase">
+                                    <p className="text-[16px] font-dm font-medium text-greenbase">
                                         {blogs[2].tag}
                                     </p>
 
-                                    <h3 className="mt-1 font-dm text-medium font-semibold text-primary leading-[32px]">
+                                    <h3 className="mt-1 font-dm text-lg font-semibold text-primary leading-[32px] pr-3 text-medium">
                                         {blogs[2].title}
                                     </h3>
 
-                                    <p className="mt-1 text-xs font-dm text-[#696969] line-clamp-3">
+                                    <p className="mt-1 text-[16px] font-dm text-[#696969] line-clamp-3">
                                         {blogs[2].desc}
                                     </p>
                                 </div>

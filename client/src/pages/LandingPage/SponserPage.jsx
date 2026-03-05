@@ -15,7 +15,7 @@ function SponsorPage() {
         school: {
             title: "Build focus, emotional intelligence, and calm in growing minds",
             description:
-                "Structured mindfulness programs that improve attention, reduce exam anxiety, and support emotional regulation — with progress tracking for students and schools.",
+                "Structured mindfulness programs that improve attention, reduce exam anxiety, and support emotional regulation with progress tracking for students and schools.",
             points: [
                 "Focus & attention",
                 "Anxiety & stress management",
@@ -92,8 +92,8 @@ function SponsorPage() {
                     <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
-                        className={`relative cursor-pointer text-[16px] font-semibold font-dm text-primary tracking-wide pb-2 ${activeTab === tab.id ? "text-greenbase" : ""}`}
-
+                        className={`relative cursor-pointer text-[18px] font-medium font-dm text-primary tracking-wide pb-2 ${activeTab === tab.id ? "text-greenbase" : ""}`}
+                        style={{fontWeight: "500"}}
                     >
                         {tab.label}
 
@@ -108,15 +108,14 @@ function SponsorPage() {
                 ))}
             </div>
 
-            <div className="sponsor-page">
-                <h1 className="font-season-medium text-center text-[36px] md:text-[42px] 2xl:text-[48px] leading-[60px] 2xl:leading-[72px] text-primary tracking-[0%]">
+            <div className="sponsor-page max-w-7xl">
+                <h1 className="font-season-medium text-center text-[36px] md:text-[56px] leading-[80px] 2xl:leading-[72px] text-primary tracking-[0%]">
                     Meditation designed for{" "}
                     <span className="text-greenbase">every stage of life</span>
                 </h1>
 
-                <p className="font-dm text-center text-[18px] 2xl:text-[20px] leading-[24px] tracking-[0%]">
-                    Personalized mindfulness journeys for kids, youth, and adults — helping build <br />
-                    focus, emotional balance, and lasting calm.
+                <p className="font-dm text-center text-[20px] 2xl:text-[20px] leading-[30px] tracking-[0%]">
+                    Personalized mindfulness journeys for kids, youth, and adults helping build             focus, <br /> emotional balance, and lasting calm.
                 </p>
             </div>
             {/* Dynamic Card */}
