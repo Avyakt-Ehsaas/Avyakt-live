@@ -79,7 +79,7 @@ function SponsorPage() {
 
     return (
         <div className="w-full pt-24 pb-18 bg-white min-h-screen mb-10">
-            <div className="max-w-[1280px] max-h-[450px]  mx-auto px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-24">
+            <div className="max-w-[1280px] h-auto  mx-auto px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-24">
 
             {/* Tabs */}
             <div className="flex gap-[30px] justify-center rounded-[12px] px-6 py-2 w-fit mx-auto relative text-[18px]">

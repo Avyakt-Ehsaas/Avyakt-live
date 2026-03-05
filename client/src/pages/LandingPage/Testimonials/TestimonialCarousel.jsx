@@ -97,7 +97,7 @@ function TestimonialCarousel() {
   return (
     <div className="bg-white min-h-screen pt-20 text-[#191919]" 
     >
-      <div className="mt-10 relative py-12">
+      <div className="relative py-12">
    <div className="absolute inset-0 bg-[linear-gradient(to_right,#9ca3af12_1px,transparent_1px),linear-gradient(to_bottom,#9ca3af12_1px,transparent_1px)] bg-[size:60px_60px]" />
       {/* Heading */}
 
