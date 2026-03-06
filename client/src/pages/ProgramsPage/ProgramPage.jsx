@@ -5,6 +5,9 @@ import AvyaktSystem from './AvyaktSystem'
 import ProgramSections from './ProgramSections'
 import StudentPressureSection from './StudentPressureSection'
 import StructureProgram from './StructureProgram'
+import ProgramGrowth from './ProgramGrowth'
+import ProgramFooter from './ProgramFooter'
+import DhyanLabs from './DhyanLabs'
 
 const ProgramPage = () => {
   return (
@@ -16,7 +19,10 @@ const ProgramPage = () => {
         <AvyaktSystem />
         <ProgramSections />
         <StudentPressureSection />
+        <ProgramGrowth />
         <StructureProgram />
+        <DhyanLabs />
+        <ProgramFooter />
     </>
   )
 }
