@@ -140,7 +140,7 @@ const ProgramFooter = () => {
 
                                         </h2>
                                         <p className="text-[18px] leading-[30px] text-primary font-dm" style={{ fontWeight: 600 }}>Student Dashboard</p>
-                                        <p className="text-[#696969] text-[16px] mb-5">Daily wellness pulse</p></div>
+                                        <p className="text-[#696969] text-[16px] mb-5 font-dm">Daily wellness pulse</p></div>
 
                                     <div className="flex justify-between text-sm mb-2">
                                         <span className='text-primary font-dm'>Focus Score</span>
@@ -171,7 +171,7 @@ const ProgramFooter = () => {
                                 {/* Parents Dashboard */}
                                 <div className="bg-white rounded-2xl shadow p-6">
                                     <p className="text-[18px] leading-[30px] text-primary font-dm" style={{ fontWeight: 600 }}>Parents Dashboard</p>
-                                    <p className="text-[#696969] text-[16px] mb-5">Daily wellness pulse</p>
+                                    <p className="text-[#696969] text-[16px] mb-5 font-dm">Daily wellness pulse</p>
                                     <div className="flex items-center gap-2 text-primary text-[16px] bg-gray-50 p-2 rounded-lg mb-2">
                                         <CheckCircle size={16} className="text-greenbase" />
                                         Daily practice: 5/7 Days
@@ -184,7 +184,7 @@ const ProgramFooter = () => {
                                 {/* Teacher Dashboard */}
                                 <div className="bg-white rounded-2xl shadow p-6">
                                     <p className="text-[18px] leading-[30px] text-primary font-dm" style={{ fontWeight: 600 }}>Teacher Dashboard</p>
-                                    <p className="text-[#696969] text-[16px] mb-5 pr-4">
+                                    <p className="text-[#696969] text-[16px] mb-5 pr-4 font-dm">
                                         Classroom emotional climate
                                     </p>
                                     <div className="h-[70px]">
@@ -203,7 +203,7 @@ const ProgramFooter = () => {
                                 </div>
                                 <div className="bg-white rounded-2xl shadow p-6">
                                     <p className="text-[18px] leading-[30px] text-primary font-dm" style={{ fontWeight: 600 }}>Admin Dashboard</p>
-                                    <p className="text-[#696969] text-[16px] mb-2">Whole school wellness</p>
+                                    <p className="text-[#696969] text-[16px] mb-2 font-dm">Whole school wellness</p>
 
                                     <div className="flex flex-row gap-4 items-center ">
 
