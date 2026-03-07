@@ -21,13 +21,13 @@ const HeroSection = () => {
         <img
           src={HeroImage}
           alt="Hero"
-          className="absolute bottom-0 md:-bottom-0 lg:-bottom-0 xl:-bottom-10 right-0 bg-[#191919] w-auto h-auto min-w-full min-h-full object-cover -z-10 pointer-events-none"
+          className="absolute bottom-0 md:-bottom-0 lg:-bottom-0 xl:-bottom-10 md:right-0 bg-[#191919] w-auto h-auto min-w-full min-h-full object-cover -z-10 pointer-events-none"
         />
 
-        <div className="absolute inset-0 flex items-center justify-center z-50 cursor-pointer">
+        <div className="absolute inset-0  max-w-2xl md:max-w-7xl flex items-center justify-center z-50 cursor-pointer">
 
           <div className="text-white font-season-medium text-center md:mt-[1rem]">
-            <h1 className="mb-3 mx-18 md:mx-0 md:text-5xl 3xl:text-6xl text-3xl/12">
+            <h1 className="mb-3 mx-8 md:mx-18 md:mx-0 md:text-5xl 3xl:text-6xl text-5xl">
               Discover Your{" "}
               <span className="text-greenbase-light">
                 Avyakt Potential
@@ -37,11 +37,11 @@ const HeroSection = () => {
               <span className="text-greenbase-light">Meditation</span>
             </h1>
 
-            <p className="text-lg mb-4 font-medium font-dm">
-              Whether you want to stay focused, feel calmer, or simply feel better we
-              <br />
-              help you build a healthier relationship with your mind.
+           <div className="text-center max-w-3xl px-10 md:px-16">
+             <p className="text-[18px] leading-[28px] md:leading-relaxed md:text-lg mb-4 md:font-medium font-dm">
+              Whether you want to stay focused, feel calmer, or simply feel better we help you build a healthier relationship with your mind.
             </p>
+           </div>
 
             <p className="text-greenbase-light text-[1.1rem] font-medium font-dm">
               Join the 21-Day Live Meditation Journey
@@ -49,12 +49,12 @@ const HeroSection = () => {
 
             <button
               onClick={handleClick}
-              className="bg-greenbasebg mb-2 text-white font-semibold font-dm mt-4 px-4 py-3 rounded-full hover:scale-105 transition-transform duration-300"
+              className="bg-greenbasebg mb-2 text-white font-semibold font-dm mt-4 px-4 py-3 rounded-full hover:scale-105 transition-transform duration-300 mb-8 md:mb-2"
             >
               Start Your Journey
             </button>
 
-            <div className="flex justify-center">
+            <div className="md:flex md:justify-center ">
               <div className="flex justify-center items-center">
                 {[1, 2, 3].map((i) => (
                   <img

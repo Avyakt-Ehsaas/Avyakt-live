@@ -52,18 +52,18 @@ useEffect(() => {
       style={{ scale, y, 
         opacity
        }}
-      className="relative mt-[100vh] min-h-screen overflow-hidden"
+      className="relative mt-[100vh]  md:min-h-screen overflow-hidden"
     >
       <div className="py-[18rem] h-[60vh] md:h-[70vh] flex items-center justify-center bg-white overflow-hidden min-h-screen">
         <div className="text-center w-[732px]">
           <motion.h1 
-            className="text-2xl md:text-6xl font-semibold z-50 text-[#191919] tracking-tight font-season-medium"
+            className="text-6xl font-semibold z-50 text-[#191919] tracking-tight font-season-medium"
           >
             Introducing
           </motion.h1>
 
           <motion.h2 
-            className="text-3xl text-greenbase md:text-5xl mt-[3rem]"
+            className="text-4xl text-greenbase md:text-5xl mt-[3rem]"
           >
             {startTyping && <Typewriter texts={avyaktText} />}
           </motion.h2>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import invertedComma from "../../../assets/images/InvertedComma.png";
 
@@ -64,12 +64,23 @@ const testimonials = [
 
 function TestimonialCarousel() {
   const [activeCard, setActiveCard] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   //circular distance between two indexes in an array of given length
   const getDistance = (index, active, length) => {
     const diff = Math.abs(index - active);
     return Math.min(diff, length - diff);
   };
+
+  useEffect(() => {
+  const checkScreen = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
+
+  checkScreen();
+  window.addEventListener("resize", checkScreen);
+  return () => window.removeEventListener("resize", checkScreen);
+}, []);
 
   const settings = {
     className: "center",
@@ -88,14 +99,40 @@ function TestimonialCarousel() {
 
     pauseOnHover: true,
     pauseOnFocus: true,
-
     beforeChange: (oldIndex, newIndex) => {
       setActiveCard(newIndex % testimonials.length);
     },
+
+     responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        centerMode: true,
+      },
+    },
+    {
+      breakpoint: 768,
+      settings: {
+        slidesToShow: 1,
+        centerMode: true,
+        centerPadding: "40px",
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        centerMode: false,
+        centerPadding: "20px",
+      },
+    },
+  ],
+
   };
 
   return (
-    <div className="bg-white min-h-screen pt-20 text-[#191919]" 
+    <div className="bg-white md:min-h-screen pt-20 text-[#191919]" 
     >
       <div className="relative py-12">
    <div className="absolute inset-0 bg-[linear-gradient(to_right,#9ca3af12_1px,transparent_1px),linear-gradient(to_bottom,#9ca3af12_1px,transparent_1px)] bg-[size:60px_60px]" />
@@ -114,7 +151,9 @@ function TestimonialCarousel() {
 
       {/* Carousel */}
       <div className="slider-container max-w-7xl mx-auto mt-8 px-4 overflow-hidden">
-        <Slider {...settings}>
+        <Slider {...settings}
+
+        >
           {testimonials.map((testimonial, index) => {
             const distance = getDistance(
               index,
@@ -126,11 +165,15 @@ function TestimonialCarousel() {
             const isActive = distance === 0;
 
             // proportional lift (far = more up)
-            const translateY = -clamped * 12;
+            // const translateY = -clamped * 12;
 
-            //  scale + opacity
-            const scale = 1 - clamped * 0.08;
-            const opacity = 1 - clamped * 0.25;
+            // //  scale + opacity
+            // const scale = 1 - clamped * 0.08;
+            // const opacity = 1 - clamped * 0.25;
+
+            const translateY = -clamped * 12;
+const scale = 1 - clamped * 0.08;
+const opacity = 1 - clamped * 0.25;
 
             return (
               <div key={testimonial.id} className="px-2">

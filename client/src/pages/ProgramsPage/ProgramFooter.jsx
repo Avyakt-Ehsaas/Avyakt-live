@@ -219,9 +219,6 @@ const ProgramFooter = () => {
 
                                     </div>
                                 </div>
-
-
-
                             </div>
                         </div>
 

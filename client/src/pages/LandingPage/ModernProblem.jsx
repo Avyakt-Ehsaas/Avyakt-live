@@ -27,19 +27,19 @@ const ModernProblem = () => {
       description:
         "Notifications, screens, and endless information overload the brain and fragment attention throughout the day.",
       image: GlobeCard4,
-      style: { bottom: "70px", left: "140px" }
+      style: { bottom: "30px", left: "140px", paddingRight: "10px" }
     },
     {
       title: "Minds That Never Switch Off",
       description:
         "Mental noise has become the new normal. The stress and pressure create anxiety and decision fatigue.",
       image: GlobeCard3,
-      style: { bottom: "80px", right: "140px" }
+      style: { bottom: "60px", right: "140px" }
     }
   ];
 
   return (
-    <div className="relative w-full min-h-[700px] flex items-center justify-center bg-white">
+    <div className="relative w-full min-h-[540px] md:min-h-[700px] flex items-center justify-center bg-white">
 
       {/* Center Content */}
       <div className="max-w-[900px] text-center z-10">
@@ -80,7 +80,7 @@ const ModernProblem = () => {
 const Card = ({ title, description, image, style }) => {
   return (
     <div
-      className="absolute w-[420px] bg-[#C2E0BA]/20 border border-[#C8E1C1] rounded-xl pr-2 mb-10 shadow-md flex gap-4 transition-all duration-500"
+      className="absolute w-[440px] bg-[#C2E0BA]/20 border border-[#C8E1C1] rounded-3xl pr-2 mb-10 shadow-md flex gap-4 transition-all duration-500"
       style={style}
     >
       <img
@@ -89,8 +89,8 @@ const Card = ({ title, description, image, style }) => {
         className="w-[120px] max-h-[200px] object-cover rounded-lg"
       />
 
-      <div>
-        <h3 className="font-semibold text-[18px] py-4 text-primary mb-0">
+      <div className="pb-4" >
+        <h3 className="font-semibold mt-2 font-dm text-[18px] py-4 text-primary mb-0">
           {title}
         </h3>
 
