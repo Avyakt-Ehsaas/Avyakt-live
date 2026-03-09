@@ -77,8 +77,8 @@ const LandingSidebar = ({ isDarkBg }) => {
         //  {  label: "Live-session", path: "/dashboard" },
           { label: "About", path: "/about" },
          { label: "Contact", path: "/contact" },
+         {label : "Blogs" , path: "/blogs"},
           { label: "Spritual", path: "/spiritual-edu/genai" },
-
            ...(user?.role === "admin"
       ? [
           {
@@ -97,9 +97,9 @@ const LandingSidebar = ({ isDarkBg }) => {
      className='fixed mt-4 z-50  
      font-dm
      rounded-full
-      bg-white/1
-      backdrop-blur-sm
-      backdrop-saturate-10
+      bg-white/0
+      backdrop-blur-xs
+      backdrop-saturate-1
       border border-l-4 border-r-4 border-white/20
       shadow-[0_10px_40px_rgba(0,0,0,0.05)]
       '
@@ -131,7 +131,7 @@ const LandingSidebar = ({ isDarkBg }) => {
         </div>
 
         <button
-        className='px-4 py-3 bg-[#71AC61] text-white rounded-[50px] hover:bg-[#71AD69]'
+        className='px-4 py-3 bg-[#71AC61] text-white rounded-[50px] hover:scale-105 transition-transform duration-300'
         >
           Join us
         </button>
