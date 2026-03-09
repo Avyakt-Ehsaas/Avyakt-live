@@ -24,7 +24,7 @@ const HeroSection = () => {
           className="absolute bottom-0 md:-bottom-0 lg:-bottom-0 xl:-bottom-10 md:right-0 bg-[#191919] w-auto h-auto min-w-full min-h-full object-cover -z-10 pointer-events-none"
         />
 
-        <div className="absolute inset-0  max-w-2xl md:max-w-7xl flex items-center justify-center z-50 cursor-pointer">
+        <div className="absolute inset-0  max-w-2xl md:max-w-full flex items-center justify-center z-50">
 
           <div className="text-white font-season-medium text-center md:mt-[1rem]">
             <h1 className="mb-3 mx-8 md:mx-18 md:mx-0 md:text-5xl 3xl:text-6xl text-5xl">
@@ -49,7 +49,7 @@ const HeroSection = () => {
 
             <button
               onClick={handleClick}
-              className="bg-greenbasebg mb-2 text-white font-semibold font-dm mt-4 px-4 py-3 rounded-full hover:scale-105 transition-transform duration-300 mb-8 md:mb-2"
+              className="bg-greenbasebg mb-2 text-white font-semibold font-dm mt-4 px-4 py-3 rounded-full hover:scale-105 transition-transform duration-300 mb-8 md:mb-2 cursor-pointer"
             >
               Start Your Journey
             </button>
