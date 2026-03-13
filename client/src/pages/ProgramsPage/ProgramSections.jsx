@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import ProgramSectionsImage from "../../assets/images/ProgramSectionBg.png";
 
-const ProgramSections = () => {
+const ProgramSections = ({activeTab,setActiveTab,data}) => {
 
-  const [activeTab, setActiveTab] = useState("school");
+  // const [activeTab, setActiveTab] = useState("school");
 
   const tabs = [
     { id: "school", label: "For school" },
@@ -46,18 +46,16 @@ const ProgramSections = () => {
 
         {/* Heading */}
         <h2 className="text-3xl md:text-5xl font-season-medium font-medium text-primary leading-tight max-w-4xl mx-auto">
-          Student Wellness Programs Designed for Focus, Calm & Emotional Growth
+          {data.title}
         </h2>
 
         <p className="mt-6 font-dm text-primary text-base md:text-lg max-w-3xl mx-auto">
-          Structured, neuroscience-backed programs that combine meditation,
-          cognitive experiments, and emotional development — built specifically
-          for Indian schools.
+          {data.description}
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
           <button className="bg-greenbase-primary font-dm text-white px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 shadow-md">
-            Bring Avyakt to Your School
+            {data.buttonText}
           </button>
 
           <button className="border font-dm border-greenbase text-greenbase px-8 py-4 rounded-full hover:bg-[#71AC61] hover:scale-105 transition-all duration-300 ">
