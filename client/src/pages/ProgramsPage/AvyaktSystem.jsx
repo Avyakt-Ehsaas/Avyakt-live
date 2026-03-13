@@ -42,7 +42,7 @@ const AvyaktSystem = () => {
           The <span className="text-greenbase">Avyakt</span> System
         </h1>
 
-        <p className="mt-4 text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
+        <p className="mt-4 font-dm text-primary text-base md:text-lg max-w-4xl mx-auto" style={{fontWeight: 500}}>
           A proven three-step methodology designed to transform your mental well-being from the inside out.
         </p>
 

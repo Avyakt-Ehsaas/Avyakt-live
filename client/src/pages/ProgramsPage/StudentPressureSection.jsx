@@ -1,6 +1,7 @@
 import React from "react";
 
-const StudentPressureSection = () => {
+const StudentPressureSection = ({data}) => {
+
   return (
     <section className="relative bg-[#F7F8F7] pt-28 pb-20 overflow-hidden">
 
@@ -13,16 +14,15 @@ const StudentPressureSection = () => {
         <div className="max-w-4xl">
 
           <h2 className="text-[42px] md:text-6xl font-season font-medium leading-[1.15] text-[#111111]">
-            India’s Students Are Under
+            {data.title}
             <br />
             <span className="text-greenbase">
-              Unprecedented Pressure
+              {data.spanTitle}
             </span>
           </h2>
 
           <p className="mt-4 text-[18px] text-primary font-dm leading-relaxed max-w-3xl">
-            Academic stress, exam anxiety, digital distraction, and emotional overload 
-            are affecting students across age groups. Research from India shows:
+            {data.description}
           </p>
 
         </div>
@@ -30,8 +30,31 @@ const StudentPressureSection = () => {
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10">
 
+        {data.cards.map((card, index) => (
+        <div
+          key={index}
+          className={`rounded-[20px] ${
+            index === 0 ? "bg-[#C2E0BA]/30 p-8" : "bg-[#E9F3E6] p-8"
+          }`}
+        >
+          <h4 className="text-[18px] font-semibold text-primary mb-4">
+            {card.cardTitle}
+          </h4>
+
+          <div className="text-[56px] font-season text-greenbase mb-4 leading-none">
+            {card.number}
+          </div>
+
+          <p className="text-[16px] font-medium text-primary font-dm leading-relaxed">
+            {card.cardDescription}
+          </p>
+        </div>
+      ))}
+
+
+
           {/* Card 1 */}
-          <div className="bg-[#C2E0BA]/30 rounded-[20px] p-8">
+          {/* <div className="bg-[#C2E0BA]/30 rounded-[20px] p-8">
             <h4 className="text-[18px] font-semibold text-primary mb-4">
               Academic Stress
             </h4>
@@ -40,13 +63,13 @@ const StudentPressureSection = () => {
               78%
             </div>
 
-            <p className="text-[16px] text-primary font-dm leading-relaxed">
+            <p className="text-[16px] font-medium text-primary font-dm leading-relaxed">
               Students reporting high level of exam stress and anxiety
             </p>
-          </div>
+          </div> */}
 
           {/* Card 2 */}
-          <div className="bg-[#E9F3E6] rounded-[20px] p-8">
+          {/* <div className="bg-[#E9F3E6] rounded-[20px] p-8">
             <h4 className="text-[18px] font-semibold text-primary mb-4">
               Digital Distraction
             </h4>
@@ -55,13 +78,13 @@ const StudentPressureSection = () => {
               65%
             </div>
 
-            <p className="text-[16px] text-primary font-dm leading-relaxed">
+            <p className="text-[16px] font-medium text-primary font-dm leading-relaxed">
               Reduction in sustained attention span over the last decade.
             </p>
-          </div>
+          </div> */}
 
           {/* Card 3 */}
-          <div className="bg-[#E9F3E6] rounded-[20px] p-4">
+          {/* <div className="bg-[#E9F3E6] rounded-[20px] p-4">
             <h4 className="text-[18px] font-semibold text-primary mb-4">
               Mental Health Gap
             </h4>
@@ -70,11 +93,11 @@ const StudentPressureSection = () => {
               1 in 5
             </div>
 
-            <p className="text-[16px] text-primary font-dm leading-relaxed">
+            <p className="text-[16px] font-medium text-primary font-dm leading-relaxed">
               Students require professional emotional support but lacks access 
               to institutional resources.
             </p>
-          </div>
+          </div> */}
 
         </div>
 

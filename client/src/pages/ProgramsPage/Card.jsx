@@ -25,7 +25,7 @@ export default function Card({
       {/* IMAGE */}
       <div
         className={[
-          "w-full md:w-[38%] min-h-[260px] md:min-h-full relative",
+          "w-full md:w-[36%] min-h-[260px] md:min-h-full relative",
           isRight ? "md:order-2 order-2" : "md:order-1 order-2",
         ].join(" ")}
       >
@@ -44,31 +44,31 @@ export default function Card({
         ].join(" ")}
       >
         {badge ? (
-          <div className="inline-flex items-center rounded-full bg-[#C2E0BA]/20 text-greenbase px-4 py-2 text-sm font-medium">
+          <div className="inline-flex items-center rounded-full bg-[#C2E0BA]/20 text-greenbase px-4 py-2 text-sm font-dm font-medium">
             {badge}
           </div>
         ) : null}
 
         {title ? (
-          <h3 className="mt-4 text-3xl md:text-4xl font-serif text-black">
+          <h3 className="mt-4 text-3xl md:text-4xl font-season-medium text-black">
             {title}
           </h3>
         ) : null}
 
         {description ? (
-          <p className="mt-3 text-primary text-base md:text-lg leading-relaxed max-w-xl">
+          <p className="mt-3 font-dm text-primary font-medium text-base md:text-lg leading-relaxed max-w-xl">
             {description}
           </p>
         ) : null}
 
         {!!list?.length && (
           <>
-            <h4 className="mt-3 font-semibold text-black">{sectionTitle}</h4>
+            <h4 className="mt-3 text-[22px] font-dm font-semibold text-black">{sectionTitle}</h4>
             <ul typeof="disc" className="mt-2 space-y-1 text-primary">
               {list.map((item, idx) => (
                 <li key={idx} className="flex gap-2 leading-snug">
-                  <span className="mt-[6px] h-[4px] w-[4px] rounded-full bg-black shrink-0" />
-                  <span>{item}</span>
+                  <span className="mt-[12px] h-[6px] w-[6px] rounded-full bg-black leading-[30px] shrink-0" />
+                  <span className="font-dm text-primary text-[20px] font-medium leading-[30px]">{item}</span>
                 </li>
               ))}
             </ul>
@@ -80,7 +80,7 @@ export default function Card({
             {chips.map((c, idx) => (
               <span
                 key={idx}
-                className="rounded-full border border-[#71AC61] text-greenbase px-4 py-2 text-sm bg-white"
+                className="rounded-full font-dm font-medium border border-[#71AC61] text-greenbase px-4 py-2 text-sm bg-white"
               >
                 {c}
               </span>
