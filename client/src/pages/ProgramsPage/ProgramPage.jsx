@@ -34,7 +34,7 @@ const ProgramPage = () => {
         <ProgramGrowth data={data.fourthPage} />
         <StructureProgram data={data.fifthPage} />
         <ProgramFooter data={data.sixthPage} />
-        <ProgramFooter />
+        
     </>
   )
 }
