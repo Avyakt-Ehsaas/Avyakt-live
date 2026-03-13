@@ -3,9 +3,9 @@ import SeniorTab from '../../assets/images/seniorsTab.png'
 import TreeLeft from "../../assets/images/treeleft.png";
 import TreeCenter from "../../assets/images/treemiddle.png";
 import TreeRight from "../../assets/images/treeright.png";
-import seniorLeft from "../../assets/images/seniorleft.png";
-import seniorCenter from "../../assets/images/seniorcenter.png";
-import seniorRight from "../../assets/images/seniorright.png";
+import seniorLeft from "../../assets/images/seniorLeft.png";
+import seniorCenter from "../../assets/images/seniorCenter.png";
+import seniorRight from "../../assets/images/seniorRight.png";
 
 
 
