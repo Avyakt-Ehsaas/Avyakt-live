@@ -32,8 +32,8 @@ const ProgramPage = () => {
         <StudentPressureSection data={data.secondPage} />
         <ProgramGrowth data={data.fourthPage} />
         <StructureProgram data={data.fifthPage} />
-        <DhyanLabs data={data.sixthPage} />
-        <ProgramFooter />
+        {/* <DhyanLabs data={data.sixthPage} /> */}
+        <ProgramFooter data={data.sixthPage} />
     </>
   )
 }
