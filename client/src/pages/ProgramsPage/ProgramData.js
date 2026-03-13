@@ -1,4 +1,13 @@
 import ProgramSectionsImage from "../../assets/images/ProgramSectionBg.png";
+import SeniorTab from '../../assets/images/seniorsTab.png'
+import TreeLeft from "../../assets/images/treeleft.png";
+import TreeCenter from "../../assets/images/treemiddle.png";
+import TreeRight from "../../assets/images/treeright.png";
+import seniorLeft from "../../assets/images/seniorleft.png";
+import seniorCenter from "../../assets/images/seniorcenter.png";
+import seniorRight from "../../assets/images/seniorright.png";
+
+
 
 const  programsTabData = {
 
@@ -71,26 +80,28 @@ const  programsTabData = {
     },
 
     fourthPage: {
-      title: "Designed for Every Stage of a Student’s Growth",
+      title: "Designed for ",
+      greenTitle: "Every Stage",
+      postTitle: " of a Student’s Growth",
       description:
         "Each program adapts meditation practices and activities for different age groups.",
       cards: [
         {
-          image: ProgramSectionsImage,
+          image: TreeLeft,
           cardTitle: "Foundations (6–9 Years)",
           cardDescription:
             "Playful stories and breathing games that build calm and emotional awareness.",
           keyPoints: ["Foundation", "Body awareness", "Emotional Expression"],
         },
         {
-          image: ProgramSectionsImage,
+          image: TreeCenter,
           cardTitle: "Growth (10–14 Years)",
           cardDescription:
             "Guided meditation and brain-based activities for attention and regulation.",
           keyPoints: ["Focus Building", "Stress awareness", "Habit Formation"],
         },
         {
-          image: ProgramSectionsImage,
+          image: TreeRight,
           cardTitle: "Mastery (15–18 Years)",
           cardDescription:
             "Advanced focus training and stress control for exam readiness.",
@@ -111,7 +122,9 @@ const  programsTabData = {
         "Through Cognitive Labs, students explore attention, memory, emotions, and focus.",
       cards: [],
       bottomCard: {
-        title: "Aligned with NEP 2020 Guidelines",
+        title: "Aligned with ",
+        greenTitle: "NEP 2020 ",
+        postTitle: "Guidelines",
         description:
           "Avyakt fulfills the mandate for socio-emotional learning in Indian schools.",
         keyPoints: [
@@ -209,30 +222,32 @@ const  programsTabData = {
     },
 
     fourthPage: {
-      title: "Programs Designed for Different Workplace Roles",
+      title: "Programs Designed for",
+      greenTitle: "Different Workplace Roles",
+      postTitle: "",
       description:
         "Different roles experience different pressures. Our programs adapt accordingly.",
       cards: [
         {
-          image: ProgramSectionsImage,
+          image: TreeLeft,
           cardTitle: "Team Members",
           cardDescription:
             "Focus and emotional resilience for everyday work challenges.",
           keyPoints: ["Focus", "Stress Balance", "Productivity"],
         },
         {
-          image: ProgramSectionsImage,
+          image: TreeCenter,
           cardTitle: "Managers",
           cardDescription:
             "Leadership calmness and decision clarity under pressure.",
           keyPoints: ["Decision Clarity", "Conflict Handling", "Team Awareness"],
         },
         {
-          image: ProgramSectionsImage,
+          image: TreeRight,
           cardTitle: "Leadership",
           cardDescription:
             "Advanced mindfulness practices for strategic thinking and leadership wellbeing.",
-          keyPoints: ["Strategic Thinking", "Emotional Leadership", "Vision Clarity"],
+          keyPoints: ["Strategic Thinking","Vision Clarity", "Emotional Leadership", ],
         },
       ],
     },
@@ -280,7 +295,7 @@ const  programsTabData = {
       description:
         "Structured meditation and cognitive wellness programs that support emotional balance, memory health, and peaceful aging.",
       buttonText: "Start Wellness Program",
-      image: ProgramSectionsImage,
+      image: SeniorTab,
     },
 
     secondPage: {
@@ -343,12 +358,14 @@ const  programsTabData = {
     },
 
   fourthPage: {
-  title: "Programs Designed for Different Senior Needs",
+  title: "Programs Designed for ",
+  greenTitle: "Different Senior Needs",
+  postTitle: "",
   description:
     "Each program adapts meditation practices, activities, and cognitive experiments to support mental clarity, emotional wellbeing, and cognitive health in seniors.",
   cards: [
     {
-      image: ProgramSectionsImage,
+      image: seniorLeft,
       cardTitle: "Active Aging",
       cardDescription:
         "For seniors who want to maintain mental sharpness, emotional wellbeing, and a calm daily routine.",
@@ -359,7 +376,7 @@ const  programsTabData = {
       ]
     },
     {
-      image: ProgramSectionsImage,
+      image : seniorCenter,
       cardTitle: "Mindful Living",
       cardDescription:
         "Programs designed to deepen awareness, emotional peace, and meaningful daily habits.",
@@ -370,7 +387,7 @@ const  programsTabData = {
       ]
     },
     {
-      image: ProgramSectionsImage,
+      image: seniorRight,
       cardTitle: "Cognitive Support",
       cardDescription:
         "Practices and cognitive activities that support memory, attention, and mental engagement.",
@@ -473,24 +490,26 @@ const  programsTabData = {
     },
 
     fourthPage: {
-      title: "Programs Designed for Your Personal Growth",
+      title: "Programs Designed for Your ",
+      greenTitle: "Individual Needs",
+      postTitle: "",
       description:
         "Different practices support different aspects of personal wellbeing.",
       cards: [
         {
-          image: ProgramSectionsImage,
+          image: TreeLeft,
           cardTitle: "Focus Training",
           cardDescription: "Strengthen attention and concentration.",
           keyPoints: ["Attention", "Clarity", "Productivity"],
         },
         {
-          image: ProgramSectionsImage,
+          image: TreeCenter,
           cardTitle: "Emotional Balance",
           cardDescription: "Learn to manage emotions with awareness.",
           keyPoints: ["Calm", "Self-awareness", "Resilience"],
         },
         {
-          image: ProgramSectionsImage,
+          image: TreeRight,
           cardTitle: "Inner Growth",
           cardDescription: "Develop deeper mindfulness and insight.",
           keyPoints: ["Reflection", "Clarity", "Personal growth"],

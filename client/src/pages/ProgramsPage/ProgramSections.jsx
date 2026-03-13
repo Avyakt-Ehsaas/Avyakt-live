@@ -68,8 +68,8 @@ const ProgramSections = ({activeTab,setActiveTab,data}) => {
       {/* Image Section */}
       <div className="relative flex justify-center">
         <img
-          src={ProgramSectionsImage}
-          alt="Students"
+          src={data.image}
+          alt="program tab image"
           className="w-full max-w-7xl object-contain -mt-[12rem] -ml-[6rem]"
         />
       </div>

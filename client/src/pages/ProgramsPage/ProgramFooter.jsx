@@ -5,6 +5,13 @@ import FullCTA from '../../assets/images/FullCTA.png'
 import DarkLogo from "../../assets/images/LogoDark.svg";
 import avyaktFooter from '../../assets/images/avyaktFooterWatermark.svg';
 
+const iconMap = {
+  Brain,
+  Heart,
+  ShieldCheck,
+  TrendingUp
+};
+
 import {
     BarChart,
     Bar,
@@ -55,9 +62,10 @@ const ScoreCard = ({ value, color }) => {
 
 
 
-const ProgramFooter = () => {
+const ProgramFooter = ( {data} ) => {
+
     //teacher barchart
-    const data = [
+    const Bardata = [
         { value: 30 },
         { value: 55 },
         { value: 35 },
@@ -123,10 +131,10 @@ const ProgramFooter = () => {
                         {/* Heading */}
                         <div >
                             <h2 className="text-center text-2xl sm:text-4xl md:text-5xl font-medium text-[#191919] leading-tight">
-                                Tracking Growth beyond Classroom
+                                {data.title}
                             </h2>
                             <p className="mt-2 text-[18px] font-medium text-center text-primary font-dm">
-                                Through Cognitive Labs, students explore attention, memory, emotions, and focus using real experiments and guided observation.
+                               {data.description}
                             </p>
                         </div>
                         {/* TOP ROW */}
@@ -157,7 +165,7 @@ const ProgramFooter = () => {
                                                 <YAxis type="category" hide dataKey="name" />
 
                                                 <Bar
-                                                animationDuration={1200}
+                                                    animationDuration={1200}
                                                     dataKey="value"
                                                     fill="#6DAA60"
                                                     radius={[10, 10, 10, 10]}
@@ -189,11 +197,11 @@ const ProgramFooter = () => {
                                     </p>
                                     <div className="h-[70px]">
                                         <ResponsiveContainer width="100%" height="100%">
-                                            <BarChart data={data}>
-                                                <Bar  
-                                                animationDuration={1200}
-                                                 dataKey="value" radius={[4, 4, 4, 4]}>
-                                                    {data.map((entry, index) => (
+                                            <BarChart data={Bardata}>
+                                                <Bar
+                                                    animationDuration={1200}
+                                                    dataKey="value" radius={[4, 4, 4, 4]}>
+                                                    {Bardata.map((entry, index) => (
                                                         <Cell key={`cell-${index}`} fill={colors[index]} />
                                                     ))}
                                                 </Bar>
@@ -222,71 +230,51 @@ const ProgramFooter = () => {
                             </div>
                         </div>
 
-                       {/* BOTTOM CARD */}
-<div className="flex justify-center px-3 pb-4">
+                        {/* BOTTOM CARD */}
+                       <div className="flex justify-center px-3 pb-4">
 
-  {/* NEP Section */}
   <div className="bg-[#F5F2ED] rounded-3xl p-4 mt-8 max-w-7xl w-full">
 
     <h2 className="text-[34px] font-medium leading-[40px] font-season">
-      Aligned with <span className="text-greenbase">NEP 2020</span> Guidelines
+      {data.bottomCard.title}
+      <span className="text-greenbase"> {data.bottomCard.greenTitle} </span>
+      {data.bottomCard.postTitle}
     </h2>
 
     <p className="text-primary font-dm leading-[20px] mt-1 max-w-2xl">
-      Avyakt fulfills the mandate for mandatory socio-emotional learning in Indian schools.
+      {data.bottomCard.description}
     </p>
 
     <div className="grid md:grid-cols-2 gap-8 mt-8">
 
-      <div className="flex gap-3">
-        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-          <Brain className="text-greenbase w-5 h-5" />
-        </div>
-        <div>
-          <h4 className="font-semibold text-[18px] leading-[20px] font-dm">Holistic Development</h4>
-          <p className="text-[#696969] text-[16px] leading-[20px] font-dm mt-1">
-            Nurturing mind, body, and spirit beyond academics.
-          </p>
-        </div>
-      </div>
+      {data.bottomCard.keyPoints.map((item, index) => {
 
-      <div className="flex gap-3">
-        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-          <Heart fill='#71AC6C' className="text-greenbase w-5 h-5" />
-        </div>
-        <div>
-          <h4 className="font-semibold text-[18px] leading-[20px] font-dm">Socio-emotional Learning</h4>
-          <p className="text-[#696969] text-[16px] leading-[20px] font-dm mt-1">
-            Building empathy, resilience, and emotional intelligence.
-          </p>
-        </div>
-      </div>
+        const Icon = Object.values(iconMap)[index];
 
-      <div className="flex gap-3">
-        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-          <ShieldCheck  className="text-greenbase w-5 h-5" />
-        </div>
-        <div>
-          <h4 className="font-semibold text-[18px] leading-[20px] font-dm">Ethical Reasoning</h4>
-          <p className="text-[#696969] text-[16px] leading-[20px] font-dm mt-1">
-            Fostering value-based decision making in students.
-          </p>
-        </div>
-      </div>
+        return (
+          <div key={index} className="flex gap-3">
 
-      <div className="flex gap-3">
-        <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-          <Brain className="text-greenbase w-5 h-5" />
-        </div>
-        <div>
-          <h4 className="font-semibold text-[18px] leading-[20px] font-dm">Mental Wellbeing</h4>
-          <p className="text-[#696969] text-[16px] leading-[20px] font-dm mt-1">
-            Providing tools for stress management and focus.
-          </p>
-        </div>
-      </div>
+            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+              <Icon className="text-greenbase w-5 h-5" />
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-[18px] leading-[20px] font-dm">
+                {item.title}
+              </h4>
+
+              <p className="text-[#696969] text-[16px] leading-[20px] font-dm mt-1">
+                {item.description}
+              </p>
+            </div>
+
+          </div>
+        );
+
+      })}
 
     </div>
+
   </div>
 
 </div>
