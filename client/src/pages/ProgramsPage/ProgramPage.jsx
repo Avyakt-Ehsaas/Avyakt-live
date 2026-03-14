@@ -10,6 +10,7 @@ import ProgramFooter from './ProgramFooter'
 import DhyanLabs from './DhyanLabs'
 
 import programsTabData from './ProgramData.js'
+import System from './System.jsx'
 
 const ProgramPage = () => {
 
@@ -33,7 +34,8 @@ const ProgramPage = () => {
         <ProgramGrowth data={data.fourthPage} />
         <StructureProgram data={data.fifthPage} />
         <DhyanLabs data={data.sixthPage} />
-        <ProgramFooter />
+        <System/>
+        <ProgramFooter /> 
     </>
   )
 }
