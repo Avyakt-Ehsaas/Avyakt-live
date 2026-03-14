@@ -31,11 +31,12 @@ const ProgramPage = () => {
           data={data.firstPage}
         />
         <StudentPressureSection data={data.secondPage} />
+
         <ProgramGrowth data={data.fourthPage} />
         <StructureProgram data={data.fifthPage} />
-        <DhyanLabs data={data.sixthPage} />
         <System/>
-        <ProgramFooter /> 
+        <ProgramFooter data={data.sixthPage} />
+        
     </>
   )
 }
