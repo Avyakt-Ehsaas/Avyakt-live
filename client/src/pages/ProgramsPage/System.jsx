@@ -16,40 +16,43 @@ const System = ({data}) => {
         "#B6E2AA",
         "#8FC580",
     ];
+   useEffect(() => {
+  const ctx = gsap.context(() => {
 
-    useEffect(() => {
-        const ctx = gsap.context(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top top",
+        end: "+=1500",
+        scrub: true,
+        pin: true,
+        pinSpacing: true,
+        anticipatePin: 1,
+      },
+    });
 
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top top",
-                    end: "+=1500",
-                    scrub: true,
-                    pin: true,
-                    pinSpacing: true,
-                    anticipatePin: 1
-                },
-            });
+    cards.current.forEach((card, i) => {
+      if (i === 0) return;
 
-            cards.current.forEach((card, i) => {
-                if (i === 0) return;
+      tl.to(
+        card,
+        {
+          y: -i * 220,
+          ease: "none",
+        },
+        i * 0.3
+      );
+    });
 
-                tl.to(
-                    card,
-                    {
-                        y: -i * 220,
-                        ease: "none",
-                        boxShadow: 'shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]'
-                    },
-                    i * 0.3
-                );
-            });
+  }, sectionRef);
 
-        }, sectionRef);
+  // 🔥 force refresh after layout
+  setTimeout(() => {
+    ScrollTrigger.refresh();
+  }, 500);
 
-        return () => ctx.revert();
-    }, []);
+  return () => ctx.revert();
+}, []);
 
     return (
         <section
