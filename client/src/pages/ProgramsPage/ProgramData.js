@@ -13,6 +13,10 @@ import seniorLeft from "../../assets/images/seniorLeft.png";
 import seniorCenter from "../../assets/images/seniorCenter.png";
 import seniorRight from "../../assets/images/seniorRight.png";
 
+import brainIcon from "../../assets/brainicon.png";
+import graph from "../../assets/graph.png";
+import watch from "../../assets/watch.png";
+import yoga from "../../assets/wyoga.png";
 
 
 
@@ -55,30 +59,32 @@ const  programsTabData = {
     },
 
     thirdPage: {
-      title: "A Structured System — Not Just Random Sessions",
+      title: "A ",
+      greenTitle : "Structured System ",
+      postTitle: "for Not Just Random Sessions",
       description:
         "Avyakt Student Programs are built on three integrated pillars:",
       cards: [
         {
-          image: ProgramSectionsImage,
+          image: brainIcon,
           cardTitle: "Neuroscience-Inspired Meditation Experience",
           cardDescription:
             "Guided practices built on how the brain regulates attention, emotions, and stress.",
         },
         {
-          image: ProgramSectionsImage,
+          image: yoga,
           cardTitle: "Live Meditation Workshops & Programs",
           cardDescription:
             "Structured group sessions and workshops that teach practical tools for focus and calm.",
         },
         {
-          image: ProgramSectionsImage,
+          image: graph,
           cardTitle: "Personalized Trackers & Growth Insights",
           cardDescription:
             "Monitor focus, emotional wellbeing, and consistency through progress tracking.",
         },
         {
-          image: ProgramSectionsImage,
+          image: watch,
           cardTitle: "Easily Fits Real Life Routines",
           cardDescription:
             "Short, flexible practices designed to blend into school, work, and home schedules.",
@@ -177,7 +183,57 @@ const  programsTabData = {
       title: "Tracking Growth beyond Classroom",
       description:
         "Through Cognitive Labs, students explore attention, memory, emotions, and focus.",
-      cards: [],
+
+
+      cards: [
+        
+
+
+        {
+    title: "Student Dashboard",
+    subtitle: "Daily wellness pulse",
+    metricLabel: "Focus Score",
+    value: 88,
+    chartType: "progressBar"
+  },
+  {
+    title: "Parents Dashboard",
+    subtitle: "Daily wellness pulse",
+    items: [
+      "Daily practice: 5/7 Days",
+      "Consistency: Improved"
+    ],
+    chartType: "info"
+  },
+  {
+    title: "Teacher Dashboard",
+    subtitle: "Classroom emotional climate",
+    chartType: "barChart",
+    data: [
+      { value: 30 },
+      { value: 55 },
+      { value: 35 },
+      { value: 70 },
+      { value: 60 },
+      { value: 50 },
+      { value: 35 }
+    ]
+  },
+  {
+    title: "Admin Dashboard",
+    subtitle: "Whole school wellness",
+    chartType: "radialChart",
+    value: 92,
+    metricLabel: "Participation",
+    metricStatus: "High (4%)"
+  }
+
+
+
+
+      ],
+
+
       bottomCard: {
         title: "Aligned with ",
         greenTitle: "NEP 2020 ",
@@ -247,30 +303,32 @@ const  programsTabData = {
     },
 
     thirdPage: {
-      title: "A Science-Based Workplace Wellness System",
+      title: "A ",
+      greenTitle: "Science-Based ",
+      postTitle: "Workplace Wellness System",
       description:
         "Avyakt workplace programs combine neuroscience, mindfulness, and practical exercises:",
       cards: [
         {
-          image: ProgramSectionsImage,
+          image: brainIcon,
           cardTitle: "Mindfulness & Focus Training",
           cardDescription:
             "Techniques designed to improve concentration and cognitive clarity at work.",
         },
         {
-          image: ProgramSectionsImage,
+          image: yoga,
           cardTitle: "Stress & Burnout Management",
           cardDescription:
             "Guided practices that help employees regulate stress and emotional pressure.",
         },
         {
-          image: ProgramSectionsImage,
+          image: graph,
           cardTitle: "Team Emotional Intelligence",
           cardDescription:
             "Exercises that improve communication, empathy, and collaboration.",
         },
         {
-          image: ProgramSectionsImage,
+          image: watch,
           cardTitle: "Flexible Workplace Integration",
           cardDescription:
             "Short, adaptable practices that fit easily into daily work routines.",
@@ -319,7 +377,46 @@ const  programsTabData = {
       title: "Measuring Workplace Wellbeing",
       description:
         "Track improvements in focus, stress levels, and emotional balance across teams.",
-      cards: [],
+      cards: [
+  {
+    title: "Organisation Dashboard",
+    subtitle: "Workplace wellbeing overview",
+    metricLabel: "Employee Engagement",
+    value: 84,
+    chartType: "progressBar"
+  },
+  {
+    title: "HR Insights",
+    subtitle: "Employee participation",
+    items: [
+      "Weekly wellness sessions: 4/5",
+      "Stress levels: Reduced"
+    ],
+    chartType: "info"
+  },
+  {
+    title: "Team Climate",
+    subtitle: "Department wellbeing trends",
+    chartType: "barChart",
+    data: [
+      { value: 40 },
+      { value: 65 },
+      { value: 55 },
+      { value: 70 },
+      { value: 60 },
+      { value: 50 },
+      { value: 45 }
+    ]
+  },
+  {
+    title: "Management Dashboard",
+    subtitle: "Company wellness score",
+    chartType: "radialChart",
+    value: 89,
+    metricLabel: "Participation",
+    metricStatus: "Very High (6%)"
+  }
+],
       bottomCard: {
         title: "Aligned with Modern Workplace Wellbeing Standards",
         description:
@@ -383,30 +480,32 @@ const  programsTabData = {
     },
 
     thirdPage: {
-      title: "A Structured System for Peaceful Aging",
+      title: "A ",
+      greenTitle : "Structured System",
+      postTitle: " for Peaceful Aging",
       description:
         "Avyakt Senior Programs combine meditation, cognitive exercises, and emotional wellbeing practices designed specifically for older adults.",
       cards: [
         {
-          image: ProgramSectionsImage,
+          image: brainIcon,
           cardTitle: "Neuroscience-Inspired Meditation Experience",
           cardDescription:
             "Gentle guided practices that help regulate emotions, reduce stress, and support mental clarity.",
         },
         {
-          image: ProgramSectionsImage,
+          image: yoga,
           cardTitle: "Group Meditation & Wellness Sessions",
           cardDescription:
             "Structured sessions designed to encourage relaxation, reflection, and community connection.",
         },
         {
-          image: ProgramSectionsImage,
+          image: graph,
           cardTitle: "Personalized Wellbeing Tracking",
           cardDescription:
             "Track mood, cognitive activity, and mindfulness practice over time."
         },
         {
-          image: ProgramSectionsImage,
+          image: watch,
           cardTitle: "Flexible Program Integration",
           cardDescription:
             "Programs can be easily integrated into senior clubs, community centers, and wellness homes.",
@@ -517,7 +616,33 @@ const  programsTabData = {
       title: "Tracking Wellbeing Beyond Daily Life",
       description:
         "Through guided meditation and cognitive wellness programs, seniors can track emotional balance, mental clarity, and overall wellbeing over time.",
-      cards: [],
+     cards: [
+  {
+    title: "Senior Dashboard",
+    subtitle: "Daily wellbeing pulse",
+    metricLabel: "Calmness score",
+    value: 88,
+    chartType: "progressBar"
+  },
+  {
+    title: "Caregiver Dashboard",
+    subtitle: "Wellbeing updates",
+    items: [
+      "Group meditation: 5/7 Days",
+      "Emotional wellbeing stable"
+    ],
+    chartType: "info"
+  },
+
+  {
+    title: "Senior Center Dashboard",
+    subtitle: "Community wellbeing insights",
+    chartType: "radialChart",
+    value: 92,
+    metricLabel: "Participation",
+    metricStatus: "High (4%)"
+  }
+],
       bottomCard: {
         title: "Supporting Healthy & Active Aging",
         description:
@@ -574,22 +699,22 @@ const  programsTabData = {
         "Programs designed to build focus, calm, and emotional intelligence.",
       cards: [
         {
-          image: ProgramSectionsImage,
+          image: brainIcon,
           cardTitle: "Daily Guided Meditation",
           cardDescription: "Short sessions that build calm and focus.",
         },
         {
-          image: ProgramSectionsImage,
+          image: yoga,
           cardTitle: "Stress Reset Practices",
           cardDescription: "Tools to release tension and restore balance.",
         },
         {
-          image: ProgramSectionsImage,
+          image: graph,
           cardTitle: "Mind Awareness Exercises",
           cardDescription: "Practices to observe thoughts and emotions clearly.",
         },
         {
-          image: ProgramSectionsImage,
+          image: watch,
           cardTitle: "Habit Building Tools",
           cardDescription: "Simple routines that make mindfulness consistent.",
         },
@@ -634,7 +759,46 @@ const  programsTabData = {
       title: "Track Your Mindfulness Journey",
       description:
         "Observe improvements in focus, emotional balance, and daily calmness.",
-      cards: [],
+      cards: [
+  {
+    title: "Personal Dashboard",
+    subtitle: "Daily mindfulness pulse",
+    metricLabel: "Focus Score",
+    value: 91,
+    chartType: "progressBar"
+  },
+  {
+    title: "Daily Habits",
+    subtitle: "Mindfulness activities",
+    items: [
+      "Meditation: 6/7 Days",
+      "Stress level: Improved"
+    ],
+    chartType: "info"
+  },
+  {
+    title: "Mood Tracker",
+    subtitle: "Weekly emotional balance",
+    chartType: "barChart",
+    data: [
+      { value: 50 },
+      { value: 65 },
+      { value: 70 },
+      { value: 75 },
+      { value: 68 },
+      { value: 72 },
+      { value: 80 }
+    ]
+  },
+  {
+    title: "Wellness Score",
+    subtitle: "Overall wellbeing",
+    chartType: "radialChart",
+    value: 94,
+    metricLabel: "Progress",
+    metricStatus: "Excellent"
+  }
+],
       bottomCard: {
         title: "Your Personal Growth Companion",
         description:

@@ -28,12 +28,12 @@ function ProgramGrowth ({data}) {
               className="bg-[#C2E0BA33] p-8 rounded-3xl flex flex-col gap-[0.5px] shadow-sm"
             >
               {/* Icon */}
-              <div className="bg-white rounded-full w-[100px] h-[100px] flex items-center justify-center relative z-10">
-                <img src={program.image} alt={program.title} className="" />
+              <div className="bg-white rounded-full w-[80px] h-[80px] flex items-center justify-center relative z-10">
+                <img src={program.image} alt={program.title} className="rounded-full "/>
               </div>
 
               {/* Title */}
-              <h3 className="text-xl font-semibold font-dm text-[22px]">
+              <h3 className="text-xl font-semibold font-dm text-[22px] mt-4">
                 {program.cardTitle}
               </h3>
 

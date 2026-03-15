@@ -7,7 +7,6 @@ import StudentPressureSection from './StudentPressureSection'
 import StructureProgram from './StructureProgram'
 import ProgramGrowth from './ProgramGrowth'
 import ProgramFooter from './ProgramFooter'
-import DhyanLabs from './DhyanLabs'
 
 import programsTabData from './ProgramData.js'
 import System from './System.jsx'
@@ -31,10 +30,9 @@ const ProgramPage = () => {
           data={data.firstPage}
         />
         <StudentPressureSection data={data.secondPage} />
-
+        <System data={data.thirdPage}/>
         <ProgramGrowth data={data.fourthPage} />
         <StructureProgram data={data.fifthPage} />
-        <System/>
         <ProgramFooter data={data.sixthPage} />
         
     </>
