@@ -1,4 +1,10 @@
 import ProgramSectionsImage from "../../assets/images/ProgramSectionBg.png";
+import schoolFirst from "../../assets/images/sixth.png"
+import schoolThird from "../../assets/images/third.png"
+import schoolSecond from "../../assets/images/schoolsecond.png"
+import seniorFirst from "../../assets/images/seniorfirst.png"
+import seniorSecond from "../../assets/images/seniorsecond.png"
+import seniorThird from "../../assets/images/seniorthird.png"
 import SeniorTab from '../../assets/images/seniorsTab.png'
 import TreeLeft from "../../assets/images/treeleft.png";
 import TreeCenter from "../../assets/images/treemiddle.png";
@@ -6,6 +12,7 @@ import TreeRight from "../../assets/images/treeright.png";
 import seniorLeft from "../../assets/images/seniorLeft.png";
 import seniorCenter from "../../assets/images/seniorCenter.png";
 import seniorRight from "../../assets/images/seniorRight.png";
+
 
 
 
@@ -111,9 +118,59 @@ const  programsTabData = {
     },
 
     fifthPage: {
-      title: "Structured Programs for Mental & Emotional Growth",
+      title: "Structured Programs for ",
+      spanTitle: "Mental & Emotional ",
+      title2: "Growth",
       description:
         "Each program combines meditation, cognitive experiments, and practical tools.",
+      cards: [
+            {
+                id: "dhyan",
+                weeks: "8 weeks",
+                title: "Dhyan Shakti — Attention Lab",
+                subtitle:
+                    "Strengthening sustained attention, reducing distraction, and improving deep focus.",
+                activities: [
+                    "Attention experiments (before & after meditation)",
+                    "Breath-counting practices",
+                    "Focus games & cognitive tasks",
+                    "Digital distraction awareness",
+                ],
+                tags: ["Improved concentration", "Classroom Engagement", "Stronger Learning readiness"],
+                image: schoolFirst,
+                imageSide: "right",
+            },
+            {
+                id: "shanti",
+                weeks: "8 weeks",
+                title: "Shanti Path — Anxiety & Calm",
+                subtitle: "Managing stress, exam anxiety, and emotional overwhelm.",
+                activities: [
+                    "Breath regulation techniques",
+                    "Calm response training",
+                    "Thought awareness exercises",
+                    "Relaxation practices",
+                ],
+                tags: ["Reduced anxiety", "Emotional control", "Increased resilience under pressure"],
+                image: schoolSecond,
+                imageSide: "left",
+            },
+            {
+                id: "Manas",
+                weeks: "10 weeks",
+                title: "Manas Vigyan — Know Your Brain",
+                subtitle: "Understanding how attention, memory, and emotions work.",
+                activities: [
+                    "Brain-based experiments",
+                    "Meditation Science labs",
+                    "Cognitive games",
+                    "Self-obervation exercises"
+                ],
+                tags: ["Greater self awareness", "Curiosity", "Owner of mental habits."],
+                image: schoolThird,
+                imageSide: "right",
+            }
+        ],
     },
 
     sixthPage: {
@@ -490,9 +547,59 @@ const  programsTabData = {
 },
 
     fifthPage: {
-      title: "Structured Programs for Cognitive & Emotional Wellbeing",
+      title: "Structured Programs for ",
+      spanTitle: "Cognitive & Emotional ",
+      title2: "Wellbeing",
       description:
         "Each program combines meditation, cognitive experiments, and practical tools to build lifelong focus, calm, and resilience.",
+      cards: [
+          {
+              id: "ShantiPath",
+              weeks: "8 weeks",
+              title: "Shanti Path- Calm & Emotional Balance",
+              subtitle:
+                  "Supporting emotional peace and stress reduction through guided meditation.",
+              activities: [
+                  "Gentle Breathing practices",
+                  "Relaxation exercises",
+                  "Emotional reflection sessions",
+              ],
+              tags: ["Improved emotional calm", "Better Stress Regulations", "Enhanced wellbeing"],
+              image: seniorFirst,
+              imageSide: "right",
+          },
+          {
+              id: "ManasShanti",
+              weeks: "8 weeks",
+              title: "Manas Shakti- Cognitive Vitality",
+              subtitle: "Exercises and mindfulness practices designed to support attention and memory.",
+              activities: [
+                  "Memory exercises",
+                  "Calm response training",
+                  "Focus activities",
+                  
+              ],
+              tags: ["Improved attention", "Cognitive engagement", "Mentalclarity"],
+              image: seniorSecond,
+              imageSide: "left",
+          },
+          {
+              id: "Samvedna",
+              weeks: "6 weeks",
+              title: "Samvedna- Connection & Emotional Wellness",
+              subtitle: "Encouraging empathy, social connection, and emotional wellbeing in senior communities.",
+              activities: [
+                  "Group reflections sessions",
+                  "Gratitude practices",
+                  "Guided conversations",
+                  
+              ],
+              tags: ["Reduced loneliness", "Stronger community bonds", "Positive emotional habits."],
+              image: seniorThird,
+              imageSide: "right",
+          }
+          
+      ],
     },
 
     sixthPage: {

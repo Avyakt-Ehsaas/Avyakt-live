@@ -326,3 +326,8 @@ body {
   max-width: 80vw;
   opacity: 1;
 }
+
+.system-image{
+  background-image: url('./assets/Group 36.svg');
+  
+}
