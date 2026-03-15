@@ -100,38 +100,32 @@ const ProgramFooter = ({ data }) => {
                             </p>
                         </div>
                         {/* TOP ROW */}
-                        <div >
+                        <div className="max-w-7xl w-full">
                             {/* Dashboard Cards */}
+                            <div className={`grid ${data.cards.length === 4 ? "grid-cols-4" : "grid-cols-3"} gap-6 mt-8`}>
+                                {data.cards.map((card, index) =>
+                                (
+                                    <div className='bg-white rounded-2xl p-6' key={index}>
+                                        <h2>
 
-                            <div>
-                                <div className="flex flex-wrap justify-center gap-6 max-w-7xl w-full mt-8">
-                                    {data.cards.map((card, index) =>
-                                    (
-                                        <div className='bg-white rounded-2xl p-6' key={index}>
-                                            <h2>
+                                        </h2>
+                                        <p className="text-[18px] leading-[30px] text-primary font-dm" style={{ fontWeight: 600 }}>{card.title}</p>
+                                        <p className="text-[#696969] text-[16px] mb-5 font-dm">{card.subtitle}</p>
 
-                                            </h2>
-                                            <p className="text-[18px] leading-[30px] text-primary font-dm" style={{ fontWeight: 600 }}>{card.title}</p>
-                                            <p className="text-[#696969] text-[16px] mb-5 font-dm">{card.subtitle}</p>
+                                        {/* Render chart based on type */}
+                                        {card.chartType === "progressBar" && renderProgressBar(card)}
 
-                                            {/* Render chart based on type */}
-                                            {card.chartType === "progressBar" && renderProgressBar(card)}
+                                        {card.chartType === "info" && renderInfo(card)}
 
-                                            {card.chartType === "info" && renderInfo(card)}
+                                        {card.chartType === "barChart" && renderBarChart(card)}
 
-                                            {card.chartType === "barChart" && renderBarChart(card)}
+                                        {card.chartType === "radialChart" && renderRadialChart(card)}
 
-                                            {card.chartType === "radialChart" && renderRadialChart(card)}
-
-                                        </div>
-                                    )
-                                    )
-                                    }
-                                </div>
+                                    </div>
+                                )
+                                )
+                                }
                             </div>
-
-
-
 
 
                         </div>
@@ -335,11 +329,11 @@ const renderInfo = (card) => {
 
     return (
         <>
-            <div className="flex items-center gap-2 text-primary text-[16px] bg-gray-50 p-2 rounded-lg mb-2">
-                <CheckCircle size={16} className="text-greenbase" />                                         
+            <div className="flex items-center gap-2 font-dm text-primary text-[16px] bg-gray-50 p-2 rounded-lg mb-2">
+                <CheckCircle size={16} className="text-greenbase" />
                 {card.items[0]}
             </div>
-            <div className="flex items-center text-primary gap-2 text-[16px] bg-gray-50 p-2 rounded-lg">
+            <div className="flex items-center font-dm text-primary gap-2 text-[16px] bg-gray-50 p-2 rounded-lg">
                 <TrendingUp size={16} className="text-greenbase" />
                 {card.items[1]}
             </div>
@@ -376,21 +370,21 @@ const renderBarChart = (card) => {
 }
 
 const renderRadialChart = (card) => {
-      return (
+    return (
         <>
-    <div className="flex flex-row gap-4 items-center ">
+            <div className="flex flex-row gap-4 items-center ">
 
-                                         <ScoreCard
-                                             value={card.value}
-                                             color="#71Ac61"
-                                         />
+                <ScoreCard
+                    value={card.value}
+                    color="#71Ac61"
+                />
 
-                                         <div className="text-sm font-dm mt-8">
-                                             <p className="font-semibold">{card.metricLabel}</p>
-                                             <p className="text-primary ">{card.metricStatus}</p>
-                                         </div>
+                <div className="text-sm font-dm mt-8">
+                    <p className="font-semibold">{card.metricLabel}</p>
+                    <p className="text-primary ">{card.metricStatus}</p>
+                </div>
 
-                                     </div>
-    </>)
+            </div>
+        </>)
 
 }
