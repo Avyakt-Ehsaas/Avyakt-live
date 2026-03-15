@@ -34,9 +34,14 @@ const ProgramPage = () => {
 
         <ProgramGrowth data={data.fourthPage} />
         <StructureProgram data={data.fifthPage} />
+<<<<<<< HEAD
+        <ProgramFooter data={data.sixthPage} />
+        {/* <DhyanLabs data={data.sixthPage} /> */}
+=======
         <System/>
         <ProgramFooter data={data.sixthPage} />
         
+>>>>>>> 15808f0ead9969943fce6b435b0b27f38868bf3e
     </>
   )
 }

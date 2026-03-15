@@ -177,7 +177,57 @@ const  programsTabData = {
       title: "Tracking Growth beyond Classroom",
       description:
         "Through Cognitive Labs, students explore attention, memory, emotions, and focus.",
-      cards: [],
+
+
+      cards: [
+        
+
+
+        {
+    title: "Student Dashboard",
+    subtitle: "Daily wellness pulse",
+    metricLabel: "Focus Score",
+    value: 88,
+    chartType: "progressBar"
+  },
+  {
+    title: "Parents Dashboard",
+    subtitle: "Daily wellness pulse",
+    items: [
+      "Daily practice: 5/7 Days",
+      "Consistency: Improved"
+    ],
+    chartType: "info"
+  },
+  {
+    title: "Teacher Dashboard",
+    subtitle: "Classroom emotional climate",
+    chartType: "barChart",
+    data: [
+      { value: 30 },
+      { value: 55 },
+      { value: 35 },
+      { value: 70 },
+      { value: 60 },
+      { value: 50 },
+      { value: 35 }
+    ]
+  },
+  {
+    title: "Admin Dashboard",
+    subtitle: "Whole school wellness",
+    chartType: "radialChart",
+    value: 92,
+    metricLabel: "Participation",
+    metricStatus: "High (4%)"
+  }
+
+
+
+
+      ],
+
+
       bottomCard: {
         title: "Aligned with ",
         greenTitle: "NEP 2020 ",
@@ -319,7 +369,46 @@ const  programsTabData = {
       title: "Measuring Workplace Wellbeing",
       description:
         "Track improvements in focus, stress levels, and emotional balance across teams.",
-      cards: [],
+      cards: [
+  {
+    title: "Organisation Dashboard",
+    subtitle: "Workplace wellbeing overview",
+    metricLabel: "Employee Engagement",
+    value: 84,
+    chartType: "progressBar"
+  },
+  {
+    title: "HR Insights",
+    subtitle: "Employee participation",
+    items: [
+      "Weekly wellness sessions: 4/5",
+      "Stress levels: Reduced"
+    ],
+    chartType: "info"
+  },
+  {
+    title: "Team Climate",
+    subtitle: "Department wellbeing trends",
+    chartType: "barChart",
+    data: [
+      { value: 40 },
+      { value: 65 },
+      { value: 55 },
+      { value: 70 },
+      { value: 60 },
+      { value: 50 },
+      { value: 45 }
+    ]
+  },
+  {
+    title: "Management Dashboard",
+    subtitle: "Company wellness score",
+    chartType: "radialChart",
+    value: 89,
+    metricLabel: "Participation",
+    metricStatus: "Very High (6%)"
+  }
+],
       bottomCard: {
         title: "Aligned with Modern Workplace Wellbeing Standards",
         description:
@@ -517,7 +606,33 @@ const  programsTabData = {
       title: "Tracking Wellbeing Beyond Daily Life",
       description:
         "Through guided meditation and cognitive wellness programs, seniors can track emotional balance, mental clarity, and overall wellbeing over time.",
-      cards: [],
+     cards: [
+  {
+    title: "Senior Dashboard",
+    subtitle: "Daily wellbeing pulse",
+    metricLabel: "Calmness score",
+    value: 88,
+    chartType: "progressBar"
+  },
+  {
+    title: "Caregiver Dashboard",
+    subtitle: "Wellbeing updates",
+    items: [
+      "Group meditation: 5/7 Days",
+      "Emotional wellbeing stable"
+    ],
+    chartType: "info"
+  },
+
+  {
+    title: "Senior Center Dashboard",
+    subtitle: "Community wellbeing insights",
+    chartType: "radialChart",
+    value: 92,
+    metricLabel: "Participation",
+    metricStatus: "High (4%)"
+  }
+],
       bottomCard: {
         title: "Supporting Healthy & Active Aging",
         description:
@@ -634,7 +749,46 @@ const  programsTabData = {
       title: "Track Your Mindfulness Journey",
       description:
         "Observe improvements in focus, emotional balance, and daily calmness.",
-      cards: [],
+      cards: [
+  {
+    title: "Personal Dashboard",
+    subtitle: "Daily mindfulness pulse",
+    metricLabel: "Focus Score",
+    value: 91,
+    chartType: "progressBar"
+  },
+  {
+    title: "Daily Habits",
+    subtitle: "Mindfulness activities",
+    items: [
+      "Meditation: 6/7 Days",
+      "Stress level: Improved"
+    ],
+    chartType: "info"
+  },
+  {
+    title: "Mood Tracker",
+    subtitle: "Weekly emotional balance",
+    chartType: "barChart",
+    data: [
+      { value: 50 },
+      { value: 65 },
+      { value: 70 },
+      { value: 75 },
+      { value: 68 },
+      { value: 72 },
+      { value: 80 }
+    ]
+  },
+  {
+    title: "Wellness Score",
+    subtitle: "Overall wellbeing",
+    chartType: "radialChart",
+    value: 94,
+    metricLabel: "Progress",
+    metricStatus: "Excellent"
+  }
+],
       bottomCard: {
         title: "Your Personal Growth Companion",
         description:
