@@ -53,6 +53,8 @@ const System = () => {
                     end: "+=1500",
                     scrub: true,
                     pin: true,
+                    pinSpacing: true,
+    anticipatePin: 1,
                 },
             });
 
