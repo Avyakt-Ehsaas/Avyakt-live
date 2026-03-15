@@ -27,6 +27,8 @@ const System = ({data}) => {
                     end: "+=1500",
                     scrub: true,
                     pin: true,
+                    anticipatePin: 1,
+                    pinSpacing: true
                 },
             });
 
