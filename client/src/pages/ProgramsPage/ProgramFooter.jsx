@@ -6,10 +6,10 @@ import DarkLogo from "../../assets/images/LogoDark.svg";
 import avyaktFooter from '../../assets/images/avyaktFooterWatermark.svg';
 
 const iconMap = {
-  Brain,
-  Heart,
-  ShieldCheck,
-  TrendingUp
+    Brain,
+    Heart,
+    ShieldCheck,
+    TrendingUp
 };
 
 import {
@@ -62,46 +62,7 @@ const ScoreCard = ({ value, color }) => {
 
 
 
-const ProgramFooter = ( {data} ) => {
-
-    //teacher barchart
-    const Bardata = [
-        { value: 30 },
-        { value: 55 },
-        { value: 35 },
-        { value: 70 },
-        { value: 60 },
-        { value: 50 },
-        { value: 35 },
-    ];
-
-    const colors = [
-        "#EDFDE9",
-        "#CAE5C2",
-        "#A4C39C",
-        "#BDDBB4",
-        "#B6DFAB",
-        "#75A268",
-        "#71AC61",
-    ];
-
-    //admin radial chart 
-    const adminData = [
-        {
-            name: "Participation",
-            value: 92,
-            fill: "#6DAA60",
-        }
-    ];
-
-    //student data
-    const studentData = [
-        {
-            name: "Focus",
-            value: 88
-        }
-    ];
-
+const ProgramFooter = ({ data }) => {
 
     return (
         <>
@@ -131,153 +92,98 @@ const ProgramFooter = ( {data} ) => {
                         {/* Heading */}
                         <div >
                             <h2 className="text-center text-2xl sm:text-4xl md:text-5xl font-medium text-[#191919] leading-tight">
+                                {console.log(data)}
                                 {data.title}
                             </h2>
                             <p className="mt-2 text-[18px] font-medium text-center text-primary font-dm">
-                               {data.description}
+                                {data.description}
                             </p>
                         </div>
                         {/* TOP ROW */}
-                        <div className="flex flex-col items-center gap-2 md:flex-row md:justify-center">
+                        <div >
                             {/* Dashboard Cards */}
-                            <div className="grid md:grid-cols-4 gap-6 mt-8 max-w-7xl w-full">
-                                {/* Student Dashboard */}
-                                <div className="bg-white rounded-2xl shadow p-6">
-                                    <div>
-                                        <h2>
 
-                                        </h2>
-                                        <p className="text-[18px] leading-[30px] text-primary font-dm" style={{ fontWeight: 600 }}>Student Dashboard</p>
-                                        <p className="text-[#696969] text-[16px] mb-5 font-dm">Daily wellness pulse</p></div>
+                            <div>
+                                <div className="flex flex-wrap justify-center gap-6 max-w-7xl w-full mt-8">
+                                    {data.cards.map((card, index) =>
+                                    (
+                                        <div className='bg-white rounded-2xl p-6' key={index}>
+                                            <h2>
 
-                                    <div className="flex justify-between text-sm mb-2">
-                                        <span className='text-primary font-dm'>Focus Score</span>
-                                        <span className="font-semibold font-dm">88%</span>
-                                    </div>
-                                    <div className="h-[14px] w-full">
-                                        <ResponsiveContainer width="100%" height="100%">
-                                            <BarChart
-                                                data={studentData}
-                                                layout="vertical"
-                                                margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
-                                            >
-                                                <XAxis type="number" hide domain={[0, 100]} />
-                                                <YAxis type="category" hide dataKey="name" />
+                                            </h2>
+                                            <p className="text-[18px] leading-[30px] text-primary font-dm" style={{ fontWeight: 600 }}>{card.title}</p>
+                                            <p className="text-[#696969] text-[16px] mb-5 font-dm">{card.subtitle}</p>
 
-                                                <Bar
-                                                    animationDuration={1200}
-                                                    dataKey="value"
-                                                    fill="#6DAA60"
-                                                    radius={[10, 10, 10, 10]}
-                                                    barSize={10}
-                                                    background={{ fill: "#E5E7EB", radius: 10 }}
-                                                />
-                                            </BarChart>
-                                        </ResponsiveContainer>
-                                    </div>
-                                </div>
-                                {/* Parents Dashboard */}
-                                <div className="bg-white rounded-2xl shadow p-6">
-                                    <p className="text-[18px] leading-[30px] text-primary font-dm" style={{ fontWeight: 600 }}>Parents Dashboard</p>
-                                    <p className="text-[#696969] text-[16px] mb-5 font-dm">Daily wellness pulse</p>
-                                    <div className="flex items-center gap-2 text-primary text-[16px] bg-gray-50 p-2 rounded-lg mb-2">
-                                        <CheckCircle size={16} className="text-greenbase" />
-                                        Daily practice: 5/7 Days
-                                    </div>
-                                    <div className="flex items-center text-primary gap-2 text-[16px] bg-gray-50 p-2 rounded-lg">
-                                        <TrendingUp size={16} className="text-greenbase" />
-                                        Consistency: Improved
-                                    </div>
-                                </div>
-                                {/* Teacher Dashboard */}
-                                <div className="bg-white rounded-2xl shadow p-6">
-                                    <p className="text-[18px] leading-[30px] text-primary font-dm" style={{ fontWeight: 600 }}>Teacher Dashboard</p>
-                                    <p className="text-[#696969] text-[16px] mb-5 pr-4 font-dm">
-                                        Classroom emotional climate
-                                    </p>
-                                    <div className="h-[70px]">
-                                        <ResponsiveContainer width="100%" height="100%">
-                                            <BarChart data={Bardata}>
-                                                <Bar
-                                                    animationDuration={1200}
-                                                    dataKey="value" radius={[4, 4, 4, 4]}>
-                                                    {Bardata.map((entry, index) => (
-                                                        <Cell key={`cell-${index}`} fill={colors[index]} />
-                                                    ))}
-                                                </Bar>
-                                            </BarChart>
-                                        </ResponsiveContainer>
-                                    </div>
-                                </div>
-                                <div className="bg-white rounded-2xl shadow p-6">
-                                    <p className="text-[18px] leading-[30px] text-primary font-dm" style={{ fontWeight: 600 }}>Admin Dashboard</p>
-                                    <p className="text-[#696969] text-[16px] mb-2 font-dm">Whole school wellness</p>
+                                            {/* Render chart based on type */}
+                                            {card.chartType === "progressBar" && renderProgressBar(card)}
 
-                                    <div className="flex flex-row gap-4 items-center ">
+                                            {card.chartType === "info" && renderInfo(card)}
 
-                                        <ScoreCard
-                                            value={92}
-                                            color="#71Ac61"
-                                        />
+                                            {card.chartType === "barChart" && renderBarChart(card)}
 
-                                        <div className="text-sm font-dm mt-8">
-                                            <p className="font-semibold">Participation</p>
-                                            <p className="text-primary ">High (4%)</p>
+                                            {card.chartType === "radialChart" && renderRadialChart(card)}
+
                                         </div>
-
-                                    </div>
+                                    )
+                                    )
+                                    }
                                 </div>
                             </div>
+
+
+
+
+
                         </div>
 
                         {/* BOTTOM CARD */}
-                       <div className="flex justify-center px-3 pb-4">
+                        <div className="flex justify-center px-3 pb-4">
 
-  <div className="bg-[#F5F2ED] rounded-3xl p-4 mt-8 max-w-7xl w-full">
+                            <div className="bg-[#F5F2ED] rounded-3xl p-4 mt-8 max-w-7xl w-full">
 
-    <h2 className="text-[34px] font-medium leading-[40px] font-season">
-      {data.bottomCard.title}
-      <span className="text-greenbase"> {data.bottomCard.greenTitle} </span>
-      {data.bottomCard.postTitle}
-    </h2>
+                                <h2 className="text-[34px] font-medium leading-[40px] font-season">
+                                    {data.bottomCard.title}
+                                    <span className="text-greenbase"> {data.bottomCard.greenTitle} </span>
+                                    {data.bottomCard.postTitle}
+                                </h2>
 
-    <p className="text-primary font-dm leading-[20px] mt-1 max-w-2xl">
-      {data.bottomCard.description}
-    </p>
+                                <p className="text-primary font-dm leading-[20px] mt-1 max-w-2xl">
+                                    {data.bottomCard.description}
+                                </p>
 
-    <div className="grid md:grid-cols-2 gap-8 mt-8">
+                                <div className="grid md:grid-cols-2 gap-8 mt-8">
 
-      {data.bottomCard.keyPoints.map((item, index) => {
+                                    {data.bottomCard.keyPoints.map((item, index) => {
 
-        const Icon = Object.values(iconMap)[index];
+                                        const Icon = Object.values(iconMap)[index];
 
-        return (
-          <div key={index} className="flex gap-3">
+                                        return (
+                                            <div key={index} className="flex gap-3">
 
-            <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-              <Icon className="text-greenbase w-5 h-5" />
-            </div>
+                                                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                                                    <Icon className="text-greenbase w-5 h-5" />
+                                                </div>
 
-            <div>
-              <h4 className="font-semibold text-[18px] leading-[20px] font-dm">
-                {item.title}
-              </h4>
+                                                <div>
+                                                    <h4 className="font-semibold text-[18px] leading-[20px] font-dm">
+                                                        {item.title}
+                                                    </h4>
 
-              <p className="text-[#696969] text-[16px] leading-[20px] font-dm mt-1">
-                {item.description}
-              </p>
-            </div>
+                                                    <p className="text-[#696969] text-[16px] leading-[20px] font-dm mt-1">
+                                                        {item.description}
+                                                    </p>
+                                                </div>
 
-          </div>
-        );
+                                            </div>
+                                        );
 
-      })}
+                                    })}
 
-    </div>
+                                </div>
 
-  </div>
+                            </div>
 
-</div>
+                        </div>
 
                     </div>
 
@@ -380,3 +286,111 @@ const ProgramFooter = ( {data} ) => {
 }
 
 export default ProgramFooter
+
+
+
+
+const renderProgressBar = (card) => {
+    const studentData = [
+        {
+            name: card.metricLabel,
+            value: card.value
+        }
+    ]
+    return (
+        <>
+
+            <div className="flex justify-between text-sm mb-2">
+                <span className='text-primary font-dm'>Focus Score</span>
+                <span className="font-semibold font-dm">88%</span>
+            </div>
+
+            <div className="h-[14px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                    <BarChart
+                        data={studentData}
+                        layout="vertical"
+                        margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+                    >
+                        <XAxis type="number" hide domain={[0, 100]} />
+                        <YAxis type="category" hide dataKey="name" />
+
+                        <Bar
+                            animationDuration={1200}
+                            dataKey="value"
+                            fill="#6DAA60"
+                            radius={[10, 10, 10, 10]}
+                            barSize={10}
+                            background={{ fill: "#E5E7EB", radius: 10 }}
+                        />
+                    </BarChart>
+                </ResponsiveContainer>
+            </div>
+
+        </>
+    )
+}
+
+const renderInfo = (card) => {
+
+    return (
+        <>
+            <div className="flex items-center gap-2 text-primary text-[16px] bg-gray-50 p-2 rounded-lg mb-2">
+                <CheckCircle size={16} className="text-greenbase" />                                         
+                {card.items[0]}
+            </div>
+            <div className="flex items-center text-primary gap-2 text-[16px] bg-gray-50 p-2 rounded-lg">
+                <TrendingUp size={16} className="text-greenbase" />
+                {card.items[1]}
+            </div>
+        </>)
+}
+
+
+const renderBarChart = (card) => {
+    const Bardata = card.data
+    const colors = [
+        "#EDFDE9",
+        "#CAE5C2",
+        "#A4C39C",
+        "#BDDBB4",
+        "#B6DFAB",
+        "#75A268",
+        "#71AC61",
+    ];
+    return (<>
+        <div className="h-[70px]">
+            <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={Bardata}>
+                    <Bar
+                        animationDuration={1200}
+                        dataKey="value" radius={[4, 4, 4, 4]}>
+                        {Bardata.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={colors[index]} />
+                        ))}
+                    </Bar>
+                </BarChart>
+            </ResponsiveContainer>
+        </div>
+    </>)
+}
+
+const renderRadialChart = (card) => {
+      return (
+        <>
+    <div className="flex flex-row gap-4 items-center ">
+
+                                         <ScoreCard
+                                             value={card.value}
+                                             color="#71Ac61"
+                                         />
+
+                                         <div className="text-sm font-dm mt-8">
+                                             <p className="font-semibold">{card.metricLabel}</p>
+                                             <p className="text-primary ">{card.metricStatus}</p>
+                                         </div>
+
+                                     </div>
+    </>)
+
+}
