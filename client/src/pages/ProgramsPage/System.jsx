@@ -27,6 +27,8 @@ const System = ({data}) => {
                     end: "+=1500",
                     scrub: true,
                     pin: true,
+                    pinSpacing: true,
+                    anticipatePin: 1
                 },
             });
 
@@ -52,7 +54,7 @@ const System = ({data}) => {
     return (
         <section
             ref={sectionRef}
-            className="relative  overflow-hidden"
+            className="relative min-h-screen overflow-hidden"
         >
             <div className="absolute inset-0 -z-10 bg-center bg-cover bg-no-repeat system-image max-h-[600px]" />
 

@@ -100,41 +100,27 @@ const ProgramFooter = ({ data }) => {
                             </p>
                         </div>
                         {/* TOP ROW */}
-                        <div >
-                            {/* Dashboard Cards */}
+                       <div className="max-w-7xl w-full">
+  {/* Dashboard Cards */}
+  <div className="grid grid-cols-3 gap-6 mt-8">
+    {data.cards.map((card, index) => (
+      <div className="bg-white rounded-2xl p-6" key={index}>
+        <p className="text-[18px] leading-[30px] text-primary font-dm font-semibold">
+          {card.title}
+        </p>
 
-                            <div>
-                                <div className="flex flex-wrap justify-center gap-6 max-w-7xl w-full mt-8">
-                                    {data.cards.map((card, index) =>
-                                    (
-                                        <div className='bg-white rounded-2xl p-6' key={index}>
-                                            <h2>
+        <p className="text-[#696969] text-[16px] mb-5 font-dm">
+          {card.subtitle}
+        </p>
 
-                                            </h2>
-                                            <p className="text-[18px] leading-[30px] text-primary font-dm" style={{ fontWeight: 600 }}>{card.title}</p>
-                                            <p className="text-[#696969] text-[16px] mb-5 font-dm">{card.subtitle}</p>
-
-                                            {/* Render chart based on type */}
-                                            {card.chartType === "progressBar" && renderProgressBar(card)}
-
-                                            {card.chartType === "info" && renderInfo(card)}
-
-                                            {card.chartType === "barChart" && renderBarChart(card)}
-
-                                            {card.chartType === "radialChart" && renderRadialChart(card)}
-
-                                        </div>
-                                    )
-                                    )
-                                    }
-                                </div>
-                            </div>
-
-
-
-
-
-                        </div>
+        {card.chartType === "progressBar" && renderProgressBar(card)}
+        {card.chartType === "info" && renderInfo(card)}
+        {card.chartType === "barChart" && renderBarChart(card)}
+        {card.chartType === "radialChart" && renderRadialChart(card)}
+      </div>
+    ))}
+  </div>
+</div>
 
                         {/* BOTTOM CARD */}
                         <div className="flex justify-center px-3 pb-4">
