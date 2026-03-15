@@ -27,13 +27,8 @@ const System = ({data}) => {
                     end: "+=1500",
                     scrub: true,
                     pin: true,
-<<<<<<< HEAD
                     pinSpacing: true,
                     anticipatePin: 1
-=======
-                    anticipatePin: 1,
-                    pinSpacing: true
->>>>>>> cbd29d896fa235f8f4817dc298f7ddbba58f7f46
                 },
             });
 
