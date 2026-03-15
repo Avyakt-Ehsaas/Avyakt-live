@@ -1,15 +1,12 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import brainIcon from "../../assets/brainicon.png";
-import graph from "../../assets/graph.png";
-import watch from "../../assets/watch.png";
-import wyoga from "../../assets/wyoga.png";
+
 
 
 gsap.registerPlugin(ScrollTrigger);
 
-const System = () => {
+const System = ({data}) => {
     const sectionRef = useRef(null);
     const cards = useRef([]);
 
@@ -18,29 +15,6 @@ const System = () => {
         "#CBEBC3",
         "#B6E2AA",
         "#8FC580",
-    ];
-
-    const cardData = [
-        {
-            title: "Neuroscience-Inspired Meditation Experience",
-            desc: "Guided practices built on how the brain regulates attention, emotions, and stress.",
-            icon: brainIcon,
-        },
-        {
-            title: "Live Meditation Workshops",
-            desc: "Structured group sessions designed to build focus and emotional balance.",
-            icon: wyoga,
-        },
-        {
-            title: "Personalized Trackers",
-            desc: "Track progress and develop consistent mindfulness habits.",
-            icon: graph,
-        },
-        {
-            title: "Community Support",
-            desc: "A supportive environment for growth and shared learning.",
-            icon: watch,
-        },
     ];
 
     useEffect(() => {
@@ -78,7 +52,7 @@ const System = () => {
     return (
         <section
             ref={sectionRef}
-            className="relative min-h-screen overflow-hidden"
+            className="relative  overflow-hidden"
         >
             <div className="absolute inset-0 -z-10 bg-center bg-cover bg-no-repeat system-image max-h-[600px]" />
 
@@ -86,39 +60,38 @@ const System = () => {
 
             <div className="max-w-7xl mx-auto grid grid-cols-2 gap-24 pt-32">
 
-                <div className="sticky top-40 h-fit">
-                    <h2 className="text-4xl font-semibold leading-tight">
-                        A <span className="text-green-600">Structured System</span> —
-                        <br />
-                        Not Just Random Sessions
+                <div className="sticky top-40  left-10 h-fit">
+                    <h2 className="text-4xl w-lg font-semibold leading-[50px] font-season text-primary">
+                      {data.title} <span className="text-greenbase">{data.greenTitle}</span> 
+                        {data.postTitle}
                     </h2>
 
-                    <p className="mt-4 text-gray-700 max-w-md">
-                        Avyakt Student Programs are built on three integrated pillars:
+                    <p className="mt-2 text-primary text-lg max-w-2xl font-dm">
+                        {data.description}
                     </p>
                 </div>
 
                 <div className="relative h-[600px]">
 
-                    {cardData.map((card, idx) => (
+                    {data.cards.map((card, idx) => (
                         <div
                             key={idx}
                             ref={(el) => (cards.current[idx] = el)}
-                            className={`absolute w-[380px] h-[220px] p-6 rounded-lg shadow-xl`}
+                            className={`absolute w-[360px] h-[230px] p-6 rounded-lg shadow-xl `}
                             style={{ top: `${idx * 240}px`, backgroundColor: bgColors[idx] }}
                         >
                             <img
-                                src={card.icon}
-                                alt=""
-                                className="inline-block size-14 rounded-full ring-white outline -outline-offset-1 outline-black/5"
+                                src={card.image}
+                                alt="card icon"
+                                className="inline-block size-14 rounded-full"
                             />
 
-                            <h3 className="text-xl font-semibold mt-4">
-                                {card.title}
+                            <h3 className="text-xl font-medium font-season mt-4 text-primary">
+                                {card.cardTitle}
                             </h3>
 
-                            <p className="text-sm mt-3">
-                                {card.desc}
+                            <p className="text-[15px] mt-3  font-dm text-primary">
+                                {card.cardDescription}
                             </p>
                         </div>
                     ))}

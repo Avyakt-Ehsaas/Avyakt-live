@@ -13,6 +13,10 @@ import seniorLeft from "../../assets/images/seniorLeft.png";
 import seniorCenter from "../../assets/images/seniorCenter.png";
 import seniorRight from "../../assets/images/seniorRight.png";
 
+import brainIcon from "../../assets/brainicon.png";
+import graph from "../../assets/graph.png";
+import watch from "../../assets/watch.png";
+import yoga from "../../assets/wyoga.png";
 
 
 
@@ -55,30 +59,32 @@ const  programsTabData = {
     },
 
     thirdPage: {
-      title: "A Structured System — Not Just Random Sessions",
+      title: "A ",
+      greenTitle : "Structured System ",
+      postTitle: "for Not Just Random Sessions",
       description:
         "Avyakt Student Programs are built on three integrated pillars:",
       cards: [
         {
-          image: ProgramSectionsImage,
+          image: brainIcon,
           cardTitle: "Neuroscience-Inspired Meditation Experience",
           cardDescription:
             "Guided practices built on how the brain regulates attention, emotions, and stress.",
         },
         {
-          image: ProgramSectionsImage,
+          image: yoga,
           cardTitle: "Live Meditation Workshops & Programs",
           cardDescription:
             "Structured group sessions and workshops that teach practical tools for focus and calm.",
         },
         {
-          image: ProgramSectionsImage,
+          image: graph,
           cardTitle: "Personalized Trackers & Growth Insights",
           cardDescription:
             "Monitor focus, emotional wellbeing, and consistency through progress tracking.",
         },
         {
-          image: ProgramSectionsImage,
+          image: watch,
           cardTitle: "Easily Fits Real Life Routines",
           cardDescription:
             "Short, flexible practices designed to blend into school, work, and home schedules.",
@@ -297,30 +303,32 @@ const  programsTabData = {
     },
 
     thirdPage: {
-      title: "A Science-Based Workplace Wellness System",
+      title: "A ",
+      greenTitle: "Science-Based ",
+      postTitle: "Workplace Wellness System",
       description:
         "Avyakt workplace programs combine neuroscience, mindfulness, and practical exercises:",
       cards: [
         {
-          image: ProgramSectionsImage,
+          image: brainIcon,
           cardTitle: "Mindfulness & Focus Training",
           cardDescription:
             "Techniques designed to improve concentration and cognitive clarity at work.",
         },
         {
-          image: ProgramSectionsImage,
+          image: yoga,
           cardTitle: "Stress & Burnout Management",
           cardDescription:
             "Guided practices that help employees regulate stress and emotional pressure.",
         },
         {
-          image: ProgramSectionsImage,
+          image: graph,
           cardTitle: "Team Emotional Intelligence",
           cardDescription:
             "Exercises that improve communication, empathy, and collaboration.",
         },
         {
-          image: ProgramSectionsImage,
+          image: watch,
           cardTitle: "Flexible Workplace Integration",
           cardDescription:
             "Short, adaptable practices that fit easily into daily work routines.",
@@ -472,30 +480,32 @@ const  programsTabData = {
     },
 
     thirdPage: {
-      title: "A Structured System for Peaceful Aging",
+      title: "A ",
+      greenTitle : "Structured System",
+      postTitle: " for Peaceful Aging",
       description:
         "Avyakt Senior Programs combine meditation, cognitive exercises, and emotional wellbeing practices designed specifically for older adults.",
       cards: [
         {
-          image: ProgramSectionsImage,
+          image: brainIcon,
           cardTitle: "Neuroscience-Inspired Meditation Experience",
           cardDescription:
             "Gentle guided practices that help regulate emotions, reduce stress, and support mental clarity.",
         },
         {
-          image: ProgramSectionsImage,
+          image: yoga,
           cardTitle: "Group Meditation & Wellness Sessions",
           cardDescription:
             "Structured sessions designed to encourage relaxation, reflection, and community connection.",
         },
         {
-          image: ProgramSectionsImage,
+          image: graph,
           cardTitle: "Personalized Wellbeing Tracking",
           cardDescription:
             "Track mood, cognitive activity, and mindfulness practice over time."
         },
         {
-          image: ProgramSectionsImage,
+          image: watch,
           cardTitle: "Flexible Program Integration",
           cardDescription:
             "Programs can be easily integrated into senior clubs, community centers, and wellness homes.",
@@ -689,22 +699,22 @@ const  programsTabData = {
         "Programs designed to build focus, calm, and emotional intelligence.",
       cards: [
         {
-          image: ProgramSectionsImage,
+          image: brainIcon,
           cardTitle: "Daily Guided Meditation",
           cardDescription: "Short sessions that build calm and focus.",
         },
         {
-          image: ProgramSectionsImage,
+          image: yoga,
           cardTitle: "Stress Reset Practices",
           cardDescription: "Tools to release tension and restore balance.",
         },
         {
-          image: ProgramSectionsImage,
+          image: graph,
           cardTitle: "Mind Awareness Exercises",
           cardDescription: "Practices to observe thoughts and emotions clearly.",
         },
         {
-          image: ProgramSectionsImage,
+          image: watch,
           cardTitle: "Habit Building Tools",
           cardDescription: "Simple routines that make mindfulness consistent.",
         },
