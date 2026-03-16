@@ -27,7 +27,7 @@ const ProgramSections = ({activeTab,setActiveTab,data}) => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`relative pb-2 transition-all duration-300 ${
+              className={`relative pb-2 transition-all duration-300 cursor-pointer ${
                 activeTab === tab.id
                   ? "text-greenbase font-semibold"
                   : "text-primary hover:text-black"

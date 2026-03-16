@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const System = ({data}) => {
+const System = ({ data }) => {
     const sectionRef = useRef(null);
     const cards = useRef([]);
 
@@ -17,43 +17,43 @@ const System = ({data}) => {
         "#8FC580",
     ];
 
-   useEffect(() => {
-  const ctx = gsap.context(() => {
+    useEffect(() => {
+        const ctx = gsap.context(() => {
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=1500",
-        scrub: true,
-        pin: true,
-        pinSpacing: true,
-        anticipatePin: 1,
-      },
-    });
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top top",
+                    end: "+=1500",
+                    scrub: true,
+                    pin: true,
+                    pinSpacing: true,
+                    anticipatePin: 1,
+                },
+            });
 
-    cards.current.forEach((card, i) => {
-      if (i === 0) return;
+            cards.current.forEach((card, i) => {
+                if (i === 0) return;
 
-      tl.to(
-        card,
-        {
-          y: -i * 220,
-          ease: "none",
-        },
-        i * 0.3
-      );
-    });
+                tl.to(
+                    card,
+                    {
+                        y: -i * 220,
+                        ease: "none",
+                    },
+                    i * 0.3
+                );
+            });
 
-  }, sectionRef);
+        }, sectionRef);
 
-  // 🔥 force refresh after layout
-  setTimeout(() => {
-    ScrollTrigger.refresh();
-  }, 500);
+        // 🔥 force refresh after layout
+        setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 500);
 
-  return () => ctx.revert();
-}, []);
+        return () => ctx.revert();
+    }, []);
 
     return (
         <section
@@ -68,7 +68,7 @@ const System = ({data}) => {
 
                 <div className="sticky top-40  left-10 h-fit">
                     <h2 className="text-4xl w-lg font-semibold leading-[50px] font-season text-primary">
-                      {data.title} <span className="text-greenbase">{data.greenTitle}</span> 
+                        {data.title} <span className="text-greenbase">{data.greenTitle}</span>
                         {data.postTitle}
                     </h2>
 

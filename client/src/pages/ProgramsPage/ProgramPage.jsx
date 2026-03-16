@@ -16,7 +16,7 @@ const ProgramPage = () => {
   const [activeTab,setActiveTab] = useState("school");
 
   const data = programsTabData[activeTab];
-  console.log(data)
+  
   return (
     <>
         <div className='sticky top-0 z-20'>
