@@ -3,13 +3,13 @@ import ProgramBg from "../../assets/images/ProgramBg.png";
 
 const Programs = () => {
   return (
-    <div className="relative w-full min-h-screen overflow-hidden z-1">
+    <div className="relative w-full min-h-[130vh] overflow-hidden z-1">
 
       {/* Background Image */}
       <img        
       src={ProgramBg}
       alt="Hero"
-      className='absolute bottom-0 right-0 w-auto h-auto min-w-full min-h-[120vh] object-cover z-0'
+      className='absolute bottom-0 right-0 w-auto h-auto min-w-full min-h-full object-cover z-0'
       />
       {/* Light Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-transparent"></div>
