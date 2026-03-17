@@ -52,7 +52,7 @@ const ScoreCard = ({ value, color }) => {
                 />
             </RadialBarChart>
 
-            <div className="text-[18px] font-dm font-medium -mt-16 ml-8">
+            <div className="text-[18px] font-dm font-semibold -mt-16 ml-8">
                 {value}%
             </div>
         </div>
@@ -295,7 +295,7 @@ const renderProgressBar = (card) => {
         <>
 
             <div className="flex justify-between text-sm mb-2">
-                <span className='text-primary font-dm'>Focus Score</span>
+                <span className='text-primary text-[16px]  font-dm'>Focus Score</span>
                 <span className="font-semibold font-dm">88%</span>
             </div>
 
@@ -329,11 +329,11 @@ const renderInfo = (card) => {
 
     return (
         <>
-            <div className="flex items-center gap-2 font-dm text-primary text-[16px] bg-gray-50 p-2 rounded-lg mb-2">
+            <div className="flex items-center gap-2 font-dm text-primary text-[14px] border border-gray-100 p-2 rounded-full mb-2">
                 <CheckCircle size={16} className="text-greenbase" />
                 {card.items[0]}
             </div>
-            <div className="flex items-center font-dm text-primary gap-2 text-[16px] bg-gray-50 p-2 rounded-lg">
+            <div className="flex items-center font-dm text-primary gap-2 text-[14px] border border-gray-100  p-2 rounded-full">
                 <TrendingUp size={16} className="text-greenbase" />
                 {card.items[1]}
             </div>
@@ -380,8 +380,8 @@ const renderRadialChart = (card) => {
                 />
 
                 <div className="text-sm font-dm mt-8">
-                    <p className="font-semibold">{card.metricLabel}</p>
-                    <p className="text-primary ">{card.metricStatus}</p>
+                    <p className="font-medium text-primary">{card.metricLabel}</p>
+                    <p className="text-primary font-semibold ">{card.metricStatus}</p>
                 </div>
 
             </div>

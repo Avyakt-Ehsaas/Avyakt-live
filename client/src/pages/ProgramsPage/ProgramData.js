@@ -61,7 +61,7 @@ const  programsTabData = {
     thirdPage: {
       title: "A ",
       greenTitle : "Structured System ",
-      postTitle: "for Not Just Random Sessions",
+      postTitle: "Not Just Random Sessions",
       description:
         "Avyakt Student Programs are built on three integrated pillars:",
       cards: [
@@ -480,9 +480,9 @@ const  programsTabData = {
     },
 
     thirdPage: {
-      title: "A ",
-      greenTitle : "Structured System",
-      postTitle: " for Peaceful Aging",
+      title: "A Structured System for",
+      greenTitle : "Peaceful Aging",
+      postTitle: "",
       description:
         "Avyakt Senior Programs combine meditation, cognitive exercises, and emotional wellbeing practices designed specifically for older adults.",
       cards: [

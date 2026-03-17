@@ -9,7 +9,7 @@ const Programs = () => {
       <img        
       src={ProgramBg}
       alt="Hero"
-      className='absolute bottom-0 right-0 w-auto h-auto min-w-full min-h-full object-cover z-0'
+      className='absolute bottom-0 right-0 w-auto h-auto min-w-full min-h-[120vh] object-cover z-0'
       />
       {/* Light Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-transparent"></div>
@@ -18,11 +18,10 @@ const Programs = () => {
         <div className="max-w-6xl font-season">
           {/* Heading */}
           <h1 className="text-3xl md:text-5xl font-medium text-primary leading-snug">
-            Programs Designed for{" "}
-            <span className="text-greenbase">Real-World Impact</span>
+            Programs Designed for Real-World Impact
           </h1>
           {/* Subtext */}
-          <p className="mt-4 text-primary font-dm text-lg leading-[30px]">
+          <p className="mt-2 text-primary font-dm text-lg leading-[24px]">
             Modular, research-informed meditation programs built for schools,
             organizations, individuals, <br /> and senior communities — each grounded
             in neuroscience and measurable outcomes.

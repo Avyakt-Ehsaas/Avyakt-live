@@ -38,7 +38,7 @@ function ProgramGrowth ({data}) {
               </h3>
 
               {/* Description */}
-              <p className="text-primary text-[16px] font-dm">
+              <p className="text-primary text-[16px] font-dm" style={{fontWeight: 400}}>
                 {program.cardDescription}
               </p>
 

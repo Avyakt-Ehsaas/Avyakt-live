@@ -18,7 +18,7 @@ export default function Card({
     <div
       className={[
         "w-full rounded-3xl bg-white border border-black/5 shadow-sm overflow-hidden",
-        "flex flex-col md:flex-row",
+        "flex flex-col md:flex-row gap-10",
         className,
       ].join(" ")}
     >

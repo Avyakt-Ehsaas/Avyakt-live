@@ -29,7 +29,7 @@ const ProgramSections = ({activeTab,setActiveTab,data}) => {
               onClick={() => setActiveTab(tab.id)}
               className={`relative pb-2 transition-all duration-300 cursor-pointer ${
                 activeTab === tab.id
-                  ? "text-greenbase font-semibold"
+                  ? "text-greenbase"
                   : "text-primary hover:text-black"
               }`}
             >
@@ -54,11 +54,11 @@ const ProgramSections = ({activeTab,setActiveTab,data}) => {
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="bg-greenbase-primary font-dm text-white px-8 py-4 rounded-full hover:scale-105 transition-all duration-300 shadow-md">
+          <button className="bg-greenbase-primary font-dm text-white px-8 py-4 rounded-full hover:scale-102 transition-all duration-300 shadow-md cursor-pointer">
             {data.buttonText}
           </button>
 
-          <button className="border font-dm border-greenbase text-greenbase px-8 py-4 rounded-full hover:bg-[#71AC61] hover:scale-105 transition-all duration-300 ">
+          <button className="border font-dm border-greenbase text-greenbase px-8 py-4 rounded-full cursor-pointer hover:scale-102  transition-all duration-300">
             Download Brochure
           </button>
         </div>
@@ -66,11 +66,11 @@ const ProgramSections = ({activeTab,setActiveTab,data}) => {
       </div>
 
       {/* Image Section */}
-      <div className="relative flex justify-center">
+      <div className="relative flex justify-center max-h-[480px]">
         <img
           src={data.image}
           alt="program tab image"
-          className="w-full max-w-7xl object-contain -mt-[12rem] -ml-[6rem]"
+          className="w-full max-w-4xl object-contain"
         />
       </div>
 
