@@ -8,7 +8,7 @@ const StudentPressureSection = ({data}) => {
       {/* Subtle Grid Background */}
      <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none"></div>
 
-      <div className="relative max-w-7xl mx-auto px-8">
+      <div className="relative max-w-[95%] mx-auto px-8">
 
         {/* Heading Block */}
         <div className="max-w-4xl">
@@ -21,7 +21,7 @@ const StudentPressureSection = ({data}) => {
             </span>
           </h2>
 
-          <p className="mt-4 text-[18px] text-primary font-dm leading-relaxed max-w-3xl">
+          <p className="mt-4 text-[20px] font-medium text-primary font-dm leading-relaxed max-w-3xl">
             {data.description}
           </p>
 
@@ -34,70 +34,22 @@ const StudentPressureSection = ({data}) => {
         <div
           key={index}
           className={`rounded-[20px] ${
-            index === 0 ? "bg-[#C2E0BA]/30 p-8" : "bg-[#E9F3E6] p-8"
+            index === 0 ? "bg-[#C2E0BA]/30 p-8" : "bg-[#E9F3E6] p-8 pr-16"
           }`}
         >
-          <h4 className="text-[18px] font-semibold text-primary mb-4">
+          <h4 className="text-[18px] font-semibold text-primary mb-2">
             {card.cardTitle}
           </h4>
 
-          <div className="text-[56px] font-season text-greenbase mb-4 leading-none">
+          <div className="text-[56px] font-medium font-season text-greenbase mb-2 leading-[3rem]">
             {card.number}
           </div>
 
-          <p className="text-[16px] font-medium text-primary font-dm leading-relaxed">
+          <p className="text-[18px] font-medium  text-primary font-dm leading-relaxed">
             {card.cardDescription}
           </p>
         </div>
       ))}
-
-
-
-          {/* Card 1 */}
-          {/* <div className="bg-[#C2E0BA]/30 rounded-[20px] p-8">
-            <h4 className="text-[18px] font-semibold text-primary mb-4">
-              Academic Stress
-            </h4>
-
-            <div className="text-[56px] font-season text-greenbase mb-4 leading-none">
-              78%
-            </div>
-
-            <p className="text-[16px] font-medium text-primary font-dm leading-relaxed">
-              Students reporting high level of exam stress and anxiety
-            </p>
-          </div> */}
-
-          {/* Card 2 */}
-          {/* <div className="bg-[#E9F3E6] rounded-[20px] p-8">
-            <h4 className="text-[18px] font-semibold text-primary mb-4">
-              Digital Distraction
-            </h4>
-
-            <div className="text-[56px] font-season text-greenbase mb-4 leading-none">
-              65%
-            </div>
-
-            <p className="text-[16px] font-medium text-primary font-dm leading-relaxed">
-              Reduction in sustained attention span over the last decade.
-            </p>
-          </div> */}
-
-          {/* Card 3 */}
-          {/* <div className="bg-[#E9F3E6] rounded-[20px] p-4">
-            <h4 className="text-[18px] font-semibold text-primary mb-4">
-              Mental Health Gap
-            </h4>
-
-            <div className="text-[56px] font-season text-greenbase mb-4 leading-none">
-              1 in 5
-            </div>
-
-            <p className="text-[16px] font-medium text-primary font-dm leading-relaxed">
-              Students require professional emotional support but lacks access 
-              to institutional resources.
-            </p>
-          </div> */}
 
         </div>
 
