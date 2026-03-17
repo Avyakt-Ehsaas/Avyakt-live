@@ -1,4 +1,4 @@
-import React,{act, useState} from 'react'
+import React, { act, useState } from 'react'
 import LandingSidebar from '../LandingPage/LandingSidebar/LandingSidebar'
 import Programs from './Programs'
 import AvyaktSystem from './AvyaktSystem'
@@ -13,28 +13,30 @@ import System from './System.jsx'
 
 const ProgramPage = () => {
 
-  const [activeTab,setActiveTab] = useState("school");
+  const [activeTab, setActiveTab] = useState("school");
 
   const data = programsTabData[activeTab];
-  
+
   return (
     <>
-        <div className='sticky top-0 z-20'>
-            <LandingSidebar className="z-40"/>
-        </div>
-        <Programs />
-        <AvyaktSystem />
-        <ProgramSections 
+      <div className='sticky top-0 z-20'>
+        <LandingSidebar className="z-40" />
+      </div>
+      <Programs />
+      <AvyaktSystem />
+      <div key={activeTab}>
+        <ProgramSections
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           data={data.firstPage}
         />
         <StudentPressureSection data={data.secondPage} />
-        <System data={data.thirdPage}/>
+        <System data={data.thirdPage} />
         <ProgramGrowth data={data.fourthPage} />
         <StructureProgram data={data.fifthPage} />
         <ProgramFooter data={data.sixthPage} />
-        
+      </div>
+
     </>
   )
 }
