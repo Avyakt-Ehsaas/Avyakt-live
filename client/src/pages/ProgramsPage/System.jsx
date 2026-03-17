@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const System = ({data}) => {
+const System = ({ data }) => {
     const sectionRef = useRef(null);
     const cards = useRef([]);
 
@@ -16,48 +16,49 @@ const System = ({data}) => {
         "#B6E2AA",
         "#8FC580",
     ];
-   useEffect(() => {
-  const ctx = gsap.context(() => {
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=1500",
-        scrub: true,
-        pin: true,
-        pinSpacing: true,
-        anticipatePin: 1,
-      },
-    });
+    useEffect(() => {
+        const ctx = gsap.context(() => {
 
-    cards.current.forEach((card, i) => {
-      if (i === 0) return;
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top top",
+                    end: "+=1500",
+                    scrub: true,
+                    pin: true,
+                    pinSpacing: true,
+                    anticipatePin: 1,
+                },
+            });
 
-      tl.to(
-        card,
-        {
-          y: -i * 220,
-          ease: "none",
-        },
-        i * 0.3
-      );
-    });
+            cards.current.forEach((card, i) => {
+                if (i === 0) return;
 
-  }, sectionRef);
+                tl.to(
+                    card,
+                    {
+                        y: -i * 220,
+                        ease: "none",
+                    },
+                    i * 0.3
+                );
+            });
 
-  // 🔥 force refresh after layout
-  setTimeout(() => {
-    ScrollTrigger.refresh();
-  }, 500);
+        }, sectionRef);
 
-  return () => ctx.revert();
-}, []);
+        // 🔥 force refresh after layout
+        setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 500);
+
+        return () => ctx.revert();
+    }, []);
 
     return (
         <section
             ref={sectionRef}
-            className="relative min-h-screen overflow-hidden"
+            className="relative  overflow-hidden"
         >
             <div className="absolute inset-0 -z-10 bg-center bg-cover bg-no-repeat system-image max-h-[600px]" />
 
@@ -67,7 +68,7 @@ const System = ({data}) => {
 
                 <div className="sticky top-40  left-10 h-fit">
                     <h2 className="text-4xl w-lg font-semibold leading-[50px] font-season text-primary">
-                      {data.title} <span className="text-greenbase">{data.greenTitle}</span> 
+                        {data.title} <span className="text-greenbase">{data.greenTitle}</span>
                         {data.postTitle}
                     </h2>
 
