@@ -27,11 +27,12 @@ const AvyaktSystem = () => {
     <div className="relative w-full overflow-hidden bg-[#F8F9F8]">
 
       {/* Top Background */}
-     <div> 
+     <div className="relative">
         <img src={ProgramLowerBg} alt="programbg" className='h-24 w-full' /> 
+          <div className="absolute inset-0 pointer-events-none 
+    bg-gradient-to-b from-transparent via-white/40 to-[#FAFAFA]" />
         </div>
 
-      
 
 
       {/* Content */}

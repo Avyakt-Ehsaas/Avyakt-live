@@ -5,7 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import school from "../../assets/images/schoolblog1.png";
 import organisation from "../../assets/images/organisationblog1.png";
 import senior from "../../assets/images/seniorsblog1.png";
-import individual from "../../assets/images/individualblog1.png";     
+import individual from "../../assets/images/individualblog1.png";
+
+import { HiAcademicCap } from "react-icons/hi";
+import { HiOfficeBuilding } from "react-icons/hi";
+import { HiUserGroup } from "react-icons/hi";
+import { HiUser } from "react-icons/hi";
 
 
 function SponsorPage() {
@@ -81,54 +86,85 @@ function SponsorPage() {
         <div className="w-full pt-24 pb-18 bg-white min-h-screen mb-10">
             <div className="max-w-[1280px] h-auto  mx-auto px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-24">
 
-            {/* Tabs */}
-            <div className="flex gap-[30px] justify-center rounded-[12px] px-6 py-2 w-fit mx-auto relative text-[18px]">
-                {[
-                    { id: "school", label: "For school" },
-                    { id: "organisation", label: "For Organisation" },
-                    { id: "senior", label: "For Senior Club" },
-                    { id: "individual", label: "Individual" },
-                ].map((tab) => (
-                    <button
-                        key={tab.id}
-                        onClick={() => setActiveTab(tab.id)}
-                        className={`relative cursor-pointer text-[18px] font-medium font-dm text-primary tracking-wide pb-2 ${activeTab === tab.id ? "text-greenbase" : ""}`}
-                        style={{fontWeight: "500"}}
-                    >
-                        {tab.label}
+                {/* Tabs */}
+                <div className="flex gap-[30px] justify-center rounded-[12px] px-6 py-2 w-fit mx-auto relative text-[18px]">
+                    {[
+                        { id: "school", label: "For school", icon: <HiAcademicCap /> },
+                        { id: "organisation", label: "For Organisation", icon: <HiOfficeBuilding /> },
+                        { id: "senior", label: "For Senior Club", icon: <HiUserGroup /> },
+                        { id: "individual", label: "Individual", icon: <HiUser /> },
+                    ].map((tab) => (
+                        // <button
+                        //     key={tab.id}
+                        //     onClick={() => setActiveTab(tab.id)}
+                        //     className={`relative cursor-pointer text-[18px] font-medium font-dm text-primary tracking-wide pb-2 ${activeTab === tab.id ? "text-greenbase" : ""}`}
+                        //     style={{ fontWeight: "500" }}
+                        // >
+                        //     {tab.label}
 
-                        {activeTab === tab.id && (
-                            <motion.div
-                                layoutId="activeTabLine"
-                                className="absolute left-0 right-0 -bottom-1 h-[3px] border-b-2 border-greenbase rounded-full"
-                                transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                                />
-                        )}
-                    </button>
-                ))}
-            </div>
+                        //     {activeTab === tab.id && (
+                        //         <motion.div
+                        //             layoutId="activeTabLine"
+                        //             className="absolute left-0 right-0 -bottom-1 h-[3px] border-b-2 border-greenbase rounded-full"
+                        //             transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                        //         />
+                        //     )}
+                        // </button>
+                         <button
+      key={tab.id}
+      onClick={() => setActiveTab(tab.id)}
+      className={`relative cursor-pointer font-medium font-dm text-primary tracking-wide pb-2 flex items-center justify-center ${
+        activeTab === tab.id ? "text-greenbase" : ""
+      }`}
+    >
+      
+      {/* Mobile → Icon */}
+      <span className="text-[22px] md:hidden">
+        {tab.icon}
+      </span>
 
-            <div className="sponsor-page max-w-7xl">
-                <h1 className="font-season-medium text-center text-[36px] md:text-[56px] leading-[80px] 2xl:leading-[72px] text-primary tracking-[0%]">
-                    Meditation designed for{" "}
-                    <span className="text-greenbase">every stage of life</span>
-                </h1>
+       {/* Hover Label (Mobile Tooltip) */}
+      <span className="absolute -bottom-7 text-[12px] bg-black text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition md:hidden whitespace-nowrap">
+        {tab.label}
+      </span>
 
-                <p className="font-dm text-center text-[20px] 2xl:text-[20px] leading-[30px] tracking-[0%]">
-                    Personalized mindfulness journeys for kids, youth, and adults helping build             focus, <br /> emotional balance, and lasting calm.
-                </p>
+      {/* Desktop → Label */}
+      <span className="hidden md:block text-[18px]">
+        {tab.label}
+      </span>
+
+      {activeTab === tab.id && (
+        <motion.div
+          layoutId="activeTabLine"
+          className="absolute left-0 right-0 -bottom-1 h-[3px] border-b-2 border-greenbase rounded-full"
+          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+        />
+      )}
+    </button>
+                    ))}
+                </div>
+
+                <div className="sponsor-page max-w-7xl">
+                    <h1 className="font-season-medium text-center text-[36px] md:text-[56px] leading-[80px] 2xl:leading-[72px] text-primary tracking-[0%]">
+                        Meditation designed for{" "}
+                        <span className="text-greenbase">every stage of life</span>
+                    </h1>
+
+                    <p className="font-dm text-center text-[20px] 2xl:text-[20px] leading-[30px] tracking-[0%]">
+                        Personalized mindfulness journeys for kids, youth, and adults helping build             focus, <br /> emotional balance, and lasting calm.
+                    </p>
+                </div>
+                {/* Dynamic Card */}
+                <div className="mt-4">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={activeTab}
+                        >
+                            <ProgramCard {...programData[activeTab]} />
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
             </div>
-            {/* Dynamic Card */}
-            <div className="mt-4">
-                <AnimatePresence mode="wait">
-                    <motion.div
-                        key={activeTab}
-                    >
-                        <ProgramCard {...programData[activeTab]}/>
-                    </motion.div>
-                </AnimatePresence>
-            </div>
-        </div>
         </div>
     );
 }
