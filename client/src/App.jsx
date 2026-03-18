@@ -44,10 +44,7 @@ import EmailCampaign from "./pages/admin/EmailCampaign";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import ContactUs from "./pages/ContactUs";
 import AboutUsNew from "./pages/AboutUs/AboutUsNew";
-import AboutUs from "./pages/AboutUs/AboutUs";
-import Programs from "./pages/ProgramsPage/Programs"
 import Research from "./pages/Research";
-import TextLoader from "./components/ui/TextLoader";
 import MeditationVideos from "./pages/user/MeditationVideos";
 import TermsAndConditions from "./components/TermsAndConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy";
@@ -131,7 +128,6 @@ function App() {
               }
             />
             <Route path="/contact" element={<ContactUs />} />
-            {/* <Route path="/about" element={<AboutUs />} /> */}
             <Route path="/about" element={<AboutUsNew />} />
             <Route path="/programs" element={<ProgramPage />} />
             <Route path="/research" element={<Research />} />
