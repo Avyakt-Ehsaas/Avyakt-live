@@ -10,7 +10,7 @@ function ProgramGrowth ({data}) {
 
         {/* Heading */}
         <div className="flex flex-col items-center gap-6 max-w-7xl">
-          <h1 className="font-[580] text-[56px] font-season-medium text-center leading-[50px]">
+          <h1 className="font-[580] text-5xl font-season-medium text-center leading-[50px]">
             {data.title}{" "}
             <span className="text-greenbase">{data.greenTitle}</span> {data.postTitle}
           </h1>
