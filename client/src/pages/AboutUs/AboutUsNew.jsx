@@ -3,6 +3,8 @@ import LandingSidebar from "../LandingPage/LandingSidebar/LandingSidebar";
 import IdeaGuide from "./IdeaGuide";
 import StagesOfLife from "./StagesOfLife";
 import FounderNote from "./FounderNote";
+import RootedSection from "./RootedSection";
+import AboutFooter from "./AboutFooter";
 
 
 const AboutUsNew = () => {
@@ -13,7 +15,9 @@ const AboutUsNew = () => {
         </div>
         <IdeaGuide />  
         <StagesOfLife /> 
+        <RootedSection />
         <FounderNote />
+        <AboutFooter />
         </>
     );
 }
