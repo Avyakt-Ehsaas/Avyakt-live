@@ -1,7 +1,7 @@
 import React from "react";
 import LandingSidebar from "../LandingPage/LandingSidebar/LandingSidebar";
 import IdeaGuide from "./IdeaGuide";
-import StagesOfLife from "./StagesOflife";
+import StagesOfLife from "./StagesOfLife";
 import FounderNote from "./FounderNote";
 
 
