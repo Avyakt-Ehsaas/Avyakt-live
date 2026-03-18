@@ -27,6 +27,8 @@ const System = ({data}) => {
                     end: "+=1500",
                     scrub: true,
                     pin: true,
+                    pinSpacing: true,
+                    anticipatePin: 1,
                 },
             });
 
@@ -45,6 +47,10 @@ const System = ({data}) => {
             });
 
         }, sectionRef);
+        
+        setTimeout(() => {
+            ScrollTrigger.refresh();
+        }, 500);
 
         return () => ctx.revert();
     }, []);
