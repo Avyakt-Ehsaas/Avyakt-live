@@ -67,8 +67,8 @@ const System = ({data}) => {
             <div className="max-w-7xl mx-auto grid grid-cols-2 gap-[25%] pt-32">
 
                 <div className="sticky top-40  left-[10rem] h-fit">
-                    <h2 className="text-4xl w-lg font-medium leading-[50px] font-season text-primary">
-                      {data.title} <span className="text-greenbase">{data.greenTitle}</span> <br />
+                    <h2 className="text-[42px] w-lg font-medium leading-[50px] font-season text-primary">
+                      {data.title} <span className="text-greenbase">{data.greenTitle}</span> {data.hyphen}<br />
                         {data.postTitle}
                     </h2>
 

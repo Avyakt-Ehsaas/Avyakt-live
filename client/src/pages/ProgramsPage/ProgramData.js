@@ -61,6 +61,7 @@ const  programsTabData = {
     thirdPage: {
       title: "A ",
       greenTitle : "Structured System ",
+      hyphen : "— ",
       postTitle: "Not Just Random Sessions",
       description:
         "Avyakt Student Programs are built on three integrated pillars:",
@@ -305,6 +306,7 @@ const  programsTabData = {
     thirdPage: {
       title: "A ",
       greenTitle: "Science-Based ",
+      hyphen : "",
       postTitle: "Workplace Wellness System",
       description:
         "Avyakt workplace programs combine neuroscience, mindfulness, and practical exercises:",
@@ -481,6 +483,7 @@ const  programsTabData = {
 
     thirdPage: {
       title: "A Structured System for",
+      hyphen : "",
       greenTitle : "Peaceful Aging",
       postTitle: "",
       description:
@@ -695,6 +698,7 @@ const  programsTabData = {
 
     thirdPage: {
       title: "A Personal System for Mental Clarity",
+      hyphen : "",
       description:
         "Programs designed to build focus, calm, and emotional intelligence.",
       cards: [

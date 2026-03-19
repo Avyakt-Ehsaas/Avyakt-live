@@ -1,13 +1,14 @@
 import React from 'react'
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { CheckCircle, TrendingUp, Heart, ShieldCheck, Brain } from "lucide-react";
+import { TbHeartFilled } from "react-icons/tb";
 import FullCTA from '../../assets/images/FullCTA.png'
 import DarkLogo from "../../assets/images/LogoDark.svg";
 import avyaktFooter from '../../assets/images/avyaktFooterWatermark.svg';
 
 const iconMap = {
     Brain,
-    Heart,
+    TbHeartFilled,
     ShieldCheck,
     TrendingUp
 };
@@ -79,11 +80,11 @@ const ProgramFooter = ({ data }) => {
                     }}
                 />
                 {/* Bottom Overlay */}
-                <div
-                    className="absolute bottom-0 left-0 w-full h-[480px] pointer-events-none z-0"
+              <div
+                    className="absolute bottom-0 left-0 w-full h-[730px] pointer-events-none z-0"
                     style={{
                         background:
-                            "linear-gradient(360deg, rgba(244,249,244,1) 0%, rgba(244,249,244,0.85) 10%, transparent 100%)",
+                            "linear-gradient(360deg, rgba(244,249,244,1) 0%, rgba(244,249,244,0.85) 10%, transparent 90%)",
                     }}
                 />
                 <div className='flex flex-col gap-20'>
