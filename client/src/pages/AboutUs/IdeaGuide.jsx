@@ -2,7 +2,7 @@ import React from "react";
 
 export default function IdeaGuide() {
   return (
-    <div className="min-h-screen items-center justify-center relative bg-white py-[100px] px-4 overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center relative bg-white py-[100px] px-4 overflow-hidden">
        <div className="absolute inset-0 grid-pattern grid-fade-top pointer-events-none z-0" />
       <div className="max-w-5xl w-full text-center">
 
