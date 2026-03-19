@@ -41,7 +41,7 @@ export default function StagesOfLife() {
       <div className="absolute inset-0 grid-pattern grid-fade-top pointer-events-none z-0" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-[1100px] mx-auto text-center">
+      <div className="relative z-10 max-w-[1200px] mx-auto text-center">
 
         {/* Heading */}
         <h1 className="text-[56px] leading-[50px] font-season-medium text-primary">
