@@ -6,21 +6,21 @@
 @import "./Fonts.css";
 
 body {
-   font-family: 'SeasonMix', serif;  
-   /* font-family: var(--font-dm); */
+  font-family: 'SeasonMix', serif;
+  /* font-family: var(--font-dm); */
 }
 
 /* ====== GLOBAL GREEN SCROLLBAR ====== */
 :root {
   --scrollbar-track: #f0fdf4;
-  --scrollbar-thumb: linear-gradient(180deg, #71AC61,#C2E0BA);
-  --scrollbar-thumb-hover: linear-gradient(180deg, #71AC61,#C2E0BA);
+  --scrollbar-thumb: linear-gradient(180deg, #71AC61, #C2E0BA);
+  --scrollbar-thumb-hover: linear-gradient(180deg, #71AC61, #C2E0BA);
   --font-dm: "DM Sans", sans-serif;
   --font-rubik: "Rubik", sans-serif;
-  --text-greenbase : #71ac61;
-  --bg-greenbase : #C2E0BA;
-  --font-inter : "Inter", sans-serif;
-  --bg-greenbase-primary : #71ac61;
+  --text-greenbase: #71ac61;
+  --bg-greenbase: #C2E0BA;
+  --font-inter: "Inter", sans-serif;
+  --bg-greenbase-primary: #71ac61;
   --border-greenbase: "#71ac61";
 
   /* Custom colors */
@@ -28,11 +28,11 @@ body {
   --primary-Text: #191919;
 }
 
-.border-top{
+.border-top {
   border-top: 12px dashed var(--border-greenbase);
 }
 
-.border-greenbase{
+.border-greenbase {
   border-color: var(--border-greenbase);
 }
 
@@ -327,12 +327,10 @@ body {
   opacity: 1;
 }
 
-.system-image{
+.system-image {
   background-image: url('./assets/Group 36.svg');
-  
+
 }
-
-
 
 /* stages.css */
 
@@ -394,4 +392,9 @@ body {
 .card p {
   font-size: 14px;
   color: #333;
+}
+
+.about-hero-section {
+  background-image: url('./assets/about-hero-section.png');
+
 }
