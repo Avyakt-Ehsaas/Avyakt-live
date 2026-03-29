@@ -98,6 +98,7 @@
   );
   animation: glowBreath 4s ease-in-out infinite;
 }
+
 /* Smooth button hover */
 button {
   transition: all 0.3s ease;

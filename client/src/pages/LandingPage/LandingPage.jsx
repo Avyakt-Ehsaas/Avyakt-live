@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import LandingSidebar from "./LandingSidebar/LandingSidebar";
 import HeroSection from "./HeroSection.jsx";
-import KidsRestlessSection from "./KidsRestlessSection.jsx";
+
 import LoginModal from "../../components/ui/Modal/LoginModal.jsx";
-import YoungAdultSection from "./YoungAdultSection.jsx";
-import Footer from "./Footer.jsx";
-import ModernProblem from "./ModernProblem.jsx";
+
+
 import TestimonialCarousel from "./Testimonials/TestimonialCarousel.jsx";
 import SponsorPage from "./SponserPage.jsx";
 import FinalCTA from "./FinalCTA.jsx";
-import HeroText from "./HeroText.jsx";
+import ProblemSection from "./ProblemSection.jsx";
+import ResearchSection from "./ResearchSection.jsx";
+import FAQSection from "./FAQs.jsx";
 
 const LandingPage = () => {
   const [isHeroVisible, setIsHeroVisible] = useState(true);
@@ -33,16 +34,17 @@ const LandingPage = () => {
     <div className="bg-white min-h-screen overflow-hidden ">
       <LandingSidebar isDarkBg={isHeroVisible} />
 
-      <div className="fixed w-full min-h-screen">
+      <div className="w-full min-h-screen">
         <HeroSection />
       </div>
-      
-        <HeroText  />
+
+      <ProblemSection />  
       <div className="relative bg-white">
      <LoginModal />
-      <ModernProblem />
+      <ResearchSection />
       <SponsorPage />
       <TestimonialCarousel />
+      <FAQSection />
       <FinalCTA />
       </div>
     </div>

@@ -1,53 +1,59 @@
 import React from "react";
 
 function ProgramCard({
+  tag,
   title,
   description,
   points = [],
-  footerText,
   buttonText,
   image,
-  // programData: { title, description, points, footerText, buttonText },
-
-
 }) {
   return (
-<div className="max-w-[1180px] mx-auto bg-white border border-gray-200 rounded-[20px]
+<div className="max-w-[1080px] mx-auto bg-white border border-gray-200 rounded-[20px]
 shadow-sm flex flex-col md:flex-row mt-[20px] overflow-hidden">
 
      {/* Left Image */}
-<div className="w-full md:w-[220px] " style={{borderRadius: "16px 0 16px 0"}}>
+<div className="w-full md:w-[280px]" style={{borderRadius: "16px 0 16px 0"}}>
   <img
     src={image}
     alt="program"
-    className="w-full h-full object-cover"
+    className="w-full h-full md:h-[380px]  object-cover"
   />
 </div>
 
       {/* Right Content */}
-      <div className="flex-1 flex flex-col  justify-start py-6 px-6">
+      <div className="flex-1 flex flex-col  justify-start py-6 px-6 bg-[#C2E0BA33] pl-12">
         <div>
           <div className="mt-2">
-            <h3 className="font-dm  text-[22px] leading-[30px] text-primary" 
-            style={{fontWeight: "580"}}>
+
+       <span className="inline-block w-fit font-season bg-[#C2E0BA33] text-greenbase px-4 py-2 rounded-full text-sm font-medium mb-4">
+            {tag}
+          </span>
+
+            <h3 className="font-season text-[32px] leading-[40px] text-primary mb-1" 
+            style={{fontWeight: "500"}}>
               {title}
             </h3>
 
-            <p className="mt-2 font-dm text-[20px] font-medium leading-[24px] text-primary">
+            <p className="mt-2 max-w-xl font-dm text-[18px] font-medium leading-[28px] text-primary">
               {description}
             </p>
           </div>
 
           {/* Bullet Points */}
-          <ul className="font-dm font-medium mt-[20px] space-y-2 text-[20px] leading-[30px] text-primary">
-            {points.map((point, index) => (
-              <li key={index}>• {point}</li>
-            ))}
+          <ul className="flex gap-2 font-dm font-medium mt-[20px] space-y-2 text-[20px] leading-[30px] text-primary">
+            {points.map(
+              (item, i) => (
+                <span
+                  key={i}
+                  className="px-4 py-2 border border-greenbase text-greenbase rounded-full text-sm"
+                >
+                  {item}
+                </span>
+              )
+            )}
           </ul>
 
-          <p className="mt-4 font-dm font-medium text-[20px] mt-6 leading-[30px] text-primary">
-            {footerText}
-          </p>
         </div>
 
         {/* CTA Button */}

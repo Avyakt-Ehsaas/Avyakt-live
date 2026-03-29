@@ -17,67 +17,42 @@ function SponsorPage() {
     const [activeTab, setActiveTab] = useState("school");
 
     const programData = {
-        school: {
-            title: "Build focus, emotional intelligence, and calm in growing minds",
-            description:
-                "Structured mindfulness programs that improve attention, reduce exam anxiety, and support emotional regulation with progress tracking for students and schools.",
-            points: [
-                "Focus & attention",
-                "Anxiety & stress management",
-                "Emotional intelligence",
-                "Cognitive development",
-            ],
-            footerText:
-                "Backed by structured curricula, neuroscience labs, and AI-powered wellbeing tracking.",
-            buttonText: "Explore School Programs",
-            image: school,
-        },
+       school: {
+        tag: "FOR SCHOOL",
+  title: "Dhyan Shakti: Attention Course",
+  description:
+    "An 8–week structured attention and mindfulness curriculum for grades 4–12. Built on neuroscience, delivered by trained instructors, with institutional impact reports.",
+    points: ["Grades 4–12", "8 weeks", "NEP 2020 aligned", "Impact report", "Teacher toolkit"],
+  buttonText: "See full Program",
+  image: school,
+},
 
         organisation: {
-            title: "Enhance productivity and reduce workplace stress",
-            description:
-                "Mindfulness programs designed for corporate teams to improve focus, emotional balance, and overall wellbeing.",
-            points: [
-                "Workplace stress reduction",
-                "Team productivity",
-                "Emotional resilience",
-                "Leadership clarity",
-            ],
-            footerText:
-                "Backed by neuroscience-based practices and performance analytics.",
-            buttonText: "Explore Organisation Programs",
+              tag: "FOR ORGANISATION",
+  title: "Workplace Wellbeing Programs",
+  description:
+    "Structured programs targeting the three biggest workplace challenges attention deficits, emotional reactivity, and chronic stress delivered as live sessions, workshops, or ongoing retainers.",
+    points: ["Attention & Regulation", "Emotional regulation", "Stress managemnet", "Online + on-site"],
+             buttonText: "See full Program",
             image: organisation,
         },
 
         senior: {
-            title: "Gentle mindfulness for healthy and peaceful aging",
-            description:
-                "Specially designed programs to improve mental clarity, reduce loneliness, and enhance emotional wellbeing for seniors.",
-            points: [
-                "Memory & cognitive support",
-                "Stress & anxiety reduction",
-                "Emotional wellbeing",
-                "Healthy lifestyle support",
-            ],
-            footerText:
-                "Backed by senior wellness experts and guided meditative practices.",
-            buttonText: "Explore Senior Club Programs",
+               tag: "FOR SENIOR CLUB",
+  title: "Cognitive + Sleep & Calm Program",
+  description: "An 8-week program designed specifically for adults 60+ addressing sleep quality, anxiety, and cognitive sharpness through gentle, accessible meditation practices delivered in Hindi and English.",
+    points: ["Age 60+", "Hindi + English", "Chair-friendly", "Sleep & cognition"],
+            buttonText: "See full Program",
             image: senior,
         },
 
         individual: {
-            title: "Personalized mindfulness journeys for everyday life",
-            description:
-                "Individual-focused meditation programs tailored to your goals for focus, calm, and emotional balance.",
-            points: [
-                "Personal growth",
-                "Daily stress management",
-                "Better focus",
-                "Emotional balance",
-            ],
-            footerText:
-                "AI-powered personalization with guided mindfulness routines.",
-            buttonText: "Explore Individual Programs",
+              tag: "FOR INDIVIDUAL",
+  title: "Daily Meditation & Silence Sessions",
+  description:
+    "Two live daily programs, a structured year-long meditation journey and a silence practice, both designed to build a genuine daily habit, tracked and community-powered.",
+    points: ["Live daily Sessions", "Progress tracking", "21-day free trial", "Community"],
+            buttonText: "See full Program",
             image: individual,
         },
     };
@@ -146,12 +121,11 @@ function SponsorPage() {
 
                 <div className="sponsor-page max-w-7xl">
                     <h1 className="font-season-medium text-center text-[36px] md:text-[56px] leading-[80px] 2xl:leading-[72px] text-primary tracking-[0%]">
-                        Meditation designed for{" "}
-                        <span className="text-greenbase">every stage of life</span>
+                            For every stage of life.
                     </h1>
 
                     <p className="font-dm text-center text-[20px] 2xl:text-[20px] leading-[30px] tracking-[0%]">
-                        Personalized mindfulness journeys for kids, youth, and adults helping build             focus, <br /> emotional balance, and lasting calm.
+                       Structured meditation programs for individuals, schools, organizations, and senior communities,<br /> each designed for the specific needs of that audience.
                     </p>
                 </div>
                 {/* Dynamic Card */}

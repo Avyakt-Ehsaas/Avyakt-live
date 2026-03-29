@@ -24,37 +24,51 @@ const HeroSection = () => {
           className="absolute bottom-0 md:-bottom-0 lg:-bottom-0 xl:-bottom-10 md:right-0 bg-[#191919] w-auto h-auto min-w-full min-h-full object-cover -z-10 pointer-events-none"
         />
 
-        <div className="absolute inset-0  max-w-2xl md:max-w-full flex items-center justify-center z-50">
+        
+        <div className="absolute inset-0 max-w-2xl md:max-w-full flex items-center justify-center z-50">
 
-          <div className="text-white font-season-medium text-center md:mt-[1rem]">
-            <h1 className="mb-3 mx-8 md:mx-18 md:mx-0 md:text-5xl 3xl:text-6xl text-5xl">
-              Discover Your{" "}
-              <span className="text-greenbase-light">
-                Avyakt Potential
-              </span>
+
+          <div className="text-white font-season-medium text-center md:mt-[1rem] ">
+
+      <ul className="flex justify-center font-dm text-white mb-4 gap-4">
+              <li>Backed by Google For Startups</li>
+              <span className="w-2 h-2 rounded-full bg-greenbase mt-2 ml-2"></span>
+              <li>
+              IIT Mandi Catalyst</li>
+              <span className="w-2 h-2 rounded-full bg-greenbase mt-2 ml-2"></span>
+              <li>500+ Live Sessions Delivered</li>
+          </ul>
+
+            <h1 className="mb-3 mx-8 md:mx-18 md:mx-0 md:text-5xl 3xl:text-6xl text-5xl leading-[50px]">
+             Meditation that fits your life, 
               <br />
-              Through{" "}
-              <span className="text-greenbase-light">Meditation</span>
+              <span className="text-greenbase-light">structured, trackable, built to last.</span>
             </h1>
 
-           <div className="text-center max-w-3xl px-10 md:px-16">
-             <p className="text-[18px] leading-[28px] md:leading-relaxed md:text-lg mb-4 md:font-medium font-dm">
-              Whether you want to stay focused, feel calmer, or simply feel better we help you build a healthier relationship with your mind.
+           <div className="text-center max-w-3xl pl-24 px-12">
+             <p className="text-[18px] leading-[28px] md:leading-relaxed md:text-lg mb-4 md:font-medium font-dm text-center">
+            Build a real meditation habit with daily live sessions, science-backed programs, and progress you can actually see, for individuals, schools, organizations, and senior communities.
             </p>
            </div>
 
-            <p className="text-greenbase-light text-[1.1rem] font-medium font-dm">
-              Join the 21-Day Live Meditation Journey
-            </p>
 
-            <button
+           <div className="flex gap-4 justify-center">
+             <button
               onClick={handleClick}
-              className="bg-greenbasebg mb-2 text-white font-semibold font-dm mt-4 px-4 py-3 rounded-full hover:scale-105 transition-transform duration-300 mb-8 md:mb-2 cursor-pointer"
+              className="bg-greenbasebg w-[200px] mb-2 text-white font-semibold font-dm mt-4 px-4 py-3 rounded-full hover:scale-105 transition-transform duration-300 mb-8 md:mb-2 cursor-pointer"
             >
-              Start Your Journey
+              Get Started
             </button>
 
-            <div className="md:flex md:justify-center ">
+             <button
+              onClick={handleClick}
+              className="bg-transparent w-[200px] border border-greenbase-light  mb-2 text-greenbase-light font-semibold font-dm mt-4 px-4 py-3 rounded-full hover:scale-105 transition-transform duration-300 mb-8 md:mb-2 cursor-pointer"
+            >
+              Explore Programs
+            </button>
+           </div>
+
+            {/* <div className="md:flex md:justify-center ">
               <div className="flex justify-center items-center">
                 {[1, 2, 3].map((i) => (
                   <img
@@ -69,8 +83,9 @@ const HeroSection = () => {
 
               <p className="ml-2 mt-2 font-medium font-dm">
                 Trusted by 500+ users on their wellness journey
-              </p>
-            </div>
+              </p>s
+            </div> */}
+
           </div>
         </div>
 
