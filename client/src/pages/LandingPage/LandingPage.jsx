@@ -13,6 +13,8 @@ import ResearchSection from "./ResearchSection.jsx";
 import FAQSection from "./FAQs.jsx";
 import Solution from "./Solution.jsx";
 import Intro from "./Intro.jsx";
+import HowItWorks from "./HowItsWork.jsx";
+import TheScienceSection from "./TheScienceSection.jsx";
 
 const LandingPage = () => {
   const [isHeroVisible, setIsHeroVisible] = useState(true);
@@ -34,22 +36,24 @@ const LandingPage = () => {
 
   return (
     <div className="bg-white min-h-screen overflow-hidden ">
-      {/* <LandingSidebar isDarkBg={isHeroVisible} /> */}
+      <LandingSidebar isDarkBg={isHeroVisible} />
 
       <div className="w-full min-h-screen">
         <HeroSection />
       </div>
 
-      <ProblemSection />
+      <ProblemSection />  
       <div className="relative bg-white">
-        <LoginModal />
-        <ResearchSection />
-        <Solution />
+     <LoginModal />
+      <ResearchSection />
+         <Solution />
         <Intro />
-        <SponsorPage />
-        <TestimonialCarousel />
-        <FAQSection />
-        <FinalCTA />
+      <SponsorPage />
+      <TheScienceSection />
+      <HowItWorks />
+      <TestimonialCarousel />
+      <FAQSection />
+      <FinalCTA />
       </div>
     </div>
 

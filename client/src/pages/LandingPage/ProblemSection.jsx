@@ -36,7 +36,7 @@ const ProblemSection = () => {
             ].map((text, index) => (
               <div
                 key={index}
-                className="bg-[#C2E0BA33] text-greenbase px-6 py-3 rounded-full text-sm font-medium w-[75%]"
+                className="bg-[#C2E0BA33] text-greenbase font-dm font-medium px-6 py-3 rounded-full text-base w-[320px]"
               >
                 {text}
               </div>
@@ -61,7 +61,7 @@ const ProblemSection = () => {
             ].map((text, index) => (
               <div
                 key={index}
-                className="bg-[#C2E0BA33] text-greenbase px-6 py-3 rounded-full text-sm font-medium w-[75%]"
+                className="bg-[#C2E0BA33] text-greenbase font-dm font-medium px-6 py-3 rounded-full text-base w-[320px]"
               >
                 {text}
               </div>

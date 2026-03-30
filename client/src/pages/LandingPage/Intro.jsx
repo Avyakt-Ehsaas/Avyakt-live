@@ -23,23 +23,23 @@ const Intro = () => {
                     Avyakt Ehsaas
                 </h1>
 
-                <p className="text-primary font-dm text-center text-lg mx-auto mt-4">
+                <p className="text-primary font-dm text-center text-lg mx-auto mt-4 font-medium">
                     "The stillness you seek is already within you. We give you the structure to find it."
                 </p>
 
                 <div className="mt-16 grid md:grid-cols-3 items-center gap-8">
 
                     <div>
-                        <h2 className="text-greenbase text-2xl"><span className="font-semibold">अव्यक्त</span> · Avyakt</h2>
+                        <h2 className="text-greenbase text-3xl font-medium"><span className="font-semibold">अव्यक्त</span> · Avyakt</h2>
                         <p className="text-primary font-dm text-center text-md mx-auto mt-4">
                             Beyond words. The silence that holds more than language can carry. The hidden potential within every mind, not something to be created, but something already present, waiting to be uncovered.
                         </p>
                     </div>
 
-                    <div className="text-4xl text-greenbase font-medium">+</div>
+                    <div className="text-5xl text-greenbase font-medium">+</div>
 
                     <div>
-                        <h2 className="text-greenbase text-2xl"><span className="font-semibold">अहसास</span> · Ehsaas</h2>
+                        <h2 className="text-greenbase text-3xl font-medium"><span className="font-semibold">अहसास</span> · Ehsaas</h2>
                         <p className="text-primary font-dm text-center text-md mx-auto mt-4">
                             The felt sense of power in stillness. The experience of emerging into your truest self, not through effort or striving, but through awareness and presence.
                         </p>

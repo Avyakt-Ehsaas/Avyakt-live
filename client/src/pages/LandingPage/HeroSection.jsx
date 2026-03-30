@@ -3,6 +3,7 @@ import HeroImage from "../../assets/images/HeroImage.svg";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import LandingSidebar from "./LandingSidebar/LandingSidebar";
+import HeroLanding from '../../assets/images/HeroLanding.png'
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const HeroSection = () => {
     <div className="relative h-screen w-full bg-white overflow-hidden">
       <div className="relative w-full h-screen overflow-hidden z-10">
         <img
-          src={HeroImage}
+          src={HeroLanding}
           alt="Hero"
           className="absolute bottom-0 md:-bottom-0 lg:-bottom-0 xl:-bottom-10 md:right-0 bg-[#191919] w-auto h-auto min-w-full min-h-full object-cover -z-10 pointer-events-none"
         />

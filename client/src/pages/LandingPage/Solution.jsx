@@ -19,7 +19,7 @@ const Solution = () => {
                     a specific reason people fail <br/>to build a lasting meditation habit.
                 </p>
 
-                <div className="relative mt-20 grid grid-cols-3 items-center h-[80vh]">
+                <div className="relative mt-8 grid grid-cols-3 items-center h-[80vh]">
 
                     <div className="flex flex-col justify-between items-end gap-10 h-full">
 
@@ -68,7 +68,7 @@ export default Solution;
 
 const Card = ({ title, desc }) => {
     return (
-        <div className="border border-green-700 rounded-2xl p-6 text-left bg-white/50 backdrop-blur-sm max-w-[350px] h-[200px]">
+        <div className="border border-greenbase rounded-2xl p-6 text-left bg-white/50 backdrop-blur-sm max-w-[350px] h-[200px]">
             <h3 className="text-greenbase font-dm mb-2 text-center">
                 {title}
             </h3>
