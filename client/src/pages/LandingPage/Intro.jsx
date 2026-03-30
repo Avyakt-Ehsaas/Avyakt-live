@@ -2,7 +2,7 @@ import bg from "../../assets/Rectangle 29.png";
 
 const Intro = () => {
     return (
-        <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
+        <section className="relative w-full h-[130vh] flex items-center justify-center overflow-hidden">
             <div
                 className="absolute inset-0 top-10"
                 style={{

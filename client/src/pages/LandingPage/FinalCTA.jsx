@@ -5,36 +5,36 @@ import FullCTA from '../../assets/images/FullCTA.png'
 import sleepImg from '../../assets/images/sleepblog1.png'
 import habitImg from '../../assets/images/habitblog1.png'
 import focusImg from '../../assets/images/focusblog1.png'
-import DarkLogo from "../../assets/images/LogoDark.svg";
-import avyaktFooter from '../../assets/images/avyaktFooterWatermark.svg';
+import DarkLogo from "../../assets/logo.png";
+import avyaktFooter from '../../assets/avyakt.png';
 
 import { IoSearch } from "react-icons/io5";
 
 const FinalCTA = () => {
-   const blogs = [
-  {
-    tag: "Sleep",
-    title: "How 20 Minutes of Meditation Changes What Happens When You Sleep",
-    desc: "What you do in the hour before bed determines the quality of sleep you get. Here's the science.",
-    image: sleepImg,
-  },
-  {
-    tag: "Building a Habit",
-    title: "70% of People Quit Meditation in 3 Weeks. Here Is Why, and How Not To.",
-    desc: "It's not discipline you're missing. It's structure, community, and a way to track if it's working.",
-    image: habitImg,
-  },
-  {
-    tag: "Attention & Focus",
-    title: "Why Your Attention Keeps Breaking — And What to Do About It",
-    desc: "The neuroscience of distraction and how structured practice rebuilds focus from the ground up.",
-    image: focusImg,
-  },
-];
+    const blogs = [
+        {
+            tag: "Sleep",
+            title: "How 20 Minutes of Meditation Changes What Happens When You Sleep",
+            desc: "What you do in the hour before bed determines the quality of sleep you get. Here's the science.",
+            image: sleepImg,
+        },
+        {
+            tag: "Building a Habit",
+            title: "70% of People Quit Meditation in 3 Weeks. Here Is Why, and How Not To.",
+            desc: "It's not discipline you're missing. It's structure, community, and a way to track if it's working.",
+            image: habitImg,
+        },
+        {
+            tag: "Attention & Focus",
+            title: "Why Your Attention Keeps Breaking — And What to Do About It",
+            desc: "The neuroscience of distraction and how structured practice rebuilds focus from the ground up.",
+            image: focusImg,
+        },
+    ];
     return (
         <>
             <section
-                className="relative z-10 w-full min-h-screen flex flex-col gap-50 items-center bg-cover bg-center bg-no-repeat"
+                className="relative z-10 w-full min-h-screen flex flex-col gap-50 items bg-cover bg-center bg-no-repeat"
                 style={{ backgroundImage: `url(${FullCTA})` }}
             >
 
@@ -57,7 +57,7 @@ const FinalCTA = () => {
                     }}
                 />
 
-                <div className='flex flex-col gap-20 '>
+                <div className='flex flex-col gap-20'>
 
                     {/* Blog Section */}
 
@@ -65,52 +65,52 @@ const FinalCTA = () => {
 
                         {/* Heading */}
                         <div>
-                             <p className="text-greenbase font-season text-center font-medium tracking-wide">
-            RESEARCH AND INSIGHTS
-          </p>
+                            <p className="text-greenbase font-season text-center font-medium tracking-wide">
+                                RESEARCH AND INSIGHTS
+                            </p>
                             <h2 className="text-center text-2xl sm:text-4xl md:text-5xl font-medium text-[#191919] leading-tight">
                                 What the science actually says
                             </h2>
                         </div>
 
                         <div className="grid gap-6 md:grid-cols-3 mt-2">
-    {blogs.map((blog, index) => (
-      <article
-        key={index}
-        className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300"
-      >
-        {/* Image */}
-        <div className="h-[200px] w-full">
-          <img
-            src={blog.image}
-            alt={blog.title}
-            className="w-full h-full object-cover"
-          />
-        </div>
+                            {blogs.map((blog, index) => (
+                                <article
+                                    key={index}
+                                    className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300"
+                                >
+                                    {/* Image */}
+                                    <div className="h-[200px] w-full">
+                                        <img
+                                            src={blog.image}
+                                            alt={blog.title}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
 
-        {/* Content */}
-        <div className="p-4 ">
-          <p className="text-base font-medium font-dm text-greenbase mb-2">
-            {blog.tag}
-          </p>
+                                    {/* Content */}
+                                    <div className="p-4 ">
+                                        <p className="text-base font-medium font-dm text-greenbase mb-2">
+                                            {blog.tag}
+                                        </p>
 
-          <h3 className="text-xl  font-dm font-semibold text-primary leading-9 mb-2">
-            {blog.title}
-          </h3>
+                                        <h3 className="text-xl  font-dm font-semibold text-primary leading-9 mb-2">
+                                            {blog.title}
+                                        </h3>
 
-           <p className="text-sm font-dm text-[#6B6B6B] leading-6 mb-4  ">
+                                        <p className="text-sm font-dm text-[#6B6B6B] leading-6 mb-4  ">
                                             {blog.desc}
                                         </p>
 
                                         <button
-                                         className="text-greenbase cursor-pointer font-medium text-lg flex items-center gap-1 hover:gap-2 transition-all mb-2 hover:scale-102 transition duration-300">
+                                            className="text-greenbase cursor-pointer font-medium text-lg flex items-center gap-1 hover:gap-2 transition-all mb-2 hover:scale-102 transition duration-300">
                                             Read article →
                                         </button>
 
-        </div>
-      </article>
-    ))}
-  </div>
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
                     </div>
 
                     {/* CTA Footer */}
@@ -164,12 +164,12 @@ const FinalCTA = () => {
 
 
 
-                        <div className=''>
+                        <div className='relative w-full'>
                             {/* Footer */}
-                            <div className="w-6xl flex flex-col gap-10 items-center">
+                            <div className="relative w-6xl flex flex-col justify-center items-center gap-10 mx-auto z-20">
 
                                 <div className="flex justify-center gap-16 mb-4 w-20">
-                                    <img src={DarkLogo} alt="Dark logo " className="text-sm" />
+                                    <img src={DarkLogo} alt="Dark logo" />
                                 </div>
 
                                 <div className="flex justify-center gap-16">
@@ -198,8 +198,8 @@ const FinalCTA = () => {
                                     Avyakt©2026. All rights reserved.
                                 </p>
                             </div>
-                            <div>
-                                <img src={avyaktFooter} alt="Avyakt Footer Logo" className="w-full -z-10 absolute bottom-0 left-1/2 transform -translate-x-1/2" />
+                            <div className='w-full relative'>
+                                <img src={avyaktFooter} alt="Avyakt Footer Logo" className="w-full h-100 z-10 absolute bottom-0 opacity-100" />
                             </div>
                         </div>
 
