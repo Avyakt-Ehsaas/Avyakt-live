@@ -1,37 +1,36 @@
 import React from 'react'
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn ,FaYoutube } from "react-icons/fa";
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 
 import FullCTA from '../../assets/images/FullCTA.png'
-import kidImg from "../../assets/images/schoolblog2.png";
-import youthImg from "../../assets/images/organisationblog2.png";
-import calmImg from "../../assets/images/individualblog2.png";
-
+import sleepImg from '../../assets/images/sleepblog1.png'
+import habitImg from '../../assets/images/habitblog1.png'
+import focusImg from '../../assets/images/focusblog1.png'
 import DarkLogo from "../../assets/images/LogoDark.svg";
 import avyaktFooter from '../../assets/images/avyaktFooterWatermark.svg';
 
 import { IoSearch } from "react-icons/io5";
 
 const FinalCTA = () => {
-    const blogs = [
-        {
-            tag: "Kids & Mindfulness",
-            title: "Helping Children Handle Big Emotions",
-            desc: "Simple breathing and awareness practices that support calm, focus, and emotional balance in everyday moments.",
-            image: kidImg,
-        },
-        {
-            tag: "Youth & Mental Clarity",
-            title: "Why Your Mind Never Seems to Rest",
-            desc: "Understanding overthinking, digital overload, and how mindfulness creates mental space.",
-            image: youthImg,
-        },
-        {
-            tag: "Everyday Calm",
-            title: "Finding Stillness in a Busy Life",
-            desc: "Small meditation habits that ease stress and bring presence back into daily routines.",
-            image: calmImg,
-        },
-    ];
+   const blogs = [
+  {
+    tag: "Sleep",
+    title: "How 20 Minutes of Meditation Changes What Happens When You Sleep",
+    desc: "What you do in the hour before bed determines the quality of sleep you get. Here's the science.",
+    image: sleepImg,
+  },
+  {
+    tag: "Building a Habit",
+    title: "70% of People Quit Meditation in 3 Weeks. Here Is Why, and How Not To.",
+    desc: "It's not discipline you're missing. It's structure, community, and a way to track if it's working.",
+    image: habitImg,
+  },
+  {
+    tag: "Attention & Focus",
+    title: "Why Your Attention Keeps Breaking — And What to Do About It",
+    desc: "The neuroscience of distraction and how structured practice rebuilds focus from the ground up.",
+    image: focusImg,
+  },
+];
     return (
         <>
             <section
@@ -41,12 +40,12 @@ const FinalCTA = () => {
 
                 {/* Overlay */}
                 <div
-  className="absolute inset-0 pointer-events-none"
-  style={{
-    background:
-      "linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 15%, rgba(255,255,255,0.6) 35%, rgba(255,255,255,0) 60%)",
-  }}
-/>
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                        background:
+                            "linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 15%, rgba(255,255,255,0.6) 35%, rgba(255,255,255,0) 60%)",
+                    }}
+                />
 
 
                 {/* Bottom Overlay */}
@@ -66,86 +65,52 @@ const FinalCTA = () => {
 
                         {/* Heading */}
                         <div>
+                             <p className="text-greenbase font-season text-center font-medium tracking-wide">
+            RESEARCH AND INSIGHTS
+          </p>
                             <h2 className="text-center text-2xl sm:text-4xl md:text-5xl font-medium text-[#191919] leading-tight">
-                                Stories & science of{" "}
-                                <span className="text-greenbase">calm living</span>
+                                What the science actually says
                             </h2>
-
-                            <p className="mt-2 text-[18px] font-medium text-center text-primary font-dm">
-                                Short reads on mindfulness, emotional wellbeing, and modern life for every age.
-                            </p>
                         </div>
 
-                        {/* TOP ROW */}
-                        <div className="flex mt-8 flex-col items-center gap-4 md:flex-row md:justify-center">
-                            {blogs.slice(0, 2).map((blog, index) => (
-                                <div
-                                    key={index}
-                                    className="flex max-w-[430px] h-[220px] overflow-hidden rounded-xl bg-white shadow-sm"
-                                >
-                                    {/* Content */}
-                                    <div className="flex flex-col justify-center py-4 pl-4 pr-6 flex-1">
-                                        <p className="text-[16px] font-dm font-medium text-greenbase">
-                                            {blog.tag}
-                                        </p>
+                        <div className="grid gap-6 md:grid-cols-3 mt-2">
+    {blogs.map((blog, index) => (
+      <article
+        key={index}
+        className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300"
+      >
+        {/* Image */}
+        <div className="h-[200px] w-full">
+          <img
+            src={blog.image}
+            alt={blog.title}
+            className="w-full h-full object-cover"
+          />
+        </div>
 
-                                        <h3 className="mt-1 pr-10 font-dm text-lg font-semibold text-primary leading-[32px]">
-                                            {blog.title}
-                                        </h3>
+        {/* Content */}
+        <div className="p-4 ">
+          <p className="text-base font-medium font-dm text-greenbase mb-2">
+            {blog.tag}
+          </p>
 
-                                        <p className="mt-1 text-[16px] font-dm text-[#696969] line-clamp-4">
+          <h3 className="text-xl  font-dm font-semibold text-primary leading-9 mb-2">
+            {blog.title}
+          </h3>
+
+           <p className="text-sm font-dm text-[#6B6B6B] leading-6 mb-4  ">
                                             {blog.desc}
                                         </p>
-                                    </div>
 
-                                    {/* Image */}
-                                    <div className="w-32 h-full">
-                                        <img
-                                            src={blog.image}
-                                            alt="blog"
-                                            className="h-full w-full object-cover"
-                                        />
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                                        <button
+                                         className="text-greenbase cursor-pointer font-medium text-lg flex items-center gap-1 hover:gap-2 transition-all mb-2 hover:scale-102 transition duration-300">
+                                            Read article →
+                                        </button>
 
-                        {/* BOTTOM CARD */}
-                        <div className="flex justify-center mt-8">
-                            <div className="flex max-w-[430px] h-[220px] overflow-hidden rounded-xl bg-white shadow-sm">
-
-                                {/* Content */}
-                                <div className="flex flex-col justify-center py-0 pl-4 pr-6 flex-1">
-                                    <p className="text-[16px] font-dm font-medium text-greenbase">
-                                        {blogs[2].tag}
-                                    </p>
-
-                                    <h3 className="mt-1 font-dm text-lg font-semibold text-primary leading-[32px] pr-3 text-medium">
-                                        {blogs[2].title}
-                                    </h3>
-
-                                    <p className="mt-1 text-[16px] font-dm text-[#696969] line-clamp-3">
-                                        {blogs[2].desc}
-                                    </p>
-                                </div>
-
-                                {/* Image */}
-                                <div className="w-32 h-full">
-                                    <img
-                                        src={blogs[2].image}
-                                        alt="blog"
-                                        className="h-full w-full object-cover"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Button */}
-                        <div className="flex justify-center mt-4">
-                            <button className="rounded-full font-dm bg-greenbase-primary px-5 py-3 text-medium text-white transition hover:scale-105">
-                                See more
-                            </button>
-                        </div>
+        </div>
+      </article>
+    ))}
+  </div>
                     </div>
 
                     {/* CTA Footer */}

@@ -1,143 +1,125 @@
-import { useGSAP } from "@gsap/react"
-import { Sparkles, Brain, Calendar, TrendingUp } from "lucide-react"
-import gsap from "gsap"
-import { useRef } from "react"
-import ScrollTrigger from "gsap/ScrollTrigger"
+import React from "react";
+import TheScienceBottom from "../../assets/images/TheScienceBottom.png"
 
-gsap.registerPlugin(ScrollTrigger)
+const stepsIndividual = [
+  "Join a free live session",
+  "Practice daily with the community",
+  "Receive your before & after report",
+  "Continue with the 12-month program",
+];
 
-const steps = [
-  {
-    id: 1,
-    title: "Join Avyakt",
-    desc: "Create your account and become part of a conscious community.",
-    icon: <Sparkles className="w-6 h-6" />
-  },
-  {
-    id: 2,
-    title: "Select Program",
-    desc: "Choose from daily meditation & neuroscience based programs.",
-    icon: <Brain className="w-6 h-6" />
-  },
-  {
-    id: 3,
-    title: "Attend Sessions",
-    desc: "Join live guided sessions through Zoom.",
-    icon: <Calendar className="w-6 h-6" />
-  },
-  {
-    id: 4,
-    title: "Track Growth",
-    desc: "Monitor your emotional & mental progress dashboard.",
-    icon: <TrendingUp className="w-6 h-6" />
-  }
-]
+const stepsOrg = [
+  "30-minute discovery call",
+  "Baseline assessment",
+  "Weekly live sessions",
+  "Before–after impact report",
+];
 
-const HowItWorks = () => {
-  const headRef = useRef()
-  const paraRef = useRef()
-  const cardContainerRef = useRef()
-
-  useGSAP(() => {
-    gsap.from(headRef.current, {
-      opacity: 0,
-      y: 50,
-      duration: 1.5,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: headRef.current,
-        start: "top 85%"
-      }
-    })
-
-    gsap.from(paraRef.current, {
-      opacity: 0,
-      y: 40,
-      duration: 1.5,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: paraRef.current,
-        start: "top 85%"
-      }
-    })
-
-    gsap.from(cardContainerRef.current, {
-      opacity: 0,
-      y: 60,
-      duration: 1.2,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: cardContainerRef.current,
-        start: "top 80%"
-      }
-    })
-  })
-
+const StepItem = ({ number, text, isLast }) => {
   return (
-    <section className="w-full bg-[#fdfcfb] py-24">
-      <div className="max-w-6xl mx-auto px-6 text-center">
+    <li className="relative flex items-start gap-4">
+
+      {/* Left Timeline */}
+      <div className="relative flex flex-col items-center">
         
-        {/* Heading */}
-        <h2
-          ref={headRef}
-          className="text-4xl md:text-5xl font-semibold text-gray-900 mb-4 tracking-tight"
-        >
-          How <span className="text-orange-500">Avyakt Ehsaas</span> Works
-        </h2>
+        {/* Circle */}
+        <div className="w-8 h-8 flex items-center justify-center rounded-full border border-greenbase text-greenbase text-sm font-semibold bg-[#C2E0BA33] z-20 ">
+          {number}
+        </div>
 
-        <p
-          ref={paraRef}
-          className="text-gray-600 max-w-2xl mx-auto mb-16 text-lg"
-        >
-          A calm, guided journey to align your mind, emotions, and consciousness
-        </p>
+        {/* Vertical Line */}
+        {!isLast && (
+          <span className="absolute top-8 left-1/2 -translate-x-1/2 w-[2px] h-[calc(100%-8px)] bg-[#71AC61]"></span>
+        )}
+      </div>
 
-        {/* Steps */}
-        <div
-          ref={cardContainerRef}
-          className="grid md:grid-cols-4 gap-10"
-        >
-          {steps.map((step) => (
-            <div
-              key={step.id}
-              className="group relative bg-white/70 backdrop-blur-xl
-                         border border-gray-200/60
-                         rounded-3xl p-8
-                         transition-all duration-500
-                         hover:-translate-y-2
-                         hover:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.15)]"
-            >
-              {/* Soft Glow */}
-              <div className="absolute inset-0 rounded-3xl
-                              bg-orange-400/10 opacity-0
-                              group-hover:opacity-100 blur-2xl transition -z-10" />
+      {/* Text */}
+      <p className="text-primary font-dm font-medium text-sm md:text-base">
+        {text}
+      </p>
+    </li>
+  );
+};
 
-              {/* Icon */}
-              <div className="w-14 h-14 mx-auto mb-6 flex items-center justify-center
-                              rounded-full bg-orange-500/10 text-orange-600">
-                {step.icon}
-              </div>
+export default function HowItWorks() {
+  return (
+    <section className="relative bg-white">
 
-              {/* Step Number */}
-              <p className="text-sm text-gray-400 mb-1">
-                Step {step.id}
-              </p>
 
-              {/* Title */}
-              <h4 className="text-xl font-semibold text-gray-900 mb-3">
-                {step.title}
-              </h4>
-
-              {/* Description */}
-              <p className="text-gray-600 text-sm leading-relaxed">
-                {step.desc}
-              </p>
+    <div className="relative">
+            <img src={TheScienceBottom} alt="sciencebotttom" className='h-24 w-full' /> 
+              <div className="absolute inset-0 pointer-events-none 
+        bg-gradient-to-b from-transparent via-white/40 to-[#FAFAFA]" />
             </div>
-          ))}
+
+
+      <div className="max-w-6xl mx-auto text-center py-16 px-4 md:px-10">
+
+        {/* Heading */}
+        <header>
+          <p className="text-greenbase text-medium font-season-medium leading-[30px] tracking-widest text-center uppercase mb-2">
+            HOW IT WORKS
+          </p>
+
+          <h2 className="text-3xl md:text-5xl font-season-medium text-primary leading-[50px]">
+            Here is exactly <br />
+            <span className="text-greenbase">
+              what happens next.
+            </span>
+          </h2>
+
+          <p className="my-4 text-primary font-medium font-dm max-w-2xl mx-auto text-sm md:text-lg leading-relaxed">
+            Two tracks, one for individuals building a personal practice, one
+            for institutions bringing it to a group. Both end with a measured
+            outcome.
+          </p>
+        </header>
+
+        {/* Cards */}
+        <div className="grid md:grid-cols-2 gap-6">
+
+          {/* Individual */}
+          <article className="bg-[#C2E0BA33] rounded-2xl p-6 text-left">
+            <span className="inline-block bg-[#C2E0BA33] font-season text-greenbase text-medium px-4 py-2 rounded-full mb-4">
+              For Individual
+            </span>
+
+            <h3 className="font-semibold text-primary mb-6 font-dm">
+              Your first 21 days, and beyond
+            </h3>
+
+            <ul className="space-y-6">
+              {stepsIndividual.map((step, index) => (
+                <StepItem
+    key={index}
+    number={index + 1}
+    text={step}
+    isLast={index === stepsIndividual.length - 1}
+  />
+              ))}
+            </ul>
+          </article>
+
+          {/* Organization */}
+          <article className="bg-[#C2E0BA33] rounded-2xl p-6 text-left">
+           <span className="inline-block bg-[#C2E0BA33] font-season text-greenbase text-medium px-4 py-2 rounded-full mb-4">
+              For Schools, Organisations & Senior Communities
+            </span>
+
+            <h3 className="font-semibold text-primary mb-6 font-dm">
+              From first conversation to impact report
+            </h3>
+
+            <ul className="space-y-6">
+              {stepsOrg.map((step, index) => (
+                <StepItem key={index} number={index + 1} text={step}
+                isLast={index === stepsOrg.length - 1} />
+              ))}
+            </ul>
+          </article>
+
         </div>
       </div>
     </section>
-  )
+  );
 }
-
-export default HowItWorks
