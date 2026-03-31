@@ -97,7 +97,7 @@ const FinalCTA = () => {
                                             {blog.title}
                                         </h3>
 
-                                        <p className="text-sm font-dm text-[#6B6B6B] leading-6 mb-4  ">
+                                        <p className="text-medium font-dm text-[#6B6B6B] leading-6 mb-4 ">
                                             {blog.desc}
                                         </p>
 
@@ -126,9 +126,11 @@ const FinalCTA = () => {
                                 Sign up to receive simple and effective meditation, yoga, and other wellness tips from experts with decades of experience. Occasionally, we’ll let you know about our upcoming retreats, too.
                             </p>
 
-                            <div className="flex flex-col items-center">
+                            <div className="flex flex-col items-center mb-24">
                                 <form>
-                                    {/* Form Row 1 */}
+                                   <div className='flex'>
+                                        <div className="flex flex-col">
+                                                 {/* Form Row 1 */}
                                     <div className="flex flex-col md:flex-row gap-4 w-xl max-w-2xl">
                                         <input
                                             type="text"
@@ -151,11 +153,15 @@ const FinalCTA = () => {
                                             required
                                         />
                                     </div>
-                                    <div className="h-20 flex items-center justify-center mt-4 ml-3">
+                                        </div>
+                                          <div className="h-20 flex items-center justify-center mt-4 ml-3">
                                         <button className="bg-[#71AC61] font-dm hover:scale-105 hover:text-medium transition px-8 py-3 rounded-full font-medium whitespace-nowrap">
                                             Sign up
                                         </button>
                                     </div>
+                                   
+                                   </div>
+                                   
                                 </form>
                             </div>
                         </div>
