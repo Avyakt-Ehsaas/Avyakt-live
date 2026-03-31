@@ -36,7 +36,7 @@ const Build = () => {
                 <h1 className="text-3xl md:text-5xl font-semibold text-primary font-season-medium  mt-2 leading-tight">
                     Live daily sessions. A 12-month structure.<br />Results you can measure.
                 </h1>
-                <div className="relative grid grid-cols-4 gap-8 mt-12">
+                <div className="relative grid grid-cols-4 gap-8 mt-12 ">
                     {cardData.map((data) =>
                         <Card
                             title={data.title}
@@ -55,7 +55,7 @@ export default Build;
 
 const Card = ({ title, desc, img }) => {
     return (
-        <div className="bg-[#C2E0BA33] h-80 rounded-2xl p-6 text-start">
+        <div className="bg-[#C2E0BA33] h-80 rounded-2xl p-6 text-start ">
             <div className="w-16 h-16 mb-4">
                 <img
                     src={img}
@@ -63,10 +63,10 @@ const Card = ({ title, desc, img }) => {
                     className="w-full h-full object-cover rounded-full"
                 />
             </div>
-            <h3 className="text-greenbase font-dm mb-2 leading-tight">
+            <h3 className="text-greenbase text-xl font-medium font-dm mb-2 leading-tight">
                 {title}
             </h3>
-            <p className="font-dm leading-relaxed">
+            <p className="font-dm leading-relaxed text-lg text-primary font-medium">
                 {desc}
             </p>
         </div>

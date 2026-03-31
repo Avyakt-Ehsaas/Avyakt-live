@@ -69,10 +69,10 @@ export default Solution;
 const Card = ({ title, desc }) => {
     return (
         <div className="border border-greenbase rounded-2xl p-6 text-left bg-white/50 backdrop-blur-sm max-w-[350px] h-[200px]">
-            <h3 className="text-greenbase font-dm mb-2 text-center">
+            <h3 className="text-greenbase font-dm mb-2 text-center font-medium">
                 {title}
             </h3>
-            <p className="text-primary font-dm text-center text-normal">
+            <p className="text-primary font-dm text-center font-medium">
                 {desc}
             </p>
         </div>

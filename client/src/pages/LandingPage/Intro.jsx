@@ -31,7 +31,7 @@ const Intro = () => {
 
                     <div>
                         <h2 className="text-greenbase text-3xl font-medium"><span className="font-semibold">अव्यक्त</span> · Avyakt</h2>
-                        <p className="text-primary font-dm text-center text-md mx-auto mt-4">
+                        <p className="text-primary font-dm text-center text-md mx-auto mt-4 font-medium">
                             Beyond words. The silence that holds more than language can carry. The hidden potential within every mind, not something to be created, but something already present, waiting to be uncovered.
                         </p>
                     </div>
@@ -40,7 +40,7 @@ const Intro = () => {
 
                     <div>
                         <h2 className="text-greenbase text-3xl font-medium"><span className="font-semibold">अहसास</span> · Ehsaas</h2>
-                        <p className="text-primary font-dm text-center text-md mx-auto mt-4">
+                        <p className="text-primary font-dm text-center text-md mx-auto mt-4 font-medium">
                             The felt sense of power in stillness. The experience of emerging into your truest self, not through effort or striving, but through awareness and presence.
                         </p>
                     </div>
