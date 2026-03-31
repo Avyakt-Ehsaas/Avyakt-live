@@ -22,7 +22,7 @@ const AboutUsNew = () => {
             <IdeaGuide />
             <StagesOfLife />
             <RootedSection />
-            <FounderNote />
+            {/* <FounderNote /> */}
             <AboutFooter />
         </>
     );
