@@ -1,12 +1,13 @@
 import stressWomen from "../../assets/stress-women.png"
 import stressman from "../../assets/stress-man.png"
 import runningWomen from "../../assets/running-women.png"
-
+import ProgramRunning from '../../assets/images/ProgramRunning.png'
+import './gridPattern.css'
 
 const Problem = () => {
     return (
         <div className="relative px-4 py-20">
-
+        
       
       {/* Grid Background */}
       <div className="absolute inset-0 grid-pattern grid-fade-top pointer-events-none z-0" />
@@ -36,7 +37,7 @@ const Problem = () => {
                     <div className="absolute top-1/2 left-0 -translate-y-1/2 w-64 h-64 rounded-full overflow-hidden">
                         <img
                             className="w-full h-full object-cover"
-                            src={runningWomen}
+                            src={ProgramRunning}
                             alt="running"
                         />
                     </div>

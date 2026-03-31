@@ -6,7 +6,7 @@ const HeroSection = () => {
             <div className="absolute inset-0 bg-cover bg-center bg-no-repeat about-hero-section bottom-0" />
 
             {/*  Soft White Mask  */}
-        <div className="absolute inset-x-0 top-0 h-[45%] bg-gradient-to-b from-white/80 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 top-0 h-[75%] bg-gradient-to-b from-white/80 to-transparent pointer-events-none" />
 
             {/* Bottom Smooth Fade */}
             <div className="absolute bottom-0 left-0 w-full h-[120px] bg-gradient-to-t from-white to-transparent" />
