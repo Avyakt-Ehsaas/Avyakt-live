@@ -55,7 +55,7 @@ export default Build;
 
 const Card = ({ title, desc, img }) => {
     return (
-        <div className="bg-[#C2E0BA33] h-80 rounded-2xl p-6 text-start ">
+        <div className="bg-[#C2E0BA33]  rounded-2xl p-6 text-start ">
             <div className="w-16 h-16 mb-4">
                 <img
                     src={img}
