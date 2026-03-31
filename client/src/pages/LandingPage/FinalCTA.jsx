@@ -1,12 +1,11 @@
 import React from 'react'
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
-
 import FullCTA from '../../assets/images/FullCTA.png'
 import sleepImg from '../../assets/images/sleepblog1.png'
 import habitImg from '../../assets/images/habitblog1.png'
 import focusImg from '../../assets/images/focusblog1.png'
-import DarkLogo from "../../assets/images/LogoDark.svg";
-import avyaktFooter from '../../assets/images/avyaktFooterWatermark.svg';
+import DarkLogo from '../../assets/Logo.png'
+import avyaktFooter from '../../assets/avyakt.png';
 
 import { IoSearch } from "react-icons/io5";
 
@@ -34,7 +33,7 @@ const FinalCTA = () => {
     return (
         <>
             <section
-                className="relative z-10 w-full min-h-screen flex flex-col gap-50 items-center bg-cover bg-center bg-no-repeat"
+                className="relative z-10 w-full min-h-screen flex flex-col gap-50 items bg-cover bg-center bg-no-repeat"
                 style={{ backgroundImage: `url(${FullCTA})` }}
             >
 
@@ -57,7 +56,7 @@ const FinalCTA = () => {
                     }}
                 />
 
-                <div className='flex flex-col gap-20 '>
+                <div className='flex flex-col gap-20'>
 
                     {/* Blog Section */}
 
@@ -89,7 +88,7 @@ const FinalCTA = () => {
                                     </div>
 
                                     {/* Content */}
-                                    <div className="p-3 ">
+                                    <div className="p-4 ">
                                         <p className="text-base font-medium font-dm text-greenbase mb-2">
                                             {blog.tag}
                                         </p>
@@ -103,7 +102,7 @@ const FinalCTA = () => {
                                         </p>
 
                                         <button
-                                         className="text-greenbase cursor-pointer font-medium text-lg flex items-center gap-1 hover:gap-2 transition-all mb-2 hover:scale-102 transition duration-300">
+                                            className="text-greenbase cursor-pointer font-medium text-lg flex items-center gap-1 hover:gap-2 transition-all mb-2 hover:scale-102 transition duration-300">
                                             Read article →
                                         </button>
 
@@ -164,12 +163,12 @@ const FinalCTA = () => {
 
 
 
-                        <div className=''>
+                        <div className='relative w-full'>
                             {/* Footer */}
-                            <div className="w-6xl flex flex-col gap-10 items-center">
+                            <div className="relative w-6xl flex flex-col justify-center items-center gap-10 mx-auto z-20">
 
                                 <div className="flex justify-center gap-16 mb-4 w-20">
-                                    <img src={DarkLogo} alt="Dark logo " className="text-sm" />
+                                    <img src={DarkLogo} alt="Dark logo" />
                                 </div>
 
                                 <div className="flex justify-center gap-16">
@@ -198,8 +197,8 @@ const FinalCTA = () => {
                                     Avyakt©2026. All rights reserved.
                                 </p>
                             </div>
-                            <div>
-                                <img src={avyaktFooter} alt="Avyakt Footer Logo" className="w-full -z-10 absolute bottom-0 left-1/2 transform -translate-x-1/2" />
+                            <div className='w-full relative'>
+                                <img src={avyaktFooter} alt="Avyakt Footer Logo" className="w-full h-100 z-10 absolute bottom-0 opacity-100" />
                             </div>
                         </div>
 

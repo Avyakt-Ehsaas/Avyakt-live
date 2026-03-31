@@ -15,6 +15,7 @@ import Solution from "./Solution.jsx";
 import Intro from "./Intro.jsx";
 import HowItWorks from "./HowItsWork.jsx";
 import TheScienceSection from "./TheScienceSection.jsx";
+import Build from "./Build.jsx";
 
 const LandingPage = () => {
   const [isHeroVisible, setIsHeroVisible] = useState(true);
@@ -48,6 +49,7 @@ const LandingPage = () => {
       <ResearchSection />
          <Solution />
         <Intro />
+        <Build/>
       <SponsorPage />
       <TheScienceSection />
       <HowItWorks />
