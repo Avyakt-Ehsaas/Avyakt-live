@@ -1,11 +1,10 @@
 import React from 'react'
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
-
 import FullCTA from '../../assets/images/FullCTA.png'
 import sleepImg from '../../assets/images/sleepblog1.png'
 import habitImg from '../../assets/images/habitblog1.png'
 import focusImg from '../../assets/images/focusblog1.png'
-import DarkLogo from "../../assets/logo.png";
+import DarkLogo from '../../assets/Logo.png'
 import avyaktFooter from '../../assets/avyakt.png';
 
 import { IoSearch } from "react-icons/io5";
