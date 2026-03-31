@@ -11,26 +11,26 @@ import avyaktFooter from '../../assets/images/avyaktFooterWatermark.svg';
 import { IoSearch } from "react-icons/io5";
 
 const FinalCTA = () => {
-   const blogs = [
-  {
-    tag: "Sleep",
-    title: "How 20 Minutes of Meditation Changes What Happens When You Sleep",
-    desc: "What you do in the hour before bed determines the quality of sleep you get. Here's the science.",
-    image: sleepImg,
-  },
-  {
-    tag: "Building a Habit",
-    title: "70% of People Quit Meditation in 3 Weeks. Here Is Why, and How Not To.",
-    desc: "It's not discipline you're missing. It's structure, community, and a way to track if it's working.",
-    image: habitImg,
-  },
-  {
-    tag: "Attention & Focus",
-    title: "Why Your Attention Keeps Breaking — And What to Do About It",
-    desc: "The neuroscience of distraction and how structured practice rebuilds focus from the ground up.",
-    image: focusImg,
-  },
-];
+    const blogs = [
+        {
+            tag: "Sleep",
+            title: "How 20 Minutes of Meditation Changes What Happens When You Sleep",
+            desc: "What you do in the hour before bed determines the quality of sleep you get. Here's the science.",
+            image: sleepImg,
+        },
+        {
+            tag: "Building a Habit",
+            title: "70% of People Quit Meditation in 3 Weeks. Here Is Why, and How Not To.",
+            desc: "It's not discipline you're missing. It's structure, community, and a way to track if it's working.",
+            image: habitImg,
+        },
+        {
+            tag: "Attention & Focus",
+            title: "Why Your Attention Keeps Breaking — And What to Do About It",
+            desc: "The neuroscience of distraction and how structured practice rebuilds focus from the ground up.",
+            image: focusImg,
+        },
+    ];
     return (
         <>
             <section
@@ -65,50 +65,52 @@ const FinalCTA = () => {
 
                         {/* Heading */}
                         <div>
-                             <p className="text-greenbase font-season text-center font-medium tracking-wide">
-            RESEARCH AND INSIGHTS
-          </p>
+                            <p className="text-greenbase font-season text-center font-medium tracking-wide">
+                                RESEARCH AND INSIGHTS
+                            </p>
                             <h2 className="text-center text-2xl sm:text-4xl md:text-5xl font-medium text-[#191919] leading-tight">
                                 What the science actually says
                             </h2>
                         </div>
 
                         <div className="grid gap-6 md:grid-cols-3 mt-2">
-    {blogs.map((blog, index) => (
-      <article
-        key={index}
-        className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300"
-      >
-        {/* Image */}
-        <div className="h-[200px] w-full">
-          <img
-            src={blog.image}
-            alt={blog.title}
-            className="w-full h-full object-cover"
-          />
-        </div>
+                            {blogs.map((blog, index) => (
+                                <article
+                                    key={index}
+                                    className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300"
+                                >
+                                    {/* Image */}
+                                    <div className="h-[200px] w-full">
+                                        <img
+                                            src={blog.image}
+                                            alt={blog.title}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
 
-        {/* Content */}
-        <div className="p-4 ">
-          <p className="text-base font-medium font-dm text-greenbase mb-2">
-            {blog.tag}
-          </p>
+                                    {/* Content */}
+                                    <div className="p-3 ">
+                                        <p className="text-base font-medium font-dm text-greenbase mb-2">
+                                            {blog.tag}
+                                        </p>
 
-          <h3 className="text-xl  font-dm font-semibold text-primary leading-9 mb-2">
-            {blog.title}
-          </h3>
+                                        <h3 className="text-xl  font-dm font-semibold text-primary leading-9 mb-2">
+                                            {blog.title}
+                                        </h3>
 
-          <p className="text-sm font-dm text-[#6B6B6B] leading-6 mb-4 pr-3">
-            {blog.desc}
-          </p>
+                                        <p className="text-sm font-dm text-[#6B6B6B] leading-6 mb-4  ">
+                                            {blog.desc}
+                                        </p>
 
-          <button className="text-greenbase font-medium text-lg flex items-center gap-1 hover:gap-2 transition-all mb-2">
-            Read article →
-          </button>
-        </div>
-      </article>
-    ))}
-  </div>
+                                        <button
+                                         className="text-greenbase cursor-pointer font-medium text-lg flex items-center gap-1 hover:gap-2 transition-all mb-2 hover:scale-102 transition duration-300">
+                                            Read article →
+                                        </button>
+
+                                    </div>
+                                </article>
+                            ))}
+                        </div>
                     </div>
 
                     {/* CTA Footer */}

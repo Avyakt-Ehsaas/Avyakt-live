@@ -80,7 +80,7 @@ export default function HowItWorks() {
 
           {/* Individual */}
           <article className="bg-[#C2E0BA33] rounded-2xl p-6 text-left">
-            <span className="inline-block bg-[#C2E0BA33] font-season text-greenbase text-medium px-4 py-2 rounded-full mb-4">
+            <span className="inline-block bg-[#C2E0BA33] font-dm text-greenbase text-medium px-4 py-2 rounded-full mb-4">
               For Individual
             </span>
 
@@ -102,7 +102,7 @@ export default function HowItWorks() {
 
           {/* Organization */}
           <article className="bg-[#C2E0BA33] rounded-2xl p-6 text-left">
-           <span className="inline-block bg-[#C2E0BA33] font-season text-greenbase text-medium px-4 py-2 rounded-full mb-4">
+           <span className="inline-block bg-[#C2E0BA33] font-dm text-greenbase text-medium px-4 py-2 rounded-full mb-4">
               For Schools, Organisations & Senior Communities
             </span>
 
