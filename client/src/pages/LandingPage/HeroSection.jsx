@@ -25,6 +25,8 @@ const HeroSection = () => {
           className="absolute bottom-0 md:-bottom-0 lg:-bottom-0 xl:-bottom-10 md:right-0 bg-[#191919] w-auto h-auto min-w-full min-h-full object-cover -z-10 pointer-events-none"
         />
 
+          <div className="absolute bottom-0 left-0 w-full h-[80px] bg-gradient-to-t from-white to-transparent" />
+
 
         <div className="absolute inset-0 max-w-2xl md:max-w-full flex items-center justify-center z-50">
 
