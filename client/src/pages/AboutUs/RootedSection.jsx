@@ -27,7 +27,7 @@ const RootedSection = () => {
         </h1>
 
         {/* Description */}
-        <p className="mt-1 text-primary font-dm font-medium leading-relaxed max-w-3xl mx-auto px-6 md:px-0">
+        <p className="mt-1 text-primary text-base md:text-[20px] font-dm font-medium md:leading-relaxed max-w-3xl mx-auto px-4 md:px-0">
           The word Avyakt refers to what is subtle or not yet expressed. Ehsaas
           means awareness or feeling. India has a long tradition of studying the
           mind through direct observation. Avyakt draws from that sensibility
@@ -35,7 +35,7 @@ const RootedSection = () => {
         </p>
 
         {/* Bottom Section */}
-        <div className=" mt-12 md:mt-8 flex items-center justify-center gap-2 md:gap-10">
+        <div className=" mt-12 md:mt-8 flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10">
           
           {/* Avyakt */}
           <div className="text-center">

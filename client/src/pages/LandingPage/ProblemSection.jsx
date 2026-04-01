@@ -10,7 +10,7 @@ const Pill = ({ text }) => {
 
 const ProblemSection = () => {
   return (
-    <section className="bg-white pt-28 pb-16 px-4 md:px-10">
+    <section className="bg-white pt-28 pb-16 px-4 md:px-10 min-h-screen flex items-center justify-center">
       <div className="max-w-6xl mx-auto text-center">
 
         {/* Header */}

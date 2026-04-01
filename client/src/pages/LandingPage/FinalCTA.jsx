@@ -203,8 +203,8 @@ const FinalCTA = () => {
                                     Avyakt©2026. All rights reserved.
                                 </p>
                             </div>
-                            <div className='w-full relative'>
-                                <img src={avyaktFooter} alt="Avyakt Footer Logo" className="w-full h-100 z-10 absolute bottom-0 opacity-100" />
+                            <div className='w-full relative flex items-center justify-center'>
+                                <img src={avyaktFooter} alt="Avyakt Footer Logo" className="w-full max-w-7xl h-100 z-10 absolute bottom-0 opacity-100" />
                             </div>
                         </div>
 
