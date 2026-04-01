@@ -65,7 +65,6 @@ import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 
 
-
 function App() {
   const { user, loadingUser } = useAuth();
   // const [showSplash, setShowSplash] = useState(true);
@@ -92,6 +91,7 @@ function App() {
     <>
       <BrowserRouter>
         <div>
+
           <Routes>
 
             {/* ===========================================

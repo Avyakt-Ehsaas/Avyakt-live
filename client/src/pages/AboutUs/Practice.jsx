@@ -5,12 +5,12 @@ import "./gridPattern.css"
 const Practice = () => {
 
     return (
-     <section className="relative bg-white py-16 px-4 md:px-8">
+     <section className="relative bg-white py-16 px-4 md:px-8 min-h-[820px] md:min-h-[720px]">
       <div className="max-w-[1100px] mx-auto text-center ">
         <div className="absolute inset-0 grid-pattern grid-fade-top pointer-events-none z-0" />
         
         {/* Heading */}
-        <h1 className="text-[28px] md:text-[56px] font-season-medium text-primary leading-snug">
+        <h1 className="text-[32px] md:text-[56px] font-season-medium text-primary leading-snug">
           A meditation practice you can{" "}
           <span className="text-greenbase">understand</span>,<br />
           not just follow.
