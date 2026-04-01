@@ -2,7 +2,6 @@ import React from "react";
 import LandingSidebar from "../LandingPage/LandingSidebar/LandingSidebar";
 import IdeaGuide from "./IdeaGuide";
 import StagesOfLife from "./StagesOfLife";
-import FounderNote from "./FounderNote";
 import RootedSection from "./RootedSection";
 import AboutFooter from "./AboutFooter";
 import HeroSection from "./HeroSection";
@@ -18,11 +17,10 @@ const AboutUsNew = () => {
             </div>
             <HeroSection />
             <Problem />
-            <Practice />
             <IdeaGuide />
+            <Practice />
             <StagesOfLife />
             <RootedSection />
-            {/* <FounderNote /> */}
             <AboutFooter />
         </>
     );
