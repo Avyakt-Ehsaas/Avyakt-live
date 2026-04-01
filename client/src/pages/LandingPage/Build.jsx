@@ -28,7 +28,7 @@ const Build = () => {
         }
     ];
     return (
-        <section className="pt-40 pb-10 px-4 bg-white">
+        <section className="pt-40 pb-10 px-4 bg-white min-h-screen flex items-center justify-center">
             <div className="max-w-7xl mx-auto text-center">
                 <p className="text-greenbase font-dm text-center font-medium leading-tight">
                     WHAT WE BUILD
