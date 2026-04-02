@@ -7,6 +7,7 @@ import AboutFooter from "./AboutFooter";
 import HeroSection from "./HeroSection";
 import Problem from "./Problem";
 import Practice from "./Practice";
+import MeditationSection from "./MeditationSection";
 
 
 const AboutUsNew = () => {
@@ -17,6 +18,7 @@ const AboutUsNew = () => {
             </div>
             <HeroSection />
             <Problem />
+            <MeditationSection />
             <IdeaGuide />
             <Practice />
             <StagesOfLife />

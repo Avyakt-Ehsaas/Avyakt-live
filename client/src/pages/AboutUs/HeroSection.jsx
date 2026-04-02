@@ -12,18 +12,18 @@ const HeroSection = () => {
             <div className="absolute bottom-0 left-0 w-full h-[120px] bg-gradient-to-t from-white to-transparent" />
 
             {/* Content */}
-            <div className="relative z-10 max-w-3xl px-6">
-                <h1 className="text-5xl  md:text-6xl font-season-medium font-semibold  leading-[50px] md:leading-tight text-primary">
+            <div className="relative z-10 max-w-3xl 2xl:max-w-5xl  px-6">
+                <h1 className="text-5xl  md:text-6xl 2xl:text-7xl font-season-medium font-semibold  leading-[50px] md:leading-tight text-primary">
                     Meditation, made simple 
                     enough for every day.
                 </h1>
 
-                <p className="mt-4 text-base md:text-[20px] font-dm font-medium text-primary ">
+                <p className="mt-4 text-base md:text-[20px] 2xl:text-[24px] leading-relaxed font-dm font-medium text-primary ">
                     Avyakt Ehsaas helps people build a meditation practice that fits
                     into their actual life. Not a retreat. Not an app you forget about.
                 </p>
 
-                <button className="mt-6 px-8 py-3 bg-[#71AC61] text-white rounded-full hover:scale-102 transition font-dm font-medium cursor-pointer">
+                <button className="mt-6 px-8 py-3 2xl:py-4 2xl:text-lg bg-[#71AC61] text-white rounded-full hover:scale-102 transition font-dm font-medium cursor-pointer">
                     Explore Programs
                 </button>
             </div>
