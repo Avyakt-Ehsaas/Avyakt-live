@@ -80,12 +80,12 @@ const AboutFooter = () => {
 
                         <div>
                             {/* Heading */}
-                            <h1 className="text-center font-season-medium max-w-md md:max-w-7xl text-4xl md:text-5xl font-medium mb-4 tracking-wide ">
+                            <h1 className="text-center font-season-medium max-w-md md:max-w-7xl text-4xl md:text-5xl 2xl:text-7xl font-medium mb-4 tracking-wide ">
                                 Mindfulness for every stage of life.
                             </h1>
 
                             {/* Subtext */}
-                            <p className="max-w-md text-center px-4 md:px-0 md:max-w-5xl font-dm text-white mb-8 text-base md:text-lg leading-6 md:leading-7 md:leading-[30px] mx-auto">
+                            <p className="max-w-md text-center px-4 md:px-0 md:max-w-5xl 2xl:text-xl font-dm text-white mb-8 text-base md:text-lg leading-6 md:leading-7 md:leading-[30px] mx-auto">
                                 Sign up to receive simple and effective meditation, yoga, and other wellness tips from experts with decades of experience. Occasionally, we’ll let you know about our upcoming retreats, too.
                             </p>
 
@@ -101,12 +101,13 @@ const AboutFooter = () => {
                                             <input
                                                 type="text"
                                                 placeholder="First Name"
-                                                className="px-5 py-3 rounded-full font-dm font-medium bg-white text-primary w-full outline-none placeholder-[#191919]"
+                                                className="px-5 py-3 rounded-full font-dm 2xl:text-xl  font-medium bg-white text-primary w-full outline-none placeholder-[#191919]"
                                             />
                                             <input
                                                 type="text"
                                                 placeholder="Last Name"
-                                                className="px-5 py-3 rounded-full font-dm font-medium bg-white text-primary w-full outline-none placeholder-[#191919]"
+                                                className="px-5 py-3 rounded-full font-dm font-medium bg-white 
+                                                2xl:text-xl text-primary w-full outline-none placeholder-[#191919]"
                                             />
                                         </div>
 
@@ -114,7 +115,8 @@ const AboutFooter = () => {
                                         <input
                                             type="email"
                                             placeholder="Enter your Email"
-                                            className="px-5 py-3 rounded-full font-dm font-medium bg-white text-primary w-full outline-none placeholder-[#191919]"
+                                            className="px-5 py-3 rounded-full font-dm font-medium bg-white 
+                                            2xl:text-xl text-primary w-full outline-none placeholder-[#191919]"
                                             required
                                         />
 
@@ -122,7 +124,7 @@ const AboutFooter = () => {
 
                                     </div>
                                          {/* Button */}
-                                       <div className='md:w-[35%]'> <button className="bg-[#71AC61] w-60 md:w-full md:w-auto mt-2 font-dm hover:scale-105 transition px-8 py-3 rounded-full font-medium">
+                                       <div className='md:w-[35%]'> <button className="bg-[#71AC61] w-60 md:w-full md:w-auto mt-2 font-dm hover:scale-105 transition px-8 py-3 rounded-full font-medium 2xl:text-xl 2xl:py-4">
                                             Sign up
                                         </button></div>
                                 </form>
@@ -145,7 +147,7 @@ const AboutFooter = () => {
                                     <div className="
     grid grid-cols-2 gap-y-6 gap-x-12
     text-primary font-dm font-semibold 
-    text-base md:text-[18px] tracking-wide text-center
+    text-base 2xl:text-[18px] tracking-wide text-center
     md:flex md:flex-wrap md:justify-center md:gap-16
   ">
                                         <a href="#" className="hover:text-[#71AC61]">HOME</a>
@@ -157,7 +159,7 @@ const AboutFooter = () => {
                                     </div>
 
                                     {/* Social Icons */}
-                                    <div className="flex justify-center gap-6 text-lg text-[#191919]">
+                                    <div className="flex justify-center gap-6 text-lg 2xl:text-xl text-[#191919]">
                                         <FaYoutube className="cursor-pointer hover:text-[#71AC61]" />
                                         <FaFacebookF className="cursor-pointer hover:text-[#71AC61]" />
                                         <FaTwitter className="cursor-pointer hover:text-[#71AC61]" />
@@ -175,11 +177,11 @@ const AboutFooter = () => {
                             </div>
 
                             {/* Background Footer Image */}
-                            <div className="w-full relative">
+                            <div className="w-full relative flex justify-center">
                                 <img
                                     src={avyaktFooter}
                                     alt="Avyakt Footer Logo"
-                                    className="w-full h-36 md:h-80 object-cover absolute bottom-0 z-10"
+                                    className="w-full 2xl:w-[1200px] h-36 md:h-80 object-cover absolute bottom-0 z-10"
                                 />
                             </div>
                         </div>

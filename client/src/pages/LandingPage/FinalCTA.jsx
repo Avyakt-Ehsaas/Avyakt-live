@@ -112,74 +112,81 @@ const FinalCTA = () => {
                         </div>
                     </div>
 
-                    {/* CTA Footer */}
-                    <div className='min-h-screen relative text-white text-center flex flex-col items-center justify-center gap-20 px-4'>
+                   {/* CTA Footer */}
+                    <div className="min-h-screen relative text-white text-center flex flex-col items-center justify-center gap-2 md:gap-20 md:px-4 py-8 md:py-12">
 
-                        <div className=''>
+                        <div>
                             {/* Heading */}
-                            <h1 className="font-season-medium text-4xl md:text-5xl  font-medium mb-4 tracking-wide">
+                            <h1 className="text-center font-season-medium max-w-md md:max-w-7xl text-4xl md:text-5xl 2xl:text-7xl font-medium mb-4 tracking-wide ">
                                 Mindfulness for every stage of life.
                             </h1>
 
                             {/* Subtext */}
-                            <p className="max-w-5xl font-dm text-white mb-8 text-lg leading-[30px]">
+                            <p className="max-w-md text-center px-4 md:px-0 md:max-w-5xl 2xl:text-xl font-dm text-white mb-8 text-base md:text-lg leading-6 md:leading-7 md:leading-[30px] mx-auto">
                                 Sign up to receive simple and effective meditation, yoga, and other wellness tips from experts with decades of experience. Occasionally, we’ll let you know about our upcoming retreats, too.
                             </p>
 
-                            <div className="flex flex-col items-center mb-24">
-                                <form>
-                                   <div className='flex'>
-                                        <div className="flex flex-col">
-                                                 {/* Form Row 1 */}
-                                    <div className="flex flex-col md:flex-row gap-4 w-xl max-w-2xl">
-                                        <input
-                                            type="text"
-                                            placeholder="First Name"
-                                            className="px-5 py-3 rounded-full font-dm font-medium bg-white text-primary w-full outline-none placeholder-[#191919]"
-                                        />
-                                        <input
-                                            type="text"
-                                            placeholder="Last Name"
-                                            className="px-5 py-3 rounded-full font-dm font-medium bg-white text-primary w-full outline-none placeholder-[#191919]"
-                                        />
-                                    </div>
+                            {/* Form */}
+                            <div className="flex flex-col items-center mb-16 md:mb-24 w-full">
+                                <form className="w-full max-w-2xl px-4 md:px-0 flex flex-col items-center md:flex-row gap-4 ">
 
-                                    {/* Form Row 2 */}
-                                    <div className="flex flex-col md:flex-row gap-4 w-xl max-w-2xl mt-4">
+                                    {/* Inputs */}
+                                    <div className="flex flex-col items-center gap-4 w-full">
+
+                                        {/* Row 1 */}
+                                        <div className="flex flex-col md:flex-row gap-4 w-full">
+                                            <input
+                                                type="text"
+                                                placeholder="First Name"
+                                                className="px-5 py-3 rounded-full font-dm 2xl:text-xl  font-medium bg-white text-primary w-full outline-none placeholder-[#191919]"
+                                            />
+                                            <input
+                                                type="text"
+                                                placeholder="Last Name"
+                                                className="px-5 py-3 rounded-full font-dm font-medium bg-white 
+                                                2xl:text-xl text-primary w-full outline-none placeholder-[#191919]"
+                                            />
+                                        </div>
+
+                                        {/* Row 2 */}
                                         <input
                                             type="email"
-                                            placeholder={`Enter your Email `}
-                                            className="px-5 py-3 rounded-full font-dm font-medium bg-white text-primary w-full outline-none placeholder-[#191919]"
+                                            placeholder="Enter your Email"
+                                            className="px-5 py-3 rounded-full font-dm font-medium bg-white 
+                                            2xl:text-xl text-primary w-full outline-none placeholder-[#191919]"
                                             required
                                         />
+
+                                      
+
                                     </div>
-                                        </div>
-                                          <div className="h-20 flex items-center justify-center mt-4 ml-3">
-                                        <button className="bg-[#71AC61] font-dm hover:scale-105 hover:text-medium transition px-8 py-3 rounded-full font-medium whitespace-nowrap">
+                                         {/* Button */}
+                                       <div className='md:w-[35%]'> <button className="bg-[#71AC61] w-60 md:w-full md:w-auto mt-2 font-dm hover:scale-105 transition px-8 py-3 rounded-full font-medium 2xl:text-xl 2xl:py-4">
                                             Sign up
-                                        </button>
-                                    </div>
-                                   
-                                   </div>
-                                   
+                                        </button></div>
                                 </form>
                             </div>
                         </div>
 
+                        {/* Footer Section */}
+                        <div className="relative w-full">
+                            <div className="relative max-w-6xl flex flex-col items-center gap-8 mx-auto z-20 px-4">
 
-
-
-                        <div className='relative w-full'>
-                            {/* Footer */}
-                            <div className="relative w-6xl flex flex-col justify-center items-center gap-10 mx-auto z-20">
-
-                                <div className="flex justify-center gap-16 mb-4 w-20">
-                                    <img src={DarkLogo} alt="Dark logo" />
+                                {/* Logo */}
+                                <div className="flex justify-center">
+                                    <img src={DarkLogo} alt="Dark logo" className="w-24 md:w-auto" />
                                 </div>
 
-                                <div className="flex justify-center gap-16">
+                                {/* Nav + Social */}
+                                <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
+
                                     {/* Nav */}
-                                    <div className="flex justify-center text-[#191919]  font-dm font-semibold gap-8 md:gap-24 text-xs md:text-sm mb-6 flex-wrap tracking-wide">
+                                    <div className="
+    grid grid-cols-2 gap-y-6 gap-x-12
+    text-primary font-dm font-semibold 
+    text-base 2xl:text-[18px] tracking-wide text-center
+    md:flex md:flex-wrap md:justify-center md:gap-16
+  ">
                                         <a href="#" className="hover:text-[#71AC61]">HOME</a>
                                         <a href="#" className="hover:text-[#71AC61]">THE SCIENCE</a>
                                         <a href="#" className="hover:text-[#71AC61]">PROGRAMS</a>
@@ -189,22 +196,30 @@ const FinalCTA = () => {
                                     </div>
 
                                     {/* Social Icons */}
-                                    <div className="flex gap-6 mb-3 text-xl text-[#191919] ">
+                                    <div className="flex justify-center gap-6 text-lg 2xl:text-xl text-[#191919]">
                                         <FaYoutube className="cursor-pointer hover:text-[#71AC61]" />
                                         <FaFacebookF className="cursor-pointer hover:text-[#71AC61]" />
                                         <FaTwitter className="cursor-pointer hover:text-[#71AC61]" />
                                         <FaInstagram className="cursor-pointer hover:text-[#71AC61]" />
                                         <FaLinkedinIn className="cursor-pointer hover:text-[#71AC61]" />
                                     </div>
+
                                 </div>
 
                                 {/* Copyright */}
-                                <p className="text-[16px] font-dm mb-8 text-[#191919] tracking-wide">
+                                <p className="text-base md:text-[18px] font-dm mb-6 text-[#191919] tracking-wide text-center">
                                     Avyakt©2026. All rights reserved.
                                 </p>
+
                             </div>
-                            <div className='w-full relative flex items-center justify-center'>
-                                <img src={avyaktFooter} alt="Avyakt Footer Logo" className="w-full max-w-7xl h-100 z-10 absolute bottom-0 opacity-100" />
+
+                            {/* Background Footer Image */}
+                            <div className="w-full relative flex justify-center">
+                                <img
+                                    src={avyaktFooter}
+                                    alt="Avyakt Footer Logo"
+                                    className="w-full 2xl:w-[1200px] h-36 md:h-80 object-cover absolute bottom-0 z-10"
+                                />
                             </div>
                         </div>
 

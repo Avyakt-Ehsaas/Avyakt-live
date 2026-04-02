@@ -61,7 +61,7 @@ export default function HowItWorks() {
             HOW IT WORKS
           </p>
 
-          <h2 className="text-3xl md:text-5xl font-season-medium text-primary leading-[50px]">
+          <h2 className="text-3xl md:text-5xl font-season-medium text-primary leading-10 md:leading-[50px]">
             Here is exactly <br />
             <span className="text-greenbase">
               what happens next.

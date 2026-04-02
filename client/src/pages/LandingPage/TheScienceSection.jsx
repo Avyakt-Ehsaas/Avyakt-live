@@ -61,7 +61,7 @@ export default function TheScienceSection() {
         THE SCIENCE
       </p>
 
-      <h2 className="text-4xl md:text-5xl font-season-medium text-primary leading-[60px] mb-6">
+      <h2 className="text-4xl md:text-5xl font-season-medium text-primary leading-[50px] md:leading-[60px] mb-6">
         What 8 weeks of structured <br />
         meditation actually does.
       </h2>

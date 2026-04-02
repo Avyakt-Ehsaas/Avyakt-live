@@ -50,6 +50,7 @@ const LandingSidebar = ({ isDarkBg }) => {
     { label: "Programs", path: "/programs" },
     { label: "About", path: "/about" },
     { label: "Blogs", path: "/blogs" },
+    { label : "Contact", path: "/contact" },
     ...(user?.role === "admin"
       ? [{ label: "Admin Panel", path: "/admin/dashboard" }]
       : []),
@@ -99,7 +100,7 @@ const LandingSidebar = ({ isDarkBg }) => {
                     key={i}
                     to={item.path}
                     className={`
-                      transition-colors duration-300 underline-offset-8
+                      transition-colors font-dm text-base duration-300 underline-offset-8
                       ${isActive
                         ? "text-[#71AC61] underline decoration-[#71AC61]"
                         : isDarkBg
@@ -115,7 +116,7 @@ const LandingSidebar = ({ isDarkBg }) => {
             </div>
 
             {/* Desktop Button */}
-            <button className="hidden md:block px-4 py-3 bg-[#71AC61] text-white rounded-full hover:scale-105 transition">
+            <button className="hidden md:block px-4 py-3 bg-[#71AC61] text-white rounded-full hover:scale-105 transition font-dm text-lg">
               Join us
             </button>
 

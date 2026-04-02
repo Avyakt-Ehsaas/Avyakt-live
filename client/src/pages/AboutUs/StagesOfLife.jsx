@@ -35,7 +35,7 @@ const stages = [
 
 export default function StagesOfLife() {
   return (
-    <section className="relative bg-white py-[100px] px-4 overflow-hidden">
+    <section className="relative bg-white py-[100px] px-4 overflow-hidden min-h-screen flex items-center justify-center">
 
       {/* ✅ Grid Background */}
       <div className="absolute inset-0 grid-pattern grid-fade-top pointer-events-none z-0" />
@@ -44,13 +44,13 @@ export default function StagesOfLife() {
       <div className="relative z-10 max-w-[1200px] mx-auto text-center">
 
         {/* Heading */}
-        <h1 className="text-4xl md:text-[56px] md:leading-[50px] font-season-medium text-primary">
+        <h1 className="text-4xl md:text-[56px] 2xl:text-[64px] md:leading-[50px] font-season-medium text-primary">
           Built for different{" "}
           <span className="text-greenbase">stages of life</span>
         </h1>
 
         {/* Subtitle */}
-        <p className="mt-2 md:mt-6 text-[18px] text-primary font-dm max-w-[900px] mx-auto leading-[30px]">
+        <p className="mt-2 md:mt-6 text-[18px] 2xl:text-xl text-primary font-dm max-w-[900px] mx-auto leading-[30px]">
           Avyakt adapts the same core approach, understanding + daily practice — to different environments.
         </p>
 

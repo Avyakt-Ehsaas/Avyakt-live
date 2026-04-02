@@ -14,7 +14,7 @@ const ResearchSection = () => {
         </p>
 
         {/* Heading */}
-        <h1 className="text-3xl md:text-5xl font-season-medium leading-[60px] text-primary">
+        <h1 className="text-3xl md:text-5xl font-season-medium leading-[50px] md:leading-[60px] text-primary">
           Meditation works. Decades of published studies confirm it. The failure
           point is never the practice, it's the{" "}
           <span className="text-greenbase">

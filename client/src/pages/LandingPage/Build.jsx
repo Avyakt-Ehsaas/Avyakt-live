@@ -36,7 +36,7 @@ const Build = () => {
                 <h1 className="text-3xl md:text-5xl font-semibold text-primary font-season-medium  mt-2 leading-tight">
                     Live daily sessions. A 12-month structure.<br />Results you can measure.
                 </h1>
-                <div className="relative grid grid-cols-4 gap-8 mt-12 ">
+                <div className="relative grid grid-rows-4 md:grid-cols-4 gap-8 mt-12 ">
                     {cardData.map((data) =>
                         <Card
                             title={data.title}

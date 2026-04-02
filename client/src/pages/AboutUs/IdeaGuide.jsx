@@ -1,4 +1,5 @@
 import React from "react";
+import AboutPillars from '../../assets/images/AboutPillars.png';
 
 export default function IdeaGuide() {
 
@@ -26,9 +27,16 @@ export default function IdeaGuide() {
   ];
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative bg-white py-[100px] px-4 overflow-hidden">
-      
-      <div className="absolute inset-0 grid-pattern grid-fade-top pointer-events-none z-0" />
+    <div className="relative bg-white overflow-hidden min-h-screen">
+        
+     <div className="relative">
+            <img src={AboutPillars} alt="programbg" className='h-24 w-full' /> 
+              <div className="absolute inset-0 pointer-events-none 
+        bg-gradient-to-b from-transparent via-white/60 to-[#FAFAFA]" />
+            </div>
+
+      <div className="flex justify-center items-center px-4 py-12">
+        <div className="absolute inset-0 grid-pattern grid-fade-top pointer-events-none z-0" />
 
       <div className="max-w-5xl w-full text-center">
         
@@ -56,7 +64,8 @@ export default function IdeaGuide() {
           ))}
         </div>
 
-      </div>
+      </div></div>
+      
     </div>
   );
 }
