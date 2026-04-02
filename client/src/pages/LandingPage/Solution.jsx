@@ -19,9 +19,9 @@ const Solution = () => {
                     a specific reason people fail <br/>to build a lasting meditation habit.
                 </p>
 
-                <div className="relative mt-8 grid grid-cols-3 items-center h-[80vh]">
+                <div className="relative mt-8 flex flex-col md:flex-row items-center justify-between h-full gap-10 md:h-[80vh]">
 
-                    <div className="flex flex-col justify-between items-end gap-10 h-full">
+                    <div className="flex flex-col justify-between items-end order-2 md:order-1 gap-10 h-full">
 
                         <Card
                             title="Grounded in published research"
@@ -34,7 +34,7 @@ const Solution = () => {
                         />
                     </div>
 
-                    <div className="flex justify-center">
+                    <div className="flex justify-center order-1 md:order-2">
                         <div className="w-[350px] h-[350px] rounded-full bg-[#EAF1E7] flex items-center justify-center">
                             <img
                                 src={meditation}
@@ -44,7 +44,7 @@ const Solution = () => {
                         </div>
                     </div>
 
-                    <div className="flex flex-col justify-between gap-10 h-full">
+                    <div className="flex flex-col justify-between order-3 md:order-3 gap-10 h-full">
 
                         <Card
                             title="Progressive, week by week"
@@ -68,11 +68,11 @@ export default Solution;
 
 const Card = ({ title, desc }) => {
     return (
-        <div className="border border-greenbase rounded-2xl p-6 text-left bg-white/50 backdrop-blur-sm max-w-[350px] h-[200px]">
-            <h3 className="text-greenbase font-dm mb-2 text-center font-medium">
+        <div className="border border-greenbase rounded-2xl p-6 text-left bg-white/50 backdrop-blur-sm max-w-[350px] h-full lg:h-[200px]">
+            <h3 className="text-greenbase font-dm mb-2 text-center">
                 {title}
             </h3>
-            <p className="text-primary font-dm text-center font-medium">
+            <p className="text-primary font-dm text-center text-normal">
                 {desc}
             </p>
         </div>
