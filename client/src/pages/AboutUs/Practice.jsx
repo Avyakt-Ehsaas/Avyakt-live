@@ -30,7 +30,7 @@ const Practice = () => {
           <img
             src={meditationImg}
             alt="Meditation"
-            className="w-full h-[220px] md:h-[320px] object-cover rounded-2xl shadow-md"
+            className="w-[400px] h-[300px] md:w-full md:h-full object-cover rounded-2xl shadow-md"
           />
         </div>
       </div>
