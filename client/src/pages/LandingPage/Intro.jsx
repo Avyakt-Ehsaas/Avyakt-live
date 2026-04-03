@@ -2,14 +2,11 @@ import bg from "../../assets/Rectangle 29.png";
 
 const Intro = () => {
     return (
-        <section className="relative w-full h-[130vh] flex items-center justify-center overflow-hidden">
+        <section className="relative w-full sm:h-[130vh] flex items-center justify-center overflow-hidden">
             <div
-                className="absolute inset-0 top-10"
+                className="absolute inset-0 top-10 bg-center bg-no-repeat bg-contain md:bg-cover"
                 style={{
                     backgroundImage: `url(${bg})`,
-                    backgroundSize: "100% 100%",  
-                    backgroundPosition: "center",
-                    backgroundRepeat: "no-repeat",
                 }}
             />
 

@@ -9,29 +9,30 @@ function ProgramCard({
   image,
 }) {
   return (
-<div className="max-w-[1080px] mx-auto bg-white border border-gray-200 rounded-[20px]
+    <div className="max-w-[1080px] mx-auto bg-white border border-gray-200 rounded-[20px]
 shadow-sm flex flex-col md:flex-row mt-[20px] overflow-hidden">
 
-     {/* Left Image */}
-<div className="w-full md:w-[280px]" style={{borderRadius: "16px 0 16px 0"}}>
-  <img
-    src={image}
-    alt="program"
-    className="w-full h-full md:h-[380px]  object-cover"
-  />
-</div>
+      {/* Left Image */}
+      <div className="w-full md:w-[280px]" style={{ borderRadius: "16px 0 16px 0" }}>
+        <img
+          src={image}
+          alt="program"
+          className="w-full h-60  sm:min-h-full object-cover"
+          style={{ backgroundPosition: '100% 100%', backgroundRepeat: 'no-repeat' }}
+        />
+      </div>
 
       {/* Right Content */}
-      <div className="flex-1 flex flex-col  justify-start py-6 px-6 bg-[#C2E0BA33] pl-12">
+      <div className="flex-1 flex flex-col  justify-start py-6 px-6 bg-[#C2E0BA33] pl-6 sm:pl-12">
         <div>
           <div className="mt-2">
 
-       <span className="inline-block w-fit font-season bg-[#C2E0BA33] text-greenbase px-4 py-2 rounded-full text-sm font-medium mb-4">
-            {tag}
-          </span>
+            <span className="inline-block w-fit font-season bg-[#C2E0BA33] text-greenbase px-4 py-2 rounded-full text-sm font-medium mb-4">
+              {tag}
+            </span>
 
-            <h3 className="font-season text-[32px] leading-[40px] text-primary mb-1" 
-            style={{fontWeight: "500"}}>
+            <h3 className="font-season text-[32px] leading-[40px] text-primary mb-1"
+              style={{ fontWeight: "500" }}>
               {title}
             </h3>
 
@@ -41,7 +42,7 @@ shadow-sm flex flex-col md:flex-row mt-[20px] overflow-hidden">
           </div>
 
           {/* Bullet Points */}
-          <ul className="flex gap-2 font-dm font-medium mt-[20px] space-y-2 text-[20px] leading-[30px] text-primary">
+          <ul className="flex flex-wrap gap-2 font-dm font-medium mt-[20px] space-y-2 text-[20px] leading-[30px] text-primary">
             {points.map(
               (item, i) => (
                 <span
