@@ -46,8 +46,8 @@ export default function MeditationSection() {
                     WHAT WE BELIEVE
                 </p>
 
-                <h1 className="font-season-medium text-primary leading-[28px] md:leading-[40px] mb-4 sm:mb-6
-          text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
+                <h1 className="font-season-medium text-primary leading-[36px] md:leading-[40px] mb-4 sm:mb-6
+            text-3xl lg:text-3xl xl:text-4xl">
                     Meditation is often suggested as the answer. It can work. But most
                     people try it for a few days, see no clear progress, and stop. That’s
                     not a failure of meditation, it’s a failure of

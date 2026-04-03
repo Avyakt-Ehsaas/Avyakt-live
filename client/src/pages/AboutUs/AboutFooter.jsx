@@ -60,11 +60,11 @@ const AboutFooter = () => {
                                 remains abstract.
                             </p>
 
-                            <p className="text-[20px] leading-[28px] md:leading-[40px] text-primary font-dm font-semibold mb-[16px]">
+                            <p className="text-[20px] leading-[28px] md:leading-[40px] text-primary font-dm font-medium  mb-[16px]">
                                 The mind can be trained like any other skill.
                             </p>
 
-                            <p className="text-base md:text-[18px] nd:leading-[30px] font-dm  text-primary mb-[16px]">
+                            <p className="text-base md:text-[18px] md:leading-[28px] md:leading-[30px] font-dm  text-primary mb-[16px]">
                                 Small, consistent practice gradually changes how we focus, respond
                                 to stress, and understand our inner experience. Avyakt combines
                                 meditation with learning and experimentation so people can explore
