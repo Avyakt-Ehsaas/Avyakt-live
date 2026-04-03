@@ -62,7 +62,7 @@ export default function StagesOfLife() {
               className="bg-[#C2E0BA44] rounded-[20px] p-[24px] text-left hover:shadow-md transition"
             >
               {/* Image */}
-              <div className="w-[64px] h-[64px] rounded-full overflow-hidden mb-[16px]">
+              <div className="w-[64px] h-[64px] rounded-full overflow-hidden mb-[8px] md:mb-[16px]">
                 <img
                   src={item.image}
                   alt={item.title}
@@ -71,12 +71,12 @@ export default function StagesOfLife() {
               </div>
 
               {/* Title */}
-              <h3 className="text-[20px] font-dm font-semibold text-primary leading-[40px]">
+              <h3 className="text-[20px] font-dm font-semibold text-primary leading-[28px] md:leading-[40px]">
                 {item.title}
               </h3>
 
               {/* Description */}
-              <p className="text-[16px] text-primary font-dm leading-[28px]">
+              <p className="text-[14px] md:text-[16px] text-primary font-dm leading-[24px] md:leading-[28px]">
                 {item.description}
               </p>
             </div>

@@ -1,260 +1,369 @@
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { FiMail, FiPhone, FiMapPin, FiSend } from 'react-icons/fi'
-import Footer from "./LandingPage/Footer"
-import LandingSidebar from "./LandingPage/LandingSidebar/LandingSidebar"
-import ContactImage from '../assets/contactUs.webp'
+import React, { useState } from "react";
+import { Mail, Phone, MessageCircle, MapPin, Leaf, Heart, Wind } from "lucide-react";
+import LandingSidebar from "./LandingPage/LandingSidebar/LandingSidebar";
 
-// Animation Variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12 }
-  }
-}
+export default function ContactPage() {
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [hoverCard, setHoverCard] = useState(null);
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { ease: 'easeOut', duration: 0.5 } }
-}
-
-const ContactCard = ({ icon, title, value }) => (
-  <motion.div
-    variants={itemVariants}
-    whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(113, 172, 97, 0.15)' }}
-    className="relative group bg-white rounded-2xl px-7 py-4 border border-gray-100 shadow-sm transition-all duration-500 overflow-hidden"
-  >
-    {/* Decorative accent */}
-    <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-    
-    <div className="flex items-center gap-5 relative z-10">
-      <motion.div 
-        whileHover={{ scale: 1.1, rotate: 5 }}
-        className="w-14 h-14 flex items-center justify-center rounded-xl transition-all duration-300"
-        style={{ backgroundColor: '#71ac6120' }}
-      >
-        <span style={{ color: '#71ac61' }} className="text-2xl">
-          {icon}
-        </span>
-      </motion.div>
-      <div>
-        <p className="text-lg font-medium font-season tracking-wide" style={{ color: '#71ac61' }}>{title}</p>
-        <p className="text-base font-medium mt-2 font-dm leading-relaxed" style={{ color: '#191919' }}>{value}</p>
-      </div>
-    </div>
-  </motion.div>
-)
-
-const ContactUs = () => {
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
-
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    alert('Thank you! Your message has been sent.')
-    setForm({ name: '', email: '', message: '' })
-  }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   return (
-    <div style={{ backgroundColor: '#ffffff' }} className="min-h-screen">
+    <div className="bg-white text-gray-800 font-sans overflow-hidden">
       <LandingSidebar />
 
-      {/* Page Heading */}
-      <section className="pt-28 pb-12 text-center max-w-5xl mx-auto px-6 relative">
-        {/* Decorative circles */}
-        <div className="absolute top-10 left-0 w-32 h-32 rounded-full bg-emerald-50/30 blur-3xl" style={{ backgroundColor: 'rgba(113, 172, 97, 0.08)' }} />
-        <div className="absolute bottom-0 right-0 w-40 h-40 rounded-full bg-emerald-50/20 blur-3xl" style={{ backgroundColor: 'rgba(113, 172, 97, 0.06)' }} />
-        
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="relative z-10"
-        >
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
-            <p className="text-sm font-season font-medium tracking-widest" style={{ color: '#71ac61' }}>GET IN TOUCH</p>
-          </motion.div>
-          <h1 className="text-6xl font-medium md:text-7xl tracking-tight mb-6 font-season leading-tight" style={{ color: '#191919' }}>
-            Let's <span style={{ color: '#71ac61' }} className="relative">
-              Connect
-              <motion.span 
-                className="absolute bottom-0 left-0 h-1" 
-                initial={{ width: 0 }} 
-                animate={{ width: '100%' }} 
-                transition={{ delay: 0.5, duration: 0.8 }}
-                style={{ backgroundColor: '#71ac61' }}
-              />
-            </span>
-          </h1>
-          <p className="text-lg tracking-wide font-medium font-dm max-w-2xl mx-auto leading-relaxed text-primary" >
-            Have a question or want to collaborate? We'd love to hear from you. Drop us a message and we'll respond as soon as possible.
-          </p>
-        </motion.div>
-      </section>
+      {/* HERO - Minimal Half Style */}
+      <div className="relative py-28 overflow-hidden bg-white">
+        {/* Subtle Background Image */}
+        <div className="absolute top-0 right-0 w-1/2 h-full opacity-40 pointer-events-none" style={{
+          backgroundImage: 'url(https://images.unsplash.com/photo-1506126613408-eca950e0c0cd?w=800&h=800&fit=crop)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}></div>
 
-      {/* Contact Cards + Image */}
-      <section className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-        {/* Left: Contact Cards */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="space-y-6"
-        >
-          <div className="mb-4">
-            <motion.p 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-lg font-season tracking-widest font-semibold mb-3 text-primary" 
-            >
-              CONTACT INFORMATION
-            </motion.p>
-          </div>
-          <ContactCard icon={<FiMail />} title="Email" value="support@avyaktehsaas.com" />
-          <ContactCard icon={<FiPhone />} title="Phone" value="+91 98765 43210" />
-          <ContactCard icon={<FiMapPin />} title="Office" value="15th Floor Ocus Quantum, Gurgaon, Haryana, India" />
-        </motion.div>
+        {/* Decorative Shapes */}
+        <div className="absolute top-10 right-20 w-32 h-32 rounded-full bg-gradient-to-br from-emerald-100 to-blue-100 opacity-30 blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-40 w-48 h-48 rounded-full bg-gradient-to-br from-blue-100 to-emerald-100 opacity-20 blur-3xl" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/3 left-1/4 w-20 h-20 rounded-lg bg-emerald-200/20 transform rotate-45 opacity-40"></div>
+        <div className="absolute bottom-1/4 right-1/3 w-16 h-16 rounded-full border-2 border-blue-200/40"></div>
 
-        {/* Right: Animated Image */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="flex justify-center relative"
-        >
-          {/* Decorative background circle */}
-          <div className="absolute inset-0 rounded-3xl" style={{ backgroundColor: 'rgba(113, 172, 97, 0.08)', transform: 'scale(1.1)' }} />
-          <motion.img
-            src={ContactImage}
-            alt="Contact Us"
-            className="w-full max-w-sm rounded-3xl shadow-lg relative z-10"
-            whileHover={{ scale: 1.03 }}
-            style={{ boxShadow: '0 30px 60px rgba(113, 172, 97, 0.2)' }}
-          />
-        </motion.div>
-      </section>
-
-      {/* Map + Form Section */}
-      <section className="max-w-7xl mx-auto px-6 py-16 grid lg:grid-cols-2 gap-16">
-        {/* Map */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="rounded-3xl overflow-hidden border border-gray-100 shadow-xl h-[500px] group relative"
-          style={{ boxShadow: '0 20px 50px rgba(113, 172, 97, 0.1)' }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.8210031821345!2d77.06623457549323!3d28.42465747577892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d2277f766242f%3A0xc932b58d70526b94!2sOcus%20Quantum!5e0!3m2!1sen!2sin!4v1768907097682!5m2!1sen!2sin" 
-            width="100%" 
-            height="100%" 
-            style={{ border: 0 }} 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </motion.div>
-
-        {/* Contact Form */}
-        <motion.form
-          onSubmit={handleSubmit}
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="bg-white rounded-3xl p-12 border border-gray-100 shadow-xl relative"
-          style={{ boxShadow: '0 20px 50px rgba(113, 172, 97, 0.08)' }}
-        >
-          {/* Decorative element */}
-          <div className="absolute top-0 right-0 w-20 h-20 rounded-full" style={{ backgroundColor: 'rgba(113, 172, 97, 0.08)' }} />
+        {/* Content Grid */}
+        <div className="relative z-10 max-w-6xl mx-auto grid md:grid-cols-2 gap-12 px-4 items-center">
           
-          <div className="relative z-10 space-y-8">
-            <div>
-              <motion.p 
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                className="text-lg font-medium font-season tracking-widest mb-4" 
-                style={{ color: '#71ac61' }}
-              >
-                Send us a Message
-              </motion.p>
-              <h3 className="text-4xl font-medium font-light mb-3 font-season" style={{ color: '#191919' }}>
-                We're All <span style={{ color: '#71ac61' }}>Ears</span>
-              </h3>
-              <p className="text-base text-primary font-dm leading-relaxed">We'll get back to you within 24 hours</p>
+          {/* Left Content */}
+          <div className="animate-fade-in">
+            <div className="mb-6 inline-block">
+              <div className="flex items-center gap-2 px-4 py-2 bg-emerald-50 rounded-full border border-emerald-200">
+                <Leaf className="w-4 h-4 text-emerald-600" />
+                <span className="text-sm font-medium text-emerald-700">Let's Connect</span>
+              </div>
             </div>
 
-            <div className="space-y-5">
-              <div className="relative">
-                <label className="text-base font-medium font-dm block mb-3 text-primary">FULL NAME</label>
-                <input
-                  type="text"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  placeholder="Enter your name"
-                  required
-                  className="w-full px-6 py-4 font-dm rounded-2xl border border-gray-200 text-base transition-all duration-300 focus:outline-none focus:ring-2 focus:border-transparent font-dm bg-white/50 hover:bg-white"
-                  style={{ color: '#191919' }}
-                  onFocus={(e) => e.target.style.boxShadow = '0 0 0 4px rgba(113, 172, 97, 0.1)'}
-                  onBlur={(e) => e.target.style.boxShadow = 'none'}
-                />
-              </div>
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900 leading-tight">
+              Reach Out &<br />
+              <span className="bg-gradient-to-r from-emerald-500 to-blue-500 bg-clip-text text-transparent">Find Peace</span>
+            </h1>
 
-              <div className="relative">
-                <label className="text-base font-dm font-medium block mb-3 text-primary">EMAIL ADDRESS</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  placeholder="Enter your email"
-                  required
-                  className="w-full px-6 py-4 font-dm rounded-2xl border border-gray-200 text-base transition-all duration-300 focus:outline-none focus:ring-2 focus:border-transparent font-dm bg-white/50 hover:bg-white"
-                  style={{ color: '#191919' }}
-                  onFocus={(e) => e.target.style.boxShadow = '0 0 0 4px rgba(113, 172, 97, 0.1)'}
-                  onBlur={(e) => e.target.style.boxShadow = 'none'}
-                />
-              </div>
+            <p className="text-lg text-gray-600 mb-8 leading-relaxed max-w-lg">
+              We're here to support your meditation journey. Whether you have questions or just want to share your experience, let's connect and grow together.
+            </p>
 
-              <div className="relative">
-                <label className="text-base font-dm font-medium block mb-3 text-primary">MESSAGE</label>
-                <textarea
-                  name="message"
-                  rows="5"
-                  value={form.message}
-                  onChange={handleChange}
-                  placeholder="Tell us what's on your mind..."
-                  required
-                  className="w-full px-6 py-4 font-dm rounded-2xl border border-gray-200 text-base transition-all duration-300 focus:outline-none focus:ring-2 focus:border-transparent resize-none font-dm bg-white/50 hover:bg-white"
-                  style={{ color: '#191919' }}
-                  onFocus={(e) => e.target.style.boxShadow = '0 0 0 4px rgba(113, 172, 97, 0.1)'}
-                  onBlur={(e) => e.target.style.boxShadow = 'none'}
-                />
-              </div>
-
-              <motion.button
-                whileHover={{ scale: 1.02, boxShadow: '0 20px 40px rgba(113, 172, 97, 0.3)' }}
-                whileTap={{ scale: 0.98 }}
-                type="submit"
-                className="w-full py-4 rounded-2xl text-white font-semibold text-base flex items-center justify-center gap-3 transition-all duration-300 font-dm tracking-wide"
-                style={{ backgroundColor: '#71ac61' }}
-              >
-                <span>Send Message</span> <FiSend size={20} />
-              </motion.button>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a href="#contact" className="inline-block px-8 py-3 bg-gradient-to-r from-emerald-500 to-blue-500 text-white font-semibold rounded-full hover:shadow-lg transition transform hover:scale-105">
+                Get In Touch
+              </a>
+              <button className="px-8 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-full hover:border-emerald-500 hover:text-emerald-600 transition">
+                Learn More
+              </button>
             </div>
           </div>
-        </motion.form>
-      </section>
-    </div>
-  )
-}
 
-export default ContactUs;
+          {/* Right Visual - Shapes & Text */}
+          <div className="relative h-96 hidden md:flex items-center justify-center">
+            {/* Main Circle */}
+            <div className="absolute w-64 h-64 rounded-full bg-gradient-to-br from-emerald-200/40 to-blue-200/40 blur-2xl"></div>
+            
+            {/* Card 1 */}
+            <div className="absolute top-0 right-0 w-48 p-6 bg-white/80 backdrop-blur-md rounded-2xl shadow-lg border border-white/50 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <Leaf className="w-8 h-8 text-emerald-500 mb-3" />
+              <p className="text-sm font-semibold text-gray-700">Peaceful</p>
+              <p className="text-xs text-gray-500">Mindful journey</p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="absolute bottom-20 left-0 w-48 p-6 bg-white/80 backdrop-blur-md rounded-2xl shadow-lg border border-white/50 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <Heart className="w-8 h-8 text-red-400 mb-3" />
+              <p className="text-sm font-semibold text-gray-700">Connected</p>
+              <p className="text-xs text-gray-500">Find wellness</p>
+            </div>
+
+            {/* Decorative Elements */}
+            <div className="absolute top-1/3 right-1/4 w-12 h-12 border-2 border-emerald-300/50 rounded-lg transform -rotate-45"></div>
+            <div className="absolute bottom-1/3 left-1/3 w-8 h-8 rounded-full border-2 border-blue-300/50"></div>
+          </div>
+
+        </div>
+      </div>
+
+
+      {/* CONTACT CARDS - Premium Meditation Style */}
+      <div className="py-20 px-4 bg-gradient-to-b from-white via-emerald-50/30 to-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+              Multiple Ways to <span className="bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">Connect</span>
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+              Choose your preferred method to reach us. We're available 24/7 to support your wellness journey.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+            {/* Phone Card */}
+            <div 
+              className="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer border border-emerald-100/50 animate-fade-in"
+              style={{ animationDelay: '0.1s' }}
+              onMouseEnter={() => setHoverCard(0)}
+              onMouseLeave={() => setHoverCard(null)}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 to-emerald-400/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative z-10">
+                <div className="w-14 h-14 bg-gradient-to-br from-blue-100 to-blue-50 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Phone className="w-7 h-7 text-blue-600" />
+                </div>
+                <h3 className="font-semibold text-gray-800 mb-2 text-lg">Phone</h3>
+                <p className="text-emerald-600 font-medium mb-1">207-8767-452</p>
+                <p className="text-sm text-gray-500">Available Mon-Fri 9AM-6PM</p>
+              </div>
+            </div>
+
+            {/* WhatsApp Card */}
+            <div 
+              className="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer border border-emerald-100/50 animate-fade-in"
+              style={{ animationDelay: '0.2s' }}
+              onMouseEnter={() => setHoverCard(1)}
+              onMouseLeave={() => setHoverCard(null)}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-green-400/10 to-emerald-400/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative z-10">
+                <div className="w-14 h-14 bg-gradient-to-br from-green-100 to-green-50 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <MessageCircle className="w-7 h-7 text-green-600" />
+                </div>
+                <h3 className="font-semibold text-gray-800 mb-2 text-lg">WhatsApp</h3>
+                <p className="text-emerald-600 font-medium mb-1">+1-234-567-8900</p>
+                <p className="text-sm text-gray-500">Quick responses</p>
+              </div>
+            </div>
+
+            {/* Email Card */}
+            <div 
+              className="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer border border-emerald-100/50 animate-fade-in"
+              style={{ animationDelay: '0.3s' }}
+              onMouseEnter={() => setHoverCard(2)}
+              onMouseLeave={() => setHoverCard(null)}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-400/10 to-pink-400/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative z-10">
+                <div className="w-14 h-14 bg-gradient-to-br from-purple-100 to-purple-50 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Mail className="w-7 h-7 text-purple-600" />
+                </div>
+                <h3 className="font-semibold text-gray-800 mb-2 text-lg">Email</h3>
+                <p className="text-emerald-600 font-medium mb-1">hello@meditation.com</p>
+                <p className="text-sm text-gray-500">Response within 24hrs</p>
+              </div>
+            </div>
+
+            {/* Location Card */}
+            <div 
+              className="group relative bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer border border-emerald-100/50 animate-fade-in"
+              style={{ animationDelay: '0.4s' }}
+              onMouseEnter={() => setHoverCard(3)}
+              onMouseLeave={() => setHoverCard(null)}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-400/10 to-red-400/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="relative z-10">
+                <div className="w-14 h-14 bg-gradient-to-br from-orange-100 to-orange-50 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <MapPin className="w-7 h-7 text-orange-600" />
+                </div>
+                <h3 className="font-semibold text-gray-800 mb-2 text-lg">Visit Us</h3>
+                <p className="text-emerald-600 font-medium mb-1">Wellness Center</p>
+                <p className="text-sm text-gray-500">2443 Oak Ridge, Omaha QA</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* MAP + FORM SECTION */}
+      <div className="py-20 px-4" id="contact">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-5 gap-10">
+
+            {/* MAP - Left Side with Animation */}
+            <div className="md:col-span-2 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <div className="rounded-3xl overflow-hidden shadow-2xl h-96 border border-emerald-100 hover:shadow-3xl transition-shadow duration-500 group">
+                <div className="relative h-full">
+                  <iframe
+                    title="map"
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    src="https://maps.google.com/maps?q=omaha&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                    className="group-hover:opacity-90 transition-opacity duration-300"
+                  ></iframe>
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                    <p className="text-white font-semibold text-sm">Our Meditation Center</p>
+                    <p className="text-white/80 text-xs">2443 Oak Ridge, Omaha QA 45065</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* FORM - Right Side with Premium Design */}
+            <div className="md:col-span-3 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <div className="bg-gradient-to-br from-white to-emerald-50/40 rounded-3xl p-8 md:p-10 shadow-xl border border-emerald-100/50 backdrop-blur-sm">
+                
+                {/* Form Header */}
+                <div className="mb-8">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Heart className="w-6 h-6 text-red-500" />
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Get In Touch</h2>
+                  </div>
+                  <p className="text-gray-600 text-base leading-relaxed">
+                    Share your journey with us. Whether you have questions or just want to connect, we'd love to hear from you.
+                  </p>
+                </div>
+
+                {/* Form */}
+                <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                  
+                  {/* Name Field */}
+                  <div className="group">
+                    <label className="block text-sm font-semibold text-gray-700 mb-3 group-hover:text-emerald-600 transition-colors">Your Name</label>
+                    <input 
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full px-5 py-4 rounded-xl bg-white border-2 border-emerald-100 text-gray-900 placeholder-gray-400 outline-none focus:border-emerald-500 focus:bg-emerald-50/30 transition-all duration-300 shadow-sm hover:shadow-md"
+                      placeholder="John Doe"
+                    />
+                  </div>
+
+                  {/* Email Field */}
+                  <div className="group">
+                    <label className="block text-sm font-semibold text-gray-700 mb-3 group-hover:text-emerald-600 transition-colors">Email Address</label>
+                    <input 
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full px-5 py-4 rounded-xl bg-white border-2 border-emerald-100 text-gray-900 placeholder-gray-400 outline-none focus:border-emerald-500 focus:bg-emerald-50/30 transition-all duration-300 shadow-sm hover:shadow-md"
+                      placeholder="your@email.com"
+                    />
+                  </div>
+
+                  {/* Subject Field */}
+                  <div className="group">
+                    <label className="block text-sm font-semibold text-gray-700 mb-3 group-hover:text-emerald-600 transition-colors">Subject</label>
+                    <select 
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      className="w-full px-5 py-4 rounded-xl bg-white border-2 border-emerald-100 text-gray-900 outline-none focus:border-emerald-500 focus:bg-emerald-50/30 transition-all duration-300 shadow-sm hover:shadow-md appearance-none cursor-pointer"
+                    >
+                      <option value="">Select a topic...</option>
+                      <option value="general">General Inquiry</option>
+                      <option value="classes">About Classes</option>
+                      <option value="retreat">Retreat Programs</option>
+                      <option value="corporate">Corporate Wellness</option>
+                      <option value="partnership">Partnership</option>
+                    </select>
+                  </div>
+
+                  {/* Message Field */}
+                  <div className="group">
+                    <label className="block text-sm font-semibold text-gray-700 mb-3 group-hover:text-emerald-600 transition-colors">Your Message</label>
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      rows="5"
+                      className="w-full px-5 py-4 rounded-xl bg-white border-2 border-emerald-100 text-gray-900 placeholder-gray-400 outline-none focus:border-emerald-500 focus:bg-emerald-50/30 transition-all duration-300 shadow-sm hover:shadow-md resize-none"
+                      placeholder="Tell us about your meditation experience or questions..."
+                    ></textarea>
+                  </div>
+
+                  {/* Checkbox */}
+                  <div className="flex items-center gap-3">
+                    <input 
+                      type="checkbox" 
+                      id="consent"
+                      className="w-5 h-5 rounded border-2 border-emerald-300 text-emerald-600 accent-emerald-600 cursor-pointer"
+                    />
+                    <label htmlFor="consent" className="text-sm text-gray-600 cursor-pointer">
+                      I agree to be contacted and receive updates about our meditation programs
+                    </label>
+                  </div>
+
+                  {/* Submit Button */}
+                  <button 
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-emerald-500 to-blue-500 hover:from-emerald-600 hover:to-blue-600 text-white font-semibold py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-2xl active:scale-95 flex items-center justify-center gap-2 group"
+                  >
+                    <span>Send Message</span>
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </button>
+                </form>
+
+                {/* Support Info */}
+                <div className="mt-8 pt-8 border-t border-emerald-100/50">
+                  <p className="text-xs text-gray-500 text-center">
+                    Average response time: <span className="font-semibold text-emerald-600">2 hours</span> • Available <span className="font-semibold text-emerald-600">24/7</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* CTA SECTION - Before Footer */}
+      <div className="px-4 py-16 bg-gradient-to-r from-emerald-50 via-blue-50 to-emerald-50">
+        <div className="max-w-4xl mx-auto text-center animate-fade-in">
+          <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Start Your Wellness Journey Today</h3>
+          <p className="text-gray-600 mb-8 text-lg">Join thousands of members finding peace and balance through meditation</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="px-8 py-3 bg-gradient-to-r from-emerald-500 to-blue-500 text-white font-semibold rounded-full hover:shadow-lg transition transform hover:scale-105">
+              Explore Programs
+            </button>
+            <button className="px-8 py-3 bg-white border-2 border-emerald-500 text-emerald-600 font-semibold rounded-full hover:bg-emerald-50 transition transform hover:scale-105">
+              Download App
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Add required animations in global CSS */}
+      <style>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes slide-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in {
+          animation: fade-in 0.8s ease-out forwards;
+          opacity: 0;
+        }
+
+        .animate-slide-up {
+          animation: slide-up 0.8s ease-out forwards;
+          opacity: 0;
+        }
+      `}</style>
+    </div>
+  );
+}
