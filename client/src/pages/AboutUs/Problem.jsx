@@ -15,14 +15,14 @@ const Problem = () => {
 
                 
                 <div className="px-1 md:px-4 md:w-[55%] ">
-                    <h1 className="text-4xl md:text-[52px] font-season-medium font-medium leading-tight text-center">
+                    <h1 className="text-4xl md:text-[52px] font-season-medium font-medium leading-tight text-center md:text-left text-primary">
                         We learn to train our bodies. Almost nobody <br />
                         <span className="text-[#71AC61]">
                             teaches us to train our minds.
                         </span>
                     </h1>
 
-                    <p className="text-center text-base md:text-[18px] max-w-xl md:px-2 text-primary font-dm font-medium mt-4">
+                    <p className="text-center md:text-left text-base md:text-[18px] max-w-xl md:px-2 text-primary font-dm font-medium mt-4">
                         We spend years learning how to stay physically fit, build careers,
                         and perform under pressure. But when it comes to focus, emotional
                         balance, or handling stress, most of us are left to figure it out

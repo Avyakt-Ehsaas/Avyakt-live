@@ -1,7 +1,6 @@
 import React from "react";
 import LandingSidebar from "../LandingPage/LandingSidebar/LandingSidebar";
 import IdeaGuide from "./IdeaGuide";
-import StagesOfLife from "./StagesOfLife";
 import RootedSection from "./RootedSection";
 import AboutFooter from "./AboutFooter";
 import HeroSection from "./HeroSection";
@@ -21,7 +20,6 @@ const AboutUsNew = () => {
             <MeditationSection />
             <IdeaGuide />
             <Practice />
-            <StagesOfLife />
             <RootedSection />
             <AboutFooter />
         </>

@@ -31,7 +31,7 @@ export default function IdeaGuide() {
         
      <div className="relative">
             <img src={AboutPillars} alt="programbg" className='h-24 w-full' /> 
-              <div className="absolute inset-0 pointer-events-none 
+              <div className="absolute inset-0  pointer-events-none 
         bg-gradient-to-b from-transparent via-white/60 to-[#FAFAFA]" />
             </div>
 
@@ -40,11 +40,11 @@ export default function IdeaGuide() {
 
       <div className="max-w-5xl w-full text-center">
         
-        <h1 className="text-4xl md:text-[56px] font-semibold text-primary font-season-medium mb-4 md:mb-6">
+        <h1 className="text-4xl md:text-[56px] font-semibold text-primary font-season-medium mb-4 mt-2 md:mb-6">
           Four ideas guide everything we build.
         </h1>
 
-        <p className="text-primary font-dm text-base md:text-[20px] md:leading-[30px] max-w-[6xl] mx-auto mb-8">
+        <p className="text-primary font-dm text-base font-medium md:text-[20px] md:leading-[30px] max-w-[6xl] mx-auto mb-8">
           Avyakt combines two things most meditation programs keep separate: practice and understanding.
           We explain how attention works, how emotions show up in the body, and why consistency matters more than long sessions. 
           With that understanding, meditation becomes a simple daily practice you can improve over time.
@@ -56,7 +56,7 @@ export default function IdeaGuide() {
               key={index}
               className="bg-[#C2E0BA44] rounded-2xl p-4 md:p-6 shadow-sm text-left"
             >
-              <h3 className="text-greenbase text-[20px] font-dm font-medium md:font-semibold mb-2 leading-[30px]">
+              <h3 className="text-greenbase text-[18px] md:text-[20px] font-dm font-medium mb-2 leading-[30px]">
                 {idea.title}
               </h3>
               <p className="font-dm text-primary text-base md:text-[18px] leading-[24px] md:leading-[30px]">{idea.description}</p>

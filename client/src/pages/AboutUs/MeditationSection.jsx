@@ -6,27 +6,28 @@ export default function MeditationSection() {
 
     const cardsData = [
         {
-            title: "Practice without awareness is no improvement.",
-            description: `If you don’t know what your attention is doing, where it goes, what triggers it, how long it actually holds, you have no way to know if anything is changing. You’re sitting, but you’re not training. Awareness of your own mind is not a side effect of meditation. It’s the point.`,
+            title: "Practice without awareness is no improvement.",
+            description: `If you don’t know what your attention is doing, where it goes or how long it stays, you can’t measure change. Awareness isn’t a byproduct. It’s the practice.`,
         },
         {
-            title: "Practice without structure is blind faith.",
-            description: `A random collection of sessions doesn’t build a skill. Week one should lay a foundation. Week three should build on it. Week six should feel measurably different from week one. Without progression and sequencing, you’re not developing, you’re repeating. Repetition without direction is not a practice. It’s a habit with no destination.`,
+            title: "Practice without structure is blind faith.",
+            description: `Random sessions don’t build skill. Without progression, you’re repeating, not improving.`,
         },
         {
-            title: "Practice without scientific knowledge is still just belief.",
-            description: `When you understand what the prefrontal cortex does, why cortisol spikes under chronic stress, how the amygdala fires before you even consciously decide to react — meditation stops being a ritual and becomes training. You stop following instructions on faith and start working with your brain. That shift changes everything about how consistently people practice.`,
+            title: "Practice without scientific knowledge is still just belief.",
+            description: `Understanding how your brain works turns meditation from ritual into training. You stop following blindly and start improving deliberately.`,
         },
     ];
 
     return (
-        <section className="relative w-full min-h-screen flex items-center justify-center py-16 sm:py-20 md:py-24 lg:py-28">
+        <section className="relative w-full  md:min-h-[120vh] py-10">
             {/* Background Image */}
             <div
                 className="absolute inset-0 bg-cover bg-center "
                 style={{
                     backgroundImage:
                         `url('${AboutMeditationSection}')`,
+                    backgroundPosition: "center 100%",
                 }}
             />
             {/* Overlay */}
@@ -48,10 +49,7 @@ export default function MeditationSection() {
 
                 <h1 className="font-season-medium text-primary leading-[36px] md:leading-[40px] mb-4 sm:mb-6
             text-3xl lg:text-3xl xl:text-4xl">
-                    Meditation is often suggested as the answer. It can work. But most
-                    people try it for a few days, see no clear progress, and stop. That’s
-                    not a failure of meditation, it’s a failure of
-                    <span className="text-greenbase"> method.</span>
+                    Meditation works, but the approach often doesn’t.
                 </h1>
 
 
