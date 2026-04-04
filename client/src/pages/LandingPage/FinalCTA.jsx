@@ -182,11 +182,11 @@ const FinalCTA = () => {
 
                                     {/* Nav */}
                                     <div className="
-    grid grid-cols-2 gap-y-24 gap-x-12
-    text-primary font-dm font-semibold 
-    text-base 2xl:text-[18px] tracking-wide text-center
-    md:flex md:flex-wrap md:justify-center md:gap-16
-  ">
+                                  grid grid-cols-2 gap-y-6 gap-x-12
+                                  text-primary font-dm font-semibold 
+                                  text-base 2xl:text-[18px] tracking-wide text-center
+                                  md:flex md:flex-wrap md:justify-center md:gap-16
+                                ">
                                         <a href="#" className="hover:text-[#71AC61]">HOME</a>
                                         <a href="#" className="hover:text-[#71AC61]">THE SCIENCE</a>
                                         <a href="#" className="hover:text-[#71AC61]">PROGRAMS</a>
@@ -215,17 +215,17 @@ const FinalCTA = () => {
 
                             {/* Background Footer Image */}
                             {/* Background Footer Image */}
-                           
+
                         </div>
 
                     </div>
 
                 </div>
-                 {/* <div className="w-full h-full  flex justify-center"> */}
-                                <img
-                                    src={avyaktFooter}
-                                    alt="Avyakt Footer Logo"
-                                    className="
+                {/* <div className="w-full h-full  flex justify-center"> */}
+                <img
+                    src={avyaktFooter}
+                    alt="Avyakt Footer Logo"
+                    className="
             absolute bottom-0 z-10
              lg:w-full
             max-w-[100vw]
@@ -233,8 +233,8 @@ const FinalCTA = () => {
             object-contain
             pointer-events-none
         "
-                                />
-                            {/* </div> */}
+                />
+                {/* </div> */}
             </section>
         </>
     )

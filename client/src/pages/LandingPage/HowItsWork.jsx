@@ -61,14 +61,14 @@ export default function HowItWorks() {
             HOW IT WORKS
           </p>
 
-          <h2 className="text-3xl md:text-5xl font-season-medium text-primary leading-10 md:leading-[50px]">
+          <h2 className="text-4xl md:text-5xl font-season-medium text-primary leading-10 md:leading-[50px]">
             Here is exactly <br />
             <span className="text-greenbase">
               what happens next.
             </span>
           </h2>
 
-          <p className="my-4 text-primary font-medium font-dm max-w-2xl mx-auto text-sm md:text-lg leading-relaxed">
+          <p className="my-4 text-primary font-medium font-dm max-w-2xl mx-auto text-base md:text-lg leading-[24px] md:leading-relaxed">
             Two tracks, one for individuals building a personal practice, one
             for institutions bringing it to a group. Both end with a measured
             outcome.
