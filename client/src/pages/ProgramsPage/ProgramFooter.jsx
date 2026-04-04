@@ -93,7 +93,6 @@ const ProgramFooter = ({ data }) => {
                         {/* Heading */}
                         <div >
                             <h2 className="text-center text-2xl sm:text-4xl md:text-5xl font-medium text-[#191919] leading-tight">
-                                {console.log(data)}
                                 {data.title}
                             </h2>
                             <p className="mt-2 text-[18px] font-medium text-center text-primary font-dm">
@@ -187,7 +186,7 @@ const ProgramFooter = ({ data }) => {
 
                         <div className=''>
                             {/* Heading */}
-                            <h1 className="font-season-medium text-4xl md:text-5xl  font-medium mb-4 tracking-wide">
+                            <h1 className="font-season-medium text-4xl md:text-5xl font-medium mb-4 tracking-wide">
                                 Mindfulness for every stage of life.
                             </h1>
 

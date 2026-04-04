@@ -28,7 +28,7 @@ const Build = () => {
         }
     ];
     return (
-        <section className="pt-40 pb-10 px-4 bg-white min-h-screen flex items-center justify-center">
+        <section className="pt-20 sm:pt-40 pb-10 px-4 bg-white min-h-screen flex items-center justify-center">
             <div className="max-w-7xl mx-auto text-center">
                 <p className="text-greenbase font-dm text-center font-medium leading-tight">
                     WHAT WE BUILD
@@ -36,7 +36,7 @@ const Build = () => {
                 <h1 className="text-3xl md:text-5xl font-semibold text-primary font-season-medium  mt-2 leading-tight">
                     Live daily sessions. A 12-month structure.<br />Results you can measure.
                 </h1>
-                <div className="relative grid grid-rows-4 md:grid-cols-4 gap-8 mt-12 ">
+                <div className="relative grid grid-rows-1 md:grid-cols-4 gap-8 mt-12 ">
                     {cardData.map((data) =>
                         <Card
                             title={data.title}
