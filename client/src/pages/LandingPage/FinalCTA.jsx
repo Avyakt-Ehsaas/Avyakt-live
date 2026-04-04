@@ -112,8 +112,8 @@ const FinalCTA = () => {
                         </div>
                     </div>
 
-                   {/* CTA Footer */}
-                    <div className="min-h-screen relative text-white text-center flex flex-col items-center justify-center gap-2 md:gap-20 md:px-4 py-8 md:py-12">
+                    {/* CTA Footer */}
+                    <div className="min-h-screen relative text-white text-center flex flex-col items-center justify-center gap-2 md:gap-20 px-0 md:px-0 md:py-0">
 
                         <div>
                             {/* Heading */}
@@ -157,19 +157,19 @@ const FinalCTA = () => {
                                             required
                                         />
 
-                                      
+
 
                                     </div>
-                                         {/* Button */}
-                                       <div className='md:w-[35%]'> <button className="bg-[#71AC61] w-60 md:w-full md:w-auto mt-2 font-dm hover:scale-105 transition px-8 py-3 rounded-full font-medium 2xl:text-xl 2xl:py-4">
-                                            Sign up
-                                        </button></div>
+                                    {/* Button */}
+                                    <div className='md:w-[35%]'> <button className="bg-[#71AC61] w-60 md:w-full md:w-auto mt-2 font-dm hover:scale-105 transition px-4 sm:px-8 py-3 rounded-full font-medium 2xl:text-xl 2xl:py-4">
+                                        Sign up
+                                    </button></div>
                                 </form>
                             </div>
                         </div>
 
                         {/* Footer Section */}
-                        <div className="relative w-full">
+                        <div className=" w-full">
                             <div className="relative max-w-6xl flex flex-col items-center gap-8 mx-auto z-20 px-4">
 
                                 {/* Logo */}
@@ -182,7 +182,7 @@ const FinalCTA = () => {
 
                                     {/* Nav */}
                                     <div className="
-    grid grid-cols-2 gap-y-6 gap-x-12
+    grid grid-cols-2 gap-y-24 gap-x-12
     text-primary font-dm font-semibold 
     text-base 2xl:text-[18px] tracking-wide text-center
     md:flex md:flex-wrap md:justify-center md:gap-16
@@ -214,18 +214,27 @@ const FinalCTA = () => {
                             </div>
 
                             {/* Background Footer Image */}
-                            <div className="w-full relative flex justify-center">
-                                <img
-                                    src={avyaktFooter}
-                                    alt="Avyakt Footer Logo"
-                                    className="w-full 2xl:w-[1200px] h-36 md:h-80 object-cover absolute bottom-0 z-10"
-                                />
-                            </div>
+                            {/* Background Footer Image */}
+                           
                         </div>
 
                     </div>
 
                 </div>
+                 {/* <div className="w-full h-full  flex justify-center"> */}
+                                <img
+                                    src={avyaktFooter}
+                                    alt="Avyakt Footer Logo"
+                                    className="
+            absolute bottom-0 z-10
+             lg:w-full
+            max-w-[100vw]
+            h-100
+            object-contain
+            pointer-events-none
+        "
+                                />
+                            {/* </div> */}
             </section>
         </>
     )

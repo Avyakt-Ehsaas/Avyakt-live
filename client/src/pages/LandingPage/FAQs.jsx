@@ -57,7 +57,7 @@ function FAQSection() {
               onClick={() => toggleFAQ(index)}
             >
               <div className="flex justify-between items-center font-dm">
-                <h3 className="text-primary text-sm md:text-lg font-medium leading-[40px]">
+                <h3 className="text-primary text-sm md:text-lg font-medium leading-5 sm:leading-10">
                   {item.question}
                 </h3>
                 <span className="text-primary font-medium text-lg font-dm">

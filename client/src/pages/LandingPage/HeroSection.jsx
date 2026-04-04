@@ -17,21 +17,21 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="relative h-screen w-full bg-white overflow-hidden">
-      <div className="relative w-full h-screen overflow-hidden z-10">
+    <div className="relative h-[150vh]  sm:h-screen w-full bg-white overflow-hidden">
+      <div className="relative w-full h-[150vh]  sm:h-screen overflow-hidden z-10">
         <img
           src={HeroLanding}
           alt="Hero"
-          className="absolute bottom-0 md:-bottom-0 lg:-bottom-0 xl:-bottom-10 md:right-0 bg-[#191919] w-auto h-auto min-w-full min-h-full object-cover -z-10 pointer-events-none"
+          className="absolute bottom-0 md:-bottom-0 lg:-bottom-0 xl:-bottom-10 md:right-0 bg-[#191919] w-auto h-[150vh]  sm:h-auto min-w-full min-h-full object-cover -z-10 pointer-events-none"
         />
 
           <div className="absolute bottom-0 left-0 w-full h-[80px] bg-gradient-to-t from-white to-transparent" />
 
 
-        <div className="absolute inset-0 max-w-2xl md:max-w-full flex items-center justify-center z-50">
+        <div className="absolute inset-0 max-w-2xl md:max-w-full flex items-center justify-center z-50 pointer-events-none">
 
 
-          <div className="text-white font-season-medium text-center md:mt-[1rem] ">
+          <div className="text-white font-season-medium text-center md:mt-[1rem] pointer-events-auto">
 
 
 
@@ -50,7 +50,8 @@ const HeroSection = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center px-8 mt-6">
               <button
-                className="bg-greenbasebg  w-full sm:w-[200px] text-white font-semibold font-dm px-4 py-4 rounded-full"
+              onClick={handleClick}
+                className="bg-greenbasebg  w-full sm:w-[200px] text-white font-semibold font-dm px-4 py-4 rounded-full cursor-pointer"
               >
                 Get Started
               </button>

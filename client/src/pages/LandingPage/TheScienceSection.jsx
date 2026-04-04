@@ -34,56 +34,56 @@ export default function TheScienceSection() {
   ];
 
   return (
-   <section
-  className="relative px-4 bg-cover bg-center"
-  style={{
-    backgroundImage: `url(${TheScience})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-  }}
->
-  {/* Overlay (BEHIND CONTENT) */}
-  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                        background:
-                            "linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 15%, rgba(255,255,255,0.6) 35%, rgba(255,255,255,0) 80%)",
-                    }}
-                />
+    <section
+      className="relative px-4 bg-cover bg-center"
+      style={{
+        backgroundImage: `url(${TheScience})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* Overlay (BEHIND CONTENT) */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 15%, rgba(255,255,255,0.6) 35%, rgba(255,255,255,0) 80%)",
+        }}
+      />
 
-  {/* Content */}
-  <div className="relative z-10 max-w-6xl mx-auto py-48">
-    
-    {/* Header */}
-    <div className="text-center mb-8">
-      <p className="text-greenbase text-sm font-season-medium tracking-widest uppercase mb-4">
-        THE SCIENCE
-      </p>
+      {/* Content */}
+      <div className="relative z-10 max-w-6xl mx-auto py-48">
 
-      <h2 className="text-4xl md:text-5xl font-season-medium text-primary leading-[50px] md:leading-[60px] mb-6">
-        What 8 weeks of structured <br />
-        meditation actually does.
-      </h2>
+        {/* Header */}
+        <div className="text-center mb-8">
+          <p className="text-greenbase text-sm font-season-medium tracking-widest uppercase mb-4">
+            THE SCIENCE
+          </p>
 
-      <p className="text-primary font-dm font-medium text-sm md:text-lg max-w-3xl mx-auto leading-relaxed">
-        fMRI studies. Randomized controlled trials. Cortisol assays. This is
-        not wellness marketing, these are documented, replicable changes in
-        the brain and body.
-      </p>
-    </div>
+          <h2 className="text-4xl md:text-5xl font-season-medium text-primary leading-[50px] md:leading-[60px] mb-6">
+            What 8 weeks of structured <br />
+            meditation actually does.
+          </h2>
 
-    {/* Cards */}
-    <div className="grid md:grid-cols-3 gap-6 mt-12">
-      {scienceCards.map((card, index) => (
-        <ScienceCard
-          key={index}
-          title={card.title}
-          description={card.description}
-        />
-      ))}
-    </div>
-  </div>
-</section>
+          <p className="text-primary font-dm font-medium text-sm md:text-lg max-w-3xl mx-auto leading-relaxed">
+            fMRI studies. Randomized controlled trials. Cortisol assays. This is
+            not wellness marketing, these are documented, replicable changes in
+            the brain and body.
+          </p>
+        </div>
+
+        {/* Cards */}
+        <div className="grid md:grid-cols-3 gap-14 sm:gap-6 mt-12">
+          {scienceCards.map((card, index) => (
+            <ScienceCard
+              key={index}
+              title={card.title}
+              description={card.description}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
