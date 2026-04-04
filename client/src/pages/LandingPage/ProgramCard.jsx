@@ -31,12 +31,12 @@ shadow-sm flex flex-col md:flex-row mt-[20px] overflow-hidden">
               {tag}
             </span>
 
-            <h3 className="font-season text-[32px] leading-[40px] text-primary mb-1"
+            <h3 className="font-season text-[30px] md:text-[32px] leading-[40px] text-primary mb-1"
               style={{ fontWeight: "500" }}>
               {title}
             </h3>
 
-            <p className="mt-2 max-w-xl font-dm text-[18px] font-medium leading-[28px] text-primary">
+            <p className="mt-2 max-w-xl font-dm  text-base md:text-[18px] font-medium leading-[24px] md:leading-[28px] text-primary">
               {description}
             </p>
           </div>

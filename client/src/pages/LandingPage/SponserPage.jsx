@@ -58,7 +58,7 @@ function SponsorPage() {
   };
 
   return (
-    <div className="w-full pt-24 pb-18 bg-white min-h-screen mb-10">
+    <div className="w-full pt-24 pb-4 md:pb-18 bg-white min-h-screen mb-4 md:mb-10">
       <div className="max-w-[1280px] h-auto  mx-auto px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-24">
 
         {/* Tabs */}
@@ -69,22 +69,6 @@ function SponsorPage() {
             { id: "senior", label: "For Senior Club", icon: <HiUserGroup /> },
             { id: "individual", label: "Individual", icon: <HiUser /> },
           ].map((tab) => (
-            // <button
-            //     key={tab.id}
-            //     onClick={() => setActiveTab(tab.id)}
-            //     className={`relative cursor-pointer text-[18px] font-medium font-dm text-primary tracking-wide pb-2 ${activeTab === tab.id ? "text-greenbase" : ""}`}
-            //     style={{ fontWeight: "500" }}
-            // >
-            //     {tab.label}
-
-            //     {activeTab === tab.id && (
-            //         <motion.div
-            //             layoutId="activeTabLine"
-            //             className="absolute left-0 right-0 -bottom-1 h-[3px] border-b-2 border-greenbase rounded-full"
-            //             transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            //         />
-            //     )}
-            // </button>
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
@@ -122,11 +106,11 @@ function SponsorPage() {
            <p className="text-greenbase text-medium pt-8 font-season-medium leading-[30px] tracking-widest text-center uppercase mb-2">
             PROGRAMS
           </p>
-          <h1 className="font-season-medium text-center text-[36px] md:text-[56px] leading-[80px] 2xl:leading-[72px] text-primary tracking-[0%]">
+          <h1 className="font-season-medium text-center text-[36px] md:text-[56px] leading-[56px] md:leading-[80px] 2xl:leading-[72px] text-primary tracking-[0%]">
             For every stage of life.
           </h1>
 
-          <p className="font-dm text-center text-[20px] 2xl:text-[20px] leading-[30px] tracking-[0%]">
+          <p className="font-dm text-center text-[18px] md:text-[20px] 2xl:text-[20px] leading-[30px] tracking-[0%]">
             Structured meditation programs for individuals, schools, organizations, and senior communities,<br /> each designed for the specific needs of that audience.
           </p>
         </div>
