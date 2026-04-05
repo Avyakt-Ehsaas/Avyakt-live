@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ProgramSectionsImage from "../../assets/images/ProgramSectionBg.png";
+import AboveProgram from '../../assets/images/AbovePrograms.png'
 
 const ProgramSections = ({activeTab,setActiveTab,data}) => {
 
@@ -15,8 +16,11 @@ const ProgramSections = ({activeTab,setActiveTab,data}) => {
   return (
     <section className="relative bg-[#F8F9F8] overflow-hidden">
 
-      {/* Light Grid Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none"></div>
+    <div className="relative">
+            <img src={AboveProgram} alt="programbg" className='h-full w-full' /> 
+              <div className="absolute inset-0 pointer-events-none 
+        bg-gradient-to-b from-transparent via-white/40 to-[#FAFAFA]" />
+            </div>
 
       <div className="relative max-w-6xl mx-auto px-6 pt-10 text-center">
 

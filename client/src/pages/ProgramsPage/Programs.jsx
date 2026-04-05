@@ -1,13 +1,14 @@
 import React from "react";
 import ProgramBg from "../../assets/images/ProgramBg.png";
+import ProgramBgImage from '../../assets/images/ProgramBgImage.png'
 
 const Programs = () => {
   return (
-    <div className="relative w-full min-h-[130vh] overflow-hidden z-1">
+    <div className="relative w-full min-h-[110vh] 2xl:min-h-screen overflow-hidden z-1 flex justify-center items-center">
 
       {/* Background Image */}
       <img        
-      src={ProgramBg}
+      src={ProgramBgImage}
       alt="Hero"
       className='absolute bottom-0 right-0 w-auto h-auto min-w-full min-h-full object-cover z-0'
       />
@@ -17,15 +18,27 @@ const Programs = () => {
       <div className="relative z-10 flex items-center justify-center min-h-screen px-4 text-center">
         <div className="max-w-6xl font-season">
           {/* Heading */}
-          <h1 className="text-3xl md:text-5xl font-medium text-primary leading-snug">
-            Programs Designed for Real-World Impact
+          <h1 className="heading-main font-season-medium text-primary">
+            A base program. Built for your problem.
           </h1>
           {/* Subtext */}
-          <p className="mt-2 text-primary font-dm text-lg leading-[24px]">
-            Modular, research-informed meditation programs built for schools,
-            organizations, individuals, <br /> and senior communities — each grounded
-            in neuroscience and measurable outcomes.
+          <p className="mt-2 max-w-5xl text-center text-primary font-dm paragraph-body leading-[24px]">
+           Every Avyakt program starts from the same rigorous foundation, structured meditation grounded in published neuroscience. Then we layer what your specific audience actually needs on top of it. <br />Same science. Different problem. Different program.
           </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center px-8 mt-6">
+              <button
+                className="bg-greenbasebg  w-full sm:w-[300px] text-white font-semibold font-dm px-4 py-4 rounded-full hover:scale-105 transition-all duration-300"
+              >
+                Talk to us about your context
+              </button>
+
+              <button
+                className="bg-transparent border w-full sm:w-[260px] text-white font-semibold font-dm px-4 py-4 rounded-full hover:scale-105 transition-all duration-300"
+              >
+                See Programs
+              </button>
+            </div>
         </div>
       </div>
     </div>

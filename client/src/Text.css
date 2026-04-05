@@ -57,6 +57,14 @@
   text-align: center;
 }
 
+.card-title {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 40px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
 
 /* =========================================
    TEXT UTILITIES
@@ -132,6 +140,11 @@
     font-size: 16px;
     line-height: 1.4;
   }
+
+  .card-title {
+    font-size: 18px;
+    line-height: 100%;
+  }
 }
 
 
@@ -165,5 +178,9 @@
 
   .caption-text {
     font-size: 14px;
+  }
+   .card-title {
+    font-size: 18px;
+    line-height: 100%;
   }
 }
