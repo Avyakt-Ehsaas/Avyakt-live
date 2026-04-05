@@ -4,6 +4,7 @@
 
 @import "tailwindcss";
 @import "./Fonts.css";
+@import "./Text.css";
 
 body {
   font-family: 'SeasonMix', serif;

@@ -1,0 +1,169 @@
+
+/* =========================================
+   DESKTOP TYPOGRAPHY
+========================================= */
+
+/* H1 - Main Heading */
+.heading-main {
+  font-weight: 600;
+  font-size: 56px;
+  line-height: 70px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+/* Secondary Large Heading */
+.heading-large {
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 40px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+/* Subheading / Highlight */
+.subheading {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 40px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+/* Body Primary */
+.paragraph-body {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+/* Body Secondary */
+.paragraph-secondary {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+/* Caption Text */
+.caption-text {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 30px;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+
+/* =========================================
+   TEXT UTILITIES
+========================================= */
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-bold {
+  font-weight: 700;
+}
+
+.text-semibold {
+  font-weight: 600;
+}
+
+.text-medium {
+  font-weight: 500;
+}
+
+.text-regular {
+  font-weight: 400;
+}
+
+
+/* =========================================
+   MOBILE TYPOGRAPHY (<= 768px)
+========================================= */
+
+@media (max-width: 768px) {
+
+  /* H1 */
+  .heading-main {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  /* Secondary Heading */
+  .heading-large {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  /* Subheading */
+  .subheading {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  /* Body Primary */
+  .paragraph-body {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  /* Body Secondary */
+  .paragraph-secondary {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  /* Caption */
+  .caption-text {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE (<= 480px)
+========================================= */
+
+@media (max-width: 480px) {
+
+  .heading-main {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .heading-large {
+    font-size: 22px;
+    line-height: 30px;
+  }
+
+  .subheading {
+    font-size: 15px;
+  }
+
+  .paragraph-body {
+    font-size: 15px;
+  }
+
+  .paragraph-secondary {
+    font-size: 13px;
+  }
+
+  .caption-text {
+    font-size: 14px;
+  }
+}
