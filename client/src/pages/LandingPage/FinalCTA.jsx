@@ -64,10 +64,10 @@ const FinalCTA = () => {
 
                         {/* Heading */}
                         <div>
-                            <p className="text-greenbase font-season text-center font-medium tracking-wide">
+                            <p className="text-greenbase font-dm text-medium md:text-lg tracking-widest  uppercase mb-4 md:mb-0 text-center">
                                 RESEARCH AND INSIGHTS
                             </p>
-                            <h2 className="text-center text-2xl sm:text-4xl md:text-5xl font-medium text-[#191919] leading-tight">
+                            <h2 className="text-center heading-main font-semibold text-primary font-season-medium mb-4 leading-tight">
                                 What the science actually says
                             </h2>
                         </div>
@@ -89,15 +89,15 @@ const FinalCTA = () => {
 
                                     {/* Content */}
                                     <div className="p-4 ">
-                                        <p className="text-base font-medium font-dm text-greenbase mb-2">
+                                        <p className="text-base font-medium font-dm text-greenbase mb-2 caption-text">
                                             {blog.tag}
                                         </p>
 
-                                        <h3 className="text-xl  font-dm font-semibold text-primary leading-9 mb-2">
+                                        <h3 className="card-title font-dm font-smbold text-primary leading-9 mb-2">
                                             {blog.title}
                                         </h3>
 
-                                        <p className="text-medium font-dm text-[#6B6B6B] leading-6 mb-4 ">
+                                        <p className="paragraph-secondary text-left font-dm text-[#6B6B6B] leading-6 mb-4 ">
                                             {blog.desc}
                                         </p>
 
@@ -117,12 +117,12 @@ const FinalCTA = () => {
 
                         <div>
                             {/* Heading */}
-                            <h1 className="text-center font-season-medium max-w-md md:max-w-7xl text-4xl md:text-5xl 2xl:text-7xl font-medium mb-4 tracking-wide ">
+                            <h1 className="text-center font-season-regular max-w-md md:max-w-7xl heading-main font-medium mb-4 tracking-wide px-8 md:px-0 ">
                                 Mindfulness for every stage of life.
                             </h1>
 
                             {/* Subtext */}
-                            <p className="max-w-md text-center px-4 md:px-0 md:max-w-5xl 2xl:text-xl font-dm text-white mb-8 text-base md:text-lg leading-6 md:leading-7 md:leading-[30px] mx-auto">
+                            <p className="max-w-md text-center px-4 md:px-0 md:max-w-5xl 2xl:text-xl font-dm text-white mb-8 paragraph-body leading-6 md:leading-7 md:leading-[30px] mx-auto">
                                 Sign up to receive simple and effective meditation, yoga, and other wellness tips from experts with decades of experience. Occasionally, we’ll let you know about our upcoming retreats, too.
                             </p>
 
