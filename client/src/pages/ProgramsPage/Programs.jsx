@@ -4,7 +4,7 @@ import ProgramBgImage from '../../assets/images/ProgramBgImage.png'
 
 const Programs = () => {
   return (
-    <div className="relative w-full min-h-[110vh] 2xl:min-h-screen overflow-hidden z-1 flex justify-center items-center">
+    <div className="relative w-full min-h-[110vh] 2xl:min-h-screen overflow-hidden overflow-y-auto z-1 flex justify-center items-center">
 
       {/* Background Image */}
       <img        
