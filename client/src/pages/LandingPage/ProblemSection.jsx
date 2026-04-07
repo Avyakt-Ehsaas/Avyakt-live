@@ -17,7 +17,7 @@ const ProblemSection = () => {
 
         {/* Header */}
         <header >
-          <p className="text-greenbase font-dm text-lg tracking-widest mb-2 uppercase">
+          <p className="text-greenbase font-dm text-[14px] md:text-[20px] tracking-widest mb-2 uppercase">
             THE PROBLEM
           </p>
 

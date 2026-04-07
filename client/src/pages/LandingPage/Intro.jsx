@@ -12,7 +12,7 @@ const Intro = () => {
 
             <div className="relative z-10 text-center max-w-5xl px-4">
 
-                <p className="text-greenbase font-season text-center font-medium tracking-widest">
+                <p className="text-greenbase font-season text-center font-medium tracking-widest text-[14px] text-[20px] uppercase ">
                     INTRODUCING
                 </p>
 

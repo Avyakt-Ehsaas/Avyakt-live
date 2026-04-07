@@ -45,7 +45,7 @@ export default function IdeaGuide() {
           Four ideas guide everything we build.
         </h1>
 
-        <p className="text-primary paragraph-body font-dm font-med max-w-[7xl] mx-auto mb-8">
+        <p className="text-primary paragraph-body font-dm  max-w-[7xl] mx-auto mb-8">
           Avyakt combines two things most meditation programs keep separate: practice and understanding.
           We explain how attention works, how emotions show up in the body, and why consistency matters more than long sessions. 
           With that understanding, meditation becomes a simple daily practice you can improve over time.
@@ -60,7 +60,7 @@ export default function IdeaGuide() {
               <h3 className="text-greenbase card-title font-dm font-med mb-4 md:mb-0">
                 {idea.title}
               </h3>
-              <p className="font-dm text-primary caption-text mb-3">{idea.description}</p>
+              <p className="font-dm text-primary text-[16px] md:text-[20px] mb-3">{idea.description}</p>
             </div>
           ))}
         </div>

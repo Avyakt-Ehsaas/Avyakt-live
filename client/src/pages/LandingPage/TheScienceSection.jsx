@@ -4,7 +4,7 @@ import TheScience from '../../assets/images/TheScience.png'
 const ScienceCard = ({ title, description }) => {
   return (
     <div className="bg-white bg-opacity-95 rounded-2xl p-6 text-left">
-      <h3 className="text-greenbase card-title font-dm font-smbold mb-3 md:mb-0">
+      <h3 className="text-greenbase card-title font-dm font-med mb-3 md:mb-0">
         {title}
       </h3>
       <p className="text-primary caption-text font-dm leading-[24px] md:leading-relaxed pr-4">

@@ -41,7 +41,7 @@ export default function MeditationSection() {
 
 
             {/* Content */}
-            <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 text-center">
+            <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 text-center lg:mt-[8rem]">
                 {/* Heading */}
                 <p className="text-greenbase font-dm text-medium md:text-lg tracking-widest uppercase mb-6 md:mb-3">
                     WHAT WE BELIEVE

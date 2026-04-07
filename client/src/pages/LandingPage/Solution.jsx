@@ -5,7 +5,7 @@ const Solution = () => {
         <section className="py-28 px-4 bg-white">
             <div className="max-w-7xl mx-auto text-center">
 
-                <p className="text-greenbase font-dm text-medium md:text-lg tracking-widest  uppercase mb-4 md:mb-0 ">
+                <p className="text-greenbase font-dm text-medium text-[14px] md:text-[20px] tracking-widest  uppercase mb-4 md:mb-0 ">
                     THE SOLUTION
                 </p>
 
