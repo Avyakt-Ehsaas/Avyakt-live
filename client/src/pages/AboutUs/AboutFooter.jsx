@@ -10,7 +10,7 @@ const AboutFooter = () => {
         <>
 
             <section
-                className="relative z-10 w-full min-h-screen flex flex-col gap-50 items bg-cover bg-center bg-no-repeat"
+                className="relative z-10 w-full min-h-screen flex flex-col gap-50 items bg-cover bg-center bg-no-repeat overflow-x-hidden"
                 style={{ backgroundImage: `url(${FullCTA})` }}
             >
                 {/* Overlay */}
@@ -45,33 +45,35 @@ const AboutFooter = () => {
                             />
                         </div>
 
-                        {/* Content Card */}
-                        <div className="bg-white p-10 md:p-[40px] rounded-[20px] h-[480px] md:h-[420px] flex flex-col justify-center ">
+                        {/* Right Side Wrapper */}
+                        <div className="w-[620px] flex lg:justify-end">
 
-                            {/* Heading */}
-                            <h2 className="text-[32px] pr-4 md:pr-0 md:text-[36px] leading-[40px] text-primary mb-4 md:mb-[20px] font-season font-medium ">
-                                A note from our{" "}
-                                <span className="text-greenbase">founder</span>
-                            </h2>
+                            {/* Card */}
+                            <div className="bg-white p-10 md:p-[40px] rounded-[20px] 
+                    w-full max-w-[680px] 
+                    h-[480px] md:h-[420px] 
+                    flex flex-col justify-center">
 
-                            {/* Text */}
-                            <p className="text-base md:text-[18px] md:leading-[28px] text-primary font-dm mb-[16px]">
-                                Many people are encouraged to meditate, but the practice often
-                                remains abstract.
-                            </p>
+                                <h2 className="text-[32px] md:text-[36px] leading-[40px] text-primary mb-4 md:mb-[20px] font-season font-medium">
+                                    A note from our{" "}
+                                    <span className="text-greenbase">founder</span>
+                                </h2>
 
-                            <p className="text-[20px] leading-[28px] md:leading-[40px] text-primary font-dm font-medium  mb-[16px]">
-                                The mind can be trained like any other skill.
-                            </p>
+                                <p className="text-base md:text-[18px] md:leading-[28px] text-primary font-dm mb-[16px]">
+                                    Many people are encouraged to meditate, but the practice often remains abstract.
+                                </p>
 
-                            <p className="text-base md:text-[18px] md:leading-[28px] md:leading-[30px] font-dm  text-primary mb-[16px]">
-                                Small, consistent practice gradually changes how we focus, respond
-                                to stress, and understand our inner experience. Avyakt combines
-                                meditation with learning and experimentation so people can explore
-                                how their mind works.
-                            </p>
+                                <p className="text-[20px] leading-[28px] md:leading-[40px] text-primary font-dm font-medium mb-[16px]">
+                                    The mind can be trained like any other skill.
+                                </p>
 
+                                <p className="text-base md:text-[18px] md:leading-[30px] font-dm text-primary">
+                                    Small, consistent practice gradually changes how we focus, respond to stress, and understand our inner experience.
+                                </p>
+
+                            </div>
                         </div>
+
                     </div>
 
 
@@ -80,12 +82,12 @@ const AboutFooter = () => {
 
                         <div>
                             {/* Heading */}
-                            <h1 className="text-center font-season-medium max-w-md md:max-w-7xl text-4xl md:text-5xl 2xl:text-7xl font-medium mb-4 tracking-wide ">
+                            <h1 className="text-center font-season-medium max-w-md md:max-w-7xl heading-main  2xl:text-7xl font-med mb-2 tracking-wide px-12 md:px-0">
                                 Mindfulness for every stage of life.
                             </h1>
 
                             {/* Subtext */}
-                            <p className="max-w-md text-center px-4 md:px-0 md:max-w-5xl 2xl:text-xl font-dm text-white mb-8 text-base md:text-lg leading-6 md:leading-7 md:leading-[30px] mx-auto">
+                            <p className="max-w-md text-center px-4 md:px-0 md:max-w-5xl 2xl:text-xl font-dm text-white mb-8 paragraph-body mx-auto">
                                 Sign up to receive simple and effective meditation, yoga, and other wellness tips from experts with decades of experience. Occasionally, we’ll let you know about our upcoming retreats, too.
                             </p>
 
@@ -120,13 +122,13 @@ const AboutFooter = () => {
                                             required
                                         />
 
-                                      
+
 
                                     </div>
-                                         {/* Button */}
-                                       <div className='md:w-[35%]'> <button className="bg-[#71AC61] w-60 md:w-full md:w-auto mt-2 font-dm hover:scale-105 transition px-8 py-3 rounded-full font-medium 2xl:text-xl 2xl:py-4">
-                                            Sign up
-                                        </button></div>
+                                    {/* Button */}
+                                    <div className='md:w-[35%]'> <button className="bg-[#71AC61] w-60 md:w-full md:w-auto mt-2 font-dm hover:bg-[#4F7944] transition px-8 py-3 rounded-full font-medium 2xl:text-xl 2xl:py-4">
+                                        Sign up
+                                    </button></div>
                                 </form>
                             </div>
                         </div>
