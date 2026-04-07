@@ -62,6 +62,7 @@ import Room from "./pages/user/Room";
 import SessionsAndRoom from "./pages/user/SessionsAndRoom";
 import ProgramPage from "./pages/ProgramsPage/ProgramPage";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import ScrollToTop from "./services/ScrollToTop";
 
 
 
@@ -69,7 +70,7 @@ function App() {
   const { user, loadingUser } = useAuth();
   // const [showSplash, setShowSplash] = useState(true);
 
-  // ✅ Loader while checking auth
+  //check auth
   if (loadingUser) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-teal-50">
@@ -90,6 +91,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+      <ScrollToTop />
         <div>
 
           <Routes>
