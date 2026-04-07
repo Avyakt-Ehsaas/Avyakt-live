@@ -116,7 +116,7 @@ const LandingSidebar = ({ isDarkBg }) => {
             </div>
 
             {/* Desktop Button */}
-            <button className="hidden md:block px-4 py-3 bg-[#71AC61] text-white rounded-full hover:scale-105 transition font-dm text-lg">
+            <button className="hidden md:block px-4 py-3 bg-[#71AC61] text-white rounded-full hover:bg-[#4F7944] transition font-dm text-lg">
               Join us
             </button>
 
@@ -159,7 +159,7 @@ const LandingSidebar = ({ isDarkBg }) => {
                 );
               })}
 
-              <button className="w-full mt-3 px-4 py-3 bg-[#71AC61] text-white rounded-full">
+              <button className="w-full mt-3 px-4 py-3 bg-[#71AC61] hover:bg-[#4F7944] text-white rounded-full transition-all duration-300">
                 Join us
               </button>
             </div>

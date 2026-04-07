@@ -34,7 +34,7 @@ const StepItem = ({ number, text, isLast }) => {
       </div>
 
       {/* Text */}
-      <p className="text-primary font-dm font-medium text-sm md:text-base">
+      <p className="text-primary font-dm font-medium text-base md:text-[18px]">
         {text}
       </p>
     </li>
@@ -57,18 +57,18 @@ export default function HowItWorks() {
 
         {/* Heading */}
         <header>
-          <p className="text-greenbase text-medium font-season-medium leading-[30px] tracking-widest text-center uppercase mb-2">
+          <p className="text-greenbase font-dm text-medium md:text-lg tracking-widest  uppercase mb-4 md:mb-2">
             HOW IT WORKS
           </p>
 
-          <h2 className="text-4xl md:text-5xl font-season-medium text-primary leading-10 md:leading-[50px]">
+          <h2 className="heading-main font-season-medium text-primary leading-10 md:leading-[50px]">
             Here is exactly <br />
             <span className="text-greenbase">
               what happens next.
             </span>
           </h2>
 
-          <p className="my-4 text-primary font-medium font-dm max-w-2xl mx-auto text-base md:text-lg leading-[24px] md:leading-relaxed">
+          <p className="my-4 text-primary font-med font-dm max-w-2xl mx-auto paragraph-body leading-[24px] md:leading-relaxed">
             Two tracks, one for individuals building a personal practice, one
             for institutions bringing it to a group. Both end with a measured
             outcome.
@@ -76,7 +76,7 @@ export default function HowItWorks() {
         </header>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-6 mt-10">
 
           {/* Individual */}
           <article className="bg-[#C2E0BA33] rounded-2xl p-6 text-left">
@@ -84,7 +84,7 @@ export default function HowItWorks() {
               For Individual
             </span>
 
-            <h3 className="font-semibold text-primary mb-6 font-dm">
+            <h3 className="font-semibold text-[20px] text-primary mb-6 font-dm">
               Your first 21 days, and beyond
             </h3>
 
@@ -106,7 +106,7 @@ export default function HowItWorks() {
               For Schools, Organisations & Senior Communities
             </span>
 
-            <h3 className="font-semibold text-primary mb-6 font-dm">
+            <h3 className="font-semibold text-[20px] text-primary mb-6 font-dm">
               From first conversation to impact report
             </h3>
 

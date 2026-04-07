@@ -5,9 +5,9 @@
 
 /* H1 - Main Heading */
 .heading-main {
-  font-weight: 600;
-  font-size: 56px;
-  line-height: 70px;
+  font-weight: 500;
+  font-size: 52px;
+  line-height: 65px;
   letter-spacing: 0;
   text-align: center;
 }
@@ -23,7 +23,7 @@
 
 /* Subheading / Highlight */
 .subheading {
-  font-weight: 600;
+  font-weight: 540;
   font-size: 22px;
   line-height: 40px;
   letter-spacing: 0;
@@ -32,7 +32,7 @@
 
 /* Body Primary */
 .paragraph-body {
-  font-weight: 500;
+  font-weight: 400;
   font-size: 20px;
   line-height: 30px;
   letter-spacing: 0;
@@ -50,11 +50,10 @@
 
 /* Caption Text */
 .caption-text {
-  font-weight: 600;
   font-size: 18px;
   line-height: 30px;
   letter-spacing: 0;
-  text-align: center;
+  text-align: left;
 }
 
 .card-title {
@@ -62,42 +61,35 @@
   font-size: 22px;
   line-height: 40px;
   letter-spacing: 0;
-  text-align: center;
+  text-align: left;
 }
 
+.font-med{
+  font-weight: 500;
+}
 
-/* =========================================
-   TEXT UTILITIES
-========================================= */
-
-.text-left {
-  text-align: left;
+.font-smbold{
+  font-weight: 600;
 }
 
 .text-center {
   text-align: center;
 }
 
-.text-right {
-  text-align: right;
+.text-left {
+  text-align: left;
 }
 
-.text-bold {
-  font-weight: 700;
+
+.custom-text {
+  text-align: center;
 }
 
-.text-semibold {
-  font-weight: 600;
+@media (min-width: 768px) {
+  .custom-text {
+    text-align: left;
+  }
 }
-
-.text-medium {
-  font-weight: 500;
-}
-
-.text-regular {
-  font-weight: 400;
-}
-
 
 /* =========================================
    MOBILE TYPOGRAPHY (<= 768px)
@@ -143,7 +135,7 @@
 
   .card-title {
     font-size: 18px;
-    line-height: 100%;
+    line-height: 28px
   }
 }
 
@@ -155,8 +147,9 @@
 @media (max-width: 480px) {
 
   .heading-main {
-    font-size: 28px;
-    line-height: 36px;
+    font-size: 32px;
+    line-height: 40px;
+
   }
 
   .heading-large {
@@ -180,7 +173,7 @@
     font-size: 14px;
   }
    .card-title {
-    font-size: 18px;
-    line-height: 100%;
+    font-size: 16px;
+    line-height: 24px;
   }
 }

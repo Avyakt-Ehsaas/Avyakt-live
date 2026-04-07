@@ -27,7 +27,7 @@ shadow-sm flex flex-col md:flex-row mt-[20px] overflow-hidden">
         <div>
           <div className="mt-2">
 
-            <span className="inline-block w-fit font-season bg-[#C2E0BA33] text-greenbase px-4 py-2 rounded-full text-sm font-medium mb-4">
+            <span className="inline-block w-fit font-dm bg-[#C2E0BA33] text-greenbase px-4 py-2 rounded-full paragraph-secondary font-med mb-4">
               {tag}
             </span>
 
@@ -42,12 +42,12 @@ shadow-sm flex flex-col md:flex-row mt-[20px] overflow-hidden">
           </div>
 
           {/* Bullet Points */}
-          <ul className="flex flex-wrap gap-2 font-dm font-medium mt-[20px] space-y-2 text-[20px] leading-[30px] text-primary">
+          <ul className="flex flex-wrap gap-2 font-dm font-medium mt-[20px]  text-[20px] leading-[30px] text-primary">
             {points.map(
               (item, i) => (
                 <span
                   key={i}
-                  className="px-4 py-2 border border-greenbase text-greenbase rounded-full text-sm"
+                  className="px-4 py-2 border border-greenbase text-greenbase rounded-full text-[16px]"
                 >
                   {item}
                 </span>
@@ -58,7 +58,7 @@ shadow-sm flex flex-col md:flex-row mt-[20px] overflow-hidden">
         </div>
 
         {/* CTA Button */}
-        <button className="w-fit mt-4 font-dm bg-greenbasebg text-white text-[18px] font-medium px-6 py-3 rounded-full hover:opacity-90 transition tracking-wide hover:scale-101">
+        <button className="w-fit mt-4 font-dm bg-greenbasebg text-white text-[18px]  px-6 py-3 rounded-full  transition tracking-wide hover:bg-[#4F7944]">
           {buttonText}
         </button>
       </div>

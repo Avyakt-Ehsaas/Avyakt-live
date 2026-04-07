@@ -1,8 +1,8 @@
-import ProblemBrain from "../../assets/images/ProblemBrain.png";
+import ProblemBrain from "../../assets/Vector 10.png";
 
 const Pill = ({ text }) => {
   return (
-    <div className="bg-[#C2E0BA33] text-greenbase font-dm font-medium px-5 py-3 rounded-full text-sm text-center w-[180px] md:w-[280px] lg:w-[320px] hover:scale-105 transition duration-300">
+    <div className="bg-[#C2E0BA33] text-greenbase font-dm px-5 py-3 rounded-full  text-center w-[180px] md:w-[420px] hover:scale-102   transition duration-300 card-title  text-center">
       {text}
     </div>
   );
@@ -10,20 +10,22 @@ const Pill = ({ text }) => {
 
 const ProblemSection = () => {
   return (
-    <section className="bg-white pt-28 pb-16 px-4 md:px-10 min-h-screen flex items-center justify-center">
-      <div className="max-w-6xl mx-auto text-center">
+    <section className="bg-white pt-28 px-4 md:px-10 min-h-screen flex items-center justify-center">
+
+      
+      <div className="max-w-5xl mx-auto text-center">
 
         {/* Header */}
-        <header className="mb-12">
-          <p className="text-greenbase font-season tracking-widest text-sm font-medium mb-1">
+        <header >
+          <p className="text-greenbase font-dm text-[14px] md:text-[20px] tracking-widest mb-2 uppercase">
             THE PROBLEM
           </p>
 
-          <h1 className="text-3xl md:text-5xl font-season-medium text-primary leading-[45px] md:leading-[60px]">
+          <h1 className="px-12 md:px-0 font-season-medium text-primary heading-main">
             Six things happening to your mind right now.
           </h1>
 
-          <p className="mt-4 text-primary font-dm max-w-4xl mx-auto text-[16px] md:text-[18px]">
+          <p className="mt-4 text-primary font-dm max-w-5xl mx-auto paragraph-body">
             Not metaphors. Documented, measurable changes, affecting students,
             working professionals, and <br className="hidden md:block" />
             seniors across India. Most people have no trained response to any of them.
@@ -31,7 +33,7 @@ const ProblemSection = () => {
         </header>
 
         {/* ================= MOBILE LAYOUT ================= */}
-        <div className="flex flex-col items-center gap-6 md:hidden">
+        <div className="flex flex-col items-center gap-6 lg:hidden mt-8">
 
           <Pill text="Reactions happen before thought" />
 
@@ -56,9 +58,9 @@ const ProblemSection = () => {
         </div>
 
         {/* ================= DESKTOP LAYOUT ================= */}
-        <div className="hidden md:grid grid-cols-3 items-center gap-10 mt-10">
+        <div className="hidden lg:grid grid-cols-3 items-center mt-2">
 
-          <div className="flex flex-col gap-12 items-end">
+          <div className="flex flex-col gap-18 items-end">
             <Pill text="Burnout is not an exception" />
             <Pill text="There is no good place to start" />
             <Pill text="People start meditating and quit" />
@@ -68,11 +70,11 @@ const ProblemSection = () => {
             <img
               src={ProblemBrain}
               alt="Brain illustration"
-              className="w-72"
+              className="w-60"
             />
           </div>
 
-          <div className="flex flex-col gap-12 items-start">
+          <div className="flex flex-col gap-18 items-start">
             <Pill text="Sleep is broken" />
             <Pill text="Attention is Collapsing" />
             <Pill text="Reactions happen before thought" />

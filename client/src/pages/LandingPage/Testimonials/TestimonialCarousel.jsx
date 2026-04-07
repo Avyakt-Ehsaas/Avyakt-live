@@ -80,7 +80,6 @@ function TestimonialCarousel() {
   // 🔥 dynamic settings (KEY FIX)
   const settings = {
     className: "center",
-    centerMode: true,
     infinite: true,
     centerMode: isMobile ? false : true,
     slidesToShow: isMobile ? 1 : window.innerWidth < 1024 ? 3 : 5,
@@ -113,13 +112,11 @@ function TestimonialCarousel() {
 
         {/* Heading */}
         <div className="text-center max-w-3xl mx-auto px-4 font-season-medium">
-          <h1 className="text-3xl md:text-5xl mb-3">
-            Stories from our <span className="text-greenbase">community.</span>
+          <h1 className="heading-main mb-3">
+            What our community says
           </h1>
-          <p className="font-dm leading-[24px]">
-            From students to working professionals, thousands are using small
-            <br />
-            daily practices to improve focus and emotional wellbeing.
+          <p className="font-dm text-center paragraph-body leading-[24px]">
+           From students to working professionals, thousands are using small daily  practices to improve focus and emotional wellbeing.
           </p>
         </div>
 
@@ -166,7 +163,11 @@ function TestimonialCarousel() {
                     {/* text */}
                     <p
                       className={`
+<<<<<<< HEAD
                         font-inter text-sm font-semibold leading-[20px]
+=======
+                        font-inter parageaph-secondary font-semibold leading-[20px]
+>>>>>>> 5d76c3ef4ea4c3a38ebea07aad406aafe8cd1d84
                         ${isActive ? "text-primary" : "text-gray-400"}
                       `}
                     >

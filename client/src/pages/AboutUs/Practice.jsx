@@ -5,19 +5,17 @@ import "./gridPattern.css"
 const Practice = () => {
 
     return (
-     <section className="relative bg-white py-16 px-4 md:px-8 min-h-[820px] md:min-h-[720px]">
-      <div className="max-w-[1100px] mx-auto text-center ">
-        <div className="absolute inset-0 grid-pattern grid-fade-top pointer-events-none z-0" />
-        
+     <section className="relative bg-white pt-16 px-4 md:px-8 h-[125vh]">
+      <div className="max-w-[1100px] mx-auto text-center flex flex-col justify-end">        
         {/* Heading */}
-        <h1 className="text-[32px] md:text-[56px] font-season-medium text-primary leading-snug">
+        <h1 className="heading-main font-season-medium text-primary leading-snug">
           A meditation practice you can{" "}
           <span className="text-greenbase">understand</span>,<br />
           not just follow.
         </h1>
 
         {/* Subtext */}
-        <p className="mt-4 text-primary text-base font-dm md:text-[20px] max-w-7xl mx-auto leading-relaxed">
+        <p className=" text-primary paragraph-body mt-3 font-med font-dm max-w-7xl mx-auto leading-relaxed">
           Aryakt combines two things most meditation programs keep separate:
           practice and understanding. We explain how attention works, how emotions
           show up in the body, and why consistency matters more than long
@@ -30,7 +28,7 @@ const Practice = () => {
           <img
             src={meditationImg}
             alt="Meditation"
-            className="w-[400px] h-[300px] md:w-full md:h-full object-cover rounded-2xl shadow-md"
+            className="w-[400px] h-[300px] md:w-[1167px] md:h-[472px] object-cover rounded-t-2xl shadow-md"
           />
         </div>
       </div>

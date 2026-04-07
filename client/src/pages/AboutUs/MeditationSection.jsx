@@ -20,7 +20,7 @@ export default function MeditationSection() {
     ];
 
     return (
-        <section className="relative w-full  md:min-h-[120vh] py-10">
+        <section className="relative w-full  md:min-h-[125vh] py-10">
             {/* Background Image */}
             <div
                 className="absolute inset-0 bg-cover bg-center "
@@ -41,14 +41,14 @@ export default function MeditationSection() {
 
 
             {/* Content */}
-            <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 text-center">
+            <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 text-center lg:mt-[8rem]">
                 {/* Heading */}
-                <p className="text-greenbase text-[14px] md:text-[16px] font-season tracking-[0.2em] font-semibold mb-3 sm:mb-4">
+                <p className="text-greenbase font-dm text-medium text-[14px] md:text-[20px] tracking-widest uppercase mb-6 md:mb-3">
                     WHAT WE BELIEVE
                 </p>
 
                 <h1 className="font-season-medium text-primary leading-[36px] md:leading-[40px] mb-4 sm:mb-6
-            text-3xl lg:text-3xl xl:text-4xl">
+            heading-main font-med">
                     Meditation works, but the approach often doesn’t.
                 </h1>
 
@@ -70,11 +70,11 @@ export default function MeditationSection() {
 
 const InfoCard = ({ title, description }) => {
     return (
-        <div className="bg-white/99 backdrop-blur-md rounded-xl sm:rounded-2xl shadow-md p-4 md:p-5 text-left">
-            <h3 className="text-greenbase font-dm font-semibold text-sm mb-2">
+        <div className="bg-white/99 backdrop-blur-md rounded-xl sm:rounded-2xl shadow-md p-4 text-left">
+            <h3 className="text-greenbase card-title font-dm font-med ">
                 {title}
             </h3>
-            <p className="text-primary font-dm text-[14px] leading-relaxed">
+            <p className="text-primary font-dm paragraph-secondary text-left leading-relaxed">
                 {description}
             </p>
         </div>
