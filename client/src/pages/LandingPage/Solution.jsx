@@ -9,7 +9,7 @@ const Solution = () => {
                     THE SOLUTION
                 </p>
 
-                <h1 className="heading-main font-semibold text-primary font-season-medium leading-[70px]">
+                <h1 className="heading-main font-semibold text-primary font-season-regular leading-[70px]">
                     What makes meditation{" "}
                     <span className="text-[#71AC61]">actually stick.</span>
                 </h1>
@@ -63,7 +63,7 @@ export default Solution;
 
 const Card = ({ title, desc }) => {
     return (
-        <div className="border border-greenbase rounded-2xl py-4 px-6 text-left bg-white/50 backdrop-blur-sm max-w-[369px] h-full lg:h-[200px]">
+        <div className="border border-greenbase rounded-2xl py-4 px-4 md:px-6 text-left bg-white/50 backdrop-blur-sm max-w-[369px] h-full lg:h-[200px]">
             <h3 className="text-greenbase font-dm card-title mb-2 text-center">
                 {title}
             </h3>

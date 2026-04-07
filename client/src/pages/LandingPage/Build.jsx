@@ -2,6 +2,7 @@ import img1 from "../../assets/Ellipse 54.png";
 import img2 from "../../assets/Ellipse 54 (1).png";
 import img3 from "../../assets/Ellipse 54 (2).png";
 import img4 from "../../assets/Ellipse 54 (3).png";
+import "../AboutUs/gridPattern.css"
 
 
 const Build = () => {
@@ -28,8 +29,9 @@ const Build = () => {
         }
     ];
     return (
-        <section className="pt-20 sm:pt-40 pb-10 px-4 bg-white min-h-screen flex items-center justify-center">
-            <div className="max-w-7xl mx-auto text-center">
+        <section className="relative pt-20 sm:pt-40 pb-10 px-4 bg-white min-h-screen flex items-center justify-center">
+            <div className=" max-w-7xl mx-auto text-center">
+                <div className="absolute inset-0 grid-pattern grid-fade-top pointer-events-none z-0 opacity-50" />
                 <p className="text-greenbase font-dm text-medium md:text-lg tracking-widest uppercase mb-6 md:mb-0 ">
                     WHAT WE BUILD
                 </p>

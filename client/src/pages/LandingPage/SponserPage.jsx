@@ -106,11 +106,11 @@ function SponsorPage() {
            <p className="text-greenbase text-center font-dm text-medium md:text-lg tracking-widest  uppercase mb-4 md:mb-0">
             PROGRAMS
           </p>
-          <h1 className="font-season-medium text-center text-[36px] md:text-[56px] leading-[56px] md:leading-[80px] 2xl:leading-[72px] text-primary tracking-[0%]">
+          <h1 className="font-season-medium text-center heading-main md:leading-[80px] 2xl:leading-[72px] text-primary tracking-[0%]">
             For every stage of life.
           </h1>
 
-          <p className="font-dm text-center text-[18px] md:text-[20px] 2xl:text-[20px] leading-[30px] tracking-[0%]">
+          <p className="font-dm text-center paragrapg-body leading-[24px] md:leading-[30px] tracking-[0%] mt-2">
             Structured meditation programs for individuals, schools, organizations, and senior communities,<br /> each designed for the specific needs of that audience.
           </p>
         </div>
