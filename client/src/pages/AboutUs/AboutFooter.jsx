@@ -63,8 +63,7 @@ const AboutFooter = () => {
                                 </p>
 
                                 <p className="text-base md:text-[18px] md:leading-[30px] font-dm text-primary mb-[16px]">
-                                    Small, consistent practice gradually changes how we focus, respond
-                                    to stress, and understand our inner experience.
+                                Small, consistent practice gradually changes how we focus, respond to stress, and understand our inner experience.Avyakt combines meditation with learning and experimentation so people can explore how their mind works.
                                 </p>
 
                             </div>
