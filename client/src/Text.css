@@ -23,7 +23,7 @@
 
 /* Subheading / Highlight */
 .subheading {
-  font-weight: 600;
+  font-weight: 540;
   font-size: 22px;
   line-height: 40px;
   letter-spacing: 0;
@@ -79,6 +79,17 @@
 
 .text-left {
   text-align: left;
+}
+
+
+.custom-text {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .custom-text {
+    text-align: left;
+  }
 }
 
 /* =========================================
