@@ -45,16 +45,11 @@ const AboutFooter = () => {
                             />
                         </div>
 
-                        {/* Right Side Wrapper */}
-                        <div className="w-[620px] flex lg:justify-end">
+                        {/* Content Card */}
+                        <div className="w-full lg:flex lg:justify-end">
+                            <div className="bg-white p-10 md:p-[40px] rounded-[20px] h-[480px] md:h-[420px] flex flex-col justify-center lg:max-w-[520px] w-full">
 
-                            {/* Card */}
-                            <div className="bg-white p-10 md:p-[40px] rounded-[20px] 
-                    w-full max-w-[680px] 
-                    h-[480px] md:h-[420px] 
-                    flex flex-col justify-center">
-
-                                <h2 className="text-[32px] md:text-[36px] leading-[40px] text-primary mb-4 md:mb-[20px] font-season font-medium">
+                                <h2 className="text-[32px] pr-4 md:pr-0 md:text-[36px] leading-[40px] text-primary mb-4 md:mb-[20px] font-season font-medium">
                                     A note from our{" "}
                                     <span className="text-greenbase">founder</span>
                                 </h2>
@@ -67,8 +62,9 @@ const AboutFooter = () => {
                                     The mind can be trained like any other skill.
                                 </p>
 
-                                <p className="text-base md:text-[18px] md:leading-[30px] font-dm text-primary">
-                                    Small, consistent practice gradually changes how we focus, respond to stress, and understand our inner experience.
+                                <p className="text-base md:text-[18px] md:leading-[30px] font-dm text-primary mb-[16px]">
+                                    Small, consistent practice gradually changes how we focus, respond
+                                    to stress, and understand our inner experience.
                                 </p>
 
                             </div>

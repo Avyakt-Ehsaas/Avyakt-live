@@ -57,7 +57,7 @@ export default function IdeaGuide() {
               key={index}
               className="bg-[#C2E0BA44] rounded-2xl p-4 shadow-sm text-left z-30"
             >
-              <h3 className="text-greenbase card-title font-dm font-med">
+              <h3 className="text-greenbase card-title font-dm font-med mb-4 md:mb-0">
                 {idea.title}
               </h3>
               <p className="font-dm text-primary caption-text mb-3">{idea.description}</p>
