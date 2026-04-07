@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import invertedComma from "../../../assets/images/InvertedComma.png";
 
+// IMPORTANT (DON'T MISS)
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const testimonials = [
   {
@@ -48,48 +51,42 @@ const testimonials = [
       "Headspace provides me with a connection to myself and a disconnection from negative thoughts.",
     author: "Keri, UK",
   },
-  {
-    id: 9,
-    text:
-      "Changing my daily habits has allowed me to grow and change my life.",
-    author: "David, London",
-  },
-  {
-    id: 10,
-    text:
-      "The mindfulness techniques have been a game-changer for my focus and stress levels.",
-    author: "Emily, USA",
-  },
 ];
 
 function TestimonialCarousel() {
   const [activeCard, setActiveCard] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  //circular distance between two indexes in an array of given length
+  // detect screen size properly
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkScreen();
+    setMounted(true);
+
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
+
+  // distance logic
   const getDistance = (index, active, length) => {
     const diff = Math.abs(index - active);
     return Math.min(diff, length - diff);
   };
 
-  useEffect(() => {
-  const checkScreen = () => {
-    setIsMobile(window.innerWidth < 768);
-  };
-
-  checkScreen();
-  window.addEventListener("resize", checkScreen);
-  return () => window.removeEventListener("resize", checkScreen);
-}, []);
-
+  // 🔥 dynamic settings (KEY FIX)
   const settings = {
     className: "center",
     centerMode: true,
     infinite: true,
-    centerPadding: "0px",
+    centerMode: isMobile ? false : true,
+    slidesToShow: isMobile ? 1 : window.innerWidth < 1024 ? 3 : 5,
+    centerPadding: isMobile ? "40px" : "0px",
+
     dots: false,
-    slidesToShow: 5,
-    slidesToScroll: 1,
     arrows: false,
 
     autoplay: true,
@@ -99,141 +96,107 @@ function TestimonialCarousel() {
 
     pauseOnHover: true,
     pauseOnFocus: true,
+
     beforeChange: (oldIndex, newIndex) => {
       setActiveCard(newIndex % testimonials.length);
     },
-
-     responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        centerMode: true,
-      },
-    },
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 1,
-        centerMode: true,
-        centerPadding: "40px",
-      },
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        centerMode: false,
-        centerPadding: "20px",
-      },
-    },
-  ],
-
   };
 
+  // prevent wrong initial render
+  if (!mounted) return null;
+
   return (
-    <div className="bg-white md:min-h-screen pt-10 sm:pt-20 text-[#191919]" 
-    >
+    <div className="bg-white md:min-h-screen pt-10 sm:pt-20 text-[#191919]">
       <div className="relative py-12">
-   <div className="absolute inset-0 bg-[linear-gradient(to_right,#9ca3af12_1px,transparent_1px),linear-gradient(to_bottom,#9ca3af12_1px,transparent_1px)] bg-[size:60px_60px]" />
-      {/* Heading */}
+        {/* grid bg */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#9ca3af12_1px,transparent_1px),linear-gradient(to_bottom,#9ca3af12_1px,transparent_1px)] bg-[size:60px_60px]" />
 
-      <div className="text-center max-w-3xl mx-auto px-4 font-season-medium">
-        <h1 className="text-3xl md:text-5xl mb-3">
-          Stories from our <span className="text-greenbase">community.</span>
-        </h1>
-        <p className="font-dm leading-[24px]">
-          From students to working professionals, thousands are using small{" "}
-          <br />
-          daily practices to improve focus and emotional wellbeing.
-        </p>
-      </div>
+        {/* Heading */}
+        <div className="text-center max-w-3xl mx-auto px-4 font-season-medium">
+          <h1 className="text-3xl md:text-5xl mb-3">
+            Stories from our <span className="text-greenbase">community.</span>
+          </h1>
+          <p className="font-dm leading-[24px]">
+            From students to working professionals, thousands are using small
+            <br />
+            daily practices to improve focus and emotional wellbeing.
+          </p>
+        </div>
 
-      {/* Carousel */}
-      <div className="slider-container max-w-7xl mx-auto mt-8 px-4 overflow-hidden">
-        <Slider {...settings}
+        {/* Slider */}
+        <div className="max-w-7xl mx-auto mt-8 px-4 overflow-hidden">
+          <Slider {...settings} key={isMobile}>
+            {testimonials.map((testimonial, index) => {
+              const distance = getDistance(
+                index,
+                activeCard,
+                testimonials.length
+              );
 
-        >
-          {testimonials.map((testimonial, index) => {
-            const distance = getDistance(
-              index,
-              activeCard,
-              testimonials.length
-            );
+              const clamped = Math.min(distance, 3);
+              const isActive = distance === 0;
 
-            const clamped = Math.min(distance, 3);
-            const isActive = distance === 0;
+              const translateY = -clamped * 12;
+              const scale = 1 - clamped * 0.08;
+              const opacity = 1 - clamped * 0.25;
 
-            // proportional lift (far = more up)
-            // const translateY = -clamped * 12;
-
-            // //  scale + opacity
-            // const scale = 1 - clamped * 0.08;
-            // const opacity = 1 - clamped * 0.25;
-
-            const translateY = -clamped * 12;
-const scale = 1 - clamped * 0.08;
-const opacity = 1 - clamped * 0.25;
-
-            return (
-              <div key={testimonial.id} className="px-2">
-                <div
-                  style={{
-                    transform: `translateY(${translateY}px) scale(${scale})`,
-                    opacity: opacity,
-                  }}
-                  className={`
-                    transition-all duration-500 rounded-2xl py-6 px-4 h-[260px]
-                    flex flex-col justify-between mb-4 mt-4
-                    ${isActive
-                      ? "bg-[#A7CFA2] shadow-xl z-10"
-                      : "bg-[#F3F6F2]"}
-                  `}
-                >
-                  {/* Quote */}
-                  <img
-                    src={invertedComma}
-                    alt=""
-                    className={`w-10 ${isActive ? "" : "opacity-40"}`}
-                  />
-
-                  {/* Text */}
-                  <p
+              return (
+                <div key={testimonial.id} className="px-2">
+                  <div
+                    style={{
+                      transform: `translateY(${translateY}px) scale(${scale})`,
+                      opacity,
+                    }}
                     className={`
-                      font-inter text-sm font-semibold leading-[20px]
-                      ${isActive ? "text-primary" : "text-gray-400"}
+                      transition-all duration-500 rounded-2xl py-6 px-4 h-[260px]
+                      flex flex-col justify-between mb-4 mt-4
+                      ${isActive
+                        ? "bg-[#A7CFA2] shadow-xl z-10"
+                        : "bg-[#F3F6F2]"
+                      }
                     `}
                   >
-                    {testimonial.text}
-                  </p>
+                    {/* quote */}
+                    <img
+                      src={invertedComma}
+                      alt=""
+                      className={`w-10 ${isActive ? "" : "opacity-40"}`}
+                    />
 
-                  {/* Author */}
-                  <div className="mt-4">
+                    {/* text */}
                     <p
-                      className={`text-sm ${
-                        isActive
-                          ? "text-[#1E1E1E] font-semibold"
-                          : "text-gray-400"
-                      }`}
+                      className={`
+                        font-inter text-sm font-semibold leading-[20px]
+                        ${isActive ? "text-primary" : "text-gray-400"}
+                      `}
                     >
-                      {testimonial.author}
+                      {testimonial.text}
                     </p>
 
-                    {isActive && (
-                      <p className="text-[10px] text-primary font-inter">
-                        on what he learned when sitting with himself
+                    {/* author */}
+                    <div className="mt-4">
+                      <p
+                        className={`text-sm ${isActive
+                          ? "text-[#1E1E1E] font-semibold"
+                          : "text-gray-400"
+                          }`}
+                      >
+                        {testimonial.author}
                       </p>
-                    )}
+
+                      {isActive && (
+                        <p className="text-[10px] text-primary font-inter">
+                          on what he learned when sitting with himself
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </Slider>
+              );
+            })}
+          </Slider>
+        </div>
       </div>
-    
-      </div>
-    
     </div>
   );
 }

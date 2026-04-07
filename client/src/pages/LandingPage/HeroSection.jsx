@@ -17,12 +17,12 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="relative h-[150vh]  sm:h-screen w-full bg-white overflow-hidden">
-      <div className="relative w-full h-[150vh]  sm:h-screen overflow-hidden z-10">
+    <div className="relative h-[140vh]  sm:h-screen w-full bg-white overflow-hidden">
+      <div className="relative w-full h-[140vh]  sm:h-screen overflow-hidden z-10">
         <img
           src={HeroLanding}
           alt="Hero"
-          className="absolute bottom-0 md:-bottom-0 lg:-bottom-0 xl:-bottom-10 md:right-0 bg-[#191919] w-auto h-[150vh]  sm:h-auto min-w-full min-h-full object-cover -z-10 pointer-events-none"
+          className="absolute bottom-0 md:-bottom-0 lg:-bottom-0 xl:-bottom-10 md:right-0 bg-[#191919] w-auto h-[140vh]  sm:h-auto min-w-full min-h-full object-[left_2%] -z-10 pointer-events-none"
         />
 
           <div className="absolute bottom-0 left-0 w-full h-[80px] bg-gradient-to-t from-white to-transparent" />
