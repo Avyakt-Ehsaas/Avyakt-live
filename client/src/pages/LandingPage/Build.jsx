@@ -63,7 +63,7 @@ const Card = ({ title, desc, img }) => {
                     className="w-full h-full object-cover rounded-full"
                 />
             </div>
-            <h3 className="text-greenbase font-dm card-title mb-2 " >
+            <h3 className="text-greenbase font-dm card-title mb-4 md:mb-2" >
                 {title}
             </h3>
             <p className="font-dm leading-[24px] md:leading-relaxed caption-text text-primary font-medium">
