@@ -4,6 +4,7 @@
 
 @import "tailwindcss";
 @import "./Fonts.css";
+@import "./Text.css";
 
 body {
   font-family: 'SeasonMix', serif;
@@ -23,9 +24,11 @@ body {
   --bg-greenbase-primary: #71ac61;
   --border-greenbase: "#71ac61";
 
+
   /* Custom colors */
   --secondary-Text: #696969;
   --primary-Text: #191919;
+
 }
 
 .border-top {

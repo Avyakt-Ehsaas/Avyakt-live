@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import school from "../../assets/images/schoolblog1.png";
 import organisation from "../../assets/images/organisationblog1.png";
-import senior from "../../assets/images/seniorsblog1.png";
-import individual from "../../assets/images/individualblog1.png";
+import individual from "../../assets/images/seniorsblog1.png";
+import senior from "../../assets/images/individualblog1.png";
 
 import { HiAcademicCap } from "react-icons/hi";
 import { HiOfficeBuilding } from "react-icons/hi";
@@ -102,8 +102,8 @@ function SponsorPage() {
           ))}
         </div>
 
-        <div className="sponsor-page max-w-7xl">
-           <p className="text-greenbase text-medium pt-8 font-season-medium leading-[30px] tracking-widest text-center uppercase mb-2">
+        <div className="sponsor-page max-w-7xl pt-12">
+           <p className="text-greenbase text-center font-dm text-medium md:text-lg tracking-widest  uppercase mb-4 md:mb-0">
             PROGRAMS
           </p>
           <h1 className="font-season-medium text-center text-[36px] md:text-[56px] leading-[56px] md:leading-[80px] 2xl:leading-[72px] text-primary tracking-[0%]">

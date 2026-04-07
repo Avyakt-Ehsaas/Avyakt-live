@@ -30,10 +30,10 @@ const Build = () => {
     return (
         <section className="pt-20 sm:pt-40 pb-10 px-4 bg-white min-h-screen flex items-center justify-center">
             <div className="max-w-7xl mx-auto text-center">
-                <p className="text-greenbase font-dm text-center font-medium leading-tight">
+                <p className="text-greenbase font-dm text-medium md:text-lg tracking-widest uppercase mb-6 md:mb-0 ">
                     WHAT WE BUILD
                 </p>
-                <h1 className="text-3xl md:text-5xl font-semibold text-primary font-season-medium  mt-2 leading-tight">
+                <h1 className="heading-main font-semibold text-primary font-season-medium  leading-tight">
                     Live daily sessions. A 12-month structure.<br />Results you can measure.
                 </h1>
                 <div className="relative grid grid-rows-1 md:grid-cols-4 gap-8 mt-12 ">
@@ -63,10 +63,10 @@ const Card = ({ title, desc, img }) => {
                     className="w-full h-full object-cover rounded-full"
                 />
             </div>
-            <h3 className="text-greenbase text-[18px] md:text-xl font-medium font-dm mb-2  leading-[24px] md:leading-tight">
+            <h3 className="text-greenbase font-dm card-title mb-2 " >
                 {title}
             </h3>
-            <p className="font-dm leading-[24px] md:leading-relaxed text-[14px] md:text-lg text-primary font-medium">
+            <p className="font-dm leading-[24px] md:leading-relaxed caption-text text-primary font-medium">
                 {desc}
             </p>
         </div>

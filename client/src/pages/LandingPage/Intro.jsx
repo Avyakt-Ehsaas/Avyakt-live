@@ -24,7 +24,7 @@ const Intro = () => {
                     "The stillness you seek is already within you. We give you the structure to find it."
                 </p>
 
-                <div className="mt-16 grid md:grid-cols-3 items-center gap-8">
+                <div className="mt-16 grid md:grid-cols-3 gap-8">
 
                     <div>
                         <h2 className="text-greenbase text-3xl font-medium"><span className="font-semibold">अव्यक्त</span> · Avyakt</h2>

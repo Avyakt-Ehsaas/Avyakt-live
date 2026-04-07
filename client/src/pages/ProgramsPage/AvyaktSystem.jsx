@@ -1,25 +1,38 @@
-import React from "react";
-import ProgramLowerBg from "../../assets/images/ProgramLowerBg.png";
-import ProgramIcon1 from "../../assets/images/ProgramIcon1.png";
-import ProgramIcon2 from "../../assets/images/ProgramIcon2.png";
-import ProgramIcon3 from "../../assets/images/ProgramIcon3.png";
+import ProgramLower from "../../assets/images/ProgramLower.png";
+
+import AboutAvyaktIcon1 from "../../assets/images/AboutAvyaktIcon1.png";
+import AboutAvyaktIcon2 from "../../assets/images/AboutAvyaktIcon2.png";
+import AboutAvyaktIcon3 from "../../assets/images/AboutAvyaktIcon3.png";
+import AboutAvyaktIcon4 from "../../assets/images/AboutAvyaktIcon4.png";
+import AboutAvyaktIcon5 from "../../assets/images/AboutAvyaktIcon5.png";
+
 
 const AvyaktSystem = () => {
   const steps = [
     {
-      icon: ProgramIcon1,
-      title: "Assess",
-      desc: "Complete a quick, science-based assessment to personalize your journey.",
+      icon: AboutAvyaktIcon1,
+      title: "Discovery conversation",
+      desc: "30 minutes. We ask about your audience, the problems you're seeing, and what success looks like to you.",
     },
     {
-      icon: ProgramIcon2,
-      title: "Practice",
-      desc: "Engage in daily guided sessions tailored specifically for your needs.",
+      icon: AboutAvyaktIcon2,
+      title: "Cognitive baseline",
+      desc: "We design the right pre-program assessment, the specific metrics that matter for your context. This becomes the measuring stick.",
     },
     {
-      icon: ProgramIcon3,
-      title: "Progress",
-      desc: "Track your progress toward focus and emotional balance.",
+      icon: AboutAvyaktIcon3,
+      title: "Program customisation",
+      desc: "The foundation program gets the contextual layer, sessions, sequencing, and exercises shaped by what we found.",
+    },
+    {
+      icon: AboutAvyaktIcon4,
+      title: "Live delivery",
+      desc: "Sai Amrit delivers every session. The program designer, live, reading the room every single week.",
+    },
+     {
+      icon: AboutAvyaktIcon5,
+      title: "Impact report",
+      desc: "Before-and-after data and cohort insights — a document you can share, not just a certificate of participation.",
     },
   ];
 
@@ -28,7 +41,7 @@ const AvyaktSystem = () => {
 
       {/* Top Background */}
      <div className="relative">
-        <img src={ProgramLowerBg} alt="programbg" className='h-24 w-full' /> 
+        <img src={ProgramLower} alt="programbg" className='h-32 w-full' /> 
           <div className="absolute inset-0 pointer-events-none 
     bg-gradient-to-b from-transparent via-white/40 to-[#FAFAFA]" />
         </div>
@@ -39,39 +52,39 @@ const AvyaktSystem = () => {
       <div className="max-w-6xl mx-auto px-4 py-16 text-center">
 
         {/* Heading */}
-        <h1 className="font-season-medium text-3xl md:text-5xl text-primary">
-          The <span className="text-greenbase">Avyakt</span> System
+        <h1 className="font-season-medium heading-main text-primary">
+          Before we build anything, we listen.
         </h1>
 
-        <p className="mt-4 font-dm text-primary text-base md:text-lg max-w-4xl mx-auto" style={{fontWeight: 500}}>
-          A proven three-step methodology designed to transform your mental well-being from the inside out.
+        <p className="mt-2 font-dm text-primary paragraph-body max-w-4xl mx-auto">
+          Every engagement starts with a proper diagnostic, not a sales call. We want to understand the actual problem before we put a program in front of you.
         </p>
 
         {/* Steps */}
         <div className="relative mt-16">
 
   {/* Dashed Center Line */}
-  <div className="hidden md:block absolute top-[40px] left-[16.66%] right-[16.66%] border-t-2 border-dashed border-[#71ac61]/20 z-0"></div>
+  <div className="hidden md:block  absolute top-[52px] left-[8.66%] right-[8.66%] border-t-2 border-dashed border-[#71ac61]/20 z-0"></div>
 
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+  <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
 
     {steps.map((step, index) => (
       <div key={index} className="flex flex-col items-center text-center">
 
         {/* Circle */}
-        <div className="relative z-10 w-20 h-20 rounded-full bg-[#EAF4E6] flex items-center justify-center mb-6">
+        <div className="relative z-10 w-28 h-28 rounded-full bg-[#EAF4E6] flex items-center justify-center mb-6">
           <img
             src={step.icon}
             alt={step.title}
-            className="w-10 h-10 object-contain"
+            className="w-18 h-18 object-contain"
           />
         </div>
 
-        <h3 className="text-xl md:text-2xl font-season font-semibold text-primary">
+        <h3 className="card-title font-dm font-semibold text-primary">
           {step.title}
         </h3>
 
-        <p className="mt-3 font-dm text-primary text-sm md:text-base max-w-xs">
+        <p className="mt-3 font-dm text-primary paragraph-body text-center max-w-xs">
           {step.desc}
         </p>
 
@@ -80,11 +93,6 @@ const AvyaktSystem = () => {
 
   </div>
 </div>
-
-        {/* Button */}
-        <button className="mt-16 font-dm bg-greenbase-primary text-white px-8 py-4 rounded-full hover:scale-105 transition-all duration-300">
-          Schedule a Demo
-        </button>
 
       </div>
     </div>

@@ -1,23 +1,18 @@
-import meditation from "../../assets/meditation.png";
+import SolutionPageIcon from "../../assets/images/SolutionPageIcon.png"
 
 const Solution = () => {
     return (
         <section className="py-28 px-4 bg-white">
             <div className="max-w-7xl mx-auto text-center">
 
-                <p className="text-greenbase font-dm text-center font-medium tracking-wide">
+                <p className="text-greenbase font-dm text-medium md:text-lg tracking-widest  uppercase mb-4 md:mb-0 ">
                     THE SOLUTION
                 </p>
 
-                <h1 className="text-3xl md:text-5xl font-semibold text-primary font-season-medium  mt-2">
+                <h1 className="heading-main font-semibold text-primary font-season-medium leading-[70px]">
                     What makes meditation{" "}
                     <span className="text-[#71AC61]">actually stick.</span>
                 </h1>
-
-                <p className="text-primary font-dm text-center text-lg mx-auto mt-4">
-                    Six design decisions behind every Avyakt program, each one targeting 
-                    a specific reason people fail <br/>to build a lasting meditation habit.
-                </p>
 
                 <div className="relative mt-8 flex flex-col md:flex-row items-center justify-between h-full gap-10 md:h-[80vh]">
 
@@ -37,8 +32,8 @@ const Solution = () => {
                     <div className="flex justify-center order-1 md:order-2">
                         <div className="w-[350px] h-[350px] rounded-full bg-[#EAF1E7] flex items-center justify-center">
                             <img
-                                src={meditation}
-                                className="w-2/3 object-contain"
+                                src={SolutionPageIcon}
+                                className="w-1/2 object-contain"
                                 alt="meditation"
                             />
                         </div>
@@ -68,8 +63,8 @@ export default Solution;
 
 const Card = ({ title, desc }) => {
     return (
-        <div className="border border-greenbase rounded-2xl p-6 text-left bg-white/50 backdrop-blur-sm max-w-[350px] h-full lg:h-[200px]">
-            <h3 className="text-greenbase font-dm mb-2 text-center">
+        <div className="border border-greenbase rounded-2xl py-4 px-6 text-left bg-white/50 backdrop-blur-sm max-w-[369px] h-full lg:h-[200px]">
+            <h3 className="text-greenbase font-dm card-title mb-2 text-center">
                 {title}
             </h3>
             <p className="text-primary font-dm text-center text-normal">

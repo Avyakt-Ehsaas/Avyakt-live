@@ -37,13 +37,13 @@ function FAQSection() {
       <div className="max-w-3xl mx-auto text-center">
         {/* Header */}
         <header className="mb-10">
-          <p className="text-greenbase font-season text-center font-medium tracking-wide">
+          <p className="text-greenbase font-dm text-medium md:text-lg tracking-widest  uppercase mb-4 md:mb-0">
             FAQ
           </p>
-          <h2 className="text-3xl md:text-5xl font-semibold text-primary font-season-medium  mt-2">
+          <h2 className="heading-main mb-3 font-season-regular text-primary ">
             Questions we get most often.
           </h2>
-          <p className="text-primary font-dm text-center mt-2 text-lg">
+          <p className="text-primary font-dm paragraph-body font-med ext-center mt-2 text-lg">
             Direct answers. No fluff.
           </p>
         </header>
