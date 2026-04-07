@@ -47,7 +47,7 @@ shadow-sm flex flex-col md:flex-row mt-[20px] overflow-hidden">
               (item, i) => (
                 <span
                   key={i}
-                  className="px-4 py-2 border border-greenbase text-greenbase rounded-full text-sm"
+                  className="px-4 py-2 border border-greenbase text-greenbase rounded-full text-[16px]"
                 >
                   {item}
                 </span>

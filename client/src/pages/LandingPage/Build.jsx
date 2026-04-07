@@ -32,7 +32,7 @@ const Build = () => {
         <section className="relative pt-20 sm:pt-40 pb-10 px-4 bg-white min-h-screen flex items-center justify-center">
             <div className=" max-w-7xl mx-auto text-center">
                 <div className="absolute inset-0 grid-pattern grid-fade-top pointer-events-none z-0 opacity-50" />
-                <p className="text-greenbase font-dm text-medium md:text-lg tracking-widest uppercase mb-6 md:mb-0 ">
+                <p className="text-greenbase font-dm text-medium text-[14px] md:text-[20px] tracking-widest uppercase mb-6 md:mb-0 ">
                     WHAT WE BUILD
                 </p>
                 <h1 className="heading-main font-semibold text-primary font-season-medium  leading-tight">

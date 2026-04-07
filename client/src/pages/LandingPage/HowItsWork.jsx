@@ -34,7 +34,7 @@ const StepItem = ({ number, text, isLast }) => {
       </div>
 
       {/* Text */}
-      <p className="text-primary font-dm font-medium text-sm md:text-base">
+      <p className="text-primary font-dm font-medium text-base md:text-[18px]">
         {text}
       </p>
     </li>
@@ -84,7 +84,7 @@ export default function HowItWorks() {
               For Individual
             </span>
 
-            <h3 className="font-semibold text-primary mb-6 font-dm">
+            <h3 className="font-semibold text-[20px] text-primary mb-6 font-dm">
               Your first 21 days, and beyond
             </h3>
 
@@ -106,7 +106,7 @@ export default function HowItWorks() {
               For Schools, Organisations & Senior Communities
             </span>
 
-            <h3 className="font-semibold text-primary mb-6 font-dm">
+            <h3 className="font-semibold text-[20px] text-primary mb-6 font-dm">
               From first conversation to impact report
             </h3>
 
