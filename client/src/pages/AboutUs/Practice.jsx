@@ -5,8 +5,8 @@ import "./gridPattern.css"
 const Practice = () => {
 
     return (
-     <section className="relative bg-white py-16 px-4 md:px-8 min-h-[820px] md:min-h-[720px]">
-      <div className="max-w-[1100px] mx-auto text-center ">        
+     <section className="relative bg-white pt-16 px-4 md:px-8 h-[125vh]">
+      <div className="max-w-[1100px] mx-auto text-center flex flex-col justify-end">        
         {/* Heading */}
         <h1 className="heading-main font-season-medium text-primary leading-snug">
           A meditation practice you can{" "}
@@ -28,7 +28,7 @@ const Practice = () => {
           <img
             src={meditationImg}
             alt="Meditation"
-            className="w-[400px] h-[300px] md:w-full md:h-full object-cover rounded-t-2xl shadow-md"
+            className="w-[400px] h-[300px] md:w-[1167px] md:h-[472px] object-cover rounded-t-2xl shadow-md"
           />
         </div>
       </div>

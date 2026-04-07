@@ -22,7 +22,7 @@ const Problem = () => {
                         </span>
                     </h1>
 
-                    <p className="custom-text paragraph-body max-w-2xl md:px-2 text-primary font-dm mt-4">
+                    <p className="custom-text paragraph-body font-med max-w-2xl text-primary font-dm mt-4">
                         We spend years learning how to stay physically fit, build careers,
                         and perform under pressure. But when it comes to focus, emotional
                         balance, or handling stress, most of us are left to figure it out
