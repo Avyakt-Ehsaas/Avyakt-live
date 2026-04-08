@@ -46,11 +46,11 @@ export default function HowItWorks() {
     <section className="relative bg-white">
 
 
-    <div className="relative">
+    {/* <div className="relative">
             <img src={TheScienceBottom} alt="sciencebotttom" className='h-24 w-full' /> 
               <div className="absolute inset-0 pointer-events-none 
         bg-gradient-to-b from-transparent via-white/40 to-[#FAFAFA]" />
-            </div>
+            </div> */}
 
 
       <div className="max-w-6xl mx-auto text-center py-16 px-4 md:px-10">

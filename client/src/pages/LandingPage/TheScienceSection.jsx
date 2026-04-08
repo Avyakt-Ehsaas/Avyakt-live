@@ -1,5 +1,5 @@
 import React from "react";
-import TheScience from '../../assets/images/TheScience.png'
+import TheScience from "../../assets/images/The_science_mask.svg"
 
 const ScienceCard = ({ title, description }) => {
   return (

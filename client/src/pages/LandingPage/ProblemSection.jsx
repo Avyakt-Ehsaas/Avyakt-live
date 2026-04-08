@@ -2,7 +2,7 @@ import ProblemBrain from "../../assets/Vector 10.png";
 
 const Pill = ({ text }) => {
   return (
-    <div className="bg-[#C2E0BA33] text-greenbase font-dm px-5 py-3 rounded-full  text-center w-[180px] md:w-[420px] hover:scale-102   transition duration-300 card-title  text-center">
+    <div className="bg-[#C2E0BA33] text-greenbase font-dm px-5 py-3 rounded-full text-center w-[180px] md:w-[420px] hover:scale-102  transition duration-300 card-title  text-center flex justify-center items-center">
       {text}
     </div>
   );
