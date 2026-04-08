@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import LandingSidebar from "./LandingSidebar/LandingSidebar";
 import HeroLanding from '../../assets/images/HeroLanding.png'
+import HeroLandingSVG from '../../assets/images/Landing_page_mask.svg'
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -17,10 +18,10 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="relative h-screen w-full bg-white overflow-hidden">
-      <div className="relative w-full h-screen overflow-hidden z-10">
+    <div className="relative h-[110vh] w-full bg-white overflow-hidden">
+      <div className="relative w-full h-full overflow-hidden z-10">
         <img
-          src={HeroLanding}
+          src={HeroLandingSVG}
           alt="Hero"
           className="absolute bottom-0 md:-bottom-0 lg:-bottom-0 xl:-bottom-10 md:right-0 bg-[#191919] w-auto h-auto min-w-full min-h-full object-cover -z-10 pointer-events-none"
         />
@@ -31,7 +32,7 @@ const HeroSection = () => {
         <div className="absolute inset-0 max-w-2xl md:max-w-full flex items-center justify-center z-50">
 
 
-          <div className="text-white font-season-medium text-center md:mt-[1rem] ">
+          <div className="text-white font-season-medium text-center">
 
             <div className="px-12 md:px-0">
               <h1 className="heading-main font-season-regular">
@@ -76,7 +77,7 @@ const HeroSection = () => {
         </div>
 
         {/* Scroll Down Arrow */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-50 cursor-pointer">
+        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-50 cursor-pointer">
           <div className="w-10 h-10 flex items-center justify-center rounded-full border border-white/40 backdrop-blur-sm animate-bounce hover:scale-110 transition">
             <span className="text-white text-lg leading-none">↓</span>
           </div>
