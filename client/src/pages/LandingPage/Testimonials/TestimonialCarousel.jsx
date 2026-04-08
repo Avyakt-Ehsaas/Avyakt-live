@@ -163,7 +163,11 @@ function TestimonialCarousel() {
                     {/* text */}
                     <p
                       className={`
+<<<<<<< HEAD
+                        font-inter text-sm font-semibold leading-[20px]
+=======
                         font-inter parageaph-secondary font-semibold leading-[20px]
+>>>>>>> 5d76c3ef4ea4c3a38ebea07aad406aafe8cd1d84
                         ${isActive ? "text-primary" : "text-gray-400"}
                       `}
                     >

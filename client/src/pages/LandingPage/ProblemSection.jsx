@@ -1,4 +1,4 @@
-import ProblemBrain from "../../assets/images/ProblemBrain.png";
+import ProblemBrain from "../../assets/Vector 10.png";
 
 const Pill = ({ text }) => {
   return (
@@ -33,7 +33,7 @@ const ProblemSection = () => {
         </header>
 
         {/* ================= MOBILE LAYOUT ================= */}
-        <div className="flex flex-col items-center gap-6 md:hidden mt-8">
+        <div className="flex flex-col items-center gap-6 lg:hidden mt-8">
 
           <Pill text="Reactions happen before thought" />
 
@@ -58,7 +58,7 @@ const ProblemSection = () => {
         </div>
 
         {/* ================= DESKTOP LAYOUT ================= */}
-        <div className="hidden md:grid grid-cols-3 items-center mt-2">
+        <div className="hidden lg:grid grid-cols-3 items-center mt-2">
 
           <div className="flex flex-col gap-18 items-end">
             <Pill text="Burnout is not an exception" />
@@ -70,7 +70,7 @@ const ProblemSection = () => {
             <img
               src={ProblemBrain}
               alt="Brain illustration"
-              className="w-90"
+              className="w-60"
             />
           </div>
 
