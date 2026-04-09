@@ -10,11 +10,10 @@ const Pill = ({ text }) => {
 
 const ProblemSection = () => {
   return (
-    <section className="bg-white pt-28 px-4 md:px-10 min-h-screen flex items-center justify-center">
-
-      
+    
+    <section className="bg-white pt-28 px-4 md:px-10 min-h-screen 2xl:min-h-fit 2xl:py-20 flex items-center justify-center
+    ">
       <div className="max-w-5xl mx-auto text-center">
-
         {/* Header */}
         <header >
           <p className="text-greenbase font-dm text-[14px] md:text-[20px] tracking-widest mb-2 uppercase">

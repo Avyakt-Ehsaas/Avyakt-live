@@ -28,7 +28,7 @@ export default function IdeaGuide() {
   ];
 
   return (
-    <div className="relative bg-white overflow-hidden min-h-screen">
+    <div className="relative bg-white overflow-hidden min-h-screen 2xl:min-h-fit">
         
      <div className="relative">
             <img src={AboutPillars} alt="programbg" className='h-28 w-full' /> 
@@ -36,7 +36,7 @@ export default function IdeaGuide() {
         bg-gradient-to-b from-transparent via-white/60 to-[#FAFAFA]" />
             </div>
 
-      <div className="flex justify-center items-center px-4 py-12">
+      <div className="flex justify-center items-center px-4 py-12 2xl:py-24">
         <div className="absolute inset-0 grid-pattern grid-fade-top pointer-events-none z-0 opacity-50" />
 
       <div className="max-w-6xl w-full text-center">

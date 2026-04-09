@@ -58,7 +58,7 @@ function SponsorPage() {
   };
 
   return (
-    <div className="w-full pt-24 pb-4 md:pb-18 bg-white min-h-screen mb-4 md:mb-10">
+    <div className="w-full pt-24 pb-4 md:pb-18 2xl:pb-0 flex items-center justify-center bg-white min-h-screen 2xl:min-h-fit mb-4 md:mb-10">
       <div className="max-w-[1280px] h-auto  mx-auto px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-24">
 
         {/* Tabs */}

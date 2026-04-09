@@ -33,7 +33,7 @@ const FinalCTA = () => {
     return (
         <>
             <section
-                className="relative z-10 w-full min-h-screen flex flex-col gap-50 items bg-cover bg-center bg-no-repeat"
+                className="relative z-10 w-full min-h-screen 2xl:min-h-fit flex flex-col gap-50 items bg-cover bg-center bg-no-repeat"
                 style={{ backgroundImage: `url(${FullCTA})` }}
             >
 
@@ -113,7 +113,7 @@ const FinalCTA = () => {
                     </div>
 
                     {/* CTA Footer */}
-                    <div className="min-h-screen relative text-white text-center flex flex-col items-center justify-center gap-2 md:gap-20 px-0 md:px-0 md:py-0">
+                    <div className="min-h-screen 2xl:min-h-fit relative text-white text-center flex flex-col items-center justify-center gap-2 md:gap-20 px-0 md:px-0 md:py-0">
 
                         <div>
                             {/* Heading */}
@@ -169,7 +169,7 @@ const FinalCTA = () => {
                         </div>
 
                         {/* Footer Section */}
-                        <div className=" w-full">
+                        <div className=" w-full 2xl:mt-20">
                             <div className="relative max-w-6xl flex flex-col items-center gap-8 mx-auto z-20 px-4">
 
                                 {/* Logo */}

@@ -105,7 +105,7 @@ function TestimonialCarousel() {
   if (!mounted) return null;
 
   return (
-    <div className="bg-white md:min-h-screen pt-10 sm:pt-20 text-[#191919]">
+    <div className="bg-white md:min-h-screen 2xl:min-h-fit pt-10 sm:pt-20 text-[#191919]">
       <div className="relative py-12">
         {/* grid bg */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#9ca3af12_1px,transparent_1px),linear-gradient(to_bottom,#9ca3af12_1px,transparent_1px)] bg-[size:60px_60px]" />
