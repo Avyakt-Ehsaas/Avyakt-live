@@ -5,7 +5,7 @@ import "./gridPattern.css"
 const Practice = () => {
 
     return (
-     <section className="relative bg-white pt-16 px-4 md:px-8 h-[125vh]">
+     <section className="relative bg-white pt-16 px-4 md:px-8 h-[125vh] 2xl:h-[80vh]">
       <div className="max-w-[1100px] mx-auto text-center flex flex-col justify-end">        
         {/* Heading */}
         <h1 className="heading-main font-season-medium text-primary leading-snug">

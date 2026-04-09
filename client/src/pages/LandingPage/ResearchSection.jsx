@@ -3,7 +3,7 @@ import "../AboutUs/gridPattern.css";
 
 const ResearchSection = () => {
   return (
-    <section className="relative w-full bg-white py-16 px-6 overflow-hidden min-h-[80vh] md:min-h-screen flex items-center justify-center">
+    <section className="relative w-full bg-white py-16 px-6 overflow-hidden min-h-[80vh] md:min-h-screen 2xl:min-h-fit flex items-center justify-center">
       {/* Grid Background */}
       <div className="absolute inset-0 grid-pattern  grid-fade-top pointer-events-none z-0" />
 

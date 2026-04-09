@@ -73,7 +73,7 @@ const AboutFooter = () => {
 
 
                     {/* CTA Footer */}
-                    <div className="min-h-screen relative text-white text-center flex flex-col items-center justify-center gap-2 md:gap-20 md:px-4 py-8 md:py-12">
+                    <div className="min-h-screen 2xl:min-h-fit relative text-white text-center flex flex-col items-center justify-center gap-2 md:gap-20 md:px-4 py-8 md:py-12">
 
                         <div>
                             {/* Heading */}
