@@ -37,7 +37,7 @@ const AvyaktSystem = () => {
   ];
 
   return (
-    <div className="relative w-full overflow-hidden bg-[#F8F9F8]">
+    <div className="relative w-full overflow-hidden bg-white">
 
       {/* Top Background */}
      <div className="relative">

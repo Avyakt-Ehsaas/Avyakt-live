@@ -18,431 +18,387 @@ import graph from "../../assets/graph.png";
 import watch from "../../assets/watch.png";
 import yoga from "../../assets/wyoga.png";
 
+// new images
+import ProgramOrganization from "../../assets/images/ProgramOrganization.png";
+import ProgramSchool from "../../assets/images/ProgramSchool.png";
+
+import SchoolProgram1 from "../../assets/images/SchoolProgram1.png";
+
+import OrganisationProgram1 from "../../assets/images/OrganisationProgram1.png"
+import OrganisationProgram2 from "../../assets/images/OrganisationProgram2.png"
+import OrganisationProgram3 from "../../assets/images/OrganisationProgram3.png"
+import OrganisationProgram4 from "../../assets/images/OrganisationProgram4.png"
+import brain from "../../assets/images/brain.png"
+
+
 
 
 const  programsTabData = {
 
   school: {
     firstPage: {
-      title: "Student Wellness Programs Designed for Focus, Calm & Emotional Growth",
-      description:
-        "Structured, neuroscience-backed programs that combine meditation, cognitive experiments, and emotional development, built specifically for Indian schools.",
+      tag: "ACADEMIC STRESS IN INDIAN SCHOOLS",
+      title: "75% of school students report high academic stress. Not some students, the majority. Exam anxiety, digital distraction, emotional overload. These aren't edge cases. They're the classroom.",
       buttonText: "Bring Avyakt to Your School",
-      image: ProgramSectionsImage,
+      image: ProgramSchool,
     },
 
-    secondPage: {
-      title: "India’s Students Are Under ",
-      spanTitle: "Unprecedented Pressure",
-      description:
-        "Academic stress, exam anxiety, digital distraction, and emotional overload are affecting students across age groups. Research from India shows:",
-      cards: [
-        {
-          cardTitle: "Academic Stress",
-          number: "78%",
-          cardDescription:
-            "Students reporting high level of exam stress and anxiety",
-        },
-        {
-          cardTitle: "Digital Distraction",
-          number: "65%",
-          cardDescription:
-            "Reduction in sustained attention span over the last decade.",
-        },
-        {
-          cardTitle: "Mental Health Gap",
-          number: "1 in 5",
-          cardDescription:
-            "Students require professional emotional support but lacks access to institutional resources.",
-        },
-      ],
+   secondPage: {
+  title: "Dhyan Shakti: Attention Lab",
+
+  description:
+    "Eight weeks. Grades 4–12. The core curriculum trains sustained attention, reduces exam anxiety, and builds emotional regulation. Then we layer the specific challenges your school is actually dealing with on top of it.",
+
+  tags: [
+    "8 weeks",
+    "Grades 4–12",
+    "NEP 2020 aligned",
+    "On-site or hybrid",
+  ],
+
+  weeks: [
+    {
+      title: "Weeks 1–2",
+      desc: "Stillness and breath-anchoring. Students learn what focused attention actually feels like.",
     },
-
-    thirdPage: {
-      title: "A ",
-      greenTitle : "Structured System ",
-      hyphen : "— ",
-      postTitle: "Not Just Random Sessions",
-      description:
-        "Avyakt Student Programs are built on three integrated pillars:",
-      cards: [
-        {
-          image: brainIcon,
-          cardTitle: "Neuroscience-Inspired Meditation Experience",
-          cardDescription:
-            "Guided practices built on how the brain regulates attention, emotions, and stress.",
-        },
-        {
-          image: yoga,
-          cardTitle: "Live Meditation Workshops & Programs",
-          cardDescription:
-            "Structured group sessions and workshops that teach practical tools for focus and calm.",
-        },
-        {
-          image: graph,
-          cardTitle: "Personalized Trackers & Growth Insights",
-          cardDescription:
-            "Monitor focus, emotional wellbeing, and consistency through progress tracking.",
-        },
-        {
-          image: watch,
-          cardTitle: "Easily Fits Real Life Routines",
-          cardDescription:
-            "Short, flexible practices designed to blend into school, work, and home schedules.",
-        },
-      ],
+    {
+      title: "Weeks 3–4",
+      desc: "Sustained attention training. Breath-counting, body scan, and cognitive tasks.",
     },
-
-    fourthPage: {
-      title: "Designed for ",
-      greenTitle: "Every Stage",
-      postTitle: " of a Student’s Growth",
-      description:
-        "Each program adapts meditation practices and activities for different age groups.",
-      cards: [
-        {
-          image: TreeLeft,
-          cardTitle: "Foundations (6–9 Years)",
-          cardDescription:
-            "Playful stories and breathing games that build calm and emotional awareness.",
-          keyPoints: ["Foundation", "Body awareness", "Emotional Expression"],
-        },
-        {
-          image: TreeCenter,
-          cardTitle: "Growth (10–14 Years)",
-          cardDescription:
-            "Guided meditation and brain-based activities for attention and regulation.",
-          keyPoints: ["Focus Building", "Stress awareness", "Habit Formation"],
-        },
-        {
-          image: TreeRight,
-          cardTitle: "Mastery (15–18 Years)",
-          cardDescription:
-            "Advanced focus training and stress control for exam readiness.",
-          keyPoints: ["Sustain Focus", "Anxiety Control", "Performance readiness"],
-        },
-      ],
+    {
+      title: "Weeks 5–6",
+      desc: "Emotional observation. Identifying triggers and building pause before response.",
     },
-
-    fifthPage: {
-      title: "Structured Programs for ",
-      spanTitle: "Mental & Emotional ",
-      title2: "Growth",
-      description:
-        "Each program combines meditation, cognitive experiments, and practical tools.",
-      cards: [
-            {
-                id: "dhyan",
-                weeks: "8 weeks",
-                title: "Dhyan Shakti — Attention Lab",
-                subtitle:
-                    "Strengthening sustained attention, reducing distraction, and improving deep focus.",
-                activities: [
-                    "Attention experiments (before & after meditation)",
-                    "Breath-counting practices",
-                    "Focus games & cognitive tasks",
-                    "Digital distraction awareness",
-                ],
-                tags: ["Improved concentration", "Classroom Engagement", "Stronger Learning readiness"],
-                image: schoolFirst,
-                imageSide: "right",
-            },
-            {
-                id: "shanti",
-                weeks: "8 weeks",
-                title: "Shanti Path — Anxiety & Calm",
-                subtitle: "Managing stress, exam anxiety, and emotional overwhelm.",
-                activities: [
-                    "Breath regulation techniques",
-                    "Calm response training",
-                    "Thought awareness exercises",
-                    "Relaxation practices",
-                ],
-                tags: ["Reduced anxiety", "Emotional control", "Increased resilience under pressure"],
-                image: schoolSecond,
-                imageSide: "left",
-            },
-            {
-                id: "Manas",
-                weeks: "10 weeks",
-                title: "Manas Vigyan — Know Your Brain",
-                subtitle: "Understanding how attention, memory, and emotions work.",
-                activities: [
-                    "Brain-based experiments",
-                    "Meditation Science labs",
-                    "Cognitive games",
-                    "Self-obervation exercises"
-                ],
-                tags: ["Greater self awareness", "Curiosity", "Owner of mental habits."],
-                image: schoolThird,
-                imageSide: "right",
-            }
-        ],
+    {
+      title: "Weeks 7–8",
+      desc: "Stress tools for high-stakes moments. Practical techniques for exams.",
     },
+  ],
 
-    sixthPage: {
-      title: "Tracking Growth beyond Classroom",
-      description:
-        "Through Cognitive Labs, students explore attention, memory, emotions, and focus.",
+  image: SchoolProgram1,
 
+  customSection: {
+    title: "What gets customised for your school",
 
-      cards: [
-        
+    subtitle: "We listen before we design.",
 
+    description:
+      "A discovery call with school leadership and a baseline assessment with students tell us where the real pressure points are. Weeks 5–8 are shaped by that.",
 
-        {
-    title: "Student Dashboard",
-    subtitle: "Daily wellness pulse",
-    metricLabel: "Focus Score",
-    value: 88,
-    chartType: "progressBar"
-  },
-  {
-    title: "Parents Dashboard",
-    subtitle: "Daily wellness pulse",
-    items: [
-      "Daily practice: 5/7 Days",
-      "Consistency: Improved"
+    points: [
+      "Board exam stress and preparation anxiety",
+      "Digital distraction and phone dependency",
+      "Classroom emotional climate issues",
+      "Age-specific language and engagement format",
     ],
-    chartType: "info"
   },
-  {
-    title: "Teacher Dashboard",
-    subtitle: "Classroom emotional climate",
-    chartType: "barChart",
-    data: [
-      { value: 30 },
-      { value: 55 },
-      { value: 35 },
-      { value: 70 },
-      { value: 60 },
-      { value: 50 },
-      { value: 35 }
-    ]
-  },
-  {
-    title: "Admin Dashboard",
-    subtitle: "Whole school wellness",
-    chartType: "radialChart",
-    value: 92,
-    metricLabel: "Participation",
-    metricStatus: "High (4%)"
-  }
+},
 
+researchShows : {
+    image : brain,
+    tag : "WHAT THE RESEARCH SHOWS",
+     heading: "Meditation works in the classroom.",
 
-
-
-      ],
-
-
-      bottomCard: {
-        title: "Aligned with ",
-        greenTitle: "NEP 2020 ",
-        postTitle: "Guidelines",
-        description:
-          "Avyakt fulfills the mandate for socio-emotional learning in Indian schools.",
-        keyPoints: [
-          {
-            title: "Holistic Development",
-            description:
-              "Nurturing mind, body, and spirit beyond academics.",
-          },
-          {
-            title: "Socio-emotional Learning",
-            description:
-              "Building empathy, resilience, and emotional intelligence.",
-          },
-          {
-            title: "Ethical Reasoning",
-            description:
-              "Fostering value-based decision making in students.",
-          },
-          {
-            title: "Mental Wellbeing",
-            description:
-              "Providing tools for stress management and focus.",
-          },
-        ],
-      },
+  cards: [
+    {
+      tags : ["Attention", "Children" ,"8 Weeks"],
+      title: "Preserved",
+      description: "Children who completed an 8-week mindfulness program maintained sustained attention, while the control group's attention measurably declined over the same period.",
     },
+    {
+      tags: ["Exam anxiety" , "Schools"],
+      title: "Reduced",
+      description: "Mindfulness-based programs in school settings consistently show significant reductions in exam anxiety and stress-related cognitive interference across multiple RCTs.",
+    },
+    {
+      tags: ["Prefrontal cortex", "Focus"],
+      title: "8 weeks",
+      description: "fMRI studies show increased grey matter in the dorsolateral prefrontal cortex, the brain's attention control hub, after 8 weeks of structured meditation. In people with zero prior experience.",}
+  ],
+},
+footer: {
+  tag: "WHAT YOU RECEIVE",
+
+  title: "A report that shows what changed.",
+
+  description:
+    "Not a participation certificate. A proper before-and-after impact report, with cognitive scores, attendance data, and a summary your principal can take to the board.",
+
+  textCard: [
+    "Cohort attention and wellbeing data",
+    "Individual student summaries (opt-in)",
+    "Delivered within 7 days of program close",
+  ],
+
+  progressCard: {
+    title: "Sample impact data — Dhyan Shakti",
+
+    progressData: [
+      { label: "Attention", points: "24" },
+      { label: "Exam anxiety", points: "27" },
+      { label: "Emotional Calm", points: "28" },
+      { label: "Attendance", points: "88" },
+    ],
+  },
+    CTA: {
+    title : "Let's talk about your classrooms.",
+    description: "Tell us what you're dealing with. We'll tell you how the program would be shaped for your students.",
+     button: "Download Program Brochure"
+  }
+}
   },
 
   organisation: {
     firstPage: {
-      title: "Workplace Wellness Programs for Focused & Resilient Teams ",
-      description:
-        "Structured mindfulness and cognitive programs designed to reduce workplace stress, improve focus, and enhance emotional intelligence across teams.",
-      buttonText: "Bring Avyakt to Your Organisation",
-      image: ProgramSectionsImage,
+      tag: "BURNOUT AT INDIAN WORKPLACES",
+      title: "Pick the problem. We build the session.",
+      description : "Each workshop targets a specific performance problem your team is already dealing with. Standalone 90-minute sessions. Science backed. Measurement built in every time. Or stack them across a quarter for compounding impact.",
+      buttonText: "Bring Avyakt to Your Workplace",
+      image: ProgramOrganization,
     },
 
     secondPage: {
-      title: "Workplace Stress Is ",
-      spanTitle: "Rising Rapidly",
-      description:
-        "Modern workplaces demand constant productivity, multitasking, and digital engagement. Studies across India show:",
-      cards: [
-        {
-          cardTitle: "Workplace Stress",
-          number: "70%",
-          cardDescription:
-            "Employees report experiencing high stress due to workload and deadlines.",
-        },
-        {
-          cardTitle: "Burnout Risk",
-          number: "60%",
-          cardDescription:
-            "Employees feel emotionally exhausted due to prolonged work pressure.",
-        },
-        {
-          cardTitle: "Focus Loss",
-          number: "50%",
-          cardDescription:
-            "Frequent digital interruptions reduce deep work productivity.",
-        },
-      ],
+  title: "The Nervous System CEO",
+
+  description:
+    "For teams where the pressure never fully switches off and people are running on adrenaline more than they realise. This session teaches the brain to regulate on demand, not just recover on weekends.",
+
+  tags: [
+    "90 minutes",
+    "Team or full org",
+    "On-site or online",
+  ],
+
+  weeks: [
+    {
+      title: "Weeks 1–2",
+      desc: "Stress anatomy. What chronic cortisol actually does to memory, decision-making, and the quality of work your team produces. Most people have never been told this.",
     },
+    {
+      title: "Weeks 3–4",
+      desc: "Regulation practice. Three evidence-based tools your team can use between meetings, not just inside a session room.",
+    },
+    {
+      title: "Weeks 5–6",
+      desc: "Integration. Building a personal recovery ritual that fits inside a real workday. Not aspirational. Practical and repeatable.",
+    },
+  ],
+
+  image: OrganisationProgram1,
+
+  customSection: {
+    title: "What gets customised for your organisation",
+
+    subtitle: "We ask before we build.",
+
+    description:
+      "A short conversation with HR tells us where the pressure is actually coming from. The session is shaped around that.",
+
+    points: [
+      "High-pressure delivery cycles and deadlines",
+      "Leadership stress cascading down to teams",
+      "Always-on culture and after-hours expectations",
+      "Specific roles carrying disproportionate load",
+    ],
+  },
+},
 
     thirdPage: {
-      title: "A ",
-      greenTitle: "Science-Based ",
-      hyphen : "",
-      postTitle: "Workplace Wellness System",
-      description:
-        "Avyakt workplace programs combine neuroscience, mindfulness, and practical exercises:",
-      cards: [
-        {
-          image: brainIcon,
-          cardTitle: "Mindfulness & Focus Training",
-          cardDescription:
-            "Techniques designed to improve concentration and cognitive clarity at work.",
-        },
-        {
-          image: yoga,
-          cardTitle: "Stress & Burnout Management",
-          cardDescription:
-            "Guided practices that help employees regulate stress and emotional pressure.",
-        },
-        {
-          image: graph,
-          cardTitle: "Team Emotional Intelligence",
-          cardDescription:
-            "Exercises that improve communication, empathy, and collaboration.",
-        },
-        {
-          image: watch,
-          cardTitle: "Flexible Workplace Integration",
-          cardDescription:
-            "Short, adaptable practices that fit easily into daily work routines.",
-        },
-      ],
+  title: "Sustainable Excellence",
+
+  description:
+    "For high-performing teams where the output looks fine on the outside but the cost of producing it keeps rising. Burnout here is quiet, not dramatic. This session names it and works at the root.",
+
+  tags: [
+    "90 minutes",
+    "Team or full org",
+    "On-site or online",
+  ],
+
+  weeks: [
+    {
+      title: "Weeks 1–2",
+      desc: "Burnout anatomy. The three dimensions most organizations miss until it is too late, and how to spot them before someone hands in their notice.",
     },
+    {
+      title: "Weeks 3–4",
+      desc: "The perfectionism trap. Why the standards that drive your best people are also quietly working against them and what to do about it.",
+    },
+    {
+      title: "Weeks 5–6",
+      desc: "Recovery design. Building the rituals and boundaries that make sustained performance actually sustainable over quarters, not just days.",
+    },
+  ],
+
+  image: OrganisationProgram2,
+
+  customSection: {
+    title: "What gets customised for your organisation",
+
+    subtitle: "We ask before we build.",
+
+    description:
+      "We look at where your high performers are in the burnout cycle before the session is designed.",
+
+    points: [
+      "Performance review cycles and their aftermath",
+      "Roles where identity is heavily tied to output",
+      "Teams recovering from a particularly hard quarter",
+      "Managers carrying both delivery and people responsibility",
+    ],
+  },
+},
+
 
     fourthPage: {
-      title: "Programs Designed for",
-      greenTitle: "Different Workplace Roles",
-      postTitle: "",
-      description:
-        "Different roles experience different pressures. Our programs adapt accordingly.",
-      cards: [
-        {
-          image: TreeLeft,
-          cardTitle: "Team Members",
-          cardDescription:
-            "Focus and emotional resilience for everyday work challenges.",
-          keyPoints: ["Focus", "Stress Balance", "Productivity"],
-        },
-        {
-          image: TreeCenter,
-          cardTitle: "Managers",
-          cardDescription:
-            "Leadership calmness and decision clarity under pressure.",
-          keyPoints: ["Decision Clarity", "Conflict Handling", "Team Awareness"],
-        },
-        {
-          image: TreeRight,
-          cardTitle: "Leadership",
-          cardDescription:
-            "Advanced mindfulness practices for strategic thinking and leadership wellbeing.",
-          keyPoints: ["Strategic Thinking","Vision Clarity", "Emotional Leadership", ],
-        },
-      ],
+  title: "Collaborative Intelligence",
+
+  description:
+  "For teams that are technically strong but losing something in how they work together. Meetings that feel unproductive. Communication that feels careful rather than honest. This session works at that layer.",
+
+  tags: [
+    "90 minutes",
+    "Teams or cross-functional groups",
+    "On-site or online",
+  ],
+
+  weeks: [
+    {
+      title: "Weeks 1–2",
+      desc: "The team brain. What Google's Project Aristotle found about what actually predicts team performance, and why psychological safety is trainable, not just aspirational.",
     },
+    {
+      title: "Weeks 3–4",
+      desc: "Listening and presence practice. The specific skills that build trust from the ground up, not from a values deck or a team offsite.",
+    },
+    {
+      title: "Weeks 5–6",
+      desc: "Team rituals. Designing practices the team actually commits to using in their regular meetings, built in the room by the people who will use them.",
+    },
+  ],
+
+  image: OrganisationProgram3,
+
+  customSection: {
+    title: "What gets customised for your organisation",
+
+    subtitle: "We ask before we build.",
+
+    description:
+      "We look at where your high performers are in the burnout cycle before the session is designed.",
+
+    points: [
+     "Mixed-hierarchy dynamics and speaking-up gaps",
+     "Cross-functional teams with low shared context",
+     "Teams coming out of conflict or restructuring",
+     "New managers building trust with existing teams"
+    ],
+  },
+},
 
     fifthPage: {
-      title: "Building Healthier and More Productive Teams",
-      description:
-        "Our programs combine meditation, cognitive tools, and behavioural insights to create sustainable workplace wellbeing.",
-    },
+  title: "The Science of Silence",
 
-    sixthPage: {
-      title: "Measuring Workplace Wellbeing",
-      description:
-        "Track improvements in focus, stress levels, and emotional balance across teams.",
-      cards: [
-  {
-    title: "Organisation Dashboard",
-    subtitle: "Workplace wellbeing overview",
-    metricLabel: "Employee Engagement",
-    value: 84,
-    chartType: "progressBar"
-  },
-  {
-    title: "HR Insights",
-    subtitle: "Employee participation",
-    items: [
-      "Weekly wellness sessions: 4/5",
-      "Stress levels: Reduced"
-    ],
-    chartType: "info"
-  },
-  {
-    title: "Team Climate",
-    subtitle: "Department wellbeing trends",
-    chartType: "barChart",
-    data: [
-      { value: 40 },
-      { value: 65 },
-      { value: 55 },
-      { value: 70 },
-      { value: 60 },
-      { value: 50 },
-      { value: 45 }
-    ]
-  },
-  {
-    title: "Management Dashboard",
-    subtitle: "Company wellness score",
-    chartType: "radialChart",
-    value: 89,
-    metricLabel: "Participation",
-    metricStatus: "Very High (6%)"
-  }
-],
-      bottomCard: {
-        title: "Aligned with Modern Workplace Wellbeing Standards",
-        description:
-          "Programs designed to support employee wellbeing initiatives in organisations.",
-        keyPoints: [
-          {
-            title: "Employee Wellbeing",
-            description: "Improving mental clarity and emotional balance.",
-          },
-          {
-            title: "Productivity",
-            description: "Helping teams work with deeper focus and energy.",
-          },
-          {
-            title: "Leadership Growth",
-            description: "Strengthening mindful and emotionally intelligent leadership.",
-          },
-          {
-            title: "Sustainable Work Culture",
-            description: "Creating healthier and more balanced workplaces.",
-          },
-        ],
-      },
+  description:
+    "For teams that are always on, always connected, and quietly running out of the cognitive capacity to do their best work. This session gives the brain actual recovery time, not just a break.",
+
+  tags: [
+    "90 minutes",
+    "All levels, tech-heavy teams ",
+    "On-site or online",
+  ],
+
+  weeks: [
+    {
+      title: "Weeks 1–2",
+      desc: "Digital overload anatomy. What chronic notification exposure does to the brain's ability to focus, decide, and recover. The numbers here are harder to ignore than most people expect.",
     },
+    {
+      title: "Weeks 3–4",
+      desc: "Silence practice. Structured, guided sessions that give the prefrontal cortex genuine recovery time. Not a break from work. A neurological reset.",
+    },
+    {
+      title: "Weeks 5–6",
+      desc: "Protocol design. Building a personal digital detox routine and proposing a team-level quiet window that fits the way you actually work.",
+    },
+  ],
+
+  image: OrganisationProgram4,
+
+  customSection: {
+    title: "What gets customised for your organisation",
+
+    subtitle: "We ask before we build.",
+
+    description:
+      "We map your team's specific digital load before designing the session.",
+
+    points: [
+    "Meeting density and back-to-back calendar patterns",
+    "Slack and notification culture",
+    "Remote vs in-person attention differences",
+    "Roles needing deep work but structured for constant interruption"
+    ],
+  },
+  },
+
+  researchShows : {
+    image : brain,
+    tag : "WHAT THE RESEARCH SHOWS",
+     heading: "Meditation works in the organisation.",
+
+  cards: [
+    {
+      tags : ["Attention", "Children" ,"8 Weeks"],
+      title: "Preserved",
+      description: "Children who completed an 8-week mindfulness program maintained sustained attention, while the control group's attention measurably declined over the same period.",
+    },
+    {
+      tags: ["Exam anxiety" , "Schools"],
+      title: "Reduced",
+      description: "Mindfulness-based programs in school settings consistently show significant reductions in exam anxiety and stress-related cognitive interference across multiple RCTs.",
+    },
+    {
+      tags: ["Prefrontal cortex", "Focus"],
+      title: "8 weeks",
+      description: "fMRI studies show increased grey matter in the dorsolateral prefrontal cortex, the brain's attention control hub, after 8 weeks of structured meditation. In people with zero prior experience.",}
+  ],
+},
+
+
+footer: {
+  tag: "WHAT YOU RECEIVE",
+
+  title: "An HR report worth presenting.",
+
+  description:
+    "Before-and-after attention and stress scores, engagement data, and a clean leadership summary. Built around what HR needs to show ROI, not what's easiest to produce.",
+
+  textCard: [
+    "Team-level attention and stress before-after",
+    "Individual summaries available (opt-in)",
+    "Delivered within 7 days of close"
+  ],
+
+  progressCard: {
+    title: "Sample HR data — Stress Reset cohort",
+
+    progressData: [
+      { label: "Stress Score", points: "24" },
+      { label: "Focus Quality", points: "27" },
+      { label: "Emotional Calm", points: "28" },
+      { label: "Participation", points: "88" },
+    ],
+  },
+  CTA: {
+    title : "Tell us what's happening in your team.",
+    description: "We'll figure out which program fits and what the customized layer should look like for your people.",
+    button: "Download Corporate Brochure"
+
+  }
+}
+
+
   },
 
   senior: {
