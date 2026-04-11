@@ -410,210 +410,109 @@ footer: {
       image: SeniorTab,
     },
 
-    secondPage: {
-      title: "Aging Minds Face Growing ",
-      spanTitle: "Emotional & Cognitive Challenges",
-      description:
-        "As people age, emotional wellbeing, memory, and social connection become essential for quality of life.",
-      cards: [
-        {
-          cardTitle: "Loneliness & Isolation",
-          number: "1 in 4",
-          cardDescription:
-            "Social isolation increases risks of depression and cognitive decline.",
-        },
-        {
-          cardTitle: "Cognitive Decline",
-          number: "15%",
-          cardDescription:
-            "Adults over 60 experience mild cognitive impairment.",
-        },
-        {
-          cardTitle: "Emotional Wellbeing",
-          number: "30%",
-          cardDescription:
-            "Seniors report experiencing persistent stress or anxiety.",
-        },
-      ],
-    },
+   secondPage: {
+  title: "Dhyan Shakti: Attention Lab",
 
-    thirdPage: {
-      title: "A Structured System for",
-      hyphen : "",
-      greenTitle : "Peaceful Aging",
-      postTitle: "",
-      description:
-        "Avyakt Senior Programs combine meditation, cognitive exercises, and emotional wellbeing practices designed specifically for older adults.",
-      cards: [
-        {
-          image: brainIcon,
-          cardTitle: "Neuroscience-Inspired Meditation Experience",
-          cardDescription:
-            "Gentle guided practices that help regulate emotions, reduce stress, and support mental clarity.",
-        },
-        {
-          image: yoga,
-          cardTitle: "Group Meditation & Wellness Sessions",
-          cardDescription:
-            "Structured sessions designed to encourage relaxation, reflection, and community connection.",
-        },
-        {
-          image: graph,
-          cardTitle: "Personalized Wellbeing Tracking",
-          cardDescription:
-            "Track mood, cognitive activity, and mindfulness practice over time."
-        },
-        {
-          image: watch,
-          cardTitle: "Flexible Program Integration",
-          cardDescription:
-            "Programs can be easily integrated into senior clubs, community centers, and wellness homes.",
-        },
-      ],
-    },
-
-  fourthPage: {
-  title: "Programs Designed for ",
-  greenTitle: "Different Senior Needs",
-  postTitle: "",
   description:
-    "Each program adapts meditation practices, activities, and cognitive experiments to support mental clarity, emotional wellbeing, and cognitive health in seniors.",
-  cards: [
+    "Eight weeks. Grades 4–12. The core curriculum trains sustained attention, reduces exam anxiety, and builds emotional regulation. Then we layer the specific challenges your school is actually dealing with on top of it.",
+
+  tags: [
+    "8 weeks",
+    "Grades 4–12",
+    "NEP 2020 aligned",
+    "On-site or hybrid",
+  ],
+
+  weeks: [
     {
-      image: seniorLeft,
-      cardTitle: "Active Aging",
-      cardDescription:
-        "For seniors who want to maintain mental sharpness, emotional wellbeing, and a calm daily routine.",
-      keyPoints: [
-        "Mental clarity",
-        "Memory strength",
-        "Stress reduction"
-      ]
+      title: "Weeks 1–2",
+      desc: "Stillness and breath-anchoring. Students learn what focused attention actually feels like.",
     },
     {
-      image : seniorCenter,
-      cardTitle: "Mindful Living",
-      cardDescription:
-        "Programs designed to deepen awareness, emotional peace, and meaningful daily habits.",
-      keyPoints: [
-        "Emotional balance",
-        "Relaxation",
-        "Inner calm"
-      ]
+      title: "Weeks 3–4",
+      desc: "Sustained attention training. Breath-counting, body scan, and cognitive tasks.",
     },
     {
-      image: seniorRight,
-      cardTitle: "Cognitive Support",
-      cardDescription:
-        "Practices and cognitive activities that support memory, attention, and mental engagement.",
-      keyPoints: [
-        "Memory exercises",
-        "Attention training",
-        "Cognitive stimulation"
-      ]
-    }
-  ]
+      title: "Weeks 5–6",
+      desc: "Emotional observation. Identifying triggers and building pause before response.",
+    },
+    {
+      title: "Weeks 7–8",
+      desc: "Stress tools for high-stakes moments. Practical techniques for exams.",
+    },
+  ],
+
+  image: SchoolProgram1,
+
+  customSection: {
+    title: "What gets customised for your school",
+
+    subtitle: "We listen before we design.",
+
+    description:
+      "A discovery call with school leadership and a baseline assessment with students tell us where the real pressure points are. Weeks 5–8 are shaped by that.",
+
+    points: [
+      "Board exam stress and preparation anxiety",
+      "Digital distraction and phone dependency",
+      "Classroom emotional climate issues",
+      "Age-specific language and engagement format",
+    ],
+  },
 },
 
-    fifthPage: {
-      title: "Structured Programs for ",
-      spanTitle: "Cognitive & Emotional ",
-      title2: "Wellbeing",
-      description:
-        "Each program combines meditation, cognitive experiments, and practical tools to build lifelong focus, calm, and resilience.",
-      cards: [
-          {
-              id: "ShantiPath",
-              weeks: "8 weeks",
-              title: "Shanti Path- Calm & Emotional Balance",
-              subtitle:
-                  "Supporting emotional peace and stress reduction through guided meditation.",
-              activities: [
-                  "Gentle Breathing practices",
-                  "Relaxation exercises",
-                  "Emotional reflection sessions",
-              ],
-              tags: ["Improved emotional calm", "Better Stress Regulations", "Enhanced wellbeing"],
-              image: seniorFirst,
-              imageSide: "right",
-          },
-          {
-              id: "ManasShanti",
-              weeks: "8 weeks",
-              title: "Manas Shakti- Cognitive Vitality",
-              subtitle: "Exercises and mindfulness practices designed to support attention and memory.",
-              activities: [
-                  "Memory exercises",
-                  "Calm response training",
-                  "Focus activities",
-                  
-              ],
-              tags: ["Improved attention", "Cognitive engagement", "Mentalclarity"],
-              image: seniorSecond,
-              imageSide: "left",
-          },
-          {
-              id: "Samvedna",
-              weeks: "6 weeks",
-              title: "Samvedna- Connection & Emotional Wellness",
-              subtitle: "Encouraging empathy, social connection, and emotional wellbeing in senior communities.",
-              activities: [
-                  "Group reflections sessions",
-                  "Gratitude practices",
-                  "Guided conversations",
-                  
-              ],
-              tags: ["Reduced loneliness", "Stronger community bonds", "Positive emotional habits."],
-              image: seniorThird,
-              imageSide: "right",
-          }
-          
-      ],
-    },
+researchShows : {
+    image : brain,
+    tag : "WHAT THE RESEARCH SHOWS",
+     heading: "Meditation works in the classroom.",
 
-    sixthPage: {
-      title: "Tracking Wellbeing Beyond Daily Life",
-      description:
-        "Through guided meditation and cognitive wellness programs, seniors can track emotional balance, mental clarity, and overall wellbeing over time.",
-     cards: [
-  {
-    title: "Senior Dashboard",
-    subtitle: "Daily wellbeing pulse",
-    metricLabel: "Calmness score",
-    value: 88,
-    chartType: "progressBar"
-  },
-  {
-    title: "Caregiver Dashboard",
-    subtitle: "Wellbeing updates",
-    items: [
-      "Group meditation: 5/7 Days",
-      "Emotional wellbeing stable"
+  cards: [
+    {
+      tags : ["Attention", "Children" ,"8 Weeks"],
+      title: "Preserved",
+      description: "Children who completed an 8-week mindfulness program maintained sustained attention, while the control group's attention measurably declined over the same period.",
+    },
+    {
+      tags: ["Exam anxiety" , "Schools"],
+      title: "Reduced",
+      description: "Mindfulness-based programs in school settings consistently show significant reductions in exam anxiety and stress-related cognitive interference across multiple RCTs.",
+    },
+    {
+      tags: ["Prefrontal cortex", "Focus"],
+      title: "8 weeks",
+      description: "fMRI studies show increased grey matter in the dorsolateral prefrontal cortex, the brain's attention control hub, after 8 weeks of structured meditation. In people with zero prior experience.",}
+  ],
+},
+footer: {
+  tag: "WHAT YOU RECEIVE",
+
+  title: "A report that shows what changed.",
+
+  description:
+    "Not a participation certificate. A proper before-and-after impact report, with cognitive scores, attendance data, and a summary your principal can take to the board.",
+
+  textCard: [
+    "Cohort attention and wellbeing data",
+    "Individual student summaries (opt-in)",
+    "Delivered within 7 days of program close",
+  ],
+
+  progressCard: {
+    title: "Sample impact data — Dhyan Shakti",
+
+    progressData: [
+      { label: "Attention", points: "24" },
+      { label: "Exam anxiety", points: "27" },
+      { label: "Emotional Calm", points: "28" },
+      { label: "Attendance", points: "88" },
     ],
-    chartType: "info"
   },
-
-  {
-    title: "Senior Center Dashboard",
-    subtitle: "Community wellbeing insights",
-    chartType: "radialChart",
-    value: 92,
-    metricLabel: "Participation",
-    metricStatus: "High (4%)"
+    CTA: {
+    title : "Let's talk about your classrooms.",
+    description: "Tell us what you're dealing with. We'll tell you how the program would be shaped for your students.",
+     button: "Download Program Brochure"
   }
-],
-      bottomCard: {
-        title: "Supporting Healthy & Active Aging",
-        description:
-          "Avyakt fulfills the mandate for mandatory socio-emotional learning in Indian schools.",
-        keyPoints: [
-          { title: "Social Connection", description: "Encouraging community interaction and reducing loneliness" },
-          { title: "Emotional Wellbeing", description: "Supporting calm, resilience, and emotional balance in later life." },
-          { title: "Mind-Body Balance", description: "Gentle mindfulness practices that support overall wellbeing." },
-          { title: "Cognitive Health", description: "Activities that help maintain memory, attention, and mental clarity." },
-        ],
-      },
-    },
+}
   },
 
   individual: {
@@ -625,153 +524,110 @@ footer: {
       image: ProgramSectionsImage,
     },
 
-    secondPage: {
-      title: "Modern Life Creates Constant ",
-      spanTitle: "Mental Noise",
-      description:
-        "Fast lifestyles, digital overload, and constant demands affect mental wellbeing.",
-      cards: [
-        {
-          cardTitle: "Stress",
-          number: "80%",
-          cardDescription:
-            "Individuals experience daily stress due to lifestyle pressure.",
-        },
-        {
-          cardTitle: "Attention Fragmentation",
-          number: "60%",
-          cardDescription:
-            "Constant digital exposure reduces sustained focus.",
-        },
-        {
-          cardTitle: "Emotional Overload",
-          number: "1 in 3",
-          cardDescription:
-            "People report feeling emotionally overwhelmed frequently.",
-        },
-      ],
-    },
+   secondPage: {
+  title: "Dhyan Shakti: Attention Lab",
 
-    thirdPage: {
-      title: "A Personal System for Mental Clarity",
-      hyphen : "",
-      description:
-        "Programs designed to build focus, calm, and emotional intelligence.",
-      cards: [
-        {
-          image: brainIcon,
-          cardTitle: "Daily Guided Meditation",
-          cardDescription: "Short sessions that build calm and focus.",
-        },
-        {
-          image: yoga,
-          cardTitle: "Stress Reset Practices",
-          cardDescription: "Tools to release tension and restore balance.",
-        },
-        {
-          image: graph,
-          cardTitle: "Mind Awareness Exercises",
-          cardDescription: "Practices to observe thoughts and emotions clearly.",
-        },
-        {
-          image: watch,
-          cardTitle: "Habit Building Tools",
-          cardDescription: "Simple routines that make mindfulness consistent.",
-        },
-      ],
-    },
+  description:
+    "Eight weeks. Grades 4–12. The core curriculum trains sustained attention, reduces exam anxiety, and builds emotional regulation. Then we layer the specific challenges your school is actually dealing with on top of it.",
 
-    fourthPage: {
-      title: "Programs Designed for Your ",
-      greenTitle: "Individual Needs",
-      postTitle: "",
-      description:
-        "Different practices support different aspects of personal wellbeing.",
-      cards: [
-        {
-          image: TreeLeft,
-          cardTitle: "Focus Training",
-          cardDescription: "Strengthen attention and concentration.",
-          keyPoints: ["Attention", "Clarity", "Productivity"],
-        },
-        {
-          image: TreeCenter,
-          cardTitle: "Emotional Balance",
-          cardDescription: "Learn to manage emotions with awareness.",
-          keyPoints: ["Calm", "Self-awareness", "Resilience"],
-        },
-        {
-          image: TreeRight,
-          cardTitle: "Inner Growth",
-          cardDescription: "Develop deeper mindfulness and insight.",
-          keyPoints: ["Reflection", "Clarity", "Personal growth"],
-        },
-      ],
-    },
+  tags: [
+    "8 weeks",
+    "Grades 4–12",
+    "NEP 2020 aligned",
+    "On-site or hybrid",
+  ],
 
-    fifthPage: {
-      title: "Build a Life of Focus, Calm, and Clarity",
-      description:
-        "Structured meditation practices that support long-term emotional and mental wellbeing.",
+  weeks: [
+    {
+      title: "Weeks 1–2",
+      desc: "Stillness and breath-anchoring. Students learn what focused attention actually feels like.",
     },
+    {
+      title: "Weeks 3–4",
+      desc: "Sustained attention training. Breath-counting, body scan, and cognitive tasks.",
+    },
+    {
+      title: "Weeks 5–6",
+      desc: "Emotional observation. Identifying triggers and building pause before response.",
+    },
+    {
+      title: "Weeks 7–8",
+      desc: "Stress tools for high-stakes moments. Practical techniques for exams.",
+    },
+  ],
 
-    sixthPage: {
-      title: "Track Your Mindfulness Journey",
-      description:
-        "Observe improvements in focus, emotional balance, and daily calmness.",
-      cards: [
-  {
-    title: "Personal Dashboard",
-    subtitle: "Daily mindfulness pulse",
-    metricLabel: "Focus Score",
-    value: 91,
-    chartType: "progressBar"
-  },
-  {
-    title: "Daily Habits",
-    subtitle: "Mindfulness activities",
-    items: [
-      "Meditation: 6/7 Days",
-      "Stress level: Improved"
+  image: SchoolProgram1,
+
+  customSection: {
+    title: "What gets customised for your school",
+
+    subtitle: "We listen before we design.",
+
+    description:
+      "A discovery call with school leadership and a baseline assessment with students tell us where the real pressure points are. Weeks 5–8 are shaped by that.",
+
+    points: [
+      "Board exam stress and preparation anxiety",
+      "Digital distraction and phone dependency",
+      "Classroom emotional climate issues",
+      "Age-specific language and engagement format",
     ],
-    chartType: "info"
   },
-  {
-    title: "Mood Tracker",
-    subtitle: "Weekly emotional balance",
-    chartType: "barChart",
-    data: [
-      { value: 50 },
-      { value: 65 },
-      { value: 70 },
-      { value: 75 },
-      { value: 68 },
-      { value: 72 },
-      { value: 80 }
-    ]
-  },
-  {
-    title: "Wellness Score",
-    subtitle: "Overall wellbeing",
-    chartType: "radialChart",
-    value: 94,
-    metricLabel: "Progress",
-    metricStatus: "Excellent"
-  }
-],
-      bottomCard: {
-        title: "Your Personal Growth Companion",
-        description:
-          "Tools and practices designed to support lifelong mindfulness.",
-        keyPoints: [
-          { title: "Mental Clarity", description: "Strengthening awareness and focus." },
-          { title: "Emotional Balance", description: "Managing stress and emotions." },
-          { title: "Consistent Practice", description: "Building healthy mindfulness habits." },
-          { title: "Self Growth", description: "Encouraging deeper personal understanding." },
-        ],
-      },
+},
+
+researchShows : {
+    image : brain,
+    tag : "WHAT THE RESEARCH SHOWS",
+     heading: "Meditation works in the classroom.",
+
+  cards: [
+    {
+      tags : ["Attention", "Children" ,"8 Weeks"],
+      title: "Preserved",
+      description: "Children who completed an 8-week mindfulness program maintained sustained attention, while the control group's attention measurably declined over the same period.",
     },
+    {
+      tags: ["Exam anxiety" , "Schools"],
+      title: "Reduced",
+      description: "Mindfulness-based programs in school settings consistently show significant reductions in exam anxiety and stress-related cognitive interference across multiple RCTs.",
+    },
+    {
+      tags: ["Prefrontal cortex", "Focus"],
+      title: "8 weeks",
+      description: "fMRI studies show increased grey matter in the dorsolateral prefrontal cortex, the brain's attention control hub, after 8 weeks of structured meditation. In people with zero prior experience.",}
+  ],
+},
+footer: {
+  tag: "WHAT YOU RECEIVE",
+
+  title: "A report that shows what changed.",
+
+  description:
+    "Not a participation certificate. A proper before-and-after impact report, with cognitive scores, attendance data, and a summary your principal can take to the board.",
+
+  textCard: [
+    "Cohort attention and wellbeing data",
+    "Individual student summaries (opt-in)",
+    "Delivered within 7 days of program close",
+  ],
+
+  progressCard: {
+    title: "Sample impact data — Dhyan Shakti",
+
+    progressData: [
+      { label: "Attention", points: "24" },
+      { label: "Exam anxiety", points: "27" },
+      { label: "Emotional Calm", points: "28" },
+      { label: "Attendance", points: "88" },
+    ],
   },
+    CTA: {
+    title : "Let's talk about your classrooms.",
+    description: "Tell us what you're dealing with. We'll tell you how the program would be shaped for your students.",
+     button: "Download Program Brochure"
+  }
+}
+}
 };
 
 export default programsTabData;
