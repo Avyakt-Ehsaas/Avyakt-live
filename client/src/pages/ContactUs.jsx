@@ -1,171 +1,241 @@
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { FiMail, FiPhone, FiMapPin, FiSend } from 'react-icons/fi'
-import Footer from "./LandingPage/Footer"
-import LandingSidebar from "./LandingPage/LandingSidebar/LandingSidebar"
-import ContactImage from '../assets/contactUs.webp'
+import React, { useState } from "react";
+import { MdEmail , MdPhone} from "react-icons/md";
+import LandingSidebar from "./LandingPage/LandingSidebar/LandingSidebar";
+import Rectangle from "../assets/images/Rectangle.png"
+import ContactUS from "../assets/images/ContactUS.png"
 
-// Animation Variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 }
-  }
-}
+export default function ContactPage() {
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [hoverCard, setHoverCard] = useState(null);
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { ease: 'easeOut', duration: 0.5 } }
-}
-
-const ContactCard = ({ icon, title, value }) => (
-  <motion.div
-    variants={itemVariants}
-    whileHover={{ y: -2 }}
-    className="flex items-center gap-4 bg-white rounded-xl px-4 py-3 border border-gray-200 shadow-sm"
-  >
-    <div className="w-9 h-9 flex items-center justify-center rounded-lg bg-orange-100 text-orange-600 text-base">
-      {icon}
-    </div>
-    <div>
-      <p className="text-[11px] font-medium text-gray-500 uppercase tracking-wider">{title}</p>
-      <p className="text-sm font-medium text-gray-800">{value}</p>
-    </div>
-  </motion.div>
-)
-
-const ContactUs = () => {
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
-
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    alert('Thank you! Your message has been sent.')
-    setForm({ name: '', email: '', message: '' })
-  }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-orange-50">
+    <div className="bg-white relative overflow-hidden">
       <LandingSidebar />
+      {/* main first screen */}
+        {/* Background Image */}
+        <img
+          src={Rectangle}
+          alt=""
+          className="absolute inset-0 md:h-screen md:w-screen z-0 pointer-events-none"
+        />
+     
 
-      {/* Page Heading */}
-      <section className="pt-28 pb-16 text-center max-w-4xl mx-auto px-6">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900"
-        >
-          Contact <span className="text-orange-500">Avyakt Ehsaas</span>
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
-          className="mt-3 text-base text-gray-600"
-        >
-          We'd love to hear from you. Reach out for programs, partnerships, or general queries.
-        </motion.p>
-      </section>
 
-      {/* Cards + Image */}
-      <section className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-        {/* Left: Cards */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="space-y-4"
-        >
-          <ContactCard icon={<FiMail />} title="Email" value="support@avyaktehsaas.com" />
-          <ContactCard icon={<FiPhone />} title="Phone" value="+91 98765 43210" />
-          <ContactCard icon={<FiMapPin />} title="Office" value="15th floor Ocus Quantum, Gurgaon, Haryana, India" />
-        </motion.div>
+        {/* Content */}
+        <div className=" min-h-screen z-20 text-center text-greenbase flex justify-center items-center z-10">
+          <div className="container max-w-5xl flex justify-between py-18">
+            {/* left */}
+            <div className="max-w-xl py-24">
+              <h1 className="heading-main text-primary font-season font-med text-left"> Connect with avyakt</h1>
+              <p className="paragraph-body text-primary text-left font-dm ">Whether you’re exploring a program, have a question, or want to collaborate, we’re here to help.</p>
 
-        {/* Right: Animated Image */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="flex justify-center order-1 lg:order-2"
-        >
-          <motion.img
-            src={ContactImage}
-            alt="Meditation"
-            className="w-full max-w-md rounded-3xl shadow-lg"
-            whileHover={{ scale: 1.03 }}
-          />
-        </motion.div>
-      </section>
+              <div className="flex flex-col sm:flex-row gap-4 mt-4">
+                <button
+                  className="bg-[#71AC61]  w-full sm:w-[250px] text-white font-medium font-dm px-4 py-4 rounded-full hover:bg-[#4F7944] transition-all duration-300 cursor-pointer"
+                >
+                  Talk to our team
+                </button>
 
-      {/* Map + Form */}
-      <section className="max-w-7xl mx-auto px-6 mt-24 pb-28 grid lg:grid-cols-2 gap-16 items-start">
-        {/* Map */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm h-[420px]"
-        >
-         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.8210031821345!2d77.06623457549323!3d28.42465747577892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d2277f766242f%3A0xc932b58d70526b94!2sOcus%20Quantum!5e0!3m2!1sen!2sin!4v1768907097682!5m2!1sen!2sin" width="800" height="600" style={{border:0}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </motion.div>
+                <button
+                  className="bg-transparent border w-full sm:w-[250px] text-[#71AC61] font-medium font-dm px-4 py-4 cursor-pointer rounded-full hover:bg-[#4F7944] transition-all duration-300 hover:text-white"
+                >
+                  Email us directly
+                </button>
+              </div>
+            </div>
+            {/* right */}
+            <div className="w-[360px] 2xl:w-[420px]">
+              <img src={ContactUS} alt="contact us " />
+            </div>
+          </div>
+        </div>
 
-        {/* Form */}
-        <motion.form
-          onSubmit={handleSubmit}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-white rounded-3xl p-8 border border-gray-200 shadow-md space-y-5"
-        >
-          <h3 className="text-2xl font-semibold text-gray-900">Send a Message</h3>
+      {/* MAP + FORM SECTION */}
+      <div className="py-12 md:py-12 px-4" id="contact">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-6 md:gap-10">
 
-          <input
-            type="text"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            placeholder="Your Name"
-            required
-            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-500 outline-none"
-          />
+            {/* MAP - Left Side with Animation */}
+            <div className="md:col-span-3 animate-fade-in mt-4" style={{ animationDelay: '0.2s' }}>
+              <div className="rounded-2xl md:rounded-2xl overflow-hidden shadow-2xl h-64 sm:h-80 md:h-130 border border-emerald-100 hover:shadow-3xl transition-shadow duration-500 group ">
+                <div className="relative h-full w-full">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.8062058148685!2d77.06573327374258!3d28.425103893473185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d2277f957e045%3A0x84b1ea2fe2951fa!2sOcus%20Quantum%2C%20Sector%2051%2C%20Gurugram%2C%20Samaspur%2C%20Haryana%20122018!5e0!3m2!1sen!2sin!4v1775229018598!5m2!1sen!2sin" width="100%" height="100%" style={{ border: '0', display: 'block' }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                    <p className="text-white/95 font-dm font-medium text-sm">Our Meditation Center</p>
+                    <p className="text-white/80 font-dm text-xs">Sector 51, Gurugram, Haryana 122018</p>
+                  </div>
+                </div>
 
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Your Email"
-            required
-            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-500 outline-none"
-          />
+              </div>
+              <div >
+                <p className="text-primary font-dm paragraph-body font-med text-left mt-6">Choose how you’d like to reach us</p>
+                <div className="flex gap-6 mt-4">
+                  <div className="bg-[#C2E0BA33] px-4 py-3 rounded-xl">
+                     <div className="flex">
+                     <MdEmail  className="text-greenbase mr-2" size={28}/>
+                    <h3 className="text-primary text-base md:text-[20px] font-med font-dm ">
+                      Email</h3></div>
+                    <p className="font-dm text-primary text-base md:text-[20px] "
+                    >
+                      hello@avyaktehsaas.com</p>
+                  </div>
+                  <div className="bg-[#C2E0BA33] px-4 py-3 rounded-xl">
+                   <div className="flex">
+                     <MdPhone  className="text-greenbase mr-2" size={28}/>
+                    <h3 className="text-primary text-base md:text-[20px] font-med font-dm ">Call</h3></div>
+                    <p className="font-dm text-primary text-base md:text-[20px]">+91 9454360828</p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          <textarea
-            name="message"
-            rows="5"
-            value={form.message}
-            onChange={handleChange}
-            placeholder="Your Message"
-            required
-            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-500 outline-none resize-none"
-          />
+            {/* FORM - Right Side with Premium Design */}
+            <div className="md:col-span-3 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+              <div className="bg-gradient-to-br from-white to-emerald-50/40 rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl border border-emerald-100/50 backdrop-blur-sm">
 
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.97 }}
-            type="submit"
-            className="w-full bg-orange-500 text-white py-3 rounded-full text-sm font-semibold flex items-center justify-center gap-2"
-          >
-            Send Message <FiSend />
-          </motion.button>
-        </motion.form>
-      </section>
+                {/* Form Header */}
+                <div className="mb-6 md:mb-8">
+                  <h2 className="text-primary font-season font-med heading-large text-left">
+                    Tell us a bit about what you’re looking for
+                  </h2>
+
+                  <p className="paragraph-secondary font-dm mt-2 text-primary text-left font-regular">Share your journey with us. Whether you have questions or just want to connect, we'd love to hear from you.</p>
+                </div>
+
+                {/* Form */}
+                <form className="space-y-4 md:space-y-6" onSubmit={(e) => e.preventDefault()}>
+
+                  {/* Name Field */}
+                  <div className="group">
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      className="w-full px-4 sm:px-5 py-3 rounded-lg md:rounded-xl bg-white border-2 border-greenbase text-primary placeholder-[#71AC61] outline-none focus:border-greenbase focus:bg-[#71AC611A] transition-all duration-300 shadow-sm hover:shadow-md text-left paragraph-secondary font-dm font-medium text-greenbase"
+                      placeholder="Full Name"
+                    />
+                  </div>
+
+                  {/* Email Field */}
+                  <div className="group">
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full px-4 sm:px-5 py-3 rounded-lg md:rounded-xl bg-white border-2 border-greenbase text-primary placeholder-[#71AC61] outline-none focus:border-greenbase focus:bg-[#71AC611A] transition-all duration-300 shadow-sm hover:shadow-md text-base font-dm font-medium paragraph-secondary text-left text-greenbase"
+                      placeholder="E-mail"
+                    />
+                  </div>
+                  <div className="group">
+                    <input
+                      type="text"
+                      name="text"
+                      value={formData.text}
+                      onChange={handleChange}
+                      className="w-full px-4 sm:px-5 py-3  rounded-lg md:rounded-xl bg-white border-2 border-greenbase text-primary placeholder-[#71AC61] outline-none focus:border-greenbase focus:bg-[#71AC611A] transition-all duration-300 shadow-sm hover:shadow-md paragraph-secondary text-left font-dm font-medium text-greenbase"
+                      placeholder="Organisation(Optional)"
+                    />
+                  </div>
+
+                  {/* Subject Field */}
+                  <div className="group">
+                    <select
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      className="w-full px-4 sm:px-5 py-3 rounded-lg md:rounded-xl bg-white border-2 border-greenbase text-primary placeholder-gray-400 outline-none focus:border-greenbase focus:bg-[#71AC611A] transition-all duration-300 shadow-sm hover:shadow-md appearance-none cursor-pointer text-greenbase font-dm paragraph-secondary text-left"
+                    >
+                      <option value="">Inquiry type</option>
+                      <option value="general">General Inquiry</option>
+                      <option value="classes">About Classes</option>
+                      <option value="retreat">Retreat Programs</option>
+                      <option value="corporate">Corporate Wellness</option>
+                      <option value="partnership">Partnership</option>
+                    </select>
+                  </div>
+
+                  {/* Message Field */}
+                  <div className="group">
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      rows="4"
+                      className="w-full px-4 sm:px-5 py-3  rounded-lg md:rounded-xl bg-white border-2 border-greenbase text-primary placeholder-[#71AC61] outline-none focus:border-greenbase focus:bg-[#71AC611A] font-dm font-medium  transition-all duration-300 shadow-sm hover:shadow-md text-left paragraph-secondary font-dm text-greenbase"
+                      placeholder="Tell us about your meditation experience or questions..."
+                    ></textarea>
+                  </div>
+
+                  {/* Checkbox */}
+                  {/* <div className="flex items-start gap-2 md:gap-3">
+                    <input 
+                      type="checkbox" 
+                      id="consent"
+                      className="w-4 h-4 sm:w-5 sm:h-5 rounded border-2 border-[#71AC6144] text-white accent-[#71AC61] focus:ring-greenbase transition-all duration-300 cursor-pointer mt-1"
+                    />
+                    <label htmlFor="consent" className="text-xs sm:text-base text-primary font-medium font-dm cursor-pointer leading-relaxed">
+                      I agree to be contacted and receive updates about our meditation programs
+                    </label>
+                  </div> */}
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    className="w-full bg-greenbase-primary text-white font-semibold py-3 sm:py-4 rounded-xl md:rounded-xl transition-all duration-300 transform hover:scale-103 shadow-lg hover:shadow-2xl active:scale-95 flex items-center justify-center gap-2 group text-sm sm:text-base font-dm cursor-pointer"
+                  >
+                    <span>Send Message</span>
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </button>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* Add required animations in global CSS */}
+      <style>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes slide-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in {
+          animation: fade-in 0.8s ease-out forwards;
+          opacity: 0;
+        }
+
+        .animate-slide-up {
+          animation: slide-up 0.8s ease-out forwards;
+          opacity: 0;
+        }
+      `}</style>
+
     </div>
-  )
+  );
 }
-
-export default ContactUs;
