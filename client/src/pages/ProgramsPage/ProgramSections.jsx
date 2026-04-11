@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import ProgramSectionsImage from "../../assets/images/ProgramSectionBg.png";
-import AboveProgram from '../../assets/images/AbovePrograms.png'
 
 const ProgramSections = ({activeTab,setActiveTab,data}) => {
 
@@ -14,15 +12,15 @@ const ProgramSections = ({activeTab,setActiveTab,data}) => {
   ];
 
   return (
-    <section className="relative bg-[#F8F9F8] overflow-hidden">
+    <section className="relative bg-white overflow-hidden">
 
     <div className="relative">
-            <img src={AboveProgram} alt="programbg" className='h-full w-full' /> 
+            <img src={data.image} alt="programbg" className='h-full w-full' /> 
               <div className="absolute inset-0 pointer-events-none 
         bg-gradient-to-b from-transparent via-white/40 to-[#FAFAFA]" />
             </div>
 
-      <div className="relative max-w-6xl mx-auto px-6 pt-10 text-center">
+      <div className="relative max-w-7xl mx-auto px-6 pt-10 text-center">
 
         {/* Tabs */}
         <div className="flex font-dm justify-center gap-8 text-sm md:text-base font-medium mb-6">
@@ -48,36 +46,31 @@ const ProgramSections = ({activeTab,setActiveTab,data}) => {
 
         </div>
 
+         <p className="text-greenbase font-dm text-center font-medium tracking-widest text-[14px] text-[20px] uppercase ">
+                  {data.tag}
+          </p>
+
         {/* Heading */}
-        <h2 className="text-3xl md:text-5xl font-season-medium font-medium text-primary leading-tight max-w-4xl mx-auto">
+        <h2 className="heading-large font-season font-med text-primary mt-4 max-w-7xl leading-tight text-center">
           {data.title}
         </h2>
 
-        <p className="mt-6 font-dm text-primary text-base md:text-lg max-w-3xl mx-auto">
+        {/* Description */}
+        <p className="text-primary font-dm text-center paragraph-body mx-auto mt-6 max-w-6xl font-medium">
           {data.description}
         </p>
 
         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="bg-greenbase-primary font-dm text-white px-8 py-4 rounded-full hover:scale-102 transition-all duration-300 shadow-md cursor-pointer">
+          <button className="bg-[#71AC61] font-dm text-white px-8 py-4 rounded-full transition-all duration-300 shadow-md cursor-pointer hover:bg-[#4f7944]">
             {data.buttonText}
           </button>
 
-          <button className="border font-dm border-greenbase text-greenbase px-8 py-4 rounded-full cursor-pointer hover:scale-102  transition-all duration-300">
+          <button className="border font-dm border-greenbase text-[#71AC61] px-8 py-4 rounded-full cursor-pointer hover:bg-[#4F7944] transition-all duration-300 hover:text-white">
             Download Brochure
           </button>
         </div>
 
       </div>
-
-      {/* Image Section */}
-      <div className="relative flex justify-center max-h-[480px]">
-        <img
-          src={data.image}
-          alt="program tab image"
-          className="w-full max-w-4xl object-contain"
-        />
-      </div>
-
     </section>
   );
 };

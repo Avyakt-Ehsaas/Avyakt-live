@@ -3,13 +3,14 @@ import LandingSidebar from '../LandingPage/LandingSidebar/LandingSidebar'
 import Programs from './Programs'
 import AvyaktSystem from './AvyaktSystem'
 import ProgramSections from './ProgramSections'
-import StudentPressureSection from './StudentPressureSection'
-import StructureProgram from './StructureProgram'
-import ProgramGrowth from './ProgramGrowth'
+import FirstProgramComponent from './FirstProgramComponent.jsx'
+
 import ProgramFooter from './ProgramFooter'
 
 import programsTabData from './ProgramData.js'
-import System from './System.jsx'
+
+import SecondProgramComponent from './SecondProgramComponent.jsx'
+import ResearchShows from './ResearchShows.jsx'
 
 const ProgramPage = () => {
 
@@ -30,11 +31,15 @@ const ProgramPage = () => {
           setActiveTab={setActiveTab}
           data={data.firstPage}
         />
-        <StudentPressureSection data={data.secondPage} />
-        <System data={data.thirdPage} />
-        <ProgramGrowth data={data.fourthPage} />
-        <StructureProgram data={data.fifthPage} />
-        <ProgramFooter data={data.sixthPage} />
+        <FirstProgramComponent data={data.secondPage} index={"01"} />
+        <SecondProgramComponent data={data.thirdPage} index={"02"} />
+        <FirstProgramComponent data={data.fourthPage} index={"03"} />
+        <SecondProgramComponent data={data.fifthPage} index={"04"} />
+
+        <ResearchShows data={data.researchShows} />
+
+        <ProgramFooter data={data.footer} /> 
+
       </div>
 
     </>

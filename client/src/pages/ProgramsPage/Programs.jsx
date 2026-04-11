@@ -18,11 +18,11 @@ const Programs = () => {
       <div className="relative z-10 flex items-center justify-center min-h-screen px-4 text-center">
         <div className="max-w-6xl font-season">
           {/* Heading */}
-          <h1 className="heading-main font-season-medium text-primary">
+          <h1 className="heading-main font-season font-med text-primary">
             A base program. Built for your problem.
           </h1>
           {/* Subtext */}
-          <p className="mt-2 max-w-5xl text-center text-primary font-dm paragraph-body leading-[24px]">
+          <p className="mt-2 max-w-5xl text-center text-primary font-dm paragraph-body font-med">
            Every Avyakt program starts from the same rigorous foundation, structured meditation grounded in published neuroscience. Then we layer what your specific audience actually needs on top of it. <br />Same science. Different problem. Different program.
           </p>
 
