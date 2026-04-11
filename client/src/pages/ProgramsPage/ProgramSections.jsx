@@ -20,10 +20,10 @@ const ProgramSections = ({activeTab,setActiveTab,data}) => {
         bg-gradient-to-b from-transparent via-white/40 to-[#FAFAFA]" />
             </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 pt-10 text-center">
+      <div className="relative max-w-7xl mx-auto px-5 md:px-6 pt-10 text-center">
 
         {/* Tabs */}
-        <div className="flex font-dm justify-center gap-8 text-sm md:text-base font-medium mb-6">
+        <div className="flex font-dm justify-center gap-4 md:gap-8 text-primary text-sm md:text-base font-med mb-6">
 
           {tabs.map((tab) => (
             <button
@@ -46,7 +46,7 @@ const ProgramSections = ({activeTab,setActiveTab,data}) => {
 
         </div>
 
-         <p className="text-greenbase font-dm text-center font-medium tracking-widest text-[14px] text-[20px] uppercase ">
+         <p className="text-greenbase font-dm text-center font-medium tracking-widest text-[14px] md:text-[20px] uppercase ">
                   {data.tag}
           </p>
 

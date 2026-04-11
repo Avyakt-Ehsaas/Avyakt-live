@@ -175,11 +175,18 @@ const AboutFooter = () => {
 
                             {/* Background Footer Image */}
                             <div className="w-full relative flex justify-center">
-                                <img
-                                    src={avyaktFooter}
-                                    alt="Avyakt Footer Logo"
-                                    className="w-full 2xl:w-[1200px] h-36 md:h-80 object-cover absolute bottom-0 z-10"
-                                />
+                                   <img
+                                                   src={avyaktFooter}
+                                                   alt="Avyakt Footer Logo"
+                                                   className="
+                                           absolute bottom-0 z-10
+                                            lg:w-full
+                                           max-w-[100vw]
+                                           h-100
+                                           object-contain
+                                           pointer-events-none
+                                       "
+                                               />
                             </div>
                         </div>
 

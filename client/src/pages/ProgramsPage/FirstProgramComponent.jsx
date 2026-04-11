@@ -15,7 +15,7 @@ const FirstProgramComponent = ({data, index}) => {
       <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-start">
 
           {/* Background Number */}
-      <h1 className="absolute -top-28 font-season text-[220px] font-med text-[#C2E0BA99] -z-10">
+      <h1 className="absolute -top-14 -md:top-28 font-season text-[150px] md:text-[220px] font-med text-[#C2E0BA99] -z-10">
         {index}
       </h1>
         

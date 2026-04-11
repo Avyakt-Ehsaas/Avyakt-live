@@ -4,7 +4,7 @@ import { CheckCircle, TrendingUp, Heart, ShieldCheck, Brain } from "lucide-react
 import { TbHeartFilled } from "react-icons/tb";
 import FullCTA from '../../assets/images/FullCTA.png'
 import DarkLogo from "../../assets/images/LogoDark.svg";
-import avyaktFooter from '../../assets/images/avyaktFooterWatermark.svg';
+import avyaktFooter from "../../assets/avyakt.png"
 
 
 
@@ -34,7 +34,7 @@ const ProgramFooter = ({ data }) => {
                 />
                 <div className='flex flex-col gap-20'>
                     {/* Blog Section */}
-                    <div className="relative z-10 mx-auto w-full max-w-[1100px] flex flex-col justify-between h-full py-28">
+                    <div className="relative z-10 mx-auto w-full max-w-[1100px] flex flex-col justify-between h-full pt-28">
 
                         <p className="text-greenbase font-dm text-center font-medium tracking-widest text-[14px] text-[20px] uppercase ">
                             {data.tag}
@@ -116,7 +116,7 @@ const ProgramFooter = ({ data }) => {
                                 {data.CTA.description}
                             </p>
 
-                            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mt-6 mb-4">
+                            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center mt-6 mb-32">
                                 <button
                                     className="bg-[#71AC61] w-fit px-16 py-4 text-white font-medium font-dm rounded-full hover:bg-[#4F7944] transition-all duration-300 cursor-pointer"
                                 >
@@ -132,7 +132,7 @@ const ProgramFooter = ({ data }) => {
                         </div>
 
                         {/* Footer Section */}
-                        <div className="relative w-full ">
+                        <div className="relative w-full  ">
                             <div className="relative max-w-6xl flex flex-col items-center gap-8 mx-auto z-20 px-4">
 
                                 {/* Logo */}
@@ -178,11 +178,18 @@ const ProgramFooter = ({ data }) => {
 
                             {/* Background Footer Image */}
                             <div className="w-full relative flex justify-center">
-                                <img
-                                    src={avyaktFooter}
-                                    alt="Avyakt Footer Logo"
-                                    className="w-full 2xl:w-[1200px] h-36 md:h-80 object-cover absolute bottom-0 z-10"
-                                />
+                                   <img
+                                                   src={avyaktFooter}
+                                                   alt="Avyakt Footer Logo"
+                                                   className="
+                                           absolute bottom-0 z-10
+                                            lg:w-full
+                                           max-w-[100vw]
+                                           h-100
+                                           object-contain
+                                           pointer-events-none
+                                       "
+                                               />
                             </div>
                         </div>
 
