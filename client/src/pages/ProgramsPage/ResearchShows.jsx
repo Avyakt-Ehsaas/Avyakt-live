@@ -4,7 +4,7 @@ const ResearchShows = ({ data }) => {
   if (!data) return null;
 
   return (
-    <section className="relative w-full h-[90vh] md:h-screen overflow-hidden">
+    <section className="relative w-full min-h-[90vh] md:h-screen overflow-hidden">
 
       {/*  Background Image */}
     <div className="absolute inset-0 z-0 w-full h-full">
