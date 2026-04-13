@@ -102,7 +102,7 @@ const FinalCTA = () => {
                                         </p>
 
                                         <button
-                                            className="text-greenbase cursor-pointer font-medium text-lg flex items-center gap-1 hover:gap-2 transition-all mb-2 hover:scale-102 transition duration-300">
+                                            className="text-greenbase cursor-pointer font-medium text-lg flex items-center gap-1 font-dm hover:gap-2 transition-all mb-2 hover:scale-102 transition duration-300">
                                             Read article →
                                         </button>
 
