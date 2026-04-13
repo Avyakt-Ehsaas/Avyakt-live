@@ -29,7 +29,7 @@ const AvyaktSystem = () => {
       title: "Live delivery",
       desc: "Sai Amrit delivers every session. The program designer, live, reading the room every single week.",
     },
-     {
+    {
       icon: AboutAvyaktIcon5,
       title: "Impact report",
       desc: "Before-and-after data and cohort insights — a document you can share, not just a certificate of participation.",
@@ -40,11 +40,11 @@ const AvyaktSystem = () => {
     <div className="relative w-full overflow-hidden bg-white">
 
       {/* Top Background */}
-     <div className="relative">
-        <img src={ProgramLower} alt="programbg" className='h-32 w-full' /> 
-          <div className="absolute inset-0 pointer-events-none 
+      <div className="relative">
+        <img src={ProgramLower} alt="programbg" className='h-32 w-full' />
+        <div className="absolute inset-0 pointer-events-none 
     bg-gradient-to-b from-transparent via-white/40 to-[#FAFAFA]" />
-        </div>
+      </div>
 
 
 
@@ -63,36 +63,36 @@ const AvyaktSystem = () => {
         {/* Steps */}
         <div className="relative mt-16">
 
-  {/* Dashed Center Line */}
-  <div className="hidden md:block  absolute top-[52px] left-[8.66%] right-[8.66%] border-t-2 border-dashed border-[#71ac61]/20 z-0"></div>
+          {/* Dashed Center Line */}
+          <div className="hidden md:block  absolute top-[52px] left-[8.66%] right-[8.66%] border-t-2 border-dashed border-[#71ac61]/20 z-0"></div>
 
-  <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
 
-    {steps.map((step, index) => (
-      <div key={index} className="flex flex-col items-center text-center">
+            {steps.map((step, index) => (
+              <div key={index} className="flex flex-col items-center text-center">
 
-        {/* Circle */}
-        <div className="relative z-10 w-28 h-28 rounded-full bg-[#EAF4E6] flex items-center justify-center mb-6">
-          <img
-            src={step.icon}
-            alt={step.title}
-            className="w-18 h-18 object-contain"
-          />
+                {/* Circle */}
+                <div className="relative z-10 w-28 h-28 rounded-full bg-[#EAF4E6] flex items-center justify-center mb-6">
+                  <img
+                    src={step.icon}
+                    alt={step.title}
+                    className="w-18 h-18 object-contain"
+                  />
+                </div>
+
+                <h3 className="card-title font-dm font-semibold text-primary text-center">
+                  {step.title}
+                </h3>
+
+                <p className="mt-3 font-dm text-primary paragraph-body text-center max-w-xs">
+                  {step.desc}
+                </p>
+
+              </div>
+            ))}
+
+          </div>
         </div>
-
-        <h3 className="card-title font-dm font-semibold text-primary">
-          {step.title}
-        </h3>
-
-        <p className="mt-3 font-dm text-primary paragraph-body text-center max-w-xs">
-          {step.desc}
-        </p>
-
-      </div>
-    ))}
-
-  </div>
-</div>
 
       </div>
     </div>

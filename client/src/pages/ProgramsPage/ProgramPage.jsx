@@ -38,7 +38,7 @@ const ProgramPage = () => {
 
         <ResearchShows data={data.researchShows} />
 
-        <ProgramFooter data={data.footer} /> 
+        <ProgramFooter data={data.footer} />
 
       </div>
 
