@@ -85,6 +85,10 @@
   text-align: center;
 }
 
+.program-data{
+   font-size: 16px;
+}
+
 @media (min-width: 768px) {
   .custom-text {
     text-align: left;
