@@ -84,7 +84,7 @@ const AvyaktSystem = () => {
                   {step.title}
                 </h3>
 
-                <p className="mt-3 font-dm text-primary paragraph-body text-center max-w-xs">
+                <p className="mt-3 font-dm text-primary program-data text-center max-w-xs">
                   {step.desc}
                 </p>
 
