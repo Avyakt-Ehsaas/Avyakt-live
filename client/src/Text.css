@@ -88,6 +88,9 @@
 .program-data{
    font-size: 16px;
 }
+.card-color-text{
+   color:#191919;
+}
 
 @media (min-width: 768px) {
   .custom-text {
