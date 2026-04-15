@@ -13,6 +13,14 @@ export default function ContactPage() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+
+  const openCalendly = () => {
+  if (window.Calendly) {
+    window.Calendly.initPopupWidget({
+      url: "https://calendly.com/saiamritp/30-minute-meeting-clone?primary_color=087037",
+    });
+  }
+  };
   return (
     <div className="bg-white relative overflow-hidden">
       <LandingSidebar />
@@ -36,7 +44,9 @@ export default function ContactPage() {
 
               <div className="flex flex-col sm:flex-row gap-4 mt-4">
                 <button
-                  className="bg-[#71AC61]  w-full sm:w-[250px] text-white font-medium font-dm px-4 py-4 rounded-full hover:bg-[#4F7944] transition-all duration-300 cursor-pointer"
+                   type="button"
+                   onClick={openCalendly}
+                   className="bg-[#71AC61]  w-full sm:w-[250px] text-white font-medium font-dm px-4 py-4 rounded-full hover:bg-[#4F7944] transition-all duration-300 cursor-pointer"
                 >
                   Talk to our team
                 </button>
