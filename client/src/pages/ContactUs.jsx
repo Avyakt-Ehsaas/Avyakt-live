@@ -13,6 +13,14 @@ export default function ContactPage() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+
+  const openCalendly = () => {
+  if (window.Calendly) {
+    window.Calendly.initPopupWidget({
+      url: "https://calendly.com/saiamritp/30-minute-meeting-clone?primary_color=087037",
+    });
+  }
+  };
   return (
     <div className="bg-white relative overflow-hidden">
       <LandingSidebar />
@@ -29,19 +37,25 @@ export default function ContactPage() {
           <div className="flex flex-col justify-end py-24 md:pl-[10%] lg:pl-[15%]">
             <h1 className="heading-main text-primary font-season font-med text-left"> Connect with avyakt</h1>
             <p className="paragraph-body text-primary font-dm text-left">Whether you’re exploring a program, have a question, or want to collaborate, we’re here to help.</p>
+              <div className="flex flex-col sm:flex-row gap-4 mt-4">
+                <button
+                   type="button"
+                   onClick={openCalendly}
+                   className="bg-[#71AC61]  w-full sm:w-[250px] text-white font-medium font-dm px-4 py-4 rounded-full hover:bg-[#4F7944] transition-all duration-300 cursor-pointer"
+                >
+                  Talk to our team
+                </button>
 
-            <div className="flex flex-col sm:flex-row gap-4 mt-4">
-              <button
-                className="bg-[#71AC61]  w-full sm:w-[250px] text-white font-medium font-dm px-4 py-4 rounded-full hover:bg-[#4F7944] transition-all duration-300 cursor-pointer"
-              >
-                Talk to our team
-              </button>
-
-              <button
-                className="bg-transparent border w-full sm:w-[250px] text-[#71AC61] font-medium font-dm px-4 py-4 cursor-pointer rounded-full hover:bg-[#4F7944] transition-all duration-300 hover:text-white"
-              >
-                Email us directly
-              </button>
+                <button
+                  className="bg-transparent border w-full sm:w-[250px] text-[#71AC61] font-medium font-dm px-4 py-4 cursor-pointer rounded-full hover:bg-[#4F7944] transition-all duration-300 hover:text-white"
+                >
+                  Email us directly
+                </button>
+              </div>
+            </div>
+            {/* right */}
+            <div className="w-[360px] 2xl:w-[420px]">
+              <img src={ContactUS} alt="contact us " />
             </div>
           </div>
           {/* right */}

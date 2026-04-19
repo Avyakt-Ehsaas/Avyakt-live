@@ -97,7 +97,7 @@ const FinalCTA = () => {
                                             {blog.title}
                                         </h3>
 
-                                        <p className="paragraph-secondary text-left font-dm text-[#6B6B6B] leading-6 mb-4 ">
+                                        <p className="paragraph-secondary text-left font-dm card-color-text leading-6 mb-4 ">
                                             {blog.desc}
                                         </p>
 
