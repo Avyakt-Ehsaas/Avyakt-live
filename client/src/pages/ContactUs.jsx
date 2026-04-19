@@ -1,171 +1,278 @@
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { FiMail, FiPhone, FiMapPin, FiSend } from 'react-icons/fi'
-import Footer from "./LandingPage/Footer"
-import LandingSidebar from "./LandingPage/LandingSidebar/LandingSidebar"
-import ContactImage from '../assets/contactUs.webp'
+import React, { useState } from "react";
+import { MdEmail, MdPhone } from "react-icons/md";
+import LandingSidebar from "./LandingPage/LandingSidebar/LandingSidebar";
+import Rectangle from "../assets/images/Rectangle.png"
+import ContactUS from "../assets/image 164.png"
 
-// Animation Variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 }
+export default function ContactPage() {
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [hoverCard, setHoverCard] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+
+  const openCalendly = () => {
+  if (window.Calendly) {
+    window.Calendly.initPopupWidget({
+      url: "https://calendly.com/saiamritp/30-minute-meeting-clone?primary_color=087037",
+    });
   }
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { ease: 'easeOut', duration: 0.5 } }
-}
-
-const ContactCard = ({ icon, title, value }) => (
-  <motion.div
-    variants={itemVariants}
-    whileHover={{ y: -2 }}
-    className="flex items-center gap-4 bg-white rounded-xl px-4 py-3 border border-gray-200 shadow-sm"
-  >
-    <div className="w-9 h-9 flex items-center justify-center rounded-lg bg-orange-100 text-orange-600 text-base">
-      {icon}
-    </div>
-    <div>
-      <p className="text-[11px] font-medium text-gray-500 uppercase tracking-wider">{title}</p>
-      <p className="text-sm font-medium text-gray-800">{value}</p>
-    </div>
-  </motion.div>
-)
-
-const ContactUs = () => {
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
-
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    alert('Thank you! Your message has been sent.')
-    setForm({ name: '', email: '', message: '' })
-  }
-
+  };
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-orange-50">
+    <div className="bg-white relative overflow-hidden">
       <LandingSidebar />
+      {/* <img
+          src={Rectangle}
+          alt=""
+          className="absolute inset-0 md:h-screen md:w-screen z-0 pointer-events-none"
+        /> */}
 
-      {/* Page Heading */}
-      <section className="pt-28 pb-16 text-center max-w-4xl mx-auto px-6">
-        <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-semibold tracking-tight text-gray-900"
-        >
-          Contact <span className="text-orange-500">Avyakt Ehsaas</span>
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
-          className="mt-3 text-base text-gray-600"
-        >
-          We'd love to hear from you. Reach out for programs, partnerships, or general queries.
-        </motion.p>
-      </section>
+      {/* Content */}
+      <div className=" min-h-screen z-20 text-center text-greenbase flex items-center z-10 w-full">
+        <div className="grid grid-cols-2 py-18 w-full">
+          {/* left */}
+          <div className="flex flex-col justify-end py-24 md:pl-[10%] lg:pl-[15%]">
+            <h1 className="heading-main text-primary font-season font-med text-left"> Connect with avyakt</h1>
+            <p className="paragraph-body text-primary font-dm text-left">Whether you’re exploring a program, have a question, or want to collaborate, we’re here to help.</p>
+              <div className="flex flex-col sm:flex-row gap-4 mt-4">
+                <button
+                   type="button"
+                   onClick={openCalendly}
+                   className="bg-[#71AC61]  w-full sm:w-[250px] text-white font-medium font-dm px-4 py-4 rounded-full hover:bg-[#4F7944] transition-all duration-300 cursor-pointer"
+                >
+                  Talk to our team
+                </button>
 
-      {/* Cards + Image */}
-      <section className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-        {/* Left: Cards */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="space-y-4"
-        >
-          <ContactCard icon={<FiMail />} title="Email" value="support@avyaktehsaas.com" />
-          <ContactCard icon={<FiPhone />} title="Phone" value="+91 98765 43210" />
-          <ContactCard icon={<FiMapPin />} title="Office" value="15th floor Ocus Quantum, Gurgaon, Haryana, India" />
-        </motion.div>
+                <button
+                  className="bg-transparent border w-full sm:w-[250px] text-[#71AC61] font-medium font-dm px-4 py-4 cursor-pointer rounded-full hover:bg-[#4F7944] transition-all duration-300 hover:text-white"
+                >
+                  Email us directly
+                </button>
+              </div>
+            </div>
+            {/* right */}
+            <div className="w-[360px] 2xl:w-[420px]">
+              <img src={ContactUS} alt="contact us " />
+            </div>
+          </div>
+          {/* right */}
+          <div className="p-0">
+            <img className="w-full h-full" src={ContactUS} alt="contact us" />
+          </div>
+        </div>
+      </div>
 
-        {/* Right: Animated Image */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="flex justify-center order-1 lg:order-2"
-        >
-          <motion.img
-            src={ContactImage}
-            alt="Meditation"
-            className="w-full max-w-md rounded-3xl shadow-lg"
-            whileHover={{ scale: 1.03 }}
-          />
-        </motion.div>
-      </section>
+      {/* MAP + FORM SECTION */}
+      <div className="py-12 md:py-12 px-4" id="contact">
+        <div className="max-w-full px-[6%]">
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-6 md:gap-10 items-stretch">
 
-      {/* Map + Form */}
-      <section className="max-w-7xl mx-auto px-6 mt-24 pb-28 grid lg:grid-cols-2 gap-16 items-start">
-        {/* Map */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm h-[420px]"
-        >
-         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.8210031821345!2d77.06623457549323!3d28.42465747577892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d2277f766242f%3A0xc932b58d70526b94!2sOcus%20Quantum!5e0!3m2!1sen!2sin!4v1768907097682!5m2!1sen!2sin" width="800" height="600" style={{border:0}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </motion.div>
+            {/* LEFT SIDE */}
+            <div
+              className="md:col-span-3 flex flex-col h-full animate-fade-in"
+              style={{ animationDelay: "0.2s" }}
+            >
+              {/* MAP */}
+              <div className="rounded-2xl overflow-hidden shadow-2xl flex-1 border border-emerald-100">
+                <div className="relative h-full w-full">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.8062058148685!2d77.06573327374258!3d28.425103893473185!2m3!1f0!2f0!3f0!2m3!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d2277f957e045%3A0x84b1ea2fe2951fa!2sOcus%20Quantum%2C%20Sector%2051%2C%20Gurugram%2C%20Samaspur%2C%20Haryana%20122018!5e0!3m2!1sen!2sin!4v1775229018598!5m2!1sen!2sin"
+                    className="absolute inset-0 w-full h-full"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
 
-        {/* Form */}
-        <motion.form
-          onSubmit={handleSubmit}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-white rounded-3xl p-8 border border-gray-200 shadow-md space-y-5"
-        >
-          <h3 className="text-2xl font-semibold text-gray-900">Send a Message</h3>
+                  {/* Overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                    <p className="text-white/95 font-dm font-medium text-sm">
+                      Our Meditation Center
+                    </p>
+                    <p className="text-white/80 font-dm text-xs">
+                      Sector 51, Gurugram, Haryana 122018
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-          <input
-            type="text"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            placeholder="Your Name"
-            required
-            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-500 outline-none"
-          />
+              {/* CONTACT OPTIONS */}
+              <div className="mt-6">
+                <p className="text-primary font-dm paragraph-body font-med text-left">
+                  Choose how you’d like to reach us
+                </p>
 
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Your Email"
-            required
-            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-500 outline-none"
-          />
+                <div className="flex gap-6 mt-8 flex-wrap">
+                  {/* Email */}
+                  <div className="bg-[#C2E0BA33] px-4 py-3 rounded-xl">
+                    <div className="flex items-center">
+                      <MdEmail className="text-greenbase mr-2" size={28} />
+                      <h3 className="text-primary text-base md:text-[20px] font-med font-dm">
+                        Email
+                      </h3>
+                    </div>
+                    <p className="font-dm text-primary text-base md:text-[20px]">
+                      hello@avyaktehsaas.com
+                    </p>
+                  </div>
 
-          <textarea
-            name="message"
-            rows="5"
-            value={form.message}
-            onChange={handleChange}
-            placeholder="Your Message"
-            required
-            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 text-sm focus:ring-2 focus:ring-orange-500 outline-none resize-none"
-          />
+                  {/* Call */}
+                  <div className="bg-[#C2E0BA33] px-4 py-3 rounded-xl">
+                    <div className="flex items-center">
+                      <MdPhone className="text-greenbase mr-2" size={28} />
+                      <h3 className="text-primary text-base md:text-[20px] font-med font-dm">
+                        Call
+                      </h3>
+                    </div>
+                    <p className="font-dm text-primary text-base md:text-[20px]">
+                      +91 9454360828
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.97 }}
-            type="submit"
-            className="w-full bg-orange-500 text-white py-3 rounded-full text-sm font-semibold flex items-center justify-center gap-2"
-          >
-            Send Message <FiSend />
-          </motion.button>
-        </motion.form>
-      </section>
+            {/* RIGHT SIDE (FORM) */}
+            <div
+              className="md:col-span-3 animate-fade-in h-full"
+              style={{ animationDelay: "0.3s" }}
+            >
+              <div className="bg-gradient-to-br from-white to-emerald-50/40 rounded-2xl md:rounded-3xl p-6 sm:p-8 md:p-10 h-full flex flex-col justify-between">
+
+                {/* Header */}
+                <div className="mb-6 md:mb-8">
+                  <h2 className="text-primary font-season font-med heading-large text-left">
+                    Tell us a bit about what you’re looking for
+                  </h2>
+
+                  <p className="paragraph-secondary font-dm mt-2 text-primary text-left font-regular">
+                    Share your journey with us. Whether you have questions or just
+                    want to connect, we'd love to hear from you.
+                  </p>
+                </div>
+
+                {/* Form */}
+                <form
+                  className="space-y-4 md:space-y-6 flex-1 flex flex-col justify-between"
+                  onSubmit={(e) => e.preventDefault()}
+                >
+                  <div className="space-y-4 md:space-y-6">
+
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Full Name"
+                      className="w-full px-5 py-3 rounded-xl bg-white border-2 border-greenbase placeholder-[#71AC61] focus:border-greenbase focus:bg-[#71AC611A] shadow-sm text-greenbase font-dm"
+                    />
+
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="E-mail"
+                      className="w-full px-5 py-3 rounded-xl bg-white border-2 border-greenbase placeholder-[#71AC61] focus:border-greenbase focus:bg-[#71AC611A] shadow-sm text-greenbase font-dm"
+                    />
+
+                    <input
+                      type="text"
+                      name="text"
+                      value={formData.text}
+                      onChange={handleChange}
+                      placeholder="Organisation (Optional)"
+                      className="w-full px-5 py-3 rounded-xl bg-white border-2 border-greenbase placeholder-[#71AC61] focus:border-greenbase focus:bg-[#71AC611A] shadow-sm text-greenbase font-dm"
+                    />
+
+                    <select
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      className="w-full px-5 py-3 rounded-xl bg-white border-2 border-greenbase focus:border-greenbase focus:bg-[#71AC611A] text-greenbase font-dm"
+                    >
+                      <option value="">Inquiry type</option>
+                      <option value="general">General Inquiry</option>
+                      <option value="classes">About Classes</option>
+                      <option value="retreat">Retreat Programs</option>
+                      <option value="corporate">Corporate Wellness</option>
+                      <option value="partnership">Partnership</option>
+                    </select>
+
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      rows="4"
+                      placeholder="Tell us about your meditation experience or questions..."
+                      className="w-full px-5 py-3 rounded-xl bg-white border-2 border-greenbase placeholder-[#71AC61] focus:border-greenbase focus:bg-[#71AC611A] shadow-sm text-greenbase font-dm"
+                    ></textarea>
+                  </div>
+
+                  {/* Button */}
+                  <button
+                    type="submit"
+                    className="max-w-40 bg-greenbase-primary text-white py-3 rounded-[2rem] shadow-lg hover:shadow-2xl transition-all flex items-center justify-center gap-2 font-dm"
+                  >
+                    Send Message
+                    {/* <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M13 7l5 5m0 0l-5 5m5-5H6"
+                      />
+                    </svg> */}
+                  </button>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* Add required animations in global CSS */}
+      <style>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes slide-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in {
+          animation: fade-in 0.8s ease-out forwards;
+          opacity: 0;
+        }
+
+        .animate-slide-up {
+          animation: slide-up 0.8s ease-out forwards;
+          opacity: 0;
+        }
+      `}</style>
+
     </div>
-  )
+  );
 }
-
-export default ContactUs;
