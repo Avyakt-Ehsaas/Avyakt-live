@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ProgramSections = ({activeTab,setActiveTab,data}) => {
+const ProgramSections = ({ activeTab, setActiveTab, data }) => {
 
   // const [activeTab, setActiveTab] = useState("school");
 
@@ -14,11 +14,10 @@ const ProgramSections = ({activeTab,setActiveTab,data}) => {
   return (
     <section className="relative bg-white overflow-hidden">
 
-    <div className="relative">
-            <img src={data.image} alt="programbg" className='h-full w-full' /> 
-              <div className="absolute inset-0 pointer-events-none 
-        bg-gradient-to-b from-transparent via-white/40 to-[#FAFAFA]" />
-            </div>
+      <div className="relative">
+        <img src={data.image} alt="programbg" className='h-full w-full rounded-t-[24rem]' />
+        <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent via-white/40 to-[#FAFAFA]" />
+      </div>
 
       <div className="relative max-w-7xl mx-auto px-5 md:px-6 pt-10 text-center">
 
@@ -29,11 +28,10 @@ const ProgramSections = ({activeTab,setActiveTab,data}) => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`relative pb-2 transition-all duration-300 cursor-pointer ${
-                activeTab === tab.id
+              className={`relative pb-2 transition-all duration-300 cursor-pointer ${activeTab === tab.id
                   ? "text-greenbase"
                   : "text-primary hover:text-black"
-              }`}
+                }`}
             >
               {tab.label}
 
@@ -46,9 +44,9 @@ const ProgramSections = ({activeTab,setActiveTab,data}) => {
 
         </div>
 
-         <p className="text-greenbase font-dm text-center font-medium tracking-widest text-[14px] md:text-[20px] uppercase ">
-                  {data.tag}
-          </p>
+        <p className="text-greenbase font-dm text-center font-medium tracking-widest text-[14px] md:text-[20px] uppercase ">
+          {data.tag}
+        </p>
 
         {/* Heading */}
         <h2 className="heading-large font-season font-med text-primary mt-4 max-w-7xl leading-tight text-center">

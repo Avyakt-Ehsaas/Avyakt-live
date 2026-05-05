@@ -57,8 +57,8 @@
 }
 
 .card-title {
-  font-weight: 600;
-  font-size: 22px;
+  font-weight: 500;
+  font-size: 20px;
   line-height: 40px;
   letter-spacing: 0;
   text-align: left;
@@ -83,6 +83,13 @@
 
 .custom-text {
   text-align: center;
+}
+
+.program-data{
+   font-size: 16px;
+}
+.card-color-text{
+   color:#191919;
 }
 
 @media (min-width: 768px) {

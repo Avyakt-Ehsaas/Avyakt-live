@@ -97,12 +97,12 @@ const FinalCTA = () => {
                                             {blog.title}
                                         </h3>
 
-                                        <p className="paragraph-secondary text-left font-dm text-[#6B6B6B] leading-6 mb-4 ">
+                                        <p className="paragraph-secondary text-left font-dm card-color-text leading-6 mb-4 ">
                                             {blog.desc}
                                         </p>
 
                                         <button
-                                            className="text-greenbase cursor-pointer font-medium text-lg flex items-center gap-1 hover:gap-2 transition-all mb-2 hover:scale-102 transition duration-300">
+                                            className="text-greenbase cursor-pointer font-medium text-lg flex items-center gap-1 font-dm hover:gap-2 transition-all mb-2 hover:scale-102 transition duration-300">
                                             Read article →
                                         </button>
 
