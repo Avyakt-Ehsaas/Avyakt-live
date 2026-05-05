@@ -1,8 +1,8 @@
-import ProblemBrain from "../../assets/Vector 10.png";
+import ProblemBrain from "../../assets/images/ProblemBrain.png";
 
 const Pill = ({ text }) => {
   return (
-    <div className="bg-[#C2E0BA33] text-greenbase font-dm px-5 py-3 rounded-full text-center w-[180px] md:w-[420px] hover:scale-102  transition duration-300 card-title  text-center flex justify-center items-center">
+    <div className="bg-[#C2E0BA33] text-greenbase font-dm  px-8 md:px-4 py-3 rounded-full text-center w-[180px] md:w-[420px] hover:scale-102  transition duration-300 card-title  text-center flex justify-center items-center font-med">
       {text}
     </div>
   );
@@ -24,7 +24,7 @@ const ProblemSection = () => {
             Six things happening to your mind right now.
           </h1>
 
-          <p className="mt-4 text-primary font-dm max-w-5xl mx-auto paragraph-body">
+          <p className="mt-4 text-gray font-dm max-w-5xl mx-auto paragraph-body">
             Not metaphors. Documented, measurable changes, affecting students,
             working professionals, and <br className="hidden md:block" />
             seniors across India. Most people have no trained response to any of them.

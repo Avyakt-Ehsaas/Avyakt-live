@@ -9,13 +9,12 @@ import TestimonialCarousel from "./Testimonials/TestimonialCarousel.jsx";
 import SponsorPage from "./SponserPage.jsx";
 import FinalCTA from "./FinalCTA.jsx";
 import ProblemSection from "./ProblemSection.jsx";
-import ResearchSection from "./ResearchSection.jsx";
 import FAQSection from "./FAQs.jsx";
-import Solution from "./Solution.jsx";
-import Intro from "./Intro.jsx";
-import HowItWorks from "./HowItsWork.jsx";
 import TheScienceSection from "./TheScienceSection.jsx";
 import Build from "./Build.jsx";
+import WhoItsFor from "./WhoItsFor.jsx";
+import ResearchPoints from "./ResearchPoints.jsx";
+import StatsBar from "./StatsBar.jsx";
 
 const LandingPage = () => {
   const [isHeroVisible, setIsHeroVisible] = useState(true);
@@ -46,13 +45,12 @@ const LandingPage = () => {
       <ProblemSection />  
       <div className="relative bg-white">
      <LoginModal />
-      <ResearchSection />
-         <Solution />
-        <Intro />
+        <ResearchPoints />
+        <WhoItsFor />
+        <StatsBar />
         <Build/>
       <SponsorPage />
       <TheScienceSection />
-      <HowItWorks />
       <TestimonialCarousel />
       <FAQSection />
       <FinalCTA />

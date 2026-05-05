@@ -1,76 +1,71 @@
-import img1 from "../../assets/Ellipse 54.png";
-import img2 from "../../assets/Ellipse 54 (1).png";
-import img3 from "../../assets/Ellipse 54 (2).png";
-import img4 from "../../assets/Ellipse 54 (3).png";
-import "../AboutUs/gridPattern.css"
-
+import "../AboutUs/gridPattern.css";
 
 const Build = () => {
-    const cardData = [
-        {
-            title: "Start free, join tomorrow morning",
-            desc: "Live sessions run every day on Insight Timer. First 21 days are free. No registration process, no app download, no credit card.",
-            img: img1
-        },
-        {
-            title: "A year of purposeful progression",
-            desc: "12 months, 12 themes, attention, sleep, stress, emotion, silence, and more. Each month builds directly on the one before it.",
-            img: img2
-        },
-        {
-            title: "You see the change, not just feel it",
-            desc: "Attention and wellbeing assessments before and after every program. Your report shows exactly what shifted.",
-            img: img3
-        },
-        {
-            title: "For individuals, schools, and institutions",
-            desc: "Individual subscription, school curriculum, corporate workshops, and senior community programs, same rigour, adapted delivery.",
-            img: img4
-        }
-    ];
-    return (
-        <section className="relative pt-20 sm:pt-40 pb-10 px-4 bg-white min-h-screen 2xl:min-h-fit flex items-center justify-center">
-            <div className=" max-w-7xl mx-auto text-center">
-                <div className="absolute inset-0 grid-pattern grid-fade-top pointer-events-none z-0 opacity-50" />
-                <p className="text-greenbase font-dm text-medium text-[14px] md:text-[20px] tracking-widest uppercase mb-6 md:mb-0 ">
-                    WHAT WE BUILD
-                </p>
-                <h1 className="heading-main font-semibold text-primary font-season-medium  leading-tight">
-                    Live daily sessions. A 12-month structure.<br />Results you can measure.
-                </h1>
-                <div className="relative grid grid-rows-1 md:grid-cols-4 gap-8 mt-12 ">
-                    {cardData.map((data) =>
-                        <Card
-                            title={data.title}
-                            desc={data.desc}
-                            img={data.img}
-                        />
-                    )}
+  const steps = [
+    {
+      number: "1",
+      title: "Tell us what's going on",
+      desc: "Pick your context, breakup, work stress, sleep issues, or just starting out. Takes 60 seconds.",
+    },
+    {
+      number: "2",
+      title: "We match you a session",
+      desc: "Your first session is chosen for you. No browsing, no decision fatigue. Just press play.",
+    },
+    {
+      number: "3",
+      title: "Rate how you feel after",
+      desc: "One tap. We use it to refine what we suggest next — and to show you your own progress over time.",
+    },
+    {
+      number: "4",
+      title: "Come back tomorrow",
+      desc: "Your streak starts. Your library grows. Sessions get deeper as your practice does.",
+    },
+  ];
+
+  return (
+    <section className="relative pt-20 sm:pt-32 pb-16 px-4 bg-white">
+      <div className="max-w-6xl mx-auto text-center relative">
+
+        {/* Heading */}
+      <p className="text-greenbase font-dm text-medium text-[14px] md:text-[20px] tracking-widest uppercase mb-6 md:mb-0 "> THE PROCESS </p>
+
+        <h1 className="px-12 md:px-0 heading-main font-semibold text-primary font-season-med"> From first visit to lasting practice </h1>
+
+        {/* Timeline */}
+        <div className="relative mt-16">
+
+          {/* Line */}
+          <div className="hidden md:block absolute top-5 left-[10%] right-0 w-4xl border-t-2 border-dashed border-[#71AC6166]"></div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">
+            {steps.map((step, i) => (
+              <div key={i} className="text-center px-4">
+
+                {/* Circle */}
+                <div className="w-10 h-10 mx-auto flex items-center justify-center rounded-full border border-[#71AC61] text-[#71AC61] font-semibold bg-white">
+                  {step.number}
                 </div>
-            </div>
-        </section>
-    );
+
+                {/* Title */}
+                <h3 className="mt-4 font-semibold text-primary font-dm paragraph-body font-med">
+                  {step.title}
+                </h3>
+
+                {/* Description */}
+                <p className="mt-2 paragraph-secondary font-dm text-[#706E6E]">
+                  {step.desc}
+                </p>
+
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Build;
-
-
-const Card = ({ title, desc, img }) => {
-    return (
-        <div className="bg-[#C2E0BA33]  rounded-2xl p-6 text-start ">
-            <div className="w-16 h-16 mb-4">
-                <img
-                    src={img}
-                    alt="card"
-                    className="w-full h-full object-cover rounded-full"
-                />
-            </div>
-            <h3 className="text-greenbase font-dm card-title mb-4 md:mb-2" >
-                {title}
-            </h3>
-            <p className="font-dm leading-[24px] md:leading-relaxed caption-text text-primary font-medium">
-                {desc}
-            </p>
-        </div>
-    );
-};
