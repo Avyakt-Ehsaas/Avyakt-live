@@ -234,7 +234,6 @@ const FinalCTA = () => {
             pointer-events-none
         "
                 />
-                {/* </div> */}
             </section>
         </>
     )

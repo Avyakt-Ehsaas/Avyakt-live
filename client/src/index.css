@@ -28,6 +28,7 @@ body {
   /* Custom colors */
   --secondary-Text: #696969;
   --primary-Text: #191919;
+  --gray-Text: #706E6E;
 
 }
 
@@ -53,6 +54,9 @@ body {
   color: var(--primary-Text);
 }
 
+.text-gray {
+  color: var(--gray-Text);
+}
 
 
 .font-dm {

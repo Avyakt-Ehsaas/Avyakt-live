@@ -64,7 +64,7 @@ const HeroSection = () => {
               </button>
             </div>
             <div className="mt-8 paragraph-secondary text-center font-dm text-white">
-              <ul className="flex flex-col sm:flex-row justify-center  mb-4 gap-4">
+              <ul className="flex flex-col sm:flex-row justify-center  mb-4 gap-8 md:gap-4">
                 <li>Backed by Google For Startups</li>
                 <span className="hidden sm:flex w-2 h-2 rounded-full bg-greenbase mt-2 ml-2 sm:visible"></span>
                 <li>

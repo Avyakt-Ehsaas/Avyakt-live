@@ -53,7 +53,7 @@ export default function TheScienceSection() {
       />
 
       {/* Content */}
-      <div className="relative z-10 max-w-6xl mx-auto py-48">
+      <div className="relative z-10 max-w-6xl mx-auto pt-24 pb-64 md:py-48 md:pb-32 ">
 
         {/* Header */}
         <div className="text-center mb-4 md:mb-8">
@@ -61,12 +61,12 @@ export default function TheScienceSection() {
             THE SCIENCE
           </p>
 
-          <h2 className="heading-main font-season-medium text-primary leading-[50px] md:leading-[60px] mb-2">
+          <h2 className="px-12 md:px-0 heading-main font-season-medium text-primary leading-[50px] md:leading-[60px] mb-2">
             What 8 weeks of structured <br />
             meditation actually does.
           </h2>
 
-          <p className="text-primary paragraph-body font-dm font-med max-w-3xl mx-auto leading-[24px] md:leading-relaxed">
+          <p className="px-8 md:px-0 text-primary paragraph-body font-dm font-med max-w-3xl mx-auto leading-[24px] md:leading-relaxed">
             fMRI studies. Randomized controlled trials. Cortisol assays. This is
             not wellness marketing, these are documented, replicable changes in
             the brain and body.
