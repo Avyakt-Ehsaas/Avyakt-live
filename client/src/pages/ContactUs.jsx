@@ -25,11 +25,6 @@ export default function ContactPage() {
     <>
     <div className="bg-white relative overflow-hidden">
       <LandingSidebar />
-      {/* <img
-          src={Rectangle}
-          alt=""
-          className="absolute inset-0 md:h-screen md:w-screen z-0 pointer-events-none"
-        /> */}
 
       {/* Content */}
       <div className=" min-h-screen z-20 text-center text-greenbase flex items-center z-10 w-full">
@@ -54,11 +49,6 @@ export default function ContactPage() {
                 </button>
               </div>
 
-            </div>
-
-            {/* right */}
-            <div className="w-[360px] 2xl:w-[420px]">
-              <img src={ContactUS} alt="contact us " />
             </div>
 
           </div>
@@ -246,7 +236,6 @@ export default function ContactPage() {
         </div>
       </div>
 
-
       {/* Add required animations in global CSS */}
       <style>{`
         @keyframes fade-in {
@@ -279,8 +268,6 @@ export default function ContactPage() {
           opacity: 0;
         }
       `}</style>
-
-    </div>
-    </>
-  );
+      </>
+  );  
 }
