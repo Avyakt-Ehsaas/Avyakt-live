@@ -22,6 +22,7 @@ export default function ContactPage() {
   }
   };
   return (
+    <>
     <div className="bg-white relative overflow-hidden">
       <LandingSidebar />
       {/* <img
@@ -52,11 +53,14 @@ export default function ContactPage() {
                   Email us directly
                 </button>
               </div>
+
             </div>
+
             {/* right */}
             <div className="w-[360px] 2xl:w-[420px]">
               <img src={ContactUS} alt="contact us " />
             </div>
+
           </div>
           {/* right */}
           <div className="p-0">
@@ -96,6 +100,7 @@ export default function ContactPage() {
                       Sector 51, Gurugram, Haryana 122018
                     </p>
                   </div>
+
                 </div>
               </div>
 
@@ -131,6 +136,7 @@ export default function ContactPage() {
                       +91 9454360828
                     </p>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -240,6 +246,7 @@ export default function ContactPage() {
         </div>
       </div>
 
+
       {/* Add required animations in global CSS */}
       <style>{`
         @keyframes fade-in {
@@ -274,5 +281,6 @@ export default function ContactPage() {
       `}</style>
 
     </div>
+    </>
   );
 }
