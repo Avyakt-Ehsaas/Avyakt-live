@@ -14,6 +14,7 @@ export default function ContactPage() {
   };
 
   return (
+    <>
     <div className="bg-white relative overflow-hidden">
       <LandingSidebar />
       {/* main first screen */}
@@ -30,6 +31,7 @@ export default function ContactPage() {
         <div className=" min-h-screen z-20 text-center text-greenbase flex justify-center items-center z-10">
           <div className="container max-w-5xl flex justify-between py-18">
             {/* left */}
+
             <div className="max-w-xl py-24">
               <h1 className="heading-main text-primary font-season font-med text-left"> Connect with avyakt</h1>
               <p className="paragraph-body text-primary text-left font-dm ">Whether you’re exploring a program, have a question, or want to collaborate, we’re here to help.</p>
@@ -47,11 +49,14 @@ export default function ContactPage() {
                   Email us directly
                 </button>
               </div>
+
             </div>
+
             {/* right */}
             <div className="w-[360px] 2xl:w-[420px]">
               <img src={ContactUS} alt="contact us " />
             </div>
+
           </div>
         </div>
 
@@ -64,11 +69,14 @@ export default function ContactPage() {
             <div className="md:col-span-3 animate-fade-in mt-4" style={{ animationDelay: '0.2s' }}>
               <div className="rounded-2xl md:rounded-2xl overflow-hidden shadow-2xl h-64 sm:h-80 md:h-130 border border-emerald-100 hover:shadow-3xl transition-shadow duration-500 group ">
                 <div className="relative h-full w-full">
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.8062058148685!2d77.06573327374258!3d28.425103893473185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d2277f957e045%3A0x84b1ea2fe2951fa!2sOcus%20Quantum%2C%20Sector%2051%2C%20Gurugram%2C%20Samaspur%2C%20Haryana%20122018!5e0!3m2!1sen!2sin!4v1775229018598!5m2!1sen!2sin" width="100%" height="100%" style={{ border: '0', display: 'block' }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.8062058148685!2d77.06573327374258!3d28.425103893473185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d2277f957e045%3A0x84b1ea2fe2951fa!2sOcus%20Quantum%2C%20Sector%2051%2C%20Gurugram%2C%20Samaspur%2C%20Haryana%20122018!5e0!3m2!1sen!2sin!4v1775229018598!5m2!1sen!2sin" width="100%" height="100%" style={{ border: '0', display: 'block' }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade">
+                  </iframe>
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+
                     <p className="text-white/95 font-dm font-medium text-sm">Our Meditation Center</p>
                     <p className="text-white/80 font-dm text-xs">Sector 51, Gurugram, Haryana 122018</p>
                   </div>
+
                 </div>
 
               </div>
@@ -84,12 +92,14 @@ export default function ContactPage() {
                     >
                       hello@avyaktehsaas.com</p>
                   </div>
+
                   <div className="bg-[#C2E0BA33] px-4 py-3 rounded-xl">
                    <div className="flex">
                      <MdPhone  className="text-greenbase mr-2" size={28}/>
                     <h3 className="text-primary text-base md:text-[20px] font-med font-dm ">Call</h3></div>
                     <p className="font-dm text-primary text-base md:text-[20px]">+91 9454360828</p>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -203,6 +213,7 @@ export default function ContactPage() {
         </div>
       </div>
 
+
       {/* Add required animations in global CSS */}
       <style>{`
         @keyframes fade-in {
@@ -237,5 +248,6 @@ export default function ContactPage() {
       `}</style>
 
     </div>
+    </>
   );
 }
