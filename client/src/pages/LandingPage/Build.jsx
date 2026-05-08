@@ -49,12 +49,12 @@ const Build = () => {
                 </div>
 
                 {/* Title */}
-                <h3 className="mt-4 font-semibold text-primary font-dm paragraph-body font-med">
+                <h3 className="mt-4 font-semibold text-primary font-dm card-title text-center font-med">
                   {step.title}
                 </h3>
 
                 {/* Description */}
-                <p className="mt-2 paragraph-secondary font-dm text-[#706E6E]">
+                <p className="mt-2 paragraph-body font-dm text-gray px-4 md:px-0">
                   {step.desc}
                 </p>
 
