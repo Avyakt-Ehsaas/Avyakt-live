@@ -3,6 +3,12 @@ import AboutStage1 from "../../assets/images/AboutStage1.png";
 import AboutStage2 from "../../assets/images/AboutStage2.png";
 import AboutStage3 from "../../assets/images/AboutStage3.png";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
+
 const audienceCards = [
   {
     img: AboutStage0,
@@ -49,7 +55,51 @@ export default function WhoItsFor() {
           community.
         </p>
 
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-9">
+        {/* Mobile Swiper */}
+        <div className="mt-12 block lg:hidden">
+          <Swiper
+            modules={[Autoplay, Pagination]}
+            slidesPerView={1.1}
+            spaceBetween={20}
+            centeredSlides={true}
+            loop={true}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            pagination={{
+              clickable: true,
+            }}
+            className="pb-14"
+          >
+            {audienceCards.map((card, index) => (
+              <SwiperSlide key={index}>
+                <div className="bg-white rounded-2xl p-6 text-left shadow-[0px_12px_35px_rgba(0,0,0,0.10)]">
+                  <img
+                    src={card.img}
+                    alt={card.title}
+                    className="w-20 h-20 rounded-full object-cover mb-5"
+                  />
+
+                  <p className="font-dm text-greenbase paragraph-secondary mb-2 text-left ">
+                    {card.tags}
+                  </p>
+
+                  <h3 className="font-dm text-primary card-title font-med text-left">
+                    {card.title}
+                  </h3>
+
+                  <p className="font-dm paragraph-secondary text-gray mt-1 font-med text-left">
+                    {card.desc}
+                  </p>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
+        {/* Desktop Grid */}
+        <div className="hidden lg:grid mt-12 grid-cols-4 gap-9">
           {audienceCards.map((card, index) => (
             <div
               key={index}
@@ -61,21 +111,40 @@ export default function WhoItsFor() {
                 className="w-20 h-20 rounded-full object-cover mb-5"
               />
 
-              <p className="font-dm text-greenbase paragraph-secondary font-medium text-left leading-[60px] mb-2">
+              <p className="font-dm text-greenbase paragraph-secondary font-med leading-12 text-left">
                 {card.tags}
               </p>
 
-              <h3 className="font-dm text-primary card-title font-med ">
+              <h3 className="font-dm text-primary card-title font-med text-left">
                 {card.title}
               </h3>
 
-              <p className="font-dm paragraph-secondary text-gray mt-1 text-left font-med">
+              <p className="font-dm paragraph-secondary text-gray mt-1 font-med text-left">
                 {card.desc}
               </p>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Custom Swiper Dots */}
+      <style jsx>{`
+        .swiper-pagination {
+          bottom: 0px !important;
+        }
+
+        .swiper-pagination-bullet {
+          width: 8px;
+          height: 8px;
+          background: #c9dec4;
+          opacity: 1;
+          margin: 0 4px !important;
+        }
+
+        .swiper-pagination-bullet-active {
+          background: #6bad5f;
+        }
+      `}</style>
     </section>
   );
 }
