@@ -1,6 +1,6 @@
 import React from "react";
 import { Star, Play } from "lucide-react";
-import Library1 from "../../assets/images/library1.png"
+import Library1 from "../../assets/images/Library1.png"
 
 const categories = [
   "All Libraries",
