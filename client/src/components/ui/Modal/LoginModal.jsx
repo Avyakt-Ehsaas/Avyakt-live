@@ -16,19 +16,19 @@ const AvyaktModal = () => {
 
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/20 backdrop-blur-[0.2px]">
-      <div className="bg-white rounded-2xl max-w-md w-full p-8 relative shadow-lg">
+      <div className="bg-white rounded-2xl max-w-lg w-full p-8 relative shadow-lg">
         {/* Close Button */}
         <button
           onClick={() => setShowModal(false)}
-          className="absolute top-4 right-4 text-gray-600 hover:text-[#71AC61] transition-transform duration-300 hover:rotate-180 text-xl font-bold"
+          className="absolute top-4 right-4 text-[#191919] hover:text-[#71AC61] transition-transform duration-300 hover:rotate-180 md:text-2xl text-xl font-bold"
         >
           ×
         </button>
 
-        <h3 className="flex justify-center items-center text-greenbase text-[14px] mb-0" style={{ fontFamily: "DM Sans, sans-serif" }}>
+        <h3 className="flex justify-center items-center text-greenbase caption-text mb-2 font-dm">
           Join the 21–Day Live Meditation Journey
         </h3>
-        <h2 className="text-2xl mb-6 font-[500] text-center font-rubik">
+        <h2 className="heading-large text-primary font-season font-med mb-3 ">
           Start your <span className="text-greenbase">Avyakt</span> Journey
         </h2>
 
@@ -36,28 +36,31 @@ const AvyaktModal = () => {
         <form className="space-y-4">
           <input
             type="text"
+            required
             placeholder="Full name"
-            className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none"
+            className="w-full border font-dm text-primary placeholder:text-[#191919] border-[#191919] rounded-2xl px-4 py-3 focus:outline-none"
           />
           <input
             type="email"
+            required
             placeholder="Email Address"
-            className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none"
+            className="w-full border font-dm text-primary placeholder:text-[#191919] border-[#191919] rounded-2xl px-4 py-3 focus:outline-none"
           />
           <div className="flex gap-3">
-            <select className="bg-white border border-gray-300 px-3 py-3 rounded-md focus:outline-none w-24">
+            <select className="bg-white border text-primary placeholder:text-[#191919] px-3 font-dm py-3 border-[#191919] rounded-2xl focus:outline-none w-24">
               <option value="+91">🇮🇳 +91</option>
               
             </select>
             <input
               type="tel"
               placeholder="Phone Number"
-              className="flex-1 px-4 py-3 border border-gray-300 rounded-md focus:outline-none"
+              required
+              className="flex-1 px-4 py-3 border font-dm text-primary placeholder:text-[#191919] border-[#191919] rounded-2xl focus:outline-none"
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-greenbasebg hover:bg-green-500 text-white py-3 rounded-full font-medium"
+            className="w-full bg-[#71AC61] hover:bg-[#4F7944]font-dm hover:bg-[#4F7944] transition-colors duration-300 text-white py-3 rounded-full font-medium cursor-pointer"
           >
             Register Now
           </button>
@@ -75,7 +78,7 @@ const AvyaktModal = () => {
             />
           ))}
         </div>
-        <p className="text-sm text-gray-600 mt-2 text-center">
+        <p className="caption-text text-primary font-dm  mt-2 text-center">
           Trusted by 5,000+ users on their wellness journey
         </p>
       </div>

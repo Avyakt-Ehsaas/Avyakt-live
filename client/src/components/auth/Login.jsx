@@ -155,16 +155,16 @@ export default function LoginForm() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4
-                    bg-gradient-to-b from-orange-50 via-amber-50 to-white">
+                    bg-gradient-to-b from-green-50 via-emerald-50 to-white">
 
       <div className="w-full max-w-md">
 
         {/* Heading */}
-        <div className="text-center mb-10">
-          <h1 className="text-4xl font-semibold tracking-tight text-gray-900 mb-2">
+        <div className="text-center mb-6">
+          <h1 className="text-4xl font-semibold tracking-tight text-primary font-season mb-2">
             Welcome Back
           </h1>
-          <p className="text-gray-600">
+          <p className="text-primary text-[18px] font-dm">
             Continue your conscious journey
           </p>
         </div>
@@ -176,7 +176,7 @@ export default function LoginForm() {
 
           {/* Soft Glow */}
           <div className="absolute -top-24 -right-24 w-60 h-60
-                          bg-orange-300/20 rounded-full blur-3xl" />
+                          bg-green-300/20 rounded-full blur-3xl" />
 
           <div className="relative px-8 py-10">
             <form onSubmit={submit} className="space-y-6">
@@ -188,10 +188,11 @@ export default function LoginForm() {
                 type="email"
                 placeholder="you@example.com"
                 value={email}
+                required
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl
-                           border border-gray-200
-                           focus:ring-2 focus:ring-orange-400
+                           border border-gray-200 font-dm
+                           focus:ring-2 focus:ring-green-400
                            focus:border-transparent"
               />
 
@@ -205,15 +206,15 @@ export default function LoginForm() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-4 py-3 rounded-xl
-                             border border-gray-200
-                             focus:ring-2 focus:ring-orange-400
+                             border border-gray-200 font-dm
+                             focus:ring-2 focus:ring-green-400
                              focus:border-transparent"
                 />
                 <div className="flex justify-end mt-2">
                   <button
                     type="button"
                     onClick={() => setShowResetModal(true)}
-                    className="text-sm text-orange-500 hover:text-orange-600 transition"
+                    className="text-sm font-dm text-greenbase hover:text-green-600 transition"
                   >
                     Forgot password?
                   </button>
@@ -225,9 +226,9 @@ export default function LoginForm() {
                 type="submit"
                 disabled={isloading}
                 className="w-full py-3 rounded-full
-                           bg-orange-500 text-white
+                           bg-greenbase-primary text-white
                            font-semibold tracking-wide
-                           shadow-lg shadow-orange-300/40
+                           shadow-lg shadow-greenbase
                            hover:scale-[1.02] transition"
               >
                 {isloading ? (
@@ -260,11 +261,11 @@ export default function LoginForm() {
               </Button>
 
               {/* Footer */}
-              <p className="text-center text-sm text-gray-600 pt-4">
+              <p className="text-center text-sm font-dm text-greenbase pt-4 font-dm">
                 Don't have an account?{" "}
                 <span
                   onClick={() => navigate("/auth/register")}
-                  className="font-medium text-orange-500 cursor-pointer hover:underline"
+                  className="font-medium text-greenbase  cursor-pointer hover:underline font-dm "
                 >
                   Create one
                 </span>
@@ -292,8 +293,8 @@ export default function LoginForm() {
 
             {/* Header */}
             <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Reset Password</h2>
-              <p className="text-gray-600 text-sm">
+              <h2 className="text-2xl font-bold text-primary font-season-semibold mb-2">Reset Password</h2>
+              <p className="text-primary  font-dm">
                 {resetStep === 1 && "Enter your email to receive a reset code"}
                 {resetStep === 2 && "Enter the 6-digit code sent to your email"}
                 {resetStep === 3 && "Create your new password"}
@@ -314,7 +315,7 @@ export default function LoginForm() {
                 <Button
                   onClick={handleSendOTP}
                   disabled={isResetLoading}
-                  className="w-full py-3 rounded-full bg-orange-500 text-white font-semibold hover:bg-orange-600 transition"
+                  className="w-full py-3 rounded-full bg-greenbase-primary text-white font-dm font-semibold hover:bg-green-600 transition"
                 >
                   {isResetLoading ? "Sending..." : "Send Reset Code"}
                 </Button>
@@ -331,20 +332,20 @@ export default function LoginForm() {
                   maxLength={6}
                   value={otp}
                   onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
-                  className="w-full text-center text-2xl tracking-widest"
+                  className="w-full text-center font-dm text-2xl tracking-widest"
                 />
                 <div className="flex gap-2">
                   <Button
                     onClick={() => setResetStep(1)}
                     variant="outline"
-                    className="flex-1 py-3 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-50 transition"
+                    className="flex-1 py-3 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-50 transition font-dm"
                   >
                     Back
                   </Button>
                   <Button
                     onClick={handleVerifyOTP}
                     disabled={isResetLoading}
-                    className="flex-1 py-3 rounded-full bg-orange-500 text-white font-semibold hover:bg-orange-600 transition"
+                    className="flex-1 py-3 rounded-full bg-greenbase-primary text-white font-semibold hover:bg-green-600 transition font-dm"
                   >
                     {isResetLoading ? "Verifying..." : "Verify Code"}
                   </Button>
@@ -369,7 +370,7 @@ export default function LoginForm() {
                   placeholder="Confirm new password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full"
+                  className="w-full "
                 />
                 <div className="flex gap-2">
                   <Button
@@ -382,7 +383,7 @@ export default function LoginForm() {
                   <Button
                     onClick={handleResetPassword}
                     disabled={isResetLoading}
-                    className="flex-1 py-3 rounded-full bg-orange-500 text-white font-semibold hover:bg-orange-600 transition"
+                    className="flex-1 py-3 rounded-full bg-greenbase-primary text-white font-semibold hover:bg-green-600 transition"
                   >
                     {isResetLoading ? "Resetting..." : "Reset Password"}
                   </Button>

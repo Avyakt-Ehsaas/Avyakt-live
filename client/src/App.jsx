@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { useAuth } from "./hooks/useAuth";
 //loader
@@ -43,10 +43,8 @@ import EmailCampaign from "./pages/admin/EmailCampaign";
 //public
 import LandingPage from "./pages/LandingPage/LandingPage";
 import ContactUs from "./pages/ContactUs";
-import AboutUs from "./pages/AboutUs/AboutUs";
-import Programs from "./pages/Programs";
+import AboutUsNew from "./pages/AboutUs/AboutUsNew";
 import Research from "./pages/Research";
-import TextLoader from "./components/ui/TextLoader";
 import MeditationVideos from "./pages/user/MeditationVideos";
 import TermsAndConditions from "./components/TermsAndConditions";
 import PrivacyPolicy from "./components/PrivacyPolicy";
@@ -60,14 +58,19 @@ import SubscriptionPricing from "./components/SubscriptionPricing";
 import VideoPageLayout from "./pages/admin/Videos/VideoPageLayout";
 import PlayVideo from "./pages/VideoPlay/PlayVideo";
 import SpritualGenAi from "./pages/Spritual/SpritualGenAi";
+import Room from "./pages/user/Room";
+import SessionsAndRoom from "./pages/user/SessionsAndRoom";
+import ProgramPage from "./pages/ProgramsPage/ProgramPage";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import ScrollToTop from "./services/ScrollToTop";
 
 
 
 function App() {
   const { user, loadingUser } = useAuth();
-    // const [showSplash, setShowSplash] = useState(true);
+  // const [showSplash, setShowSplash] = useState(true);
 
-  // ✅ Loader while checking auth
+  //check auth
   if (loadingUser) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-teal-50">
@@ -84,11 +87,13 @@ function App() {
   // if (showSplash) {
   //   return <TextLoader />; // You can center it with full-screen styles
   // }
-  
+
   return (
     <>
       <BrowserRouter>
-        <div className="min-h-screen bg-gradient-to-br from-purple-50 to-teal-50">
+      <ScrollToTop />
+        <div>
+
           <Routes>
 
             {/* ===========================================
@@ -99,10 +104,10 @@ function App() {
 
             {/* Landing Page - Anyone can access */}
             <Route path="/" element={<LandingPage />} />
-            
+
             <Route path="/dashboard" element={<UserLayout><Dashboard /></UserLayout>} />
 
-              <Route path='/spiritual-edu/genai' element={<SpritualGenAi />} />
+            <Route path='/spiritual-edu/genai' element={<SpritualGenAi />} />
             <Route
               path="/auth/login"
               element={
@@ -125,14 +130,14 @@ function App() {
               }
             />
             <Route path="/contact" element={<ContactUs />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/programs" element={<Programs />} />
+            <Route path="/about" element={<AboutUsNew />} />
+            <Route path="/programs" element={<ProgramPage />} />
             <Route path="/research" element={<Research />} />
 
             <Route path="/meditation-videos" element={<MeditationVideos />} />
             <Route path="/terms" element={<TermsAndConditions />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
-            
+
             <Route path="/surveys" element={<ActiveSurveys />} />
             <Route path="/surveys/preview/:id" element={<PreviewSurvey />} />
             <Route path="/surveys/thank-you" element={<ThankYouPage />} />
@@ -144,33 +149,33 @@ function App() {
               path="/feedback"
               element={user ? <Feedback /> : <Navigate to="/auth/login" replace />}
             />
-          
-              <Route
-              path="/plans" 
-              element={<SubscriptionPricing />} 
-              />
-              <Route path="/plans/:planId" 
+
+            <Route
+              path="/plans"
+              element={<SubscriptionPricing />}
+            />
+            <Route path="/plans/:planId"
               element={<SubscriptionPlanDetail />} />
 
-              <Route
+            <Route
               path="/admin/dashboard"
               element={<AdminLayout><AdminDashboard /></AdminLayout>}
-               />
+            />
 
 
             {/* ===========================================
                ✅ PROTECTED DASHBOARD ROUTE
             ============================================ */}
-           
+
             <Route
               path="/dashboard"
               element={
                 user &&
                   user.role === "admin" ? (
-                    <AdminLayout>
-                      <AdminDashboard />
-                    </AdminLayout>
-                  ) :  (
+                  <AdminLayout>
+                    <AdminDashboard />
+                  </AdminLayout>
+                ) : (
                   <Navigate to="/auth/login" replace />
                 )
               }
@@ -195,68 +200,68 @@ function App() {
               }
             />
 
-          <Route
-          path="/admin/surveys"
-          element={
-            user && user?.role === "admin" ? (
-              <AdminLayout>
-                <SurveyLayout />
-              </AdminLayout>
-            ) : (
-              <Navigate to="/" replace/>
-            )
-          }
-           />
-
-        <Route
-          path="/admin/surveys/create"
-          element={
-            user && user?.role === "admin" ? (
-              <AdminLayout>
-                <CreateSurvey />
-              </AdminLayout>
-            ) : (
-              <Navigate to="/" replace/>
-            )
-          }
-           />
-
-        <Route
-          path="/admin/email-campaign"
-          element={
-            user && user?.role === "admin" ? (
-              <AdminLayout>
-                <EmailCampaign />
-              </AdminLayout>
-            ) : (
-              <Navigate to="/" replace/>
-            )
-          }
-           />
+            <Route
+              path="/admin/surveys"
+              element={
+                user && user?.role === "admin" ? (
+                  <AdminLayout>
+                    <SurveyLayout />
+                  </AdminLayout>
+                ) : (
+                  <Navigate to="/" replace />
+                )
+              }
+            />
 
             <Route
-          path="/admin/surveys/:id"
-          element={
-            user && user?.role === "admin" ? (
-              <AdminLayout>
-            <SurveyResponses />
-              </AdminLayout>
-          ) : ( <Navigate to="/" replace />)       
-          }
-           />
+              path="/admin/surveys/create"
+              element={
+                user && user?.role === "admin" ? (
+                  <AdminLayout>
+                    <CreateSurvey />
+                  </AdminLayout>
+                ) : (
+                  <Navigate to="/" replace />
+                )
+              }
+            />
 
-           <Route 
-           path="/admin/meditation-videos"
-           element={
-            user && user?.role === "admin" ? (
-              <AdminLayout>
-                <VideoPageLayout />
-              </AdminLayout>
-            ) : (
-              <Navigate to="/" replace />
-            )
-           }
-           />
+            <Route
+              path="/admin/email-campaign"
+              element={
+                user && user?.role === "admin" ? (
+                  <AdminLayout>
+                    <EmailCampaign />
+                  </AdminLayout>
+                ) : (
+                  <Navigate to="/" replace />
+                )
+              }
+            />
+
+            <Route
+              path="/admin/surveys/:id"
+              element={
+                user && user?.role === "admin" ? (
+                  <AdminLayout>
+                    <SurveyResponses />
+                  </AdminLayout>
+                ) : (<Navigate to="/" replace />)
+              }
+            />
+
+            <Route
+              path="/admin/meditation-videos"
+              element={
+                user && user?.role === "admin" ? (
+                  <AdminLayout>
+                    <VideoPageLayout />
+                  </AdminLayout>
+                ) : (
+                  <Navigate to="/" replace />
+                )
+              }
+            />
 
             <Route
               path="/admin/users"
@@ -272,17 +277,17 @@ function App() {
             />
 
 
-             <Route 
-             path="/admin/users/:userId" 
-             element={
-              user?.role === "admin" ? (
-                <AdminLayout>
-                  <UserProfile />
-                </AdminLayout>
-              ) : (
-                <Navigate to="/" replace />
-              )
-             } />
+            <Route
+              path="/admin/users/:userId"
+              element={
+                user?.role === "admin" ? (
+                  <AdminLayout>
+                    <UserProfile />
+                  </AdminLayout>
+                ) : (
+                  <Navigate to="/" replace />
+                )
+              } />
 
 
             <Route
@@ -329,7 +334,7 @@ function App() {
               element={
                 user?.role === "admin" ? (
                   <AdminLayout>
-                   <AttendanceList />
+                    <AttendanceList />
                   </AdminLayout>
                 ) : (
                   <Navigate to="/" replace />
@@ -371,21 +376,21 @@ function App() {
             <Route
               path="/user/profile"
               element={
-                  <UserLayout>
-                    <Profile />
-                  </UserLayout>
+                <UserLayout>
+                  <Profile />
+                </UserLayout>
               }
             />
 
             <Route
               path="/join-meeting"
               element={
-                user ? ( 
-                   <UserLayout>
-                    <JoinMeeting />
+                user ? (
+                  <UserLayout>
+                    <SessionsAndRoom />
                   </UserLayout>) : (
-                    <Navigate to="/auth/login" replace />
-                  )
+                  <Navigate to="/auth/login" replace />
+                )
               }
             />
 
@@ -444,9 +449,9 @@ function App() {
             <Route
               path="/user/emotion-analytics"
               element={
-               <UserLayout>
-                    <EmotionAnalytics />
-                  </UserLayout>
+                <UserLayout>
+                  <EmotionAnalytics />
+                </UserLayout>
               }
             />
 
@@ -454,8 +459,7 @@ function App() {
                ✅ FALLBACK
             ============================================ */}
 
-            <Route path="*" element={<Navigate to="/" replace />} />
-
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
         </div>
       </BrowserRouter>

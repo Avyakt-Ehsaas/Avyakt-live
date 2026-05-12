@@ -21,7 +21,7 @@ const allowedOrigins = [
   "https://avaykt-ehsaas.netlify.app",
   "https://avyaktehsaas.netlify.app",
   "http://localhost:5173",
-  "https://www.avyaktehsaas.com"
+  "http://avyaktehsaas.com"
 ];
 
 app.use(cors({
