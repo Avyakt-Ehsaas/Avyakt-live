@@ -1,47 +1,77 @@
-import React from "react";
-import ProgramBg from "../../assets/images/ProgramBg.png";
-import ProgramBgImage from '../../assets/images/ProgramBgImage.png'
+import React, { useEffect, useState } from "react";
+import ProgramPage from "../../assets/images/ProgramPage.png";
+
+const words = ["Structured", "Trackable", "Built to last"];
 
 const Programs = () => {
+  const [index, setIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFade(false);
+
+      setTimeout(() => {
+        setIndex((prev) => (prev + 1) % words.length);
+        setFade(true);
+      }, 300);
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="relative w-full min-h-[110vh] 2xl:min-h-screen overflow-hidden overflow-y-auto z-1 flex justify-center items-center">
-
+    <section className="relative w-full min-h-screen overflow-hidden bg-[#F6FCF5]">
       {/* Background Image */}
-      <img        
-      src={ProgramBgImage}
-      alt="Hero"
-      className='absolute bottom-0 right-0 w-auto h-auto min-w-full min-h-full object-cover z-0'
+      <img
+        src={ProgramPage}
+        alt="Meditation"
+        className="absolute left-[30%] right-0 inset-0 w-[70%] h-full object-cover object-right z-0"
       />
-      {/* Light Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/40 to-transparent"></div>
-      {/* Content */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen px-4 text-center">
-        <div className="max-w-6xl font-season">
-          {/* Heading */}
-          <h1 className="heading-main font-season font-med text-primary">
-            A base program. Built for your problem.
-          </h1>
-          {/* Subtext */}
-          <p className="mt-2 max-w-5xl text-center text-primary font-dm paragraph-body font-med">
-           Every Avyakt program starts from the same rigorous foundation, structured meditation grounded in published neuroscience. Then we layer what your specific audience actually needs on top of it. <br />Same science. Different problem. Different program.
-          </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center px-8 mt-6">
-              <button
-                className="bg-greenbasebg  w-full sm:w-[300px] text-white font-semibold font-dm px-4 py-4 rounded-full hover:scale-105 transition-all duration-300"
+      {/* Left Soft White Overlay */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#F7FCF5] via-[#F7FCF5]/95 to-transparent" />
+
+      {/* Extra Center Fade */}
+      <div className="absolute inset-0 z-[2] bg-gradient-to-r from-[#F7FCF5]/90 via-white/35 to-transparent" />
+
+      {/* Content */}
+      <div className="relative z-10 min-h-screen flex items-center">
+        <div className="w-full max-w-[1280px] mx-auto px-6 md:px-12 lg:px-20">
+          <div className="max-w-[470px]">
+            <h1 className="px-12 md:px-0 heading-main font-semibold text-primary font-season-med leading-tight text-left">
+              Meditation that fits <br />
+              your life{" "}
+              <span
+                className={`text-[#71AC61] inline-block transition-all duration-500 ${
+                  fade
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-2"
+                }`}
               >
-                Talk to us about your context
+                {words[index]}
+              </span>
+            </h1>
+
+            <p className="max-w-4xl px-2 mt-2 text-gray font-dm paragraph-body text-left">
+              From stress and burnout to focus, sleep, and emotional
+              regulation, every session is designed using proven mental
+              frameworks, not guesswork.
+            </p>
+
+            <div className="mt-7 flex items-center gap-4">
+              <button className="bg-[#71AC61] w-full sm:w-[250px] text-white font-medium font-dm px-4 py-4 rounded-full hover:bg-[#4F7944] transition-all duration-300 cursor-pointer">
+                Explore Sessions
               </button>
 
-              <button
-                className="bg-transparent border w-full sm:w-[260px] text-white font-semibold font-dm px-4 py-4 rounded-full hover:scale-105 transition-all duration-300"
-              >
-                See Programs
+              <button className="bg-transparent border w-full sm:w-[250px] text-[#71AC61] font-medium font-dm px-4 py-4 cursor-pointer rounded-full hover:bg-[#4F7944] transition-all duration-300 hover:text-white/80">
+                I have an account
               </button>
             </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
