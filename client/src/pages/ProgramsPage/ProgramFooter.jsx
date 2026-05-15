@@ -7,23 +7,26 @@ import DarkLogo from "../../assets/images/LogoDark.svg";
 import avyaktFooter from "../../assets/avyakt.png"
 
 import MeditationWork1 from "../../assets/Icons/MeditationWork1.png"
+import faceEmoji from "../../assets/Icons/faceEmoji.png"
+import fireEmoji from "../../assets/Icons/fireEmoji.png"
+import brainEmoji from "../../assets/Icons/brainEmoji.png"
 
 const ProgramFooter = ({ data }) => {
 
 
     const textCard = [
         {
-            icon: MeditationWork1,
+            icon: faceEmoji,
             title: "Before & after mood score",
             decs: "A single mood check before and after each session. Over time this becomes a mood history you can actually read."
         },
         {
-            icon: MeditationWork1,
+            icon: fireEmoji,
             title: "Streak & consistency rate",
             decs: "Weekly and monthly views show patterns and tells how often you showed up, which days you skip, which contexts triggered return visits."
         },
         {
-            icon: MeditationWork1,
+            icon: brainEmoji,
             title: "Context shift over time",
             decs: "Started with heartbreak sessions, moved to sleep, then growth? Your context journey is tracked and reflected back to you as a visible arc of recovery."
         }
@@ -70,17 +73,18 @@ const ProgramFooter = ({ data }) => {
 
                             <div>
                                 {textCard.map((card, index) => (
-                                    <div className='bg-white py-5 px-4 rounded-xl paragraph-body text-left font-dm font-med mb-2'>
-                                        {/* <img src={card.icon} alt={card.title} /> */}
-                                        <div className='flex items-center gap-3 mb-2'>
-                                            {/* <div className='w-10 h-10 rounded-xl bg-greenbase-primary flex items-center justify-center text-white text-lg'>
-                                                {card.icon}
-                                            </div> */}
+                                    <div className='bg-white py-5 px-4 rounded-xl paragraph-body text-left font-dm font-med mb-2 flex'>
+                                        
+                                           <img src={card.icon} alt={card.title} className='w-8 h-8 mt-6 mr-3' />
+                                        <div>
+                                             <div className='flex items-center gap-3 mb-2'>
 
                                             <div> 
                                                 <p className='text-primary font-dm font-med card-title'>{card.title}</p></div></div><p className='text-gray font-dm paragraph-secondary text-left'>
                                             {card.decs}
                                         </p>
+                                        </div>
+                                    
                                     </div>
                                 ))}
                             </div>

@@ -46,8 +46,9 @@ const LandingSidebar = ({ isDarkBg }) => {
 
   const menu = [
     { label: "Home", path: "/" },
-    { label: "The Science", path: "/science" },
-    { label: "Programs", path: "/programs" },
+    // { label: "The Science", path: "/science" },
+    {label : "Live Sessions" , path : "/live-sessions"},
+    { label: "Library", path: "/library" },
     { label: "About", path: "/about" },
     { label: "Blogs", path: "/blogs" },
     { label : "Contact", path: "/contact" },

@@ -55,48 +55,48 @@ export default function WhoItsFor() {
           community.
         </p>
 
-        {/* Mobile Swiper */}
-        <div className="mt-12 block lg:hidden">
-          <Swiper
-            modules={[Autoplay, Pagination]}
-            slidesPerView={1.1}
-            spaceBetween={20}
-            centeredSlides={true}
-            loop={true}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false,
-            }}
-            pagination={{
-              clickable: true,
-            }}
-            className="pb-14"
-          >
-            {audienceCards.map((card, index) => (
-              <SwiperSlide key={index}>
-                <div className="bg-white rounded-2xl p-6 text-left shadow-[0px_12px_35px_rgba(0,0,0,0.10)]">
-                  <img
-                    src={card.img}
-                    alt={card.title}
-                    className="w-20 h-20 rounded-full object-cover mb-5"
-                  />
+    {/* Mobile Swiper */}
+<div className="mt-12 block lg:hidden">
+  <Swiper
+    modules={[Autoplay, Pagination]}
+    slidesPerView={1.1}
+    spaceBetween={20}
+    centeredSlides={true}
+    loop={true}
+    autoplay={{
+      delay: 2500,
+      disableOnInteraction: false,
+    }}
+    pagination={{
+      clickable: true,
+    }}
+    className="who-swiper !pb-12"
+  >
+    {audienceCards.map((card, index) => (
+      <SwiperSlide key={index}>
+        <div className="bg-white rounded-2xl p-6 text-left shadow-[0px_12px_35px_rgba(0,0,0,0.10)] min-h-[270px]">
+          <img
+            src={card.img}
+            alt={card.title}
+            className="w-20 h-20 rounded-full object-cover mb-5"
+          />
 
-                  <p className="font-dm text-greenbase paragraph-secondary mb-2 text-left ">
-                    {card.tags}
-                  </p>
+          <p className="font-dm text-greenbase paragraph-secondary mb-2 text-left">
+            {card.tags}
+          </p>
 
-                  <h3 className="font-dm text-primary card-title font-med text-left">
-                    {card.title}
-                  </h3>
+          <h3 className="font-dm text-primary card-title font-med text-left">
+            {card.title}
+          </h3>
 
-                  <p className="font-dm paragraph-secondary text-gray mt-1 font-med text-left">
-                    {card.desc}
-                  </p>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          <p className="font-dm paragraph-secondary text-gray mt-1 font-med text-left">
+            {card.desc}
+          </p>
         </div>
+      </SwiperSlide>
+    ))}
+  </Swiper>
+</div>
 
         {/* Desktop Grid */}
         <div className="hidden lg:grid mt-12 grid-cols-4 gap-9">
@@ -128,23 +128,27 @@ export default function WhoItsFor() {
       </div>
 
       {/* Custom Swiper Dots */}
-      <style jsx>{`
-        .swiper-pagination {
-          bottom: 0px !important;
-        }
+     <style jsx>{`
+  .who-swiper {
+    padding-bottom: 42px !important;
+  }
 
-        .swiper-pagination-bullet {
-          width: 8px;
-          height: 8px;
-          background: #c9dec4;
-          opacity: 1;
-          margin: 0 4px !important;
-        }
+  .who-swiper .swiper-pagination {
+    bottom: 0px !important;
+  }
 
-        .swiper-pagination-bullet-active {
-          background: #6bad5f;
-        }
-      `}</style>
+  .who-swiper .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: #c9dec4;
+    opacity: 1;
+    margin: 0 4px !important;
+  }
+
+  .who-swiper .swiper-pagination-bullet-active {
+    background: #6bad5f;
+  }
+`}</style>
     </section>
   );
 }

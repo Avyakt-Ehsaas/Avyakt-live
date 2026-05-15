@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  Plus,
-} from "lucide-react";
+import { Plus, Minus } from "lucide-react";
 import Organized1 from "../../assets/Icons/Organized1.png"
 import Organized2 from "../../assets/Icons/Organized2.png"
 import Organized3 from "../../assets/Icons/Organized3.png"
@@ -14,7 +12,7 @@ import Organized7 from "../../assets/Icons/Organized7.png"
 
 const sections = [
   {
-    icon : Organized1,
+    icon: Organized1,
     id: "hard-feelings",
     title: "Hard Feelings",
     desc: "Manage emotional distress & build resilience",
@@ -25,14 +23,32 @@ const sections = [
       typeLabel: "recovery sessions",
     },
     items: [
-      { icon : Organized3, name: "Anxiety & Stress", sessions: 6 },
-      { icon : Organized6, name: "Grief and Loss", sessions: 4 },
-      { icon : Organized7, name: "Stress & Burnout", sessions: 3 },
+      {
+        icon: Organized3,
+        name: "Anxiety & Stress",
+        sessions: 6,
+        description: "Support for calming anxious thoughts, emotional overload, and stress triggers.",
+        keypoints: ["Calm breathing", "Stress reset", "Thought awareness"],
+      },
+      {
+        icon: Organized6,
+        name: "Grief and Loss",
+        sessions: 4,
+        description: "Gentle sessions to process loss, sadness, and emotional heaviness.",
+        keypoints: ["Emotional release", "Self-compassion", "Healing reflection"],
+      },
+      {
+        icon: Organized7,
+        name: "Stress & Burnout",
+        sessions: 3,
+        description: "Designed to recover energy, reduce mental fatigue, and rebuild balance.",
+        keypoints: ["Nervous system rest", "Energy recovery", "Work-life reset"],
+      },
     ],
   },
 
   {
-    icon : Organized2,
+    icon: Organized2,
     id: "meditation",
     title: "Meditation Basics",
     desc: "Learn core meditation skills",
@@ -43,14 +59,32 @@ const sections = [
       typeLabel: "mindfulness sessions",
     },
     items: [
-      { icon : Organized3, name: "Breathing Basics", sessions: 5 },
-      { icon : Organized6, name: "Awareness", sessions: 4 },
-      { icon : Organized7, name: "Mindfulness", sessions: 7 },
+      {
+        icon: Organized3,
+        name: "Anxiety & Stress",
+        sessions: 6,
+        description: "Support for calming anxious thoughts, emotional overload, and stress triggers.",
+        keypoints: ["Calm breathing", "Stress reset", "Thought awareness"],
+      },
+      {
+        icon: Organized6,
+        name: "Grief and Loss",
+        sessions: 4,
+        description: "Gentle sessions to process loss, sadness, and emotional heaviness.",
+        keypoints: ["Emotional release", "Self-compassion", "Healing reflection"],
+      },
+      {
+        icon: Organized7,
+        name: "Stress & Burnout",
+        sessions: 3,
+        description: "Designed to recover energy, reduce mental fatigue, and rebuild balance.",
+        keypoints: ["Nervous system rest", "Energy recovery", "Work-life reset"],
+      },
     ],
   },
 
   {
-    icon : Organized5,
+    icon: Organized5,
     id: "body-rest",
     title: "Body & Rest",
     desc: "Improve sleep, relaxation, and physical awareness",
@@ -61,14 +95,32 @@ const sections = [
       typeLabel: "body recovery sessions",
     },
     items: [
-      { icon : Organized6, name: "Sleep Body Scan", sessions: 5 },
-      { icon : Organized7, name: "Night Recovery", sessions: 6 },
-      { icon : Organized3, name: "Calm Nervous System", sessions: 3 },
+      {
+        icon: Organized3,
+        name: "Anxiety & Stress",
+        sessions: 6,
+        description: "Support for calming anxious thoughts, emotional overload, and stress triggers.",
+        keypoints: ["Calm breathing", "Stress reset", "Thought awareness"],
+      },
+      {
+        icon: Organized6,
+        name: "Grief and Loss",
+        sessions: 4,
+        description: "Gentle sessions to process loss, sadness, and emotional heaviness.",
+        keypoints: ["Emotional release", "Self-compassion", "Healing reflection"],
+      },
+      {
+        icon: Organized7,
+        name: "Stress & Burnout",
+        sessions: 3,
+        description: "Designed to recover energy, reduce mental fatigue, and rebuild balance.",
+        keypoints: ["Nervous system rest", "Energy recovery", "Work-life reset"],
+      },
     ],
   },
 
   {
-    icon : Organized4,
+    icon: Organized4,
     id: "focus",
     title: "Focus & Productivity",
     desc: "Improve cognitive performance and work output",
@@ -79,15 +131,33 @@ const sections = [
       typeLabel: "performance sessions",
     },
     items: [
-      { icon : Organized6, name: "Deep Focus", sessions: 8 },
-      { icon : Organized7, name: "Mental Clarity", sessions: 4 },
-      { icon : Organized3, name: "Work Recovery", sessions: 5 },
+      {
+        icon: Organized3,
+        name: "Anxiety & Stress",
+        sessions: 6,
+        description: "Support for calming anxious thoughts, emotional overload, and stress triggers.",
+        keypoints: ["Calm breathing", "Stress reset", "Thought awareness"],
+      },
+      {
+        icon: Organized6,
+        name: "Grief and Loss",
+        sessions: 4,
+        description: "Gentle sessions to process loss, sadness, and emotional heaviness.",
+        keypoints: ["Emotional release", "Self-compassion", "Healing reflection"],
+      },
+      {
+        icon: Organized7,
+        name: "Stress & Burnout",
+        sessions: 3,
+        description: "Designed to recover energy, reduce mental fatigue, and rebuild balance.",
+        keypoints: ["Nervous system rest", "Energy recovery", "Work-life reset"],
+      },
     ],
   },
 
   // 5TH ITEM
   {
-    icon : Organized3,
+    icon: Organized3,
     id: "growth",
     title: "Growth & Relationships",
     desc: "Improve self-awareness and relationships",
@@ -98,9 +168,27 @@ const sections = [
       typeLabel: "relationship awareness",
     },
     items: [
-      { icon : Organized6, name: "Self Awareness", sessions: 5 },
-      { icon : Organized7, name: "Healthy Boundaries", sessions: 4 },
-      { icon : Organized3, name: "Emotional Connection", sessions: 6 },
+      {
+        icon: Organized3,
+        name: "Anxiety & Stress",
+        sessions: 6,
+        description: "Support for calming anxious thoughts, emotional overload, and stress triggers.",
+        keypoints: ["Calm breathing", "Stress reset", "Thought awareness"],
+      },
+      {
+        icon: Organized6,
+        name: "Grief and Loss",
+        sessions: 4,
+        description: "Gentle sessions to process loss, sadness, and emotional heaviness.",
+        keypoints: ["Emotional release", "Self-compassion", "Healing reflection"],
+      },
+      {
+        icon: Organized7,
+        name: "Stress & Burnout",
+        sessions: 3,
+        description: "Designed to recover energy, reduce mental fatigue, and rebuild balance.",
+        keypoints: ["Nervous system rest", "Energy recovery", "Work-life reset"],
+      },
     ],
   },
 ];
@@ -112,6 +200,9 @@ export default function MeditationLayout() {
     useState("hard-feelings");
 
   const sectionRefs = useRef({});
+
+  const [openItem, setOpenItem] = useState(null);
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -157,7 +248,7 @@ export default function MeditationLayout() {
   };
 
   return (
-    <section className="bg-white py-20 px-6">
+    <section className="bg-white py-12 md:py-20 px-4 md:px-6">
       <div className="max-w-7xl mx-auto">
 
         {/* HEADER */}
@@ -179,16 +270,16 @@ export default function MeditationLayout() {
         </div>
 
         {/* MAIN LAYOUT */}
-        <div className="grid grid-cols-12 gap-10">
+        <div className="grid grid-cols-12 gap-2 lg:gap-10 ">
 
           {/* SIDEBAR */}
           <div className="col-span-12 lg:col-span-3">
-            <div className="sticky top-10 space-y-3">
+            <div className="lg:sticky lg:top-10 flex lg:block gap-3 overflow-x-auto lg:overflow-visible pb-3 lg:pb-0 lg:space-y-3">
               {sections.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`w-full text-left rounded-[24px] p-5 transition-all duration-300 border
+                 className={`min-w-[260px] lg:min-w-0 w-full text-left rounded-[24px] p-4 md:p-5 transition-all duration-300 border
                   
                   ${activeSection === item.id
                       ? "bg-[#C2E0BA33] border-[#C2E0BA33]"
@@ -218,7 +309,7 @@ export default function MeditationLayout() {
           </div>
 
           {/* RIGHT CONTENT */}
-          <div className="col-span-12 lg:col-span-9 space-y-24">
+          <div className="col-span-12 lg:col-span-9 space-y-16 lg:space-y-24">
             {sections.map((section) => (
               <div
                 key={section.id}
@@ -226,17 +317,14 @@ export default function MeditationLayout() {
                 ref={(el) =>
                   (sectionRefs.current[section.id] = el)
                 }
-                className="scroll-mt-24 min-h-screen"
+                className="scroll-mt-24 min-h-fit md:min-h-screen"
               >
 
                 {/* TOP CARD */}
-                <div className="bg-[#C2E0BA33] rounded-[32px] p-8 ">
+              <div className="bg-[#C2E0BA33] rounded-[28px] md:rounded-[32px] p-5 md:p-8">
 
-                  {/* Heading */}
-                  <div className="flex items-start gap-4">
-                  
-                      <img src={section.icon} alt={section.title} className="mt-1 h-12 w-12" />
-                  
+                <div className="flex items-start gap-3 md:gap-4">
+  <img src={section.icon} alt={section.title} className="mt-1 h-10 w-10 md:h-12 md:w-12 shrink-0" />
 
                     <div>
                       <h2 className="heading-large text-left text-primary font-season-medium font-med">
@@ -276,40 +364,68 @@ export default function MeditationLayout() {
 
                 {/* SESSION LIST */}
                 <div className="space-y-4 mt-6">
-                  {section.items.map((item, index) => (
-                    <div
-                      key={index}
-                      className="bg-white border border-[#E8E8E8] rounded-[22px] px-6 py-5 flex items-center justify-between hover:shadow-sm transition-all"
-                    >
+                  {section.items.map((item, index) => {
+                    const itemKey = `${section.id}-${index}`;
+                    const isOpen = openItem === itemKey;
 
-                      {/* LEFT */}
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-[#EEF4EA] flex items-center justify-center text-lg">
-                          <img src={item.icon} alt={item.name} />
+                    return (
+                      <div
+                        key={itemKey}
+                        className="bg-white border border-[#E8E8E8] rounded-[22px] px-6 py-5 hover:shadow-sm transition-all"
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-4">
+                            <div className="w-10 h-10 rounded-xl bg-[#EEF4EA] flex items-center justify-center text-lg">
+                              <img src={item.icon} alt={item.name} />
+                            </div>
+
+                            <h4 className="text-primary paragraph-body font-dm font-med">
+                              {item.name}
+                            </h4>
+                          </div>
+
+                          <div className="flex items-center gap-4">
+                            <span className="text-gray font-dm paragraph-secondary">
+                              {item.sessions} sessions
+                            </span>
+
+                            <button
+                              onClick={() => setOpenItem(isOpen ? null : itemKey)}
+                              className="w-8 h-8 rounded-full border border-[#9CC48B] flex items-center justify-center text-[#7BA96B] hover:bg-[#EEF4EA] transition"
+                            >
+                              {isOpen ? <Minus size={14} /> : <Plus size={14} />}
+                            </button>
+                          </div>
                         </div>
 
-                        <h4 className="text-primary paragraph-body font-dm font-med">
-                          {item.name}
-                        </h4>
+                        {isOpen && (
+                          <div className="mt-5 pl-14 border-t border-[#E8E8E8] pt-4">
+                            <p className="text-gray font-dm paragraph-secondary text-left font-med">
+                              {item.description}
+                            </p>
+                            <div className="flex flex-wrap gap-3 mt-5">
+                              {item.keypoints.map((point, i) => (
+                                <div
+                                  key={i}
+                                  className="px-5 py-3 rounded-full border border-[#8EBB7F] 
+      text-[#7BA96B] font-dm  
+      bg-[#F9FCF7] hover:bg-[#EEF4EA] paragraph-secondary transition-all"
+                                >
+                                  {point}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
-
-                      {/* RIGHT */}
-                      <div className="flex items-center gap-4">
-                        <span className="text-gray font-dm paragraph-secondary">
-                          {item.sessions} sessions
-                        </span>
-
-                        <button className="w-8 h-8 rounded-full border border-[#9CC48B] flex items-center justify-center text-[#7BA96B] hover:bg-[#EEF4EA] transition">
-                          <Plus size={14} />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
               </div>
             ))}
           </div>
+
         </div>
       </div>
     </section>
