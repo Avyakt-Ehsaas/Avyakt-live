@@ -42,7 +42,7 @@ export default function ResearchPoints() {
             What the research actually says
           </p>
 
-          <h2 className="px-4 md:px-4 font-season-medium text-primary heading-main text-center md:text-left">
+          <h2 className="px-4 md:px-4 font-season-medium text-primary heading-main text-center-left">
             Meditation works. Decades of published studies confirm it.
           </h2>
 

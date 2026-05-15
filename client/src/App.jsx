@@ -105,7 +105,7 @@ function App() {
             {/* Landing Page - Anyone can access */}
             <Route path="/" element={<LandingPage />} />
 
-            <Route path="/dashboard" element={<UserLayout><Dashboard /></UserLayout>} />
+            <Route path="/live-sessions" element={<UserLayout><Dashboard /></UserLayout>} />
 
             <Route path='/spiritual-edu/genai' element={<SpritualGenAi />} />
             <Route
@@ -131,7 +131,7 @@ function App() {
             />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/about" element={<AboutUsNew />} />
-            <Route path="/programs" element={<ProgramPage />} />
+            <Route path="/library" element={<ProgramPage />} />
             <Route path="/research" element={<Research />} />
 
             <Route path="/meditation-videos" element={<MeditationVideos />} />

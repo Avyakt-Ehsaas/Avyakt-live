@@ -66,7 +66,7 @@ function FAQSection() {
               </div>
 
               {activeIndex === index && (
-                <p className="mt-3 text-medium text-primary font-dm leading-relaxed">
+                <p className="mt-2 paragraph-secondary text-left text-primary font-dm leading-relaxed">
                   {item.answer}
                 </p>
               )}
