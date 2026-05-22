@@ -63,6 +63,7 @@ import SessionsAndRoom from "./pages/user/SessionsAndRoom";
 import ProgramPage from "./pages/ProgramsPage/ProgramPage";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import ScrollToTop from "./services/ScrollToTop";
+import LiveSession from "./pages/LiveSession/LiveSession";
 
 
 
@@ -104,8 +105,9 @@ function App() {
 
             {/* Landing Page - Anyone can access */}
             <Route path="/" element={<LandingPage />} />
+            <Route path="/live-sessions" element={<LiveSession />} />
 
-            <Route path="/live-sessions" element={<UserLayout><Dashboard /></UserLayout>} />
+            <Route path="/dashboard" element={<UserLayout><Dashboard /></UserLayout>} />
 
             <Route path='/spiritual-edu/genai' element={<SpritualGenAi />} />
             <Route
