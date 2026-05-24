@@ -4,7 +4,7 @@ import LiveSessionPractice from "../../assets/images/LiveSessionPractice.png"
 
 export default function PracticeSection() {
   return (
-    <section className="relative bg-white px-6 py-42 overflow-hidden">
+    <section className="relative bg-white px-6 py-30 md:py-42 overflow-hidden">
       {/* soft grid background */}
       <div className="absolute inset-0 bg-[linear-gradient(#eef3ed_1px,transparent_1px),linear-gradient(90deg,#eef3ed_1px,transparent_1px)] bg-[size:64px_64px] opacity-70" />
 

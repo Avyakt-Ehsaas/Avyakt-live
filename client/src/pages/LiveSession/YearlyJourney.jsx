@@ -68,14 +68,14 @@ const journeyData = [
 
 const YearlyJourney = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-white py-24">
+    <section className="relative w-full overflow-hidden bg-white py-16 md:py-24">
       {/* Heading */}
-      <div className="text-center px-6">
+      <div className="text-center px-5 md:px-6">
         <p className="text-greenbase font-dm text-[14px] md:text-[20px] tracking-widest mb-2 uppercase">
           Your Yearly Journey
         </p>
 
-        <h2 className="font-season-medium text-primary heading-main  mb-4">
+        <h2 className="font-season-medium text-primary heading-main mb-4">
           A roadmap through the year
         </h2>
 
@@ -85,8 +85,62 @@ const YearlyJourney = () => {
         </p>
       </div>
 
-      {/* Roadmap Area */}
-      <div className="relative mx-auto max-w-[1440px] h-[1250px]">
+      {/* ================= MOBILE TIMELINE ================= */}
+      <div className="relative mx-auto mt-14 flex max-w-[420px] flex-col gap-10 px-4 md:hidden">
+
+        {/* Vertical Line */}
+        <div className="absolute left-[38px] top-0 h-full w-[2px] bg-greenbase-primary mt-3" />
+
+        {journeyData.map((item) => (
+          <div key={item.id} className="relative flex gap-4">
+
+            {/* Number Circle */}
+            <div className="relative z-10 flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full bg-[#8BC975] shadow-[0_10px_25px_rgba(139,201,117,0.35)] mt-2">
+              <span className="text-white font-season-medium heading-large font-med ">
+                {item.id}
+              </span>
+            </div>
+
+            {/* Card */}
+            <div className="flex-1 rounded-[26px] bg-[#C2E0BA66] p-5 shadow-[0_12px_35px_rgba(0,0,0,0.05)] border border-[#C2E0BA]">
+
+              {/* Badge */}
+              <div className="inline-flex items-center justify-center border border-[#7AC563] rounded-full px-4 py-1.5 mb-4">
+                <span className="text-greenbase font-dm text-[11px] uppercase tracking-[0.18em]">
+                  {item.quarter}
+                </span>
+              </div>
+
+              {/* Title */}
+              <h3 className="card-title font-dm font-med text-primary">
+                {item.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-gray font-dm paragraph-secondary text-left mt-1">
+                {item.description}
+              </p>
+
+              {/* Points */}
+              <ul className="space-y-2 pt-5">
+                {item.points.map((point, index) => (
+                  <li
+                    key={index}
+                    className="flex items-start gap-3 text-gray font-dm paragraph-secondary text-left"
+                  >
+                    <span className="w-[4px] h-[4px] rounded-full bg-[#706E6E] mt-[10px]" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ================= DESKTOP ROADMAP ================= */}
+      <div className="relative mx-auto hidden md:block max-w-[1440px] h-[1250px]">
+        
         {/* VECTOR IMAGE */}
         <img
           src={RoadMap}
@@ -97,6 +151,7 @@ const YearlyJourney = () => {
         {/* CONTENT */}
         {journeyData.map((item) => (
           <React.Fragment key={item.id}>
+            
             {/* NUMBER */}
             <div
               className={`absolute ${item.numberPosition} z-20 w-[56px] h-[56px] rounded-full bg-[#8BC975] flex items-center justify-center shadow-xl`}
@@ -119,6 +174,7 @@ const YearlyJourney = () => {
 
               {/* Content */}
               <div className="grid md:grid-cols-2 gap-4">
+                
                 {/* Left */}
                 <div>
                   <h3 className="card-title font-dm font-med">

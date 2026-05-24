@@ -1,5 +1,11 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState } from "react";
 import { Check } from "lucide-react";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/pagination";
 
 const pricingData = {
   Monthly: [
@@ -121,79 +127,150 @@ const pricingData = {
 };
 
 const Pricing = () => {
-
   const [activeTab, setActiveTab] = useState("Monthly");
+
   const plans = pricingData[activeTab];
 
   return (
     <>
-    <section className="relative w-full overflow-hidden px-6 py-8">
+      <section className="relative w-full overflow-x-hidden py-14 md:py-20">
+        {/* Top Fade */}
+        <div className="pointer-events-none absolute top-0 left-0 z-[1] h-[160px] w-full bg-gradient-to-b from-white via-white/80 to-transparent" />
 
-      <div className="relative z-10 mb-8 flex justify-center gap-10 text-sm font-semibold">
-        {Object.keys(pricingData).map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`relative pb-5 transition ${
-              activeTab === tab ? "text-greenbase" : "text-primary"
-            } font-dm font-smbold paragraph-secondary `}
-          >
-            {tab}
-            {activeTab === tab && (
-              <span className="absolute bottom-0 left-1/2 h-[3px] w-[70px] -translate-x-1/2 bg-greenbase-primary" />
-            )}
-          </button>
-        ))}
-      </div>
+        {/* Main Content */}
+        <div className="relative z-10 px-1 md:px-6">
+          {/* Tabs */}
+          <div className="mb-10 flex items-center justify-center gap-6 md:gap-10">
+            {Object.keys(pricingData).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`relative pb-4 transition-all duration-300 ${activeTab === tab ? "text-greenbase" : "text-primary"
+                  } font-dm font-smbold paragraph-secondary`}
+              >
+                {tab}
 
-      <div className="relative max-h-[480px] z-10 mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-3 ">
-        {plans.map((plan) => (
-          <div
-            key={plan.name}
-            className={`min-h-[400px] rounded-[34px] px-8 py-8 shadow-[0_18px_35px_rgba(0,0,0,0.16)] bg-white border ${plan.highlighted ? "border-greenbase" : "border-transparent"} hover:bg-[#C2E0BA] hover:text-white transition-colors duration-300 cursor-pointer`}
-          >
-            <h3 className="font-season-medium heading-large text-left font-med text-primary">
-              {plan.name}
-            </h3>
-
-            <p className="mt-2 font-dm text-gray paragraph-secondary text-left">{plan.subtitle}</p>
-
-            <div className="mt-1 flex items-end gap-1">
-              <span className="font-smbold text-[40px] font-noto text-primary">
-                {plan.price}
-              </span>
-              <span className="pb-4 uppercase text-gray font-dm paragraph-secondary text-left">
-                / {activeTab === "Monthly" ? "Month" : activeTab}
-              </span>
-            </div>
-
-            <ul className="mt-3 space-y-3">
-              {plan.features.map((feature) => (
-                <li
-                  key={feature}
-                  className="flex items-start gap-3 text-gray font-dm paragraph-secondary text-left"
-                >
-                  <span className="mt-[3px] flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#6fad5f] text-white">
-                    <Check size={11} strokeWidth={3} />
-                  </span>
-                  {feature}
-                </li>
-              ))}
-            </ul>
-
-          <button className="mt-4 bg-[#71AC61] w-full sm:w-[250px] text-white font-medium font-dm px-3   py-3 rounded-full hover:bg-[#4F7944] transition-all duration-300 cursor-pointer">
-                Start free 21-days
+                {activeTab === tab && (
+                  <span className="absolute bottom-0 left-1/2 h-[3px] w-[60px] md:w-[70px] -translate-x-1/2 rounded-full bg-greenbase-primary" />
+                )}
               </button>
+            ))}
           </div>
-        ))}
-      </div>
-    </section>
 
+          {/* Desktop Grid */}
+          <div className="hidden md:grid relative z-10 mx-auto max-w-6xl grid-cols-3 gap-8">
+            {plans.map((plan) => (
+              <PricingCard
+                key={plan.name}
+                plan={plan}
+                activeTab={activeTab}
+              />
+            ))}
+          </div>
 
-
+          {/* Mobile Swiper */}
+          <div className="md:hidden w-[520px] overflow-hidden pl-16">
+                     <Swiper
+                       modules={[Pagination, Autoplay]}
+                       spaceBetween={18}
+                       slidesPerView={1.2}
+                      //  centeredSlides={true}
+                       pagination={{ clickable: true }}
+                       autoplay={{
+                         delay: 2000,
+                         disableOnInteraction: false,
+                       }}
+                       loop={true}
+                       className="who-swiper !pb-12"
+                     >
+              {plans.map((plan) => (
+                <SwiperSlide key={plan.name}>
+                  <PricingCard
+                    plan={plan}
+                    activeTab={activeTab}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+      </section>
     </>
-  )
-}
+  );
+};
 
-export default Pricing
+const PricingCard = ({ plan, activeTab }) => {
+  return (
+    <div
+      className={`min-h-[520px] rounded-[34px] px-6 md:px-8 py-6 shadow-[0_18px_35px_rgba(0,0,0,0.10)] bg-white hover:bg-[#c2e0ba] border transition-all duration-300 ${plan.highlighted
+          ? "border-greenbase bg-[#F7FCF5]"
+          : "border-transparent"
+        }`}
+    >
+      {/* Heading */}
+      <h3 className="font-season-medium heading-large text-left font-med text-primary">
+        {plan.name}
+      </h3>
 
+      <p className="mt-2 font-dm text-gray paragraph-secondary text-left">
+        {plan.subtitle}
+      </p>
+
+      {/* Price */}
+      <div className="mt-4 flex items-end gap-1">
+        <span className="font-smbold text-[42px] leading-none font-noto text-primary">
+          {plan.price}
+        </span>
+
+        <span className="pb-1 uppercase text-gray font-dm paragraph-secondary text-left">
+          / {activeTab === "Monthly" ? "Month" : activeTab}
+        </span>
+      </div>
+
+      {/* Features */}
+      <ul className="mt-6 space-y-4">
+        {plan.features.map((feature) => (
+          <li
+            key={feature}
+            className="flex items-start gap-3 text-gray font-dm paragraph-secondary text-left"
+          >
+            <span className="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#6fad5f] text-white">
+              <Check size={12} strokeWidth={3} />
+            </span>
+
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* CTA */}
+      <button className="mt-8 w-full rounded-full bg-[#71AC61] px-4 py-4 text-white font-medium font-dm transition-all duration-300 hover:bg-[#4F7944] cursor-pointer">
+        Start free 21-days
+      </button>
+
+       <style jsx>{`
+  .who-swiper {
+    padding-bottom: 42px !important;
+  }
+
+  .who-swiper .swiper-pagination {
+    bottom: 0px !important;
+  }
+
+  .who-swiper .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: #c9dec4;
+    opacity: 1;
+    margin: 0 4px !important;
+  }
+
+  .who-swiper .swiper-pagination-bullet-active {
+    background: #6bad5f;
+  }
+`}</style>
+    </div>
+  );
+};
+
+export default Pricing;
