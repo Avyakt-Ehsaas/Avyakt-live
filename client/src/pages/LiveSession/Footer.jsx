@@ -38,7 +38,7 @@ const Footer = () => {
     return (
         <>
             <section
-                className="relative z-10 w-full min-h-screen flex flex-col gap-50 items-center bg-cover bg-center bg-no-repeat"
+                className="relative z-10 w-full min-h-screen flex flex-col gap-50 items-center bg-cover bg-center bg-no-repeat overflow-hidden"
                 style={{ backgroundImage: `url(${FullCTA})` }}
             >
                 {/* Overlay */}
@@ -59,9 +59,9 @@ const Footer = () => {
                 />
                 <div className='flex flex-col gap-20'>
                     {/* Blog Section */}
-                    <div className="relative z-10 mx-auto w-full max-w-[1100px] flex flex-col justify-between h-full pt-28">
+                    <div className="relative z-10 mx-auto w-full max-w-[1100px] flex flex-col justify-between h-full pt-16">
 
-                        <p className="text-greenbase font-dm text-center font-medium tracking-widest text-[14px] text-[20px] uppercase ">
+                        <p className="text-greenbase font-dm text-center font-medium tracking-widest text-[14px] md:text-[20px] uppercase mt-2">
                             PRICING
                         </p>
 

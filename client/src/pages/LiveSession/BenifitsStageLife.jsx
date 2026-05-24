@@ -69,11 +69,10 @@ export default function BenefitsStageLife() {
         </div>
 
         <div className="relative h-[430px] w-full">
-          <div className="relative h-[395px] w-[520px]">
+          <div className="relative left-[16%] sm:left-[24%] md:left-[0%] lg:left-[16%] h-[340px] w-[340px] sm:w-[400px] sm:h-[400px] md:h-[395px] md:w-[520px]">
             {cards.map((card, index) => {
               const pos = getCardIndex(index);
               const isFront = pos === 0;
-
               return (
                 <div
                   key={card.title}
@@ -97,13 +96,13 @@ export default function BenefitsStageLife() {
                   <img
                     src={card.img}
                     alt={card.title}
-                    className="h-full w-full object-cover"
+                    className="h-[340px] w-[340px] sm:w-[400px] sm:h-[400px] md:h-full md:w-full object-cover"
                   />
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
                   <div className="absolute bottom-7 left-7 right-7 text-white">
-                    <h3 className="font-serif text-[28px] leading-none">
+                    <h3 className="font-dm caption-text">
                       {card.title}
                     </h3>
                     <p className="mt-2 text-[15px] leading-6">{card.desc}</p>
