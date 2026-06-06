@@ -1,15 +1,52 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef , useEffect} from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { useAuth } from '../../../hooks/useAuth'
 import { toast } from 'react-hot-toast'
 import Logo from '../../../assets/images/Logo.svg'
 import LogoDark from '../../../assets/images/LogoDark.svg'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, User, LogOut } from "lucide-react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 
 const LandingSidebar = ({ isDarkBg }) => {
 
-  const { user, logout } = useAuth();
+const [profileOpen, setProfileOpen] = useState(false);
+const profileRef = useRef(null);
+
+// spring logic 
+  const [payload, setPayload] = useState({});
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      try {
+        const decoded = JSON.parse(
+          atob(token.split(".")[1])
+        );
+
+        setPayload(decoded);
+
+        console.log("User Payload:", decoded);
+      } catch (error) {
+        console.log("Invalid token");
+      }
+    }
+  }, []);
+
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (profileRef.current && !profileRef.current.contains(event.target)) {
+      setProfileOpen(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => document.removeEventListener("mousedown", handleClickOutside);
+}, []);
+
+
+  console.log("User Payload in LandingSidebar:", payload);
+
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -36,13 +73,17 @@ const LandingSidebar = ({ isDarkBg }) => {
   });
 
   const handleLogout = async () => {
-    try {
-      await logout();
-      toast.success("User logged out");
-    } catch (error) {
-      toast.error("Logout failed");
-    }
-  };
+  try {
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    setPayload({});
+    setProfileOpen(false);
+    toast.success("User logged out");
+    navigate("/");
+  } catch (error) {
+    toast.error("Logout failed");
+  }
+};
 
   const menu = [
     { label: "Home", path: "/" },
@@ -50,12 +91,22 @@ const LandingSidebar = ({ isDarkBg }) => {
     {label : "Live Sessions" , path : "/live-sessions"},
     { label: "Library", path: "/library" },
     { label: "About", path: "/about" },
-    { label: "Blogs", path: "/blogs" },
+    // { label: "Blogs", path: "/blogs" },
     { label : "Contact", path: "/contact" },
-    ...(user?.role === "admin"
-      ? [{ label: "Admin Panel", path: "/admin/dashboard" }]
-      : []),
+    // ...(user?.role === "admin"
+    //   ? [{ label: "Admin Panel", path: "/admin/dashboard" }]
+    //   : []),
   ];
+
+  const handleJoinUsClick = () => {
+      try {
+        navigate("/auth/login");
+        toast.success("Welcome back!");
+      } catch (error) {
+        toast.error("Error while login")
+      }
+    }
+
 
   return (
     <div className="flex justify-around">
@@ -117,9 +168,44 @@ const LandingSidebar = ({ isDarkBg }) => {
             </div>
 
             {/* Desktop Button */}
-            <button className="hidden md:block px-4 py-3 bg-[#71AC61] text-white rounded-full hover:bg-[#4F7944] transition font-dm text-lg">
-              Join us
-            </button>
+          <div className="hidden md:flex items-center">
+  {payload?.sub ? (
+    <div ref={profileRef} className="relative">
+      <button
+        onClick={() => setProfileOpen((prev) => !prev)}
+        className="flex h-11 w-11 items-center justify-center rounded-full bg-[#71AC61] text-white hover:bg-[#4F7944] transition-all duration-300 shadow-sm"
+      >
+        <User size={21} />
+      </button>
+
+      {profileOpen && (
+        <div className="absolute right-0 top-[58px] w-[285px] overflow-hidden rounded-2xl border border-white/20 bg-white shadow-[0_18px_50px_rgba(0,0,0,0.18)] z-[999]">
+          <div className="px-5 py-2 border-b border-gray-100">
+            <p className="mt-1 font-dm paragraph-secondary text-gray-500 text-left">Logged in as</p>
+            <h3 className="font-dm paragraph-body font-med text-primary break-all text-left">
+              {payload?.sub}
+            </h3>
+          </div>
+
+          <button
+            onClick={handleLogout}
+            className="flex w-full items-center gap-3 px-5 py-4 font-dm paragraph-secondary font-semibold text-red-500 hover:bg-red-50 transition"
+          >
+            <LogOut size={18} />
+            Logout
+          </button>
+        </div>
+      )}
+    </div>
+  ) : (
+    <button
+      onClick={handleJoinUsClick}
+      className="px-4 py-3 bg-[#71AC61] text-white rounded-full hover:bg-[#4F7944] transition font-dm text-lg"
+    >
+      Join us
+    </button>
+  )}
+</div>
 
             {/* Mobile Menu Toggle */}
             <button
@@ -160,9 +246,23 @@ const LandingSidebar = ({ isDarkBg }) => {
                 );
               })}
 
-              <button className="w-full mt-3 px-4 py-3 bg-[#71AC61] hover:bg-[#4F7944] text-white rounded-full transition-all duration-300">
+              {payload?.sub ? (<>
+                <div className="mt-4 mb-2 px-3 py-2 rounded-lg bg-slate-100/30 text-primary">
+                <h3 className='text-left font-dm paragraph-body px-4 text-primary'>{payload?.sub}</h3>
+                </div>
+              <button
+              onClick={handleLogout}
+              className="w-full mt-3 px-4 py-3 bg-[#71AC61] hover:bg-[#4F7944] text-white rounded-full transition-all duration-300 ">
+                Logout
+              </button>
+              </>) : (<>
+              <button 
+              onClick={handleJoinUsClick}
+              className="w-full mt-3 px-4 py-3 bg-[#71AC61] hover:bg-[#4F7944] text-white rounded-full transition-all duration-300">
                 Join us
               </button>
+              </>)}
+              
             </div>
           )}
         </div>

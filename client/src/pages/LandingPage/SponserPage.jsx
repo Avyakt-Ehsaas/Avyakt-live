@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import ProgramCard from "./ProgramCard";
+import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import toast from "react-hot-toast";
 
 import Library1 from "../../assets/images/Library1.png";
 import Library2 from "../../assets/images/Library2.png";
@@ -21,6 +23,7 @@ import "swiper/css/pagination";
 
 function SponsorPage() {
   const [activeTab, setActiveTab] = useState("school");
+  const navigate = useNavigate();
 
   const programData = [
     {
@@ -60,6 +63,16 @@ function SponsorPage() {
       image: Library3,
     }
   ];
+
+  const handleBrowseAllClick = () => {  
+    try {
+      navigate("/library");
+    }
+      catch (error) {
+      toast.error("Something went wrong. Please try again later.");
+      }
+  };
+
 
   return (
     <div className="w-full pt-0 md:pt-24 pb-0 flex items-center justify-center bg-white min-h-screen 2xl:min-h-fit mb-4 md:mb-0">
@@ -130,7 +143,7 @@ function SponsorPage() {
 
 
         <div className="flex justify-center mt-10">
-          <button className="bg-[#71AC61] text-white px-6 py-3 font-dm paragraph-body  rounded-full font-medium hover:bg-[#4F7944] transition-all duration-300 cursor-pointer">
+          <button onClick={handleBrowseAllClick} className="bg-[#71AC61] text-white px-6 py-3 font-dm paragraph-body  rounded-full font-medium hover:bg-[#4F7944] transition-all duration-300 cursor-pointer">
             Browse all sessions
           </button>
         </div>

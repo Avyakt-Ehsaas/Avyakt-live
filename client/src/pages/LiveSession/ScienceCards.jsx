@@ -138,9 +138,9 @@ export default function ScienceSection() {
 
       <div className="pointer-events-none absolute bottom-0 left-0 z-20 h-[80px] w-full bg-gradient-to-b from-transparent via-white/80 to-white" />
 
-      
+
       {/* Custom Swiper Dots */}
-     <style jsx>{`
+      <style jsx>{`
   .who-swiper {
     padding-bottom: 42px !important;
   }
@@ -162,6 +162,6 @@ export default function ScienceSection() {
   }
 `}</style>
     </section>
-    
+
   );
 }

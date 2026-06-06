@@ -64,6 +64,7 @@ import ProgramPage from "./pages/ProgramsPage/ProgramPage";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import ScrollToTop from "./services/ScrollToTop";
 import LiveSession from "./pages/LiveSession/LiveSession";
+import PaymentPage from "./pages/PaymentPage/PaymentPage";
 
 
 
@@ -146,6 +147,8 @@ function App() {
 
             <Route path="/meditation-video/play/:id" element={<PlayVideo />} />
 
+{/* add protected route later */}
+              <Route path="/payment" element={<PaymentPage />} />
 
             <Route
               path="/feedback"

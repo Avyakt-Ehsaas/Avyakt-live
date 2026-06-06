@@ -1,7 +1,23 @@
 import React from "react";
 import liveSessionHero from "../../assets/images/liveSessionHero.png";
+import toat from "react-hot-toast";
 
 const HeroSection = () => {
+  const handleClick = () => {
+    try {
+    const element = document.getElementById("pricing-section");
+    if (element) {
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }
+    }catch (error) {
+      toast.error("Something went wrong. Please try again later.");
+    }
+  };
+
+
   return (
     <section className="relative w-full overflow-hidden bg-[#C2E0BA33]">
       {/* Background Image */}
@@ -66,6 +82,7 @@ const HeroSection = () => {
               "
             >
               <button
+              onClick={() => handleClick()}
                 className="
                   bg-[#71AC61]
                   w-full sm:w-[250px]

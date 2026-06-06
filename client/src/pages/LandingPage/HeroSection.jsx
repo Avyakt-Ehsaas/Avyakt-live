@@ -9,9 +9,17 @@ import HeroLandingSVG from '../../assets/images/Landing_page_mask.svg'
 const HeroSection = () => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleGetStartedClick = () => {
     try {
-      navigate("/dashboard");
+      navigate("/live-sessions");
+    } catch (error) {
+      toast.error("Something went wrong. Please try again later.");
+    }
+  };
+
+  const handleExploreClick = () => {
+    try {
+      navigate("/library"); 
     } catch (error) {
       toast.error("Something went wrong. Please try again later.");
     }
@@ -51,13 +59,13 @@ const HeroSection = () => {
 
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center px-8 mt-6">
-              <button
+              <button onClick={handleGetStartedClick}
                 className="bg-[#71AC61]  w-full sm:w-[250px] text-white font-medium font-dm px-4 py-4 rounded-full hover:bg-[#4F7944] transition-all duration-300 cursor-pointer"
               >
                 Get Started
               </button>
 
-              <button
+              <button onClick={handleExploreClick}
                 className="bg-transparent border w-full sm:w-[250px] text-greenbase-light font-medium font-dm px-4 py-4 cursor-pointer rounded-full hover:bg-[#4F7944] transition-all duration-300"
               >
                 Explore Programs

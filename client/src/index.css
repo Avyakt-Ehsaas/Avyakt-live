@@ -21,7 +21,7 @@ body {
   --font-noto-serif: "Noto Serif", serif;
 
   --text-greenbase: #71ac61;
-  --bg-greenbase: #C2E0BA;
+  --bg-greenbase: #c2e0ba;
   --font-inter: "Inter", sans-serif;
   --bg-greenbase-primary: #71ac61;
   --border-greenbase: "#71ac61";
@@ -417,6 +417,15 @@ body {
 .intro-section-bg{
     background-image: url('./assets/images/Rectangle 29.png');
 }
+
+/* fixing scroll when modal is open */
+body.modal-open {
+  overflow: hidden;
+  height: 100vh;
+  touch-action: none;
+}
+
+
 
 @media (max-width:640px){
   
