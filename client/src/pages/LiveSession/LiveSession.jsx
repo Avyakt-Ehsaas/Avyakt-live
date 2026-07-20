@@ -12,6 +12,7 @@ import Footer from './Footer'
 import VisionSection from './VisionSection'
 import YearlyJourney from './YearlyJourney'
 import BenefitsStageLife from './BenifitsStageLife'
+import Pricing from './Pricing'
 
 const LiveSession = () => {
   return (
@@ -30,6 +31,7 @@ const LiveSession = () => {
         <VisionSection />
         <YearlyJourney />
         <TestimonialCarousel />
+        <Pricing />
         <Footer />
     </section>
     </>

@@ -1,6 +1,6 @@
 import React from "react";
 import liveSessionHero from "../../assets/images/liveSessionHero.png";
-import toat from "react-hot-toast";
+import toat, { toast } from "react-hot-toast";
 
 const HeroSection = () => {
   const handleClick = () => {
@@ -17,6 +17,19 @@ const HeroSection = () => {
     }
   };
 
+  const handleHowItsWork = () => {
+    try{
+      const element = document.getElementById("working-steps");
+      if(element){
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        })
+      }
+    }catch(error){
+      toast.error("unknown error occured!")
+    }
+  }
 
   return (
     <section className="relative w-full overflow-hidden bg-[#C2E0BA33]">
@@ -96,10 +109,11 @@ const HeroSection = () => {
                   cursor-pointerbg-[#71AC61] w-full sm:w-[250px] text-white font-medium font-dm px-4 py-4 rounded-full hover:bg-[#4F7944] transition-all duration-300 cursor-pointer
                 "
               >
-                Start free 21-days
+                Start free 24-days
               </button>
 
               <button
+              onClick={() => handleHowItsWork()}
                 className="
                   bg-transparent border w-full sm:w-[250px] text-[#71AC61] font-medium font-dm px-4 py-4 cursor-pointer rounded-full hover:bg-[#4F7944] transition-all duration-300 hover:text-white/80
                 "

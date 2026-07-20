@@ -1,209 +1,274 @@
-import React from "react";
-import RoadMap from "../../assets/Icons/RoadMap.png";
+import React, { useRef } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+} from "framer-motion";
 
 const journeyData = [
   {
-    id: "1",
-    quarter: "QUARTER 01",
+    id: "01",
+    quarter: "Quarter One",
+    label: "The Grounding",
     title: "Foundation & Stabilisation",
     description:
-      "Initial neural pathways for calmness are established, reducing baseline stress.",
+      "Build the internal conditions for calmness. This phase establishes awareness, attention and a more regulated baseline.",
     points: [
-      "Breath & body awareness",
-      "Attention & focus training",
+      "Breath and body awareness",
+      "Attention and focus training",
       "Sleep onset techniques",
     ],
-    position: "top-[26px] left-[25%]",
-    numberPosition: "top-[245px] left-[24%]",
+    duration: "Months 01–03",
   },
-
   {
-    id: "2",
-    quarter: "QUARTER 02",
+    id: "02",
+    quarter: "Quarter Two",
+    label: "The Regulation",
     title: "Resilience & Regulation",
     description:
-      "The ‘gap’ between stimulus and response widens, emotional volatility decreases.",
+      "Create more space between stimulus and response while developing emotional stability and nervous-system resilience.",
     points: [
       "Emotional regulation",
       "Thought observation",
       "Nervous system regulation",
       "Resilience building",
     ],
-    position: "top-[360px] left-[18%]",
-    numberPosition: "top-[425px] right-[35%]",
+    duration: "Months 04–06",
   },
-
   {
-    id: "3",
-    quarter: "QUARTER 03",
+    id: "03",
+    quarter: "Quarter Three",
+    label: "The Expansion",
     title: "Depth & Performance",
     description:
-      "Accessing flow states and deeper layers of internal silence on demand.",
+      "Move beyond basic practice into deeper states of silence, cognitive clarity and intentional flow.",
     points: [
       "Peak cognitive performance",
       "Deep states of silence",
-      "Flow state entry",
-      "Advanced visualization",
+      "Flow-state entry",
+      "Advanced visualisation",
     ],
-    position: "top-[720px] left-[32%]",
-    numberPosition: "top-[780px] left-[25.5%]",
+    duration: "Months 07–09",
   },
-
   {
-    id: "4",
-    quarter: "QUARTER 04",
+    id: "04",
+    quarter: "Quarter Four",
+    label: "The Integration",
     title: "Integration & Awareness",
     description:
-      "Stillness becomes a trait rather than a state, integrated into every action.",
+      "Meditation becomes less of an activity and more of a natural way of moving through everyday life.",
     points: [
-      "24/7 mindfulness",
-      "Compassion & equanimity",
-      "Ego dissolution",
+      "Continuous mindfulness",
+      "Compassion and equanimity",
+      "Freedom from reactive patterns",
       "Embodied wisdom",
     ],
-    position: "bottom-[20px] left-[45%]",
-    numberPosition: "bottom-[245px] left-[52%]",
+    duration: "Months 10–12",
   },
 ];
 
 const YearlyJourney = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-white py-16 md:py-24">
-      {/* Heading */}
-      <div className="text-center px-5 md:px-6">
-        <p className="text-greenbase font-dm text-[14px] md:text-[20px] tracking-widest mb-2 uppercase">
-          Your Yearly Journey
-        </p>
+    <section
+      id="working-steps"
+      className="relative overflow-hidden bg-[#FBFCF8] py-20 md:py-32"
+    >
+      {/* Soft background decoration */}
+      <div className="pointer-events-none absolute -left-40 top-32 h-[420px] w-[420px] rounded-full bg-[#DDEED7]/50 blur-[120px]" />
 
-        <h2 className="font-season-medium text-primary heading-main mb-4">
-          A roadmap through the year
-        </h2>
+      <div className="pointer-events-none absolute -right-40 bottom-20 h-[460px] w-[460px] rounded-full bg-[#E8F1E3]/70 blur-[130px]" />
 
-        <p className="max-w-[800px] mx-auto text-gray font-dm paragraph-body">
-          Each quarter builds on the last, creating structural changes in your
-          mind through targeted neuro-cognitive training.
-        </p>
-      </div>
+      <div className="relative mx-auto max-w-[1240px] px-5 md:px-8">
+        {/* Heading */}
+        <div className="mx-auto max-w-[760px] text-center">
+          <div className="mb-5 inline-flex items-center gap-3">
+            <span className="h-px w-8 bg-[#7BAD69]" />
 
-      {/* ================= MOBILE TIMELINE ================= */}
-      <div className="relative mx-auto mt-14 flex max-w-[420px] flex-col gap-10 px-4 md:hidden">
+            <p className="font-dm text-[11px] uppercase tracking-[0.28em] text-[#6FA55E] md:text-[13px]">
+              Your Yearly Journey
+            </p>
 
-        {/* Vertical Line */}
-        <div className="absolute left-[38px] top-0 h-full w-[2px] bg-greenbase-primary mt-3" />
-
-        {journeyData.map((item) => (
-          <div key={item.id} className="relative flex gap-4">
-
-            {/* Number Circle */}
-            <div className="relative z-10 flex h-[46px] w-[46px] shrink-0 items-center justify-center rounded-full bg-[#8BC975] shadow-[0_10px_25px_rgba(139,201,117,0.35)] mt-2">
-              <span className="text-white font-season-medium heading-large font-med ">
-                {item.id}
-              </span>
-            </div>
-
-            {/* Card */}
-            <div className="flex-1 rounded-[26px] bg-[#C2E0BA66] p-5 shadow-[0_12px_35px_rgba(0,0,0,0.05)] border border-[#C2E0BA]">
-
-              {/* Badge */}
-              <div className="inline-flex items-center justify-center border border-[#7AC563] rounded-full px-4 py-1.5 mb-4">
-                <span className="text-greenbase font-dm text-[11px] uppercase tracking-[0.18em]">
-                  {item.quarter}
-                </span>
-              </div>
-
-              {/* Title */}
-              <h3 className="card-title font-dm font-med text-primary">
-                {item.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-gray font-dm paragraph-secondary text-left mt-1">
-                {item.description}
-              </p>
-
-              {/* Points */}
-              <ul className="space-y-2 pt-5">
-                {item.points.map((point, index) => (
-                  <li
-                    key={index}
-                    className="flex items-start gap-3 text-gray font-dm paragraph-secondary text-left"
-                  >
-                    <span className="w-[4px] h-[4px] rounded-full bg-[#706E6E] mt-[10px]" />
-                    {point}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <span className="h-px w-8 bg-[#7BAD69]" />
           </div>
-        ))}
-      </div>
 
-      {/* ================= DESKTOP ROADMAP ================= */}
-      <div className="relative mx-auto hidden md:block max-w-[1440px] h-[1250px]">
-        
-        {/* VECTOR IMAGE */}
-        <img
-          src={RoadMap}
-          alt="Journey Path"
-          className="absolute inset-0 w-full h-full object-contain pointer-events-none"
-        />
+          <h2 className="font-season-medium text-[40px] leading-[1.08] text-[#1F2A20] md:text-[64px]">
+            A year of returning
+            <span className="block italic text-[#6FA55E]">to yourself.</span>
+          </h2>
 
-        {/* CONTENT */}
-        {journeyData.map((item) => (
-          <React.Fragment key={item.id}>
-            
-            {/* NUMBER */}
-            <div
-              className={`absolute ${item.numberPosition} z-20 w-[56px] h-[56px] rounded-full bg-[#8BC975] flex items-center justify-center shadow-xl`}
-            >
-              <span className="text-white font-season-medium heading-large font-med">
-                {item.id}
-              </span>
-            </div>
+          <p className="mx-auto mt-6 max-w-[650px] font-dm text-[15px] leading-7 text-[#70766F] md:text-[17px]">
+            Four progressive phases designed to turn meditation from a daily
+            practice into a more natural and embodied way of living.
+          </p>
+        </div>
 
-            {/* CARD */}
-            <div
-              className={`absolute ${item.position} z-10 max-w-[580px]`}
-            >
-              {/* Badge */}
-              <div className="inline-flex items-center justify-center border border-[#7AC563] rounded-full px-5 py-2 mb-3">
-                <span className="text-greenbase font-dm paragraph-secondary uppercase text-[14px] tracking-widest">
-                  {item.quarter}
-                </span>
-              </div>
+        {/* Journey */}
+        <div className="relative mt-20 md:mt-28">
+          {/* Desktop centre line */}
+          <div className="absolute left-1/2 top-8 hidden h-[calc(100%-64px)] w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-[#A8C99B] to-transparent md:block" />
 
-              {/* Content */}
-              <div className="grid md:grid-cols-2 gap-4">
-                
-                {/* Left */}
-                <div>
-                  <h3 className="card-title font-dm font-med">
-                    {item.title}
-                  </h3>
+          {/* Mobile line */}
+          <div className="absolute bottom-10 left-[20px] top-10 w-px bg-gradient-to-b from-transparent via-[#A8C99B] to-transparent md:hidden" />
 
-                  <p className="text-gray font-dm paragraph-secondary text-left mt-2">
-                    {item.description}
-                  </p>
-                </div>
+          <div className="space-y-12 md:space-y-24">
+            {journeyData.map((item, index) => {
+              const isEven = index % 2 !== 0;
 
-                {/* Right */}
-                <ul className="space-y-4 pt-2">
-                  {item.points.map((point, index) => (
-                    <li
-                      key={index}
-                      className="flex items-start gap-3 text-gray font-dm paragraph-secondary text-left"
+              return (
+                <article
+                  key={item.id}
+                  className="relative grid items-center md:grid-cols-[1fr_100px_1fr]"
+                >
+                  {/* Desktop left side */}
+                  <div
+                    className={`hidden md:block ${
+                      isEven ? "md:col-start-1" : "md:col-start-3"
+                    }`}
+                  >
+                    <JourneyCard item={item} />
+                  </div>
+
+                  {/* Desktop centre marker */}
+                  <div className="relative z-10 hidden h-full items-center justify-center md:col-start-2 md:row-start-1 md:flex">
+                    <div className="flex h-[58px] w-[58px] items-center justify-center rounded-full border border-[#A8C99B] bg-[#FBFCF8] shadow-[0_0_0_10px_rgba(251,252,248,0.95)]">
+                      <div className="h-[12px] w-[12px] rounded-full bg-[#82B66E] shadow-[0_0_20px_rgba(130,182,110,0.7)]" />
+                    </div>
+                  </div>
+
+                  {/* Empty balancing space */}
+                  <div
+                    className={`hidden md:block ${
+                      isEven ? "md:col-start-3" : "md:col-start-1"
+                    } md:row-start-1`}
+                  >
+                    <div
+                      className={`flex ${
+                        isEven ? "justify-start" : "justify-end"
+                      }`}
                     >
-                      <span className="w-[4px] h-[4px] rounded-full bg-[#706E6E] mt-[10px]" />
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </React.Fragment>
-        ))}
+                      <span className="select-none font-season-medium text-[150px] leading-none text-[#DDE8D8]/55">
+                        {item.id}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Mobile layout */}
+                  <div className="relative pl-14 md:hidden">
+                    <div className="absolute left-[11px] top-8 z-10 flex h-[19px] w-[19px] items-center justify-center rounded-full border border-[#83B870] bg-[#FBFCF8]">
+                      <div className="h-[7px] w-[7px] rounded-full bg-[#83B870]" />
+                    </div>
+
+                    <JourneyCard item={item} />
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
+  );
+};
+
+const JourneyCard = ({ item, index }) => {
+  const cardRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: cardRef,
+    offset: ["start 95%", "end 20%"],
+  });
+
+  // Subtle parallax
+  const rawY = useTransform(scrollYProgress, [0, 1], [60, -25]);
+  const parallaxY = useSpring(rawY, {
+    stiffness: 90,
+    damping: 22,
+    mass: 0.8,
+  });
+
+  const isEven = index % 2 !== 0;
+
+  return (
+    <motion.div
+      ref={cardRef}
+      style={{ y: parallaxY }}
+      initial={{
+        opacity: 0,
+        x: isEven ? -90 : 90,
+        scale: 0.94,
+        filter: "blur(8px)",
+      }}
+      whileInView={{
+        opacity: 1,
+        x: 0,
+        scale: 1,
+        filter: "blur(0px)",
+      }}
+      viewport={{
+        once: true,
+        amount: 0.28,
+      }}
+      transition={{
+        duration: 0.9,
+        delay: index * 0.12,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="group relative overflow-hidden rounded-[30px] border border-[#DDE7D9] bg-white/75 p-6 shadow-[0_22px_70px_rgba(39,63,34,0.06)] backdrop-blur-xl transition-[border-color,box-shadow] duration-500 hover:border-[#BFD8B5] hover:shadow-[0_28px_90px_rgba(39,63,34,0.1)] md:p-9"
+    >
+      {/* Card glow */}
+      <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-[#E1F0DB] opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
+
+      <div className="relative">
+        <div className="mb-7 flex flex-wrap items-center justify-between gap-4">
+          <div className="inline-flex items-center rounded-full border border-[#B9D7AE] bg-[#F6FAF4] px-4 py-2">
+            <span className="font-dm text-[10px] font-medium uppercase tracking-[0.2em] text-[#649C52]">
+              {item.quarter}
+            </span>
+          </div>
+
+          <span className="font-dm text-[11px] uppercase tracking-[0.16em] text-[#999F97]">
+            {item.duration}
+          </span>
+        </div>
+
+        <p className="mb-3 font-dm text-[12px] uppercase tracking-[0.22em] text-[#83A979]">
+          {item.label}
+        </p>
+
+        <h3 className="max-w-[440px] font-season-medium text-[28px] leading-tight text-[#202A21] md:text-[36px]">
+          {item.title}
+        </h3>
+
+        <p className="mt-5 max-w-[500px] font-dm text-[14px] leading-7 text-[#747A73] md:text-[15px]">
+          {item.description}
+        </p>
+
+        <div className="my-7 h-px w-full bg-gradient-to-r from-[#D7E5D1] to-transparent" />
+
+        <ul className="grid gap-3 sm:grid-cols-2">
+          {item.points.map((point, pointIndex) => (
+            <motion.li
+              key={point}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.45,
+                delay: 0.25 + pointIndex * 0.08,
+              }}
+              className="flex items-start gap-3 font-dm text-[13px] leading-6 text-[#60675F] md:text-[14px]"
+            >
+              <span className="mt-[7px] flex h-[16px] w-[16px] shrink-0 items-center justify-center rounded-full bg-[#E9F4E5]">
+                <span className="h-[5px] w-[5px] rounded-full bg-[#78AB64]" />
+              </span>
+
+              <span>{point}</span>
+            </motion.li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
   );
 };
 
