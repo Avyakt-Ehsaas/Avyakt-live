@@ -352,31 +352,6 @@ export default function BenefitsStageLife() {
             </AnimatePresence>
           </div>
         </div>
-
-        {/* Scroll hint */}
-        <motion.div
-          animate={
-            shouldReduceMotion
-              ? undefined
-              : {
-                  y: [0, 7, 0],
-                }
-          }
-          transition={{
-            duration: 1.8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 items-center gap-3 md:flex"
-        >
-          <span className="font-dm text-[10px] uppercase tracking-[0.22em] text-[#91998F]">
-            Scroll to explore
-          </span>
-
-          <span className="flex h-8 w-[18px] justify-center rounded-full border border-[#B5C9AE] pt-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#71AC61]" />
-          </span>
-        </motion.div>
       </div>
     </section>
   );

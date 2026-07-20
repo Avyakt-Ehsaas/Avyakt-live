@@ -14,7 +14,7 @@ const pricingPlans = [
     title: "Monthly",
     description:
       "A flexible starting point for building a peaceful and consistent meditation routine.",
-    price: "₹499",
+    price: "₹199",
     duration: "Month",
     durationLabel: "Monthly",
     highlighted: false,
@@ -32,7 +32,7 @@ const pricingPlans = [
     title: "Quarterly",
     description:
       "The ideal plan for developing lasting habits and experiencing deeper personal transformation.",
-    price: "₹1449",
+    price: "₹449",
     duration: "3 Months",
     durationLabel: "Quarterly",
     highlighted: true,
@@ -50,7 +50,7 @@ const pricingPlans = [
     title: "Half Yearly",
     description:
       "A long-term journey designed to support complete lifestyle transformation and inner stability.",
-    price: "₹2949",
+    price: "₹999",
     duration: "6 Months",
     durationLabel: "Half Yearly",
     highlighted: false,
