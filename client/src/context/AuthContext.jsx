@@ -9,176 +9,173 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
  
-  const fetchMe = async () => {
-    const token = localStorage.getItem("token");
+  // const fetchMe = async () => {
+  //   const token = localStorage.getItem("token");
 
-    if(!token){
-      setUser(null);
-      setLoadingUser(false);
-      return;
-    }
+  //   if(!token){
+  //     setUser(null);
+  //     setLoadingUser(false);
+  //     return;
+  //   }
 
-    try {
-      const res = await API.get('/user/me');
-      if (!res) {
-        setUser(null);
-        setLoadingUser(false);
-      }
+  //   try {
+  //     const res = await API.get('/user/me');
+  //     if (!res) {
+  //       setUser(null);
+  //       setLoadingUser(false);
+  //     }
 
-      if (res.data && res.data.success && res.data.user) {
-        setUser(res.data.user);
-        setLoadingUser(false);
-      }
-      else{
-        setUser(null);
-        localStorage.removeItem("token")
-        setLoadingUser(false);
-      }
-    } catch (error) {
-      console.log(error);
-      setUser(null);
-      localStorage.removeItem("token")
-    }finally{
-      setLoadingUser(false);
-    }
-  }
+  //     if (res.data && res.data.success && res.data.user) {
+  //       setUser(res.data.user);
+  //       setLoadingUser(false);
+  //     }
+  //     else{
+  //       setUser(null);
+  //       localStorage.removeItem("token")
+  //       setLoadingUser(false);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //     setUser(null);
+  //     localStorage.removeItem("token")
+  //   }finally{
+  //     setLoadingUser(false);
+  //   }
+  // }
 
-  useEffect(() => {
-    fetchMe();
-  }, [])
+  // useEffect(() => {
+  //   fetchMe();
+  // }, [])
 
   
 
-  const login = async (data) => {
-    try {
-      console.log("Login payload:", data);
+  // const login = async (data) => {
+  //   try {
+  //     console.log("Login payload:", data);
 
-      const res = await API.post("/auth/login", data, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        withCredentials: true
-      });
+  //     const res = await API.post("/auth/login", data, {
+  //       headers: {
+  //         "Content-Type": "application/json"
+  //       },
+  //       withCredentials: true
+  //     });
 
-      console.log("Login response:", res);
+  //     console.log("Login response:", res);
 
-      if (res.data?.token) {
-        localStorage.setItem("token",res.data.token);
-        if(res.data?.user)
-        setUser(res.data.user);
-      }else{
-        await fetchMe();
-      }
-      return {
-        success : true,
-        user : res.data?.user || user,
-        token : res.data.token,
-        subscriptionStatus: res.data?.subscriptionStatus,
-        planCheckResult: res.data?.planCheckResult
-      }
-    } catch (error) {
-      console.error("LOGIN FRONTEND ERROR ", error.response?.data || error.message);
-       return {
-      success: false,
-      message: error.response?.data?.message || 
-              error.message || 
-              "Login failed. Please try again."
-    };
-    }
-  };
+  //     if (res.data?.token) {
+  //       localStorage.setItem("token",res.data.token);
+  //       if(res.data?.user)
+  //       setUser(res.data.user);
+  //     }else{
+  //       await fetchMe();
+  //     }
+  //     return {
+  //       success : true,
+  //       user : res.data?.user || user,
+  //       token : res.data.token,
+  //       subscriptionStatus: res.data?.subscriptionStatus,
+  //       planCheckResult: res.data?.planCheckResult
+  //     }
+  //   } catch (error) {
+  //     console.error("LOGIN FRONTEND ERROR ", error.response?.data || error.message);
+  //      return {
+  //     success: false,
+  //     message: error.response?.data?.message || 
+  //             error.message || 
+  //             "Login failed. Please try again."
+  //   };
+  //   }
+  // };
 
-  const logout = async () => {
-    try {
-      await API.post('/auth/logout', {}, { withCredentials: true });
-      //clearing local storage
-       localStorage.removeItem('token');
-       //clearing cookie
-       document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    } catch (error) {
-      console.error("Logout error:", error);
-    } finally {
-      setUser(null);
-      // The cookie will be cleared by the server
-    }
-  }
+  // const logout = async () => {
+  //   try {
+  //     await API.post('/auth/logout', {}, { withCredentials: true });
+  //     //clearing local storage
+  //      localStorage.removeItem('token');
+  //      //clearing cookie
+  //      document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+  //   } catch (error) {
+  //     console.error("Logout error:", error);
+  //   } finally {
+  //     setUser(null);
+  //     // The cookie will be cleared by the server
+  //   }
+  // }
 
-  const register = async (data) => {
-    try {
-      const res = await API.post('/auth/register', data, {
-        headers: {
-          "Content-Type": "application/json"
-        },
-        withCredentials: true
-      });
+  // const register = async (data) => {
+  //   try {
+  //     const res = await API.post('/auth/register', data, {
+  //       headers: {
+  //         "Content-Type": "application/json"
+  //       },
+  //       withCredentials: true
+  //     });
 
-      console.log(res)
+  //     console.log(res)
   
-      if (res.data && res.data.token) {
-        localStorage.setItem('token', res.data.token);
+  //     if (res.data && res.data.token) {
+  //       localStorage.setItem('token', res.data.token);
         
-        if (res?.data?.user) {
-          setUser(res?.data?.user);
-        } else {
-          await fetchMe();
-        }
+  //       if (res?.data?.user) {
+  //         setUser(res?.data?.user);
+  //       } else {
+  //         await fetchMe();
+  //       }
         
-        return {
-          success: true, 
-            message: res.data.message || 'Registration successful!',
-            user: res.data.user, 
-            token: res.data.token
-        }
-      }
+  //       return {
+  //         success: true, 
+  //           message: res.data.message || 'Registration successful!',
+  //           user: res.data.user, 
+  //           token: res.data.token
+  //       }
+  //     }
       
-      const errorMessage = res.data?.message || 'Registration failed. Please try again.';
-      return { 
-        success: false, 
-        message: errorMessage
-      };
+  //     const errorMessage = res.data?.message || 'Registration failed. Please try again.';
+  //     return { 
+  //       success: false, 
+  //       message: errorMessage
+  //     };
       
-    } catch (error) {
-      console.error("Registration error:", error);
-      const errorMessage = error.response?.data?.message || 
-                             error.message || 
-                             "Registration failed. Please try again.";
-      return {
-        success: false,
-        message: errorMessage
-      };
-    }
-  }
+  //   } catch (error) {
+  //     console.error("Registration error:", error);
+  //     const errorMessage = error.response?.data?.message || 
+  //                            error.message || 
+  //                            "Registration failed. Please try again.";
+  //     return {
+  //       success: false,
+  //       message: errorMessage
+  //     };
+  //   }
+  // }
 
-  const updateLocalUser = (updatedUser) => {
-    setUser(prevUser => ({
-      ...prevUser,
-      ...updatedUser
-    }));
-  }
+  // const updateLocalUser = (updatedUser) => {
+  //   setUser(prevUser => ({
+  //     ...prevUser,
+  //     ...updatedUser
+  //   }));
+  // }
 
-  const updateUser = async (user) => {
-    const res = await API.put('/user/me', user);
-    if (res.data.success) {
-      setUser(res.data.user);
-    }
-  }
+  // const updateUser = async (user) => {
+  //   const res = await API.put('/user/me', user);
+  //   if (res.data.success) {
+  //     setUser(res.data.user);
+  //   }
+  // }
 
   
   return (
     <AuthContext.Provider
       value={{
         user,
-        login,
-        logout,
-        register,
-        updateLocalUser,
-        updateUser,
-        fetchMe,
-        loading: loadingUser
+        // login,
+        // logout,
+        // register,
+        // updateLocalUser,
+        // updateUser,
+        // fetchMe,
+        // loading: loadingUser
       }}
-    >{loadingUser ? <div className="min-h-screen flex justify-center items-center">
-      <Loader />
-      </div>
-       : children}
+    >{children}
     </AuthContext.Provider>
   )
 }

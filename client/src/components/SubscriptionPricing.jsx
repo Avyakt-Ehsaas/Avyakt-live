@@ -69,24 +69,24 @@ const SubscriptionPricing = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
+    <section className="relative py-16 md:py-20 bg-white/70 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-20 -right-20 w-64 h-64 bg-orange-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
-        <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-amber-100 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+        <div className="absolute -top-20 -right-20 w-64 h-64 bg-[#C2E0BA]/40 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+        <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-[#C2E0BA]/80 rounded-full rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-5xl mx-auto mb-16">
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent mb-4"
+            className="text-4xl font-rubik md:text-5xl font-semibold text-[#191919] mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            Choose Your Meditation Journey
+            Choose Your <span className="text-greenbase">Meditation Journey</span> 
           </motion.h2>
           <motion.p 
             className="text-lg text-gray-600"
@@ -131,7 +131,7 @@ const SubscriptionPricing = () => {
                 relative
                 flex flex-col
                 bg-white/80 backdrop-blur-sm
-                border border-gray-100
+                border border-green-300/40
                 rounded-2xl
                 p-6
                 shadow-lg
@@ -140,17 +140,17 @@ const SubscriptionPricing = () => {
                 transition-all
                 duration-300
                 hover:shadow-xl
-                hover:border-orange-200
-                ${plan.popular ? 'ring-2 ring-orange-400' : ''}
+                hover:border-green-600/80
+                ${plan.popular ? 'ring-2 ring-[#71AC61]' : ''}
               `}
             >
               {plan.popular && (
-                <div className="absolute top-0 right-0 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                <div className="absolute top-0 right-0 bg-[#71AC61] text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
                   POPULAR
                 </div>
               )}
               
-              <div className="mb-6">
+              <div className="mb-6 font-dm">
                 <h3 className="text-xl font-bold text-gray-900 mb-1">{plan.title}</h3>
                 <div className="flex items-baseline">
                   <span className="text-3xl font-extrabold text-gray-900">{plan.price}</span>
@@ -192,8 +192,8 @@ const SubscriptionPricing = () => {
                 whileTap={{ scale: 0.98 }}
                 className={`
                   w-full py-3 px-4 rounded-xl font-medium
-                  bg-gradient-to-r from-orange-500 to-amber-500
-                  text-white
+                  bg-gradient-to-r from-[#71AC61] via-[#A8C9A0] to-[#C2E0BA]
+                  text-gray-700
                   shadow-md
                   hover:shadow-lg
                   transition-all

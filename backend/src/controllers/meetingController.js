@@ -1,6 +1,6 @@
 import Meeting from "../models/MeetingModel.js";
 import User from "../models/user.model.js";
-import * as XLSX from 'xlsx';
+import ExcelJS from 'exceljs';
 import multer from 'multer';
 
 /**
@@ -774,26 +774,52 @@ export const uploadAttendance = async (req, res) => {
       });
     }
 
-    // Read the Excel file - headers are on row 11 (0-indexed, so row 10)
-    const workbook = XLSX.read(req.file.buffer, { type: 'buffer' });
-    const sheetName = workbook.SheetNames[0];
-    const worksheet = workbook.Sheets[sheetName];
+    // Read the Excel file - headers are on row 11
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.load(req.file.buffer);
     
-    // Convert to JSON with headers starting from row 11 (range A11:I)
-    const data = XLSX.utils.sheet_to_json(worksheet, { 
-      range: 10, // Start from row 11 (0-indexed)
-      header: 1  // Use first row as headers
-    });
-    
-    // Convert array of arrays to array of objects using the first row as keys
-    const headers = data[0];
-    const rows = data.slice(1).map(row => {
-      const obj = {};
-      headers.forEach((header, index) => {
-        obj[header] = row[index];
+    const worksheet = workbook.getWorksheet(1);
+    if (!worksheet) {
+      return res.status(400).json({
+        success: false,
+        message: "No worksheet found in Excel file"
       });
-      return obj;
-    }).filter(row => row['Email'] && row['Email'].trim()); // Filter out rows without email
+    }
+
+    // Extract headers from row 11
+    const headerRow = worksheet.getRow(11);
+    if (!headerRow) {
+      return res.status(400).json({
+        success: false,
+        message: "Header row not found at row 11"
+      });
+    }
+
+    const headers = headerRow.values.slice(1); // Skip first empty element from ExcelJS
+
+    // Read data rows starting from row 12
+    const rows = [];
+    let rowNum = 12;
+    let row = worksheet.getRow(rowNum);
+    
+    while (row && row.hasValues) {
+      const values = row.values.slice(1); // Skip first empty element
+      
+      if (values.some(v => v !== null && v !== undefined)) { // Check if row has any data
+        const obj = {};
+        headers.forEach((header, index) => {
+          obj[header] = values[index];
+        });
+        
+        // Filter out rows without email
+        if (obj['Email'] && String(obj['Email']).trim()) {
+          rows.push(obj);
+        }
+      }
+      
+      rowNum++;
+      row = worksheet.getRow(rowNum);
+    }
 
     if (rows.length === 0) {
       return res.status(400).json({
