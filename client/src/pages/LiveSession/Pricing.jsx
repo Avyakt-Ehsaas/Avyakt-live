@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Check, X } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { Check, X, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,194 +8,117 @@ import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-const pricingData = {
-  Monthly: [
-    {
-      name: "Seeker",
-      subtitle: "Build the foundation of your habit",
-      price: "₹299",
-      features: [
-        "Basic well-being log",
-        "Streak & session tracking",
-        "Foundations & Body & Sleep libraries",
-        "Daily live sessions at 9:30 PM IST",
-      ],
-    },
-    {
-      name: "Practitioner",
-      subtitle: "Build the foundation of your habit",
-      price: "₹499",
-      highlighted: true,
-      features: [
-        "Daily live sessions at 9:30 PM IST",
-        "All 5 libraries + SOS access",
-        "Full profile & skill-area tracking",
-        "Monthly well-being report",
-        "Session recordings (48-hr access)",
-      ],
-    },
-    {
-      name: "Deep Dive",
-      subtitle: "Go all the way",
-      price: "₹899",
-      features: [
-        "Everything in Practitioner",
-        "Monthly 1:1 with the instructor",
-        "Personalized practice roadmap",
-        "Early access to new topic modules",
-        "Priority for workshops & intensives",
-      ],
-    },
-  ],
-
-  "6 Months": [
-    {
-      name: "Seeker",
-      subtitle: "6-month habit building plan",
-      price: "₹1,499",
-      features: [
-        "Everything in Monthly Seeker",
-        "Save ₹295 compared to monthly",
-        "Long-term streak tracking",
-        "Quarterly progress snapshot",
-      ],
-    },
-    {
-      name: "Practitioner",
-      subtitle: "Consistent practice with deeper access",
-      price: "₹2,499",
-      highlighted: true,
-      features: [
-        "Everything in Monthly Practitioner",
-        "Save ₹495 compared to monthly",
-        "All 5 libraries + SOS access",
-        "Monthly well-being reports",
-        "Session recordings access",
-      ],
-    },
-    {
-      name: "Deep Dive",
-      subtitle: "Structured deep transformation",
-      price: "₹4,499",
-      features: [
-        "Everything in Monthly Deep Dive",
-        "Save ₹895 compared to monthly",
-        "Monthly 1:1 instructor support",
-        "Personalized roadmap",
-        "Priority workshop access",
-      ],
-    },
-  ],
-
-  Annual: [
-    {
-      name: "Seeker",
-      subtitle: "One full year of guided foundation",
-      price: "₹2,999",
-      features: [
-        "Everything in Seeker",
-        "Save ₹589 compared to monthly",
-        "Annual progress review",
-        "Habit-building roadmap",
-      ],
-    },
-    {
-      name: "Practitioner",
-      subtitle: "Best for serious daily practice",
-      price: "₹4,999",
-      highlighted: true,
-      features: [
-        "Everything in Practitioner",
-        "Save ₹989 compared to monthly",
-        "Full profile & skill tracking",
-        "Monthly reports for 12 months",
-        "Priority access to new libraries",
-      ],
-    },
-    {
-      name: "Deep Dive",
-      subtitle: "Complete yearly transformation plan",
-      price: "₹8,999",
-      features: [
-        "Everything in Deep Dive",
-        "Save ₹1,789 compared to monthly",
-        "12 monthly 1:1 sessions",
-        "Personalized yearly roadmap",
-        "Priority workshops & intensives",
-      ],
-    },
-  ],
-};
+const pricingPlans = [
+  {
+    id: 1,
+    title: "Monthly",
+    description:
+      "A flexible starting point for building a peaceful and consistent meditation routine.",
+    price: "₹499",
+    duration: "Month",
+    durationLabel: "Monthly",
+    highlighted: false,
+    badge: null,
+    features: [
+      "24 guided meditation sessions",
+      "Daily mindfulness practices",
+      "Progress and habit tracking",
+      "Meditation community access",
+      "Email support",
+    ],
+  },
+  {
+    id: 2,
+    title: "Quarterly",
+    description:
+      "The ideal plan for developing lasting habits and experiencing deeper personal transformation.",
+    price: "₹1449",
+    duration: "3 Months",
+    durationLabel: "Quarterly",
+    highlighted: true,
+    badge: "Most Popular",
+    features: [
+      "Everything included in Monthly",
+      "Advanced meditation library",
+      "Sleep and stress programs",
+      "Personal growth dashboard",
+      "Priority support",
+    ],
+  },
+  {
+    id: 3,
+    title: "Half Yearly",
+    description:
+      "A long-term journey designed to support complete lifestyle transformation and inner stability.",
+    price: "₹2949",
+    duration: "6 Months",
+    durationLabel: "Half Yearly",
+    highlighted: false,
+    badge: "Best Value",
+    features: [
+      "Everything included in Quarterly",
+      "Exclusive premium courses",
+      "Live meditation sessions",
+      "Habit-building programs",
+      "Early access to new content",
+    ],
+  },
+];
 
 const Pricing = () => {
-  const [activeTab, setActiveTab] = useState("Monthly");
+  const navigate = useNavigate();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
 
-  const [payload, setPayload] = useState({});
-  
-    useEffect(() => {
-      const token = localStorage.getItem("token");
-  
-      if (token) {
-        try {
-          const decoded = JSON.parse(
-            atob(token.split(".")[1])
-          );
-  
-          setPayload(decoded);
-  
-          console.log("User Payload:", decoded);
-        } catch (error) {
-          console.log("Invalid token");
-        }
-      }
-    }, []);
-
-    console.log(payload)
-
-  const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
-  name: "",
-  email: "",
-  whatsapp: "",
-});
+    name: "",
+    email: "",
+    whatsapp: "",
+  });
 
-useEffect(() => {
-  if (payload?.sub) {
-    setFormData((prev) => ({
-      ...prev,
-      name: payload?.name || "",
-      email: payload?.sub || "",
-    }));
-  }
-}, [payload]);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-  const plans = pricingData[activeTab];
+    if (!token) return;
+
+    try {
+      const decoded = JSON.parse(atob(token.split(".")[1]));
+
+      setFormData((prev) => ({
+        ...prev,
+        name: decoded?.name || "",
+        email: decoded?.sub || decoded?.email || "",
+      }));
+    } catch (error) {
+      console.error("Unable to decode user token:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isModalOpen]);
 
   const openModal = (plan) => {
-    setSelectedPlan({
-      ...plan,
-      billingCycle: activeTab,
-    });
-
+    setSelectedPlan(plan);
     setIsModalOpen(true);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedPlan(null);
-
-    setFormData({
-      name: "",
-      email: "",
-      whatsapp: "",
-    });
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
 
     setFormData((prev) => ({
       ...prev,
@@ -203,294 +126,381 @@ useEffect(() => {
     }));
   };
 
-  const handlePayment = (e) => {
-    e.preventDefault();
+  const handleWhatsappChange = (event) => {
+    const value = event.target.value.replace(/\D/g, "").slice(0, 10);
+
+    setFormData((prev) => ({
+      ...prev,
+      whatsapp: value,
+    }));
+  };
+
+  const handlePayment = (event) => {
+    event.preventDefault();
+
+    if (!selectedPlan) return;
 
     const paymentData = {
       ...formData,
-      planName: selectedPlan?.name,
-      price: selectedPlan?.price,
-      billingCycle: selectedPlan?.billingCycle,
+      planId: selectedPlan.id,
+      planName: selectedPlan.title,
+      price: selectedPlan.price,
+      billingCycle: selectedPlan.durationLabel,
+      duration: selectedPlan.duration,
     };
-
-    console.log("Payment Data:", paymentData);
-
-    /*
-      Later you can replace this with:
-      1. Razorpay integration
-      2. Backend API call
-      3. React Router navigation
-
-      Example:
-      navigate("/payment", { state: paymentData });
-    */
 
     localStorage.setItem("paymentData", JSON.stringify(paymentData));
 
+    closeModal();
     navigate("/payment");
   };
-
-  useEffect(() => {
-    if (isModalOpen) {
-      document.body.classList.add("modal-open");
-    } else {
-      document.body.classList.remove("modal-open");
-    }
-
-    return () => {
-      document.body.classList.remove("modal-open");
-    };
-  }, [isModalOpen]);
 
   return (
     <>
       <section
         id="pricing-section"
-        className="relative w-full overflow-x-hidden py-14"
+        className="relative w-full overflow-hidden bg-[#FBFCF8] py-20 md:py-28"
       >
-        <div className="relative z-10 px-1 md:px-6">
-          <div className="mb-10 flex items-center justify-center gap-6 md:gap-10">
-            {Object.keys(pricingData).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`relative pb-4 transition-all duration-300 ${activeTab === tab ? "text-greenbase" : "text-primary"
-                  } font-dm font-smbold paragraph-secondary`}
-              >
-                {tab}
+        {/* Background decoration */}
+        <div className="pointer-events-none absolute -left-44 top-10 h-[420px] w-[420px] rounded-full bg-[#DDEED7]/60 blur-[120px]" />
 
-                {activeTab === tab && (
-                  <span className="absolute bottom-0 left-1/2 h-[3px] w-[60px] md:w-[70px] -translate-x-1/2 rounded-full bg-greenbase-primary" />
-                )}
-              </button>
-            ))}
+        <div className="pointer-events-none absolute -right-44 bottom-0 h-[450px] w-[450px] rounded-full bg-[#E8F2E4]/80 blur-[130px]" />
+
+        <div className="relative z-10 mx-auto max-w-[1240px] px-5 md:px-8">
+          {/* Heading */}
+          <div className="mx-auto max-w-[760px] text-center">
+            <div className="mb-5 inline-flex items-center gap-3">
+              <span className="h-px w-8 bg-[#83B870]" />
+
+              <p className="font-dm text-[11px] uppercase tracking-[0.28em] text-[#6FA55E] md:text-[13px]">
+                Choose Your Journey
+              </p>
+
+              <span className="h-px w-8 bg-[#83B870]" />
+            </div>
+
+            <h2 className="font-season-medium text-[38px] leading-[1.1] text-[#202A21] md:text-[60px]">
+              A plan for every stage
+              <span className="block italic text-[#71AC61]">
+                of your transformation.
+              </span>
+            </h2>
+
+            <p className="mx-auto mt-5 max-w-[650px] font-dm text-[15px] leading-7 text-[#747A73] md:text-[17px]">
+              Begin with a flexible monthly plan or commit to a deeper journey
+              with our quarterly and half-yearly experiences.
+            </p>
           </div>
 
-          <div className="hidden md:grid relative z-10 mx-auto max-w-6xl grid-cols-3 gap-8">
-            {plans.map((plan) => (
+          {/* Desktop cards */}
+          <div className="mt-16 hidden grid-cols-3 items-stretch gap-7 md:grid lg:gap-8">
+            {pricingPlans.map((plan) => (
               <PricingCard
-                key={plan.name}
+                key={plan.id}
                 plan={plan}
-                activeTab={activeTab}
                 onStart={() => openModal(plan)}
               />
             ))}
           </div>
 
-          <div className="md:hidden w-full overflow-hidden px-4">
+          {/* Mobile slider */}
+          <div className="mt-12 w-full md:hidden">
             <Swiper
               modules={[Pagination, Autoplay]}
               spaceBetween={18}
-              slidesPerView={1.08}
-              pagination={{ clickable: true }}
+              slidesPerView={1.06}
+              centeredSlides
+              pagination={{
+                clickable: true,
+              }}
               autoplay={{
-                delay: 2000,
+                delay: 3500,
                 disableOnInteraction: false,
               }}
-              loop={true}
-              className="who-swiper !pb-12"
+              loop
+              className="pricing-swiper !pb-14"
             >
-              {plans.map((plan) => (
-                <SwiperSlide key={plan.name}>
+              {pricingPlans.map((plan) => (
+                <SwiperSlide key={plan.id} className="h-auto">
                   <PricingCard
                     plan={plan}
-                    activeTab={activeTab}
                     onStart={() => openModal(plan)}
                   />
                 </SwiperSlide>
               ))}
             </Swiper>
           </div>
+
+          {/* Trust note */}
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 font-dm text-[12px] text-[#7D847B] md:text-[13px]">
+            <span>✓ Secure payment</span>
+            <span>✓ 24-day guided beginning</span>
+            <span>✓ Cancel anytime</span>
+          </div>
         </div>
       </section>
 
-      {isModalOpen && (
+      {/* Payment modal */}
+      {isModalOpen && selectedPlan && (
         <div
-          className="fixed inset-0 !z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4 max-h-screen"
+          className="fixed inset-0 z-[9999] flex items-center justify-center overflow-y-auto bg-[#162017]/60 px-4 py-8 backdrop-blur-md"
           onClick={closeModal}
         >
           <div
-            className="relative w-full max-w-[480px] rounded-[32px] bg-white p-6 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-[500px] overflow-hidden rounded-[32px] border border-white/40 bg-white p-6 shadow-[0_35px_100px_rgba(24,47,24,0.28)] md:p-8"
+            onClick={(event) => event.stopPropagation()}
           >
+            <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#DDEFD7] blur-[70px]" />
+
             <button
               type="button"
               onClick={closeModal}
-              className="absolute right-5 top-5 flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-600 transition hover:bg-gray-200 hover:text-black"
+              aria-label="Close payment form"
+              className="absolute right-5 top-5 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-[#F1F5EF] text-[#687066] transition hover:bg-[#E4ECE1] hover:text-[#202A21]"
             >
-              <X size={20} />
+              <X size={19} />
             </button>
 
-            <div className="pr-2">
-              <p className="font-dm font-medium text-[#71AC61]">
-                {selectedPlan?.name} Plan • {selectedPlan?.billingCycle}
+            <div className="relative z-10 pr-10">
+              <p className="font-dm text-[12px] font-medium uppercase tracking-[0.18em] text-[#71AC61]">
+                {selectedPlan.durationLabel} Plan
               </p>
 
-              <h2 className="font-season-medium text-3xl md:text-4xl text-primary">
-                Start your 21-day journey
+              <h2 className="mt-2 font-season-medium text-[32px] leading-tight text-[#202A21] md:text-[40px]">
+                Begin your journey
               </h2>
 
-              <p className="mt-2 text-left font-dm text-gray paragraph-secondary">
-                Enter your details and continue to the payment page.
+              <p className="mt-3 font-dm text-[14px] leading-6 text-[#747A73]">
+                Enter your details and continue securely to the payment page.
               </p>
             </div>
 
-            <form onSubmit={handlePayment} className="mt-4 space-y-4">
+            <div className="relative z-10 mt-6 rounded-[22px] border border-[#DCE8D7] bg-[#F8FBF6] p-4">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="font-dm text-[12px] uppercase tracking-[0.15em] text-[#8A9188]">
+                    Selected plan
+                  </p>
+
+                  <h3 className="mt-1 font-season-medium text-[23px] text-[#202A21]">
+                    {selectedPlan.title}
+                  </h3>
+                </div>
+
+                <div className="text-right">
+                  <p className="font-dm text-[24px] font-semibold text-[#202A21]">
+                    {selectedPlan.price}
+                  </p>
+
+                  <p className="font-dm text-[12px] text-[#7A8278]">
+                    / {selectedPlan.duration}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <form
+              onSubmit={handlePayment}
+              className="relative z-10 mt-6 space-y-4"
+            >
               <div>
+                <label
+                  htmlFor="pricing-name"
+                  className="mb-2 block font-dm text-[12px] font-medium text-[#525A51]"
+                >
+                  Full name
+                </label>
+
                 <input
+                  id="pricing-name"
                   type="text"
                   name="name"
                   required
                   placeholder="Enter your name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full rounded-full border border-gray-200 px-5 py-4 font-dm text-primary outline-none transition focus:border-[#71AC61]"
+                  className="w-full rounded-full border border-[#DEE5DC] bg-white px-5 py-4 font-dm text-[14px] text-[#202A21] outline-none transition placeholder:text-[#A1A7A0] focus:border-[#71AC61] focus:ring-4 focus:ring-[#71AC61]/10"
                 />
               </div>
 
               <div>
+                <label
+                  htmlFor="pricing-email"
+                  className="mb-2 block font-dm text-[12px] font-medium text-[#525A51]"
+                >
+                  Email address
+                </label>
 
                 <input
+                  id="pricing-email"
                   type="email"
                   name="email"
                   required
                   placeholder="Enter your email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="w-full rounded-full border border-gray-200 px-5 py-4 font-dm text-primary outline-none transition focus:border-[#71AC61]"
+                  className="w-full rounded-full border border-[#DEE5DC] bg-white px-5 py-4 font-dm text-[14px] text-[#202A21] outline-none transition placeholder:text-[#A1A7A0] focus:border-[#71AC61] focus:ring-4 focus:ring-[#71AC61]/10"
                 />
               </div>
 
               <div>
+                <label
+                  htmlFor="pricing-whatsapp"
+                  className="mb-2 block font-dm text-[12px] font-medium text-[#525A51]"
+                >
+                  WhatsApp number
+                </label>
+
                 <input
+                  id="pricing-whatsapp"
                   type="tel"
                   name="whatsapp"
                   required
-                  placeholder="Enter WhatsApp number"
+                  placeholder="Enter 10-digit number"
                   value={formData.whatsapp}
-                  onChange={(e) => {
-                    const value = e.target.value.replace(/\D/g, "");
-
-                    if (value.length <= 10) {
-                      setFormData((prev) => ({
-                        ...prev,
-                        whatsapp: value,
-                      }));
-                    }
-                  }}
+                  onChange={handleWhatsappChange}
                   pattern="[0-9]{10}"
                   maxLength={10}
                   inputMode="numeric"
-                  className="w-full rounded-full border border-gray-200 px-5 py-4 font-dm text-primary outline-none transition focus:border-[#71AC61]"
+                  className="w-full rounded-full border border-[#DEE5DC] bg-white px-5 py-4 font-dm text-[14px] text-[#202A21] outline-none transition placeholder:text-[#A1A7A0] focus:border-[#71AC61] focus:ring-4 focus:ring-[#71AC61]/10"
                 />
-              </div>
-
-              <div className="rounded-2xl bg-[#F7FCF5] px-4 py-2">
-                <div className="flex items-center justify-between gap-1">
-                  <span className="font-dm text-sm text-gray">
-                    Selected Plan
-                  </span>
-                  <span className="font-dm font-semibold text-primary">
-                    {selectedPlan?.name}
-                  </span>
-                </div>
-
-                <div className="mt-2 flex items-center justify-between gap-2">
-                  <span className="font-dm text-sm text-gray">Price</span>
-                  <span className="font-dm font-semibold text-primary">
-                    {selectedPlan?.price} /{" "}
-                    {selectedPlan?.billingCycle === "Monthly"
-                      ? "Month"
-                      : selectedPlan?.billingCycle}
-                  </span>
-                </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full rounded-full bg-[#71AC61] px-5 py-4 font-dm font-medium text-white transition-all duration-300 hover:bg-[#4F7944]"
+                className="mt-2 flex w-full items-center justify-center gap-2 rounded-full bg-[#71AC61] px-5 py-4 font-dm text-[15px] font-medium text-white shadow-[0_14px_35px_rgba(113,172,97,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#5F9751] hover:shadow-[0_18px_40px_rgba(113,172,97,0.4)]"
               >
-                Go to Payment Page
+                Continue to Payment
               </button>
+
+              <p className="text-center font-dm text-[11px] leading-5 text-[#929891]">
+                By continuing, you agree to the subscription terms and privacy
+                policy.
+              </p>
             </form>
           </div>
         </div>
       )}
 
       <style>{`
-        .who-swiper {
-          padding-bottom: 42px !important;
+        .pricing-swiper {
+          overflow: visible;
         }
 
-        .who-swiper .swiper-pagination {
-          bottom: 0px !important;
+        .pricing-swiper .swiper-slide {
+          height: auto;
         }
 
-        .who-swiper .swiper-pagination-bullet {
-          width: 10px;
-          height: 10px;
-          background: #c9dec4;
+        .pricing-swiper .swiper-pagination {
+          bottom: 2px !important;
+        }
+
+        .pricing-swiper .swiper-pagination-bullet {
+          width: 9px;
+          height: 9px;
+          background: #c8d9c2;
           opacity: 1;
-          margin: 0 4px !important;
+          margin: 0 5px !important;
+          transition: all 0.3s ease;
         }
 
-        .who-swiper .swiper-pagination-bullet-active {
-          background: #6bad5f;
+        .pricing-swiper .swiper-pagination-bullet-active {
+          width: 24px;
+          border-radius: 999px;
+          background: #71ac61;
         }
       `}</style>
     </>
   );
 };
 
-const PricingCard = ({ plan, activeTab, onStart }) => {
+const PricingCard = ({ plan, onStart }) => {
   return (
-    <div
-      className={`min-h-[520px] rounded-[34px] px-6 md:px-8 py-6 shadow-[0_18px_35px_rgba(0,0,0,0.10)] bg-white hover:bg-[#c2e0ba] border transition-all duration-300 ${plan.highlighted
-        ? "border-greenbase bg-[#F7FCF5]"
-        : "border-transparent"
-        }`}
+    <article
+      className={`group relative flex min-h-[570px] h-full flex-col overflow-hidden rounded-[32px] border px-6 py-8 transition-all duration-500 md:px-7 lg:px-8 ${
+        plan.highlighted
+          ? "border-[#9BC88C] bg-[#F5FAF2] shadow-[0_30px_80px_rgba(80,125,67,0.16)] md:-translate-y-4"
+          : "border-[#E3E9E0] bg-white shadow-[0_20px_60px_rgba(38,58,34,0.07)] hover:-translate-y-2 hover:border-[#BFD9B6] hover:shadow-[0_28px_75px_rgba(38,58,34,0.12)]"
+      }`}
     >
-      <h3 className="font-season-medium heading-large text-left font-med text-primary">
-        {plan.name}
-      </h3>
+      {/* Decorative glow */}
+      <div
+        className={`pointer-events-none absolute -right-24 -top-24 h-60 w-60 rounded-full blur-[80px] transition-opacity duration-500 ${
+          plan.highlighted
+            ? "bg-[#BFE1B2]/70"
+            : "bg-[#DAECD4]/0 group-hover:bg-[#DAECD4]/60"
+        }`}
+      />
 
-      <p className="mt-2 font-dm text-gray paragraph-secondary text-left">
-        {plan.subtitle}
-      </p>
-
-      <div className="mt-4 flex items-end gap-1">
-        <span className="font-smbold text-[42px] leading-none font-noto text-primary">
-          {plan.price}
-        </span>
-
-        <span className="pb-1 uppercase text-gray font-dm paragraph-secondary text-left">
-          / {activeTab === "Monthly" ? "Month" : activeTab}
-        </span>
-      </div>
-
-      <ul className="mt-6 space-y-4">
-        {plan.features.map((feature) => (
-          <li
-            key={feature}
-            className="flex items-start gap-3 text-gray font-dm paragraph-secondary text-left"
+      {/* Badge */}
+      {plan.badge && (
+        <div className="absolute right-5 top-5 z-10">
+          <span
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 font-dm text-[10px] font-medium uppercase tracking-[0.16em] ${
+              plan.highlighted
+                ? "bg-[#71AC61] text-white"
+                : "border border-[#C7DCC0] bg-white text-[#639553]"
+            }`}
           >
-            <span className="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#6fad5f] text-white">
-              <Check size={12} strokeWidth={3} />
-            </span>
+            {plan.highlighted && <Sparkles size={12} />}
+            {plan.badge}
+          </span>
+        </div>
+      )}
 
-            <span>{feature}</span>
-          </li>
-        ))}
-      </ul>
+      <div className="relative z-10 flex h-full flex-col">
+        <p className="font-dm text-[11px] uppercase tracking-[0.2em] text-[#80A576]">
+          {plan.durationLabel} membership
+        </p>
 
-      <button
-        type="button"
-        onClick={onStart}
-        className="mt-8 w-full rounded-full bg-[#71AC61] px-4 py-4 text-white font-medium font-dm transition-all duration-300 hover:bg-[#4F7944] cursor-pointer"
-      >
-        Start free 21-days
-      </button>
-    </div>
+        <h3 className="mt-2 font-season-medium text-[34px] leading-tight text-[#202A21]">
+          {plan.title}
+        </h3>
+
+        <p className="mt-2 min-h-[72px] font-dm text-[14px] leading-6 text-[#747B72]">
+          {plan.description}
+        </p>
+
+        <div className="mt-2 flex items-end gap-2">
+          <span className="font-noto text-[42px] font-semibold leading-none text-[#202A21] lg:text-[48px]">
+            {plan.price}
+          </span>
+
+          <span className="pb-1.5 font-dm text-[12px] uppercase tracking-[0.08em] text-[#7C837B]">
+            / {plan.duration}
+          </span>
+        </div>
+
+        <div className="my-7 h-px bg-gradient-to-r from-[#D4E2CF] via-[#D4E2CF] to-transparent" />
+
+        <ul className="space-y-4">
+          {plan.features.map((feature) => (
+            <li
+              key={feature}
+              className="flex items-start gap-3 font-dm text-[13px] leading-6 text-[#5E665D] lg:text-[14px]"
+            >
+              <span className="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#E7F2E3] text-[#659E55]">
+                <Check size={12} strokeWidth={3} />
+              </span>
+
+              <span>{feature}</span>
+            </li>
+          ))}
+        </ul>
+
+        <button
+          type="button"
+          onClick={onStart}
+          className={`mt-3 w-full rounded-full px-5 py-4 font-dm text-[14px] font-medium transition-all duration-300 ${
+            plan.highlighted
+              ? "bg-[#71AC61] text-white shadow-[0_14px_30px_rgba(113,172,97,0.3)] hover:-translate-y-0.5 hover:bg-[#5E9550]"
+              : "border border-[#D5E2D1] bg-[#F8FAF7] text-[#355331] hover:border-[#71AC61] hover:bg-[#71AC61] hover:text-white"
+          }`}
+        >
+          Start free 24-days
+        </button>
+      </div>
+    </article>
   );
 };
 

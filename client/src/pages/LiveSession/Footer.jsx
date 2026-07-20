@@ -1,213 +1,231 @@
-import React,{useState,useEffect} from 'react'
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
-import { CheckCircle, TrendingUp, Heart, ShieldCheck, Brain } from "lucide-react";
-import { TbHeartFilled } from "react-icons/tb";
-import FullCTA from '../../assets/images/FullCTA.png'
+import React from "react";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaYoutube,
+} from "react-icons/fa";
+import { ArrowRight, Mail } from "lucide-react";
+
+import FullCTA from "../../assets/images/FullCTA.png";
 import DarkLogo from "../../assets/images/LogoDark.svg";
-import avyaktFooter from "../../assets/avyakt.png"
-
-import MeditationWork1 from "../../assets/Icons/MeditationWork1.png"
-import faceEmoji from "../../assets/Icons/faceEmoji.png"
-import fireEmoji from "../../assets/Icons/fireEmoji.png"
-import brainEmoji from "../../assets/Icons/brainEmoji.png"
-import Pricing from './Pricing';
+import avyaktFooter from "../../assets/avyakt.png";
 
 
+const footerLinks = [
+  {
+    title: "Explore",
+    links: [
+      { label: "Home", href: "/" },
+      { label: "The Science", href: "#science" },
+      { label: "Programs", href: "#programs" },
+      { label: "Pricing", href: "#pricing-section" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About Us", href: "#about" },
+      { label: "Contact", href: "#contact" },
+      { label: "Blog", href: "#blog" },
+      { label: "FAQs", href: "#faq" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Privacy Policy", href: "/privacy-policy" },
+      { label: "Terms & Conditions", href: "/terms" },
+      { label: "Refund Policy", href: "/refund-policy" },
+    ],
+  },
+];
 
+const socialLinks = [
+  {
+    label: "YouTube",
+    href: "#",
+    icon: FaYoutube,
+  },
+  {
+    label: "Facebook",
+    href: "#",
+    icon: FaFacebookF,
+  },
+  {
+    label: "Instagram",
+    href: "#",
+    icon: FaInstagram,
+  },
+  {
+    label: "LinkedIn",
+    href: "#",
+    icon: FaLinkedinIn,
+  },
+];
 
 const Footer = () => {
+  const handleNewsletterSubmit = (event) => {
+    event.preventDefault();
 
-    const textCard = [
-        {
-            icon: faceEmoji,
-            title: "Before & after mood score",
-            decs: "A single mood check before and after each session. Over time this becomes a mood history you can actually read."
-        },
-        {
-            icon: fireEmoji,
-            title: "Streak & consistency rate",
-            decs: "Weekly and monthly views show patterns and tells how often you showed up, which days you skip, which contexts triggered return visits."
-        },
-        {
-            icon: brainEmoji,
-            title: "Context shift over time",
-            decs: "Started with heartbreak sessions, moved to sleep, then growth? Your context journey is tracked and reflected back to you as a visible arc of recovery."
-        }
-    ]
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get("email");
 
-    return (
-        <>
-            <section
-                className="relative z-10 w-full min-h-screen flex flex-col gap-50 items-center bg-cover bg-center bg-no-repeat overflow-hidden"
-                style={{ backgroundImage: `url(${FullCTA})` }}
+    console.log("Newsletter email:", email);
+
+    event.currentTarget.reset();
+  };
+
+  return (
+    <>
+              
+      {/* ================= FOOTER ================= */}
+      <footer className="relative overflow-hidden bg-[#152419] text-white">
+        {/* Background watermark */}
+        <img
+          src={avyaktFooter}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-[-15px] left-1/2 w-[900px] max-w-none -translate-x-1/2 opacity-[0.035] md:w-[1200px]"
+        />
+
+        {/* Soft gradient */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(113,172,97,0.16),transparent_40%)]" />
+
+        <div className="relative z-10 mx-auto max-w-[1240px] px-5 pb-8 pt-16 md:px-8 md:pt-20">
+          {/* Newsletter CTA */}
+          <div className="grid gap-8 border-b border-white/10 pb-14 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+            <div className="max-w-[590px]">
+              <p className="font-dm text-[11px] uppercase tracking-[0.25em] text-[#9BC68D] md:text-[12px]">
+                Stay connected
+              </p>
+
+              <h2 className="mt-4 font-season-medium text-[34px] leading-tight text-white md:text-[48px]">
+                Small moments of stillness,
+                <span className="block italic text-[#9BC68D]">
+                  delivered gently.
+                </span>
+              </h2>
+
+              <p className="mt-4 max-w-[520px] font-dm text-[14px] leading-7 text-white/60 md:text-[15px]">
+                Receive guided practices, mindful reflections and updates from
+                the Avyakt community.
+              </p>
+            </div>
+
+            <form
+              onSubmit={handleNewsletterSubmit}
+              className="w-full max-w-[540px] lg:justify-self-end"
             >
-                {/* Overlay */}
-                <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                        background:
-                            "linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.95) 15%, rgba(255,255,255,0.6) 35%, rgba(255,255,255,0) 60%)",
-                    }}
-                />
-                {/* Bottom Overlay */}
-                <div
-                    className="absolute bottom-0 left-0 w-full h-[730px] pointer-events-none z-0"
-                    style={{
-                        background:
-                            "linear-gradient(360deg, rgba(244,249,244,1) 0%, rgba(244,249,244,0.85) 10%, transparent 90%)",
-                    }}
-                />
-                <div className='flex flex-col gap-20'>
-                    {/* Blog Section */}
-                    <div className="relative z-10 mx-auto w-full max-w-[1100px] flex flex-col justify-between h-full pt-16">
+              <div className="flex flex-col gap-3 rounded-[24px] border border-white/10 bg-white/[0.06] p-3 backdrop-blur-md sm:flex-row">
+                <div className="flex flex-1 items-center gap-3 px-3">
+                  <Mail
+                    size={18}
+                    strokeWidth={1.8}
+                    className="shrink-0 text-[#9BC68D]"
+                  />
 
-                        <p className="text-greenbase font-dm text-center font-medium tracking-widest text-[14px] md:text-[20px] uppercase mt-2">
-                            PRICING
-                        </p>
-
-
-
-                        {/* Heading */}
-                        <div >
-                            <h2 className="heading-main font-season font-med text-center text-primary">
-                                Start free. Then commit.
-                            </h2>
-                            <p className='text-gray font-dm paragraph-body mt-1'>21 days on us. Then choose how long you want to go.</p>
-                        </div>
-
-                        <div className="mt-2">
-
-                            <Pricing />
-
-                        </div>
-
-                    </div>
-
-                    {/* CTA Footer */}
-                    <div className="min-h-screen 2xl:min-h-fit relative text-white text-center flex flex-col items-center justify-center gap-2 md:gap-20 md:px-4 pt-8 md:pt-12">
-
-                        <div>
-                            {/* Heading */}
-                            <h1 className="text-center font-season-medium max-w-md md:max-w-7xl heading-main  2xl:text-7xl font-med mb-2 tracking-wide px-12 md:px-0">
-                                Mindfulness for every stage of life.
-                            </h1>
-
-                            {/* Subtext */}
-                            <p className="max-w-md text-center px-4 md:px-0 md:max-w-5xl 2xl:text-xl font-dm text-white mb-8 paragraph-body mx-auto">
-                                Sign up to receive simple and effective meditation, yoga, and other wellness tips from experts with decades of experience. Occasionally, we’ll let you know about our upcoming retreats, too.
-                            </p>
-
-                            <div className="flex flex-col items-center mb-16 md:mb-24 w-full">
-                                <form className="w-full max-w-2xl px-4 md:px-0 flex flex-col items-center md:flex-row gap-4 ">
-
-                                    {/* Inputs */}
-                                    <div className="flex flex-col items-center gap-4 w-full">
-
-                                        {/* Row 1 */}
-                                        <div className="flex flex-col md:flex-row gap-4 w-full">
-                                            <input
-                                                type="text"
-                                                placeholder="First Name"
-                                                className="px-5 py-3 rounded-full font-dm 2xl:text-xl  font-medium bg-white text-primary w-full outline-none placeholder-[#191919]"
-                                            />
-                                            <input
-                                                type="text"
-                                                placeholder="Last Name"
-                                                className="px-5 py-3 rounded-full font-dm font-medium bg-white 
-                                                2xl:text-xl text-primary w-full outline-none placeholder-[#191919]"
-                                            />
-                                        </div>
-
-                                        {/* Row 2 */}
-                                        <input
-                                            type="email"
-                                            placeholder="Enter your Email"
-                                            className="px-5 py-3 rounded-full font-dm font-medium bg-white 
-                                            2xl:text-xl text-primary w-full outline-none placeholder-[#191919]"
-                                            required
-                                        />
-
-
-
-                                    </div>
-                                    {/* Button */}
-                                    <div className='md:w-[35%]'> <button className="bg-[#71AC61] w-60 md:w-full md:w-auto mt-2 font-dm hover:scale-105 transition px-4 sm:px-8 py-3 rounded-full font-medium 2xl:text-xl 2xl:py-4">
-                                        Sign up
-                                    </button></div>
-                                </form>
-                            </div>
-                        </div>
-
-                        {/* Footer Section */}
-                        <div className="relative w-full  ">
-                            <div className="relative max-w-6xl flex flex-col items-center gap-8 mx-auto z-20 px-4">
-
-                                {/* Logo */}
-                                <div className="flex justify-center">
-                                    <img src={DarkLogo} alt="Dark logo" className="w-24 md:w-auto" />
-                                </div>
-
-                                {/* Nav + Social */}
-                                <div className="flex flex-col md:flex-row items-center gap-10 md:gap-16">
-
-                                    {/* Nav */}
-                                    <div className="
-                       grid grid-cols-2 gap-y-6 gap-x-12
-                       text-primary font-dm font-semibold 
-                       text-base 2xl:text-[18px] tracking-wide text-center
-                       md:flex md:flex-wrap md:justify-center md:gap-16
-                     ">
-                                        <a href="#" className="hover:text-[#71AC61]">HOME</a>
-                                        <a href="#" className="hover:text-[#71AC61]">THE SCIENCE</a>
-                                        <a href="#" className="hover:text-[#71AC61]">PROGRAMS</a>
-                                        <a href="#" className="hover:text-[#71AC61]">ABOUT</a>
-                                        <a href="#" className="hover:text-[#71AC61]">CONTACT</a>
-                                        <a href="#" className="hover:text-[#71AC61]">BLOG</a>
-                                    </div>
-
-                                    {/* Social Icons */}
-                                    <div className="flex justify-center gap-6 text-lg 2xl:text-xl text-[#191919]">
-                                        <FaYoutube className="cursor-pointer hover:text-[#71AC61]" />
-                                        <FaFacebookF className="cursor-pointer hover:text-[#71AC61]" />
-                                        <FaTwitter className="cursor-pointer hover:text-[#71AC61]" />
-                                        <FaInstagram className="cursor-pointer hover:text-[#71AC61]" />
-                                        <FaLinkedinIn className="cursor-pointer hover:text-[#71AC61]" />
-                                    </div>
-
-                                </div>
-
-                                {/* Copyright */}
-                                <p className="text-base md:text-[18px] font-dm mb-6 text-[#191919] tracking-wide text-center">
-                                    Avyakt©2026. All rights reserved.
-                                </p>
-
-                            </div>
-
-                            {/* Background Footer Image */}
-                            <div className="w-full relative flex justify-center">
-                                <img
-                                    src={avyaktFooter}
-                                    alt="Avyakt Footer Logo"
-                                    className="
-                                           absolute bottom-0 z-10
-                                            lg:w-full
-                                           max-w-[100vw]
-                                           h-100
-                                           object-contain
-                                           pointer-events-none
-                                       "
-                                />
-                            </div>
-                        </div>
-
-                    </div>
-
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="Enter your email address"
+                    className="w-full bg-transparent py-3 font-dm text-[14px] text-white outline-none placeholder:text-white/35"
+                  />
                 </div>
-            </section>
-        </>
-    )
-}
 
-export default Footer
+                <button
+                  type="submit"
+                  className="group flex items-center justify-center gap-2 rounded-[18px] bg-[#71AC61] px-6 py-4 font-dm text-[13px] font-medium text-white transition-all duration-300 hover:bg-[#82B873]"
+                >
+                  Join the journey
 
+                  <ArrowRight
+                    size={16}
+                    className="transition-transform duration-300 group-hover:translate-x-1"
+                  />
+                </button>
+              </div>
 
+              <p className="mt-3 pl-1 font-dm text-[11px] text-white/35">
+                Thoughtful emails only. No noise, no spam.
+              </p>
+            </form>
+          </div>
+
+          {/* Main footer */}
+          <div className="grid gap-12 py-14 md:grid-cols-2 lg:grid-cols-[1.3fr_2fr]">
+            {/* Brand */}
+            <div className="max-w-[350px]">
+              <a href="/" className="inline-flex">
+                <img
+                  src={DarkLogo}
+                  alt="Avyakt"
+                  className="h-auto w-[110px] brightness-0 invert"
+                />
+              </a>
+
+              <p className="mt-6 font-dm text-[14px] leading-7 text-white/55">
+                A mindful space where neuroscience, meditation and human
+                awareness come together to support lasting inner change.
+              </p>
+
+              {/* Social */}
+              <div className="mt-7 flex flex-wrap gap-3">
+                {socialLinks.map(({ label, href, icon: Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    aria-label={label}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] text-white/65 transition-all duration-300 hover:-translate-y-1 hover:border-[#71AC61] hover:bg-[#71AC61] hover:text-white"
+                  >
+                    <Icon size={15} />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation */}
+            <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3">
+              {footerLinks.map((group) => (
+                <div key={group.title}>
+                  <h3 className="font-dm text-[12px] font-medium uppercase tracking-[0.18em] text-white">
+                    {group.title}
+                  </h3>
+
+                  <ul className="mt-5 space-y-3.5">
+                    {group.links.map((link) => (
+                      <li key={link.label}>
+                        <a
+                          href={link.href}
+                          className="font-dm text-[13px] text-white/50 transition-colors duration-300 hover:text-[#9BC68D] md:text-[14px]"
+                        >
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom bar */}
+          <div className="flex flex-col gap-4 border-t border-white/10 pt-7 font-dm text-[11px] text-white/35 sm:flex-row sm:items-center sm:justify-between md:text-[12px]">
+            <p>© {new Date().getFullYear()} Avyakt. All rights reserved.</p>
+
+            <p className="flex items-center gap-2">
+              Designed for mindful living
+              <span className="h-1 w-1 rounded-full bg-[#71AC61]" />
+              Made with intention
+            </p>
+          </div>
+        </div>
+      </footer>
+    </>
+  );
+};
+
+export default Footer;

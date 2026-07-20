@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Check, ChevronRight } from "lucide-react";
+
 import LegendSleep from "../../assets/Icons/LegendSleep.png";
 import Group from "../../assets/Icons/Group.png";
 import Lotus from "../../assets/Icons/Lotus.png";
@@ -6,97 +8,115 @@ import Aim from "../../assets/Icons/Aim.png";
 
 const cards = [
   {
+    id: "01",
     label: "Unlocks · Week 3",
     icon: LegendSleep,
-    hoverKey: "FOCUS · SHARPENED",
-    hoverTitle: "Attention Ninja",
-    hoverDesc:
-      "Your mind stays where you put it. Distractions still arrive — but they no longer win.",
+    category: "Focus · Sharpened",
+    title: "Attention Ninja",
+    description:
+      "Your mind stays where you place it. Distractions still arrive, but they no longer control the moment.",
     keyPoints: [
       "Sustained concentration",
       "Fewer intrusive thoughts",
-      "Decisions come quicker",
-      "Present in conversation",
+      "Quicker decisions",
+      "More present conversations",
     ],
   },
   {
+    id: "02",
     label: "Unlocks · Month 2",
     icon: Aim,
-    hoverKey: "SLEEP · RESTORED",
-    hoverTitle: "The Sleep Sage",
-    hoverDesc:
-      "You've stopped fighting the night. Sleep arrives without the wrestling match.",
+    category: "Sleep · Restored",
+    title: "The Sleep Sage",
+    description:
+      "The struggle with night begins to soften. Rest comes with less resistance and the nervous system settles more naturally.",
     keyPoints: [
       "Falls asleep with ease",
       "Night anxiety loosens",
-      "Wakes less wired",
-      "First mood shifts",
+      "Wakes feeling calmer",
+      "Early mood improvement",
     ],
   },
   {
+    id: "03",
     label: "Unlocks · Month 6",
     icon: Group,
-    hoverKey: "EMOTIONS · MASTERED",
-    hoverTitle: "Zen Warrior",
-    hoverDesc:
-      "You still feel everything. But you're no longer at the mercy of it.",
+    category: "Emotions · Mastered",
+    title: "Zen Warrior",
+    description:
+      "You continue to feel deeply, but your emotions no longer decide every response.",
     keyPoints: [
-      "Anger arises and passes",
-      "Stress recovery is fast",
-      "Responds, doesn't react",
+      "Stress recovery improves",
+      "Anger passes faster",
+      "Responds instead of reacting",
       "Stable under pressure",
     ],
   },
   {
+    id: "04",
     label: "Unlocks · Month 12",
     icon: Lotus,
-    hoverKey: "STILLNESS · EMBODIED",
-    hoverTitle: "Calm Character",
-    hoverDesc:
-      "This is no longer something you do. It is who you are. People notice before you say a word.",
+    category: "Stillness · Embodied",
+    title: "Calm Character",
+    description:
+      "Meditation is no longer something you practise occasionally. It becomes visible in the way you live and respond.",
     keyPoints: [
-      "Calm is the default state",
-      "Gratitude is spontaneous",
-      "Presence without effort",
-      "The practice is the person",
+      "Calm becomes the default",
+      "Gratitude feels natural",
+      "Presence requires less effort",
+      "Practice becomes identity",
     ],
   },
 ];
 
 export default function LegendarySection() {
+  const [activeCard, setActiveCard] = useState(0);
+
   return (
-    <section className="bg-[#C2E0BA33] px-5 md:px-6 py-20 md:py-24 overflow-hidden">
-      <div className="mx-auto grid max-w-[1120px] grid-cols-1 items-start gap-12 md:gap-16 lg:grid-cols-[420px_1fr]">
-        {/* Left Content */}
-        <div className="text-center lg:text-left">
-          <p className="text-greenbase font-dm text-[14px] md:text-[20px] tracking-widest mb-2 uppercase">
-            What Consistent Practice Builds
-          </p>
+    <section className="relative overflow-hidden bg-[#F8FBF6] px-5 py-20 md:px-8 md:py-28">
+      {/* Background decoration */}
+      <div className="pointer-events-none absolute -left-48 top-1/3 h-[430px] w-[430px] rounded-full bg-[#DDEFD7]/70 blur-[130px]" />
 
-          <h2 className="font-season-medium text-primary heading-main text-center lg:text-left mb-3 leading-[1.08]">
-            Every session is whole.
-            <br />
-            Time makes you legendary.
-          </h2>
+      <div className="pointer-events-none absolute -right-44 bottom-0 h-[460px] w-[460px] rounded-full bg-[#E8F1E4] blur-[140px]" />
 
-          <p className="max-w-[440px] mx-auto lg:mx-0 text-gray font-dm paragraph-body text-center lg:text-left">
-            Join any night. There is no starting point you've missed. Show up
-            consistently, and the practice builds a new version of you. These
-            are the characters you unlock.
+      <div className="relative z-10 mx-auto max-w-[1240px]">
+        {/* Heading */}
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+          <div>
+            <div className="inline-flex items-center gap-3">
+              <span className="h-px w-8 bg-[#71AC61]" />
+
+              <p className="font-dm text-[11px] font-medium uppercase tracking-[0.28em] text-[#71AC61] md:text-[13px]">
+                What Consistent Practice Builds
+              </p>
+            </div>
+
+            <h2 className="mt-5 max-w-[580px] font-season-medium text-[40px] leading-[1.08] text-[#202A21] md:text-[58px]">
+              Every session is whole.
+              <span className="block italic text-[#71AC61]">
+                Time makes it transformative.
+              </span>
+            </h2>
+          </div>
+
+          <p className="max-w-[560px] font-dm text-[15px] leading-7 text-[#747B72] md:text-[17px] lg:justify-self-end">
+            There is no perfect starting point. Show up consistently and the
+            practice begins to reshape attention, sleep, emotional regulation
+            and the way you move through everyday life.
           </p>
         </div>
 
-        {/* Desktop Grid */}
-        <div className="hidden md:grid grid-cols-2 gap-8">
+        {/* Cards */}
+        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:mt-18 lg:gap-6">
           {cards.map((card, index) => (
-            <HoverCard key={index} card={card} />
-          ))}
-        </div>
-
-        {/* Mobile Cards */}
-        <div className="md:hidden flex flex-col gap-5">
-          {cards.map((card, index) => (
-            <MobileCard key={index} card={card} />
+            <LegendCard
+              key={card.id}
+              card={card}
+              isActive={activeCard === index}
+              onToggle={() =>
+                setActiveCard((current) => (current === index ? -1 : index))
+              }
+            />
           ))}
         </div>
       </div>
@@ -104,108 +124,121 @@ export default function LegendarySection() {
   );
 }
 
-function HoverCard({ card }) {
+function LegendCard({ card, isActive, onToggle }) {
   return (
-    <div className="group relative h-[300px] overflow-hidden rounded-[18px] bg-[#C2E0BA33] p-8">
-      {/* Default Content */}
-      <div className="absolute inset-0 p-8 transition-all duration-500 group-hover:opacity-0 group-hover:translate-y-4">
-        <div className="flex h-full flex-col items-center justify-center">
-          <p className="text-greenbase font-dm caption-text mb-4 font-smbold">
-            {card.label}
-          </p>
-
-          <div className="flex h-[105px] w-[105px] items-center justify-center rounded-full bg-[#6EAD5F] transition-all duration-500 group-hover:bg-white/20">
-            <img src={card.icon} alt="" />
-          </div>
-        </div>
-      </div>
-
-      {/* Hover Content */}
-      <div className="absolute inset-0 flex translate-y-5 flex-col justify-center p-6 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-        <p className="text-greenbase font-dm paragraph-secondary mb-2 uppercase text-left">
-          {card.hoverKey}
-        </p>
-
-        <h3 className="text-primary font-season-medium heading-large font-med mb-2 text-left">
-          {card.hoverTitle}
-        </h3>
-
-        <p className="max-w-[240px] text-primary font-dm body-secondary text-left mb-2">
-          {card.hoverDesc}
-        </p>
-
-        <ul className="list-disc pl-5 space-y-1">
-          {card.keyPoints.map((point, index) => (
-            <li
-              key={index}
-              className="text-primary font-dm paragraph-secondary text-left"
-            >
-              {point}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-}
-
-/* Mobile Version */
-function MobileCard({ card }) {
-  const [active, setActive] = useState(false);
-
-  return (
-    <div
-      onClick={() => setActive(!active)}
-      className="relative overflow-hidden rounded-[18px] bg-[#EAF4E6] p-6 transition-all duration-500"
+    <article
+      onMouseEnter={onToggle}
+      onMouseLeave={onToggle}
+      onClick={onToggle}
+      className={`group relative cursor-pointer overflow-hidden rounded-[30px] border p-6 transition-all duration-500 md:p-8 ${
+        isActive
+          ? "border-[#A8CEA0] bg-white shadow-[0_30px_90px_rgba(57,91,48,0.14)] md:-translate-y-2"
+          : "border-[#DFE8DC] bg-white/75 shadow-[0_18px_55px_rgba(43,65,39,0.06)] hover:border-[#BED9B6]"
+      }`}
     >
-      {/* Top */}
+      {/* Glow */}
       <div
-        className={`transition-all duration-500 ${
-          active ? "opacity-0 -translate-y-5 absolute" : "opacity-100"
+        className={`pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#DCEFD6] blur-[80px] transition-opacity duration-500 ${
+          isActive ? "opacity-80" : "opacity-0 group-hover:opacity-55"
         }`}
-      >
-        <div className="flex flex-col items-center justify-center py-6">
-          <p className="text-greenbase font-dm caption-text mb-4 font-smbold text-center">
-            {card.label}
-          </p>
+      />
 
-          <div className="flex h-[90px] w-[90px] items-center justify-center rounded-full bg-[#6EAD5F]">
-            <img src={card.icon} alt="" className="w-[42px]" />
+      {/* Large faded number */}
+      <span className="pointer-events-none absolute right-5 top-2 select-none font-season-medium text-[92px] leading-none text-[#E4EDE0] md:text-[110px]">
+        {card.id}
+      </span>
+
+      <div className="relative z-10">
+        {/* Top row */}
+        <div className="flex items-start justify-between gap-6">
+          <div>
+            <p className="font-dm text-[10px] font-medium uppercase tracking-[0.2em] text-[#7FA675] md:text-[11px]">
+              {card.label}
+            </p>
+
+            <p className="mt-3 font-dm text-[11px] uppercase tracking-[0.22em] text-[#979E95]">
+              {card.category}
+            </p>
+          </div>
+
+          <div
+            className={`flex h-[72px] w-[72px] shrink-0 items-center justify-center rounded-[22px] border transition-all duration-500 md:h-[82px] md:w-[82px] ${
+              isActive
+                ? "rotate-3 border-[#91BF84] bg-[#71AC61] shadow-[0_18px_40px_rgba(113,172,97,0.28)]"
+                : "border-[#D6E5D2] bg-[#EEF6EB] group-hover:-rotate-3"
+            }`}
+          >
+            <img
+              src={card.icon}
+              alt=""
+              className={`h-[34px] w-[34px] object-contain transition-all duration-500 md:h-[40px] md:w-[40px] ${
+                isActive ? "scale-110 brightness-0 invert" : ""
+              }`}
+            />
           </div>
         </div>
-      </div>
 
-      {/* Expanded Content */}
-      <div
-        className={`transition-all duration-500 ${
-          active
-            ? "opacity-100 translate-y-0 relative"
-            : "opacity-0 translate-y-5 h-0 overflow-hidden"
-        }`}
-      >
-        <p className="text-greenbase font-dm paragraph-secondary mb-2 uppercase text-left">
-          {card.hoverKey}
-        </p>
+        {/* Main content */}
+        <div className="mt-10">
+          <h3 className="font-season-medium text-[30px] leading-tight text-[#202A21] md:text-[38px]">
+            {card.title}
+          </h3>
 
-        <h3 className="text-primary font-season-medium heading-large font-med mb-2 text-left">
-          {card.hoverTitle}
-        </h3>
+          <p className="mt-4 max-w-[500px] font-dm text-[14px] leading-7 text-[#70776F] md:text-[15px]">
+            {card.description}
+          </p>
+        </div>
 
-        <p className="text-primary font-dm body-secondary text-left mb-3">
-          {card.hoverDesc}
-        </p>
+        <div className="my-7 h-px bg-gradient-to-r from-[#D5E3D0] via-[#D5E3D0] to-transparent" />
 
-        <ul className="list-disc pl-5 space-y-1">
+        {/* Key points */}
+        <div
+          className={`grid overflow-hidden transition-all duration-500 sm:grid-cols-2 ${
+            isActive
+              ? "max-h-[240px] gap-3 opacity-100"
+              : "max-h-[48px] gap-3 opacity-80"
+          }`}
+        >
           {card.keyPoints.map((point, index) => (
-            <li
-              key={index}
-              className="text-primary font-dm paragraph-secondary text-left"
+            <div
+              key={point}
+              className={`flex items-start gap-3 transition-all duration-500 ${
+                !isActive && index > 1
+                  ? "translate-y-3 opacity-0"
+                  : "translate-y-0 opacity-100"
+              }`}
+              style={{
+                transitionDelay: isActive ? `${index * 70}ms` : "0ms",
+              }}
             >
-              {point}
-            </li>
+              <span className="mt-[3px] flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#E6F2E2] text-[#659D55]">
+                <Check size={12} strokeWidth={3} />
+              </span>
+
+              <span className="font-dm text-[13px] leading-6 text-[#5E665D] md:text-[14px]">
+                {point}
+              </span>
+            </div>
           ))}
-        </ul>
+        </div>
+
+        {/* Bottom action */}
+        <div className="mt-7 flex items-center justify-between">
+          <span className="font-dm text-[11px] uppercase tracking-[0.16em] text-[#969D94]">
+            {isActive ? "Milestone revealed" : "Explore milestone"}
+          </span>
+
+          <span
+            className={`flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-500 ${
+              isActive
+                ? "rotate-90 border-[#71AC61] bg-[#71AC61] text-white"
+                : "border-[#D6E3D2] bg-[#F7FAF5] text-[#517449]"
+            }`}
+          >
+            <ChevronRight size={17} />
+          </span>
+        </div>
       </div>
-    </div>
+    </article>
   );
 }

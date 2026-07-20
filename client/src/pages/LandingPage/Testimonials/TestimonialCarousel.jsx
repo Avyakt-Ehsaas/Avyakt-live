@@ -9,47 +9,67 @@ import "slick-carousel/slick/slick-theme.css";
 const testimonials = [
   {
     id: 1,
-    text: "Your app brings so much peace and tolerance to our home.",
-    author: "Rachael, UK",
+    text:
+      "The short evening sessions helped me slow down after long workdays. I now sleep more peacefully and wake up feeling less overwhelmed.",
+    author: "Ananya Sharma",
+    location: "Bengaluru, India",
+    role: "Product Designer",
   },
   {
     id: 2,
-    text: "I came to learn that the storyline in my head was holding me back.",
-    author: "Peter, Belgium",
+    text:
+      "I started using the focus practices during exam preparation. Within a few weeks, I was able to study longer without constantly checking my phone.",
+    author: "Rohan Mehta",
+    location: "Delhi, India",
+    role: "University Student",
   },
   {
     id: 3,
     text:
-      "Headspace provides me with a connection to myself and a disconnection from negative thoughts.",
-    author: "Keri, UK",
+      "The guided sessions gave me a simple way to manage stress between meetings. I feel more patient, focused, and less reactive at work.",
+    author: "Michael Carter",
+    location: "Austin, USA",
+    role: "Software Engineer",
   },
   {
     id: 4,
     text:
-      "Changing my daily habits has allowed me to grow and change my life.",
-    author: "David, London",
+      "Meditation always felt difficult to me, but these sessions were easy to follow. The daily routine has made a noticeable difference in my anxiety.",
+    author: "Priya Nair",
+    location: "Pune, India",
+    role: "HR Professional",
   },
   {
     id: 5,
     text:
-      "The mindfulness techniques have been a game-changer for my focus and stress levels.",
-    author: "Emily, USA",
+      "The sleep meditations became part of my nightly routine. I no longer spend an hour replaying the entire day before falling asleep.",
+    author: "Emily Johnson",
+    location: "Seattle, USA",
+    role: "Marketing Manager",
   },
   {
     id: 6,
-    text: "Your app brings so much peace and tolerance to our home.",
-    author: "Rachael, UK",
+    text:
+      "As a parent, I wanted to respond more calmly instead of reacting immediately. The mindfulness exercises have helped me create that pause.",
+    author: "Neha Kapoor",
+    location: "Mumbai, India",
+    role: "Parent and Educator",
   },
   {
     id: 7,
-    text: "I came to learn that the storyline in my head was holding me back.",
-    author: "Peter, Belgium",
+    text:
+      "The progress tracking kept me consistent. Seeing how my mood changed before and after each session made the benefits feel real and measurable.",
+    author: "Daniel Brooks",
+    location: "Chicago, USA",
+    role: "Financial Analyst",
   },
   {
     id: 8,
     text:
-      "Headspace provides me with a connection to myself and a disconnection from negative thoughts.",
-    author: "Keri, UK",
+      "I began with five-minute sessions during lunch breaks. Over time, I noticed better concentration, fewer anxious thoughts, and more emotional balance.",
+    author: "Arjun Verma",
+    location: "Dehradun, India",
+    role: "Software Developer",
   },
 ];
 
