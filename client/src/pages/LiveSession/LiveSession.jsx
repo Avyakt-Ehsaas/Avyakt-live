@@ -1,5 +1,5 @@
 import React from 'react'
-import HeroSection from './HeroSection'
+import HeroSection from './HeroSection.jsx'
 import LandingSidebar from '../LandingPage/LandingSidebar/LandingSidebar'
 import StatsBar from './StatsBar'
 import ScienceSection from './ScienceCards'
@@ -13,6 +13,8 @@ import VisionSection from './VisionSection'
 import YearlyJourney from './YearlyJourney'
 import BenefitsStageLife from './BenifitsStageLife'
 import Pricing from './Pricing'
+import WhyFifteenMinutes from './WhyFifteenMinutes.jsx'
+import PersonYouBecomeSection from './PersonYouBecomeSection.jsx'
 
 const LiveSession = () => {
   return (
@@ -22,13 +24,15 @@ const LiveSession = () => {
         <LandingSidebar className="z-40" />
       </div>
         <HeroSection />
-        <StatsBar />
+        {/* <StatsBar /> */}
+        <WhyFifteenMinutes />
         <ScienceSection />
-        <BenefitsStageLife />
+        <PersonYouBecomeSection />
+        {/* <BenefitsStageLife /> */}
         <ProgressSection />
-        <PracticeSection />
+        {/* <PracticeSection /> */}
         <LegendarySection />
-        <VisionSection />
+        {/* <VisionSection /> */}
         <YearlyJourney />
         <TestimonialCarousel />
         <Pricing />
