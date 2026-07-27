@@ -195,14 +195,6 @@ export default function PersonYouBecomeSection() {
                                 className="absolute inset-3 rounded-full border border-dashed border-[#72B866]/25"
                             />
 
-                            <div className="absolute -right-2 top-8 flex h-10 w-10 items-center justify-center rounded-full border border-[#72B866]/15 bg-white shadow-[0_8px_24px_rgba(34,75,48,0.08)]">
-                                <Sparkles
-                                    size={17}
-                                    strokeWidth={1.7}
-                                    className="text-[#62A657]"
-                                />
-                            </div>
-
                             <div className="text-center">
                                 <p className="font-season-medium text-[48px] leading-none text-primary">
                                     30
@@ -215,7 +207,7 @@ export default function PersonYouBecomeSection() {
                         </motion.div>
 
                         <div className="mt-8 border-l border-[#72B866]/35 pl-5">
-                            <p className="max-w-[360px] font-season-medium text-[21px] leading-8 text-primary">
+                            <p className="max-w-[360px] font-dm paragraph-body text-left text-primary">
                                 Not a new personality.
                                 <span className="text-[#69A85E]">
                                     {" "}
@@ -312,15 +304,11 @@ hover:shadow-[0_14px_40px_rgba(32,75,45,0.08)]
                                             </motion.div>
 
                                             <div className="flex-1">
-                                                <div className="flex items-center justify-between gap-4">
-                                                    <p className="font-dm text-[10px] font-medium uppercase tracking-[0.2em] text-[#5D9F53]">
-                                                        Identity shift
-                                                    </p>
-
+                                            
                                                     <span className="font-dm text-[11px] tracking-[0.16em] text-[#163F2C]/25">
                                                         {item.number}
                                                     </span>
-                                                </div>
+                                               
 
                                                 <h3 className="mt-2 font-season-medium caption-text text-primary">
                                                     {item.title}
@@ -365,8 +353,8 @@ hover:shadow-[0_14px_40px_rgba(32,75,45,0.08)]
                     }}
                     className="mt-16 flex flex-col gap-4 border-t border-[#163F2C]/10 pt-7 sm:flex-row sm:items-center sm:justify-between lg:mt-20"
                 >
-                    <p className="max-w-[720px] font-season-medium text-[21px] leading-8 text-primary md:text-[25px]">
-                        One day, you notice that life is the same—
+                    <p className="max-w-[720px] font-dm paragraph-body text-primary">
+                        One day, you notice that life is the same
                         <span className="text-[#68A85D]"> but you are responding differently.</span>
                     </p>
 
@@ -379,7 +367,7 @@ hover:shadow-[0_14px_40px_rgba(32,75,45,0.08)]
                             repeat: Infinity,
                             ease: "easeInOut",
                         }}
-                        className="font-dm text-[12px] uppercase tracking-[0.18em] text-[#163F2C]/45"
+                        className="font-dm text-[12px] uppercase tracking-[0.18em] text-[#163F2C]/65"
                     >
                         Practice becomes identity
                     </motion.p>

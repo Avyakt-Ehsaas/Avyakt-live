@@ -91,15 +91,15 @@ export default function LegendarySection() {
               </p>
             </div>
 
-            <h2 className="mt-5 max-w-[580px] font-season-medium text-[40px] leading-[1.08] text-[#202A21] md:text-[58px]">
+            <h2 className="mt-5 font-season-medium text-[#202A21] heading-main text-left">
               Every session is whole.
-              <span className="block italic text-[#71AC61]">
+              <span className="block text-[#71AC61]">
                 Time makes it transformative.
               </span>
             </h2>
           </div>
 
-          <p className="max-w-[560px] font-dm text-[15px] leading-7 text-[#747B72] md:text-[17px] lg:justify-self-end">
+          <p className="max-w-[560px] font-dm  paragraph-body text-[#747B72]  lg:justify-self-end ">
             There is no perfect starting point. Show up consistently and the
             practice begins to reshape attention, sleep, emotional regulation
             and the way you move through everyday life.
@@ -152,11 +152,11 @@ function LegendCard({ card, isActive, onToggle }) {
         {/* Top row */}
         <div className="flex items-start justify-between gap-6">
           <div>
-            <p className="font-dm text-[10px] font-medium uppercase tracking-[0.2em] text-[#7FA675] md:text-[11px]">
+            <p className="font-dm paragraph-secondary text-left font-medium uppercase tracking-[0.06em] text-[#7FA675]">
               {card.label}
             </p>
 
-            <p className="mt-3 font-dm text-[11px] uppercase tracking-[0.22em] text-[#979E95]">
+            <p className="mt-2 font-dm text-[12px] uppercase tracking-[0.22em] text-[#979E95]">
               {card.category}
             </p>
           </div>
@@ -179,17 +179,17 @@ function LegendCard({ card, isActive, onToggle }) {
         </div>
 
         {/* Main content */}
-        <div className="mt-10">
-          <h3 className="font-season-medium text-[30px] leading-tight text-[#202A21] md:text-[38px]">
+        <div className="mt-1">
+          <h3 className="font-season-medium heading-large text-left text-[#202A21]">
             {card.title}
           </h3>
 
-          <p className="mt-4 max-w-[500px] font-dm text-[14px] leading-7 text-[#70776F] md:text-[15px]">
+          <p className="mt-2 max-w-[500px] font-dm caption-text text-[#70776F] md:text-[15px]">
             {card.description}
           </p>
         </div>
 
-        <div className="my-7 h-px bg-gradient-to-r from-[#D5E3D0] via-[#D5E3D0] to-transparent" />
+        <div className="my-4 h-px bg-gradient-to-r from-[#D5E3D0] via-[#D5E3D0] to-transparent" />
 
         {/* Key points */}
         <div
@@ -215,7 +215,7 @@ function LegendCard({ card, isActive, onToggle }) {
                 <Check size={12} strokeWidth={3} />
               </span>
 
-              <span className="font-dm text-[13px] leading-6 text-[#5E665D] md:text-[14px]">
+              <span className="font-dm paragraph-secondary text-[#5E665D]">
                 {point}
               </span>
             </div>
@@ -224,7 +224,7 @@ function LegendCard({ card, isActive, onToggle }) {
 
         {/* Bottom action */}
         <div className="mt-7 flex items-center justify-between">
-          <span className="font-dm text-[11px] uppercase tracking-[0.16em] text-[#969D94]">
+          <span className="font-dm text-[12px] uppercase tracking-[0.16em] text-[#969D94]">
             {isActive ? "Milestone revealed" : "Explore milestone"}
           </span>
 

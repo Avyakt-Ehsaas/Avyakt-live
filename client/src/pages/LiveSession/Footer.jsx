@@ -100,9 +100,9 @@ const Footer = () => {
                 Stay connected
               </p>
 
-              <h2 className="mt-4 font-season-medium text-[34px] leading-tight text-white md:text-[48px]">
+              <h2 className="mt-4 font-season heading-main text-left font-med ">
                 Small moments of stillness,
-                <span className="block italic text-[#9BC68D]">
+                <span className="block  text-[#9BC68D]">
                   delivered gently.
                 </span>
               </h2>

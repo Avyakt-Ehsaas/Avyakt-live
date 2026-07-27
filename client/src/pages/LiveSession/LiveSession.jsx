@@ -15,6 +15,8 @@ import BenefitsStageLife from './BenifitsStageLife'
 import Pricing from './Pricing'
 import WhyFifteenMinutes from './WhyFifteenMinutes.jsx'
 import PersonYouBecomeSection from './PersonYouBecomeSection.jsx'
+import HowItWorks from '../LandingPage/HowItsWork.jsx'
+import HowItWorkLS from './HowItsWorkLS.jsx'
 
 const LiveSession = () => {
   return (
@@ -29,6 +31,7 @@ const LiveSession = () => {
         <ScienceSection />
         <PersonYouBecomeSection />
         {/* <BenefitsStageLife /> */}
+      <HowItWorkLS />
         <ProgressSection />
         {/* <PracticeSection /> */}
         <LegendarySection />
