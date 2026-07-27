@@ -145,11 +145,11 @@ const HeroSection = () => {
                 flex h-8 w-8
                 items-center justify-center
                 rounded-full
-                bg-[#5f9557]
+                bg-red-100
                 text-white
               "
             >
-              <span className="text-base">✦</span>
+              <Radio className="text-red-400" />
             </span>
 
             <span
@@ -195,7 +195,6 @@ const HeroSection = () => {
               paragraph-body text-left"
           >
             Every day, join a live guided meditation scientifically designed
-            using neuroscience, psychology and timeless meditation practices
             to help you feel calmer, think clearer and build lasting mental
             wellbeing.
           </p>

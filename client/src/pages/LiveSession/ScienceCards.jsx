@@ -22,37 +22,49 @@ const scienceCards = [
     number: "01",
     icon: Focus,
     title: "Attention Network",
-    desc: "Strengthens the brain networks responsible for sustained focus, mental clarity, and working memory.",
+    duration: "13 min/day",
+    desc: "Strengthens the brain's attention networks, improving focus, working memory and reducing mind wandering.",
+    research: "Dr. Amishi Jha • Wendy Suzuki",
   },
   {
     number: "02",
     icon: HeartPulse,
     title: "Emotional Brain",
-    desc: "Reduces emotional reactivity by helping the brain process difficult thoughts and feelings more calmly.",
+    duration: "10–20 min/day",
+    desc: "Reduces amygdala reactivity while strengthening prefrontal control, helping you stay calm under pressure.",
+    research: "Sara Lazar • Richard Davidson",
   },
   {
     number: "03",
     icon: Pause,
     title: "Response Control",
-    desc: "Creates a deliberate pause between stimulus and response, supporting thoughtful decisions over impulse.",
+    duration: "10–15 min/day",
+    desc: "Strengthens inhibitory control, creating a mental pause between an impulse and your response.",
+    research: "Numerous mindfulness & cognitive control studies",
   },
   {
     number: "04",
     icon: Activity,
     title: "Stress & Recovery",
-    desc: "Supports nervous-system regulation, helping the body move from prolonged stress toward recovery.",
+    duration: "10–20 min/day",
+    desc: "Lowers physiological stress, supporting healthier cortisol regulation and faster recovery from daily pressure.",
+    research: "Jon Kabat-Zinn • MBSR Research",
   },
   {
     number: "05",
     icon: MoonStar,
     title: "Sleep System",
-    desc: "Settles mental activity and supports the biological transition into deeper, more restorative sleep.",
+    duration: "10–20 min/day",
+    desc: "Calms mental hyperarousal, helping you fall asleep more easily and improving sleep quality.",
+    research: "JAMA Internal Medicine Mindfulness Trials",
   },
   {
     number: "06",
     icon: Network,
     title: "Brain Plasticity",
-    desc: "Repeated practice reinforces healthier neural pathways, making calm attention easier to access over time.",
+    duration: "~8 Weeks",
+    desc: "Increases gray matter in regions involved in learning, memory and self-awareness while reducing stress-related brain changes.",
+    research: "Sara Lazar (Harvard)",
   },
 ];
 
@@ -142,9 +154,9 @@ function ScienceCard({ item }) {
         },
       }}
       className="
-        group relative flex h-full min-h-[250px] flex-col overflow-hidden
+        group relative flex h-full min-h-[360px] flex-col overflow-hidden
         rounded-[24px] border border-[#163F2C]/[0.08] bg-white
-        p-6 transition-colors duration-500
+        p-6 transition-all duration-500
         hover:border-[#72B866]/30
         hover:shadow-[0_24px_60px_rgba(31,74,48,0.10)]
         lg:p-7
@@ -167,60 +179,70 @@ function ScienceCard({ item }) {
         }}
       />
 
-      {/* Top row */}
+      {/* Top */}
       <div className="relative z-10 flex items-start justify-between">
         <motion.div
           whileHover={{
             rotate: 8,
-            scale: 1.1,
-          }}
-          transition={{
-            duration: 0.3,
+            scale: 1.08,
           }}
           className="
-            flex h-11 w-11 items-center justify-center
-            rounded-[14px] border border-[#72B866]/15
-            bg-[#F2F8F0] transition-colors duration-300
-            group-hover:border-[#72B866]/25
+            flex h-12 w-12 items-center justify-center
+            rounded-[16px]
+            border border-[#72B866]/15
+            bg-[#F2F8F0]
+            transition-all duration-300
             group-hover:bg-[#EAF5E7]
           "
         >
           <Icon
-            size={20}
-            strokeWidth={1.6}
+            size={21}
+            strokeWidth={1.7}
             className="text-[#5DA652]"
           />
         </motion.div>
 
-        <motion.span
-          initial={{
-            opacity: 0.25,
-          }}
-          whileHover={{
-            opacity: 0.7,
-          }}
-          className="font-dm text-[12px] font-medium tracking-[0.18em] text-[#163F2C]/30"
-        >
+        <span className="font-dm text-[12px] font-medium tracking-[0.18em] text-[#163F2C]/35">
           {item.number}
-        </motion.span>
+        </span>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 mt-auto pt-10">
-        <h3 className="font-season-medium text-[23px] leading-[1.15] text-primary">
+      <div className="relative z-10 mt-3 flex-1">
+        <h3 className="font-season font-smbold card-title  text-primary">
           {item.title}
         </h3>
 
-        <p className="mt-3 font-dm text-[15px] leading-7 text-gray">
+        {/* Duration */}
+        <div className="mt-2 inline-flex items-center rounded-full bg-[#EEF7EB] px-4 py-2">
+          <span className="font-dm text-[12px] font-med uppercase tracking-wide text-[#5DA652]">
+            {item.duration}
+          </span>
+        </div>
+
+        {/* Description */}
+        <p className="mt-2 font-dm paragraph-secondary text-left text-gray">
           {item.desc}
         </p>
       </div>
 
-      {/* Bottom hover line */}
+      {/* Research */}
+      <div className="relative z-10 mt-2 border-t border-[#163F2C]/10 pt-5">
+        <p className="font-dm text-[12px] font-semibold uppercase tracking-[0.2em] text-[#5DA652]">
+          Research
+        </p>
+
+        <p className="mt-2 font-dm text-base text-left text-[#163F2C]/70">
+          {item.research}
+        </p>
+      </div>
+
+      {/* Hover Line */}
       <div
         className="
           absolute bottom-0 left-0 h-[3px] w-0
-          bg-[#72B866] transition-all duration-500
+          bg-[#72B866]
+          transition-all duration-500
           group-hover:w-full
         "
       />
@@ -481,7 +503,7 @@ export default function ScienceSection() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="font-dm text-[13px] uppercase tracking-[0.16em] text-[#163F2C]/45"
+            className="font-dm text-[13px] uppercase tracking-[0.16em] text-[#163F2C]/65"
           >
             A few minutes. Practised daily.
           </motion.p>

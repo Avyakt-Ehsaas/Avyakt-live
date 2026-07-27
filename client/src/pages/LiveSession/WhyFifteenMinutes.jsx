@@ -52,7 +52,7 @@ const benefits = [
 
 const WhyFifteenMinutes = () => {
   return (
-    <section className="relative overflow-hidden bg-[#F8F8F3] px-5 py-10 sm:px-8 sm:py-24">
+    <section className="relative overflow-hidden bg-[#F8F8F3] px-5 py-10 sm:px-8 sm:py-24 lg:py-32">
       {/* Ambient background */}
       <div className="pointer-events-none absolute left-1/2 top-[45%] h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#DDE8D8]/55 blur-[150px]" />
 
@@ -66,15 +66,14 @@ const WhyFifteenMinutes = () => {
           className="mx-auto max-w-3xl text-center"
         >
           <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#D8E1D4] bg-white/70 px-4 py-2 backdrop-blur-md">
-            <Sparkles className="h-3.5 w-3.5 text-greenbase" />
-
+           
             <span className="text-[12px] font-season font-semibold uppercase tracking-[0.22em] text-greenbase">
               Why 15 minutes?
             </span>
           </div>
 
           <h2 className="font-medium tracking-[-0.045em] text-primary heading-main font-season ">
-            Fifteen minutes can shape
+            Just Fifteen minutes can shape
             <span className="block text-greenbase">
               the rest of your day.
             </span>

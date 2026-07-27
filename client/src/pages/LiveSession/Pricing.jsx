@@ -172,16 +172,16 @@ const Pricing = () => {
             <div className="mb-5 inline-flex items-center gap-3">
               <span className="h-px w-8 bg-[#83B870]" />
 
-              <p className="font-dm text-[11px] uppercase tracking-[0.28em] text-[#6FA55E] md:text-[13px]">
+              <p className="font-dm text-[12px] uppercase tracking-[0.28em] text-[#6FA55E] md:text-[13px]">
                 Choose Your Journey
               </p>
 
               <span className="h-px w-8 bg-[#83B870]" />
             </div>
 
-            <h2 className="font-season-medium text-[38px] leading-[1.1] text-[#202A21] md:text-[60px]">
+            <h2 className="font-season-medium text-primary heading-main">
               A plan for every stage
-              <span className="block italic text-[#71AC61]">
+              <span className="block text-[#71AC61]">
                 of your transformation.
               </span>
             </h2>
