@@ -65,13 +65,6 @@ const WhyFifteenMinutes = () => {
           transition={{ duration: 0.75 }}
           className="mx-auto max-w-3xl text-center"
         >
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#D8E1D4] bg-white/70 px-4 py-2 backdrop-blur-md">
-           
-            <span className="text-[12px] font-season font-semibold uppercase tracking-[0.22em] text-greenbase">
-              Why 15 minutes?
-            </span>
-          </div>
-
           <h2 className="font-medium tracking-[-0.045em] text-primary heading-main font-season ">
             Just Fifteen minutes can shape
             <span className="block text-greenbase">
@@ -325,54 +318,6 @@ const WhyFifteenMinutes = () => {
           </div>
         </div>
 
-        {/* Final result */}
-        <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8 }}
-          className="relative mx-auto mt-14 max-w-5xl overflow-hidden rounded-[34px] bg-[#19341F] px-6 py-10 sm:px-10 sm:py-12 lg:mt-20 lg:flex lg:items-center lg:justify-between lg:px-14 lg:text-left"
-        >
-          <div className="pointer-events-none absolute -right-24 -top-32 h-72 w-72 rounded-full bg-[#89A780]/20 blur-[90px]" />
-
-          <div className="relative max-w-xl text-center lg:text-left">
-            <span className="text-[12px] font-medium uppercase tracking-[0.24em] text-white/70">
-              The return on your time
-            </span>
-
-            <h3 className="mt-2 heading-large tracking-[-0.04em] text-white sm:text-4xl font-dm ">
-              One practice.
-              <span className="block text-[#AAC0A4]">
-                A better version of the day.
-              </span>
-            </h3>
-
-            <p className="mt-3 text-sm paragraph-secondary text-[#BBC9C8] sm:text-base font-dm">
-              You are not losing fifteen minutes. You are improving how you
-              experience everything that follows.
-            </p>
-          </div>
-
-          <div className="relative mt-4 text-center lg:mt-0 lg:text-right">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.75 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{
-                delay: 0.25,
-                duration: 0.7,
-                type: "spring",
-              }}
-              className="text-6xl font-medium font-season tracking-[-0.05em] text-white/90 sm:text-7xl"
-            >
-              1,425
-            </motion.div>
-
-            <p className="mt-2 text-sm uppercase tracking-[0.2em] text-white/90 font-dm">
-              better remaining minutes
-            </p>
-          </div>
-        </motion.div>
       </div>
 
       {/* Bottom section fade */}

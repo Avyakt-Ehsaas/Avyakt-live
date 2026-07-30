@@ -100,70 +100,35 @@ const YearlyJourney = () => {
       </div>
 
       <div className="relative mx-auto max-w-[1240px] px-5 md:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 30,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-            amount: 0.4,
-          }}
-          transition={{
-            duration: 0.75,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="mx-auto max-w-[760px] text-center"
-        >
-          <div className="mb-3 inline-flex items-center gap-3">
-            <span className="h-px w-8 bg-[#7BAD69]" />
-
-            <p className="font-dm text-[12px] uppercase tracking-[0.28em] text-[#6FA55E] md:text-[14px]">
-              Your Yearly Journey
-            </p>
-
-            <span className="h-px w-8 bg-[#7BAD69]" />
-          </div>
-
-          <h2 className="heading-main font-season-medium text-[#1F2A20]">
-            A year of returning
-            <span className="block text-[#6FA55E]">to yourself.</span>
-          </h2>
-
-          <p className="mx-auto mt-3 max-w-[630px] font-dm paragraph-body text-gray">
-            Four progressive phases that gradually transform meditation into a
-            more natural and embodied way of living.
-          </p>
-        </motion.div>
-
-        {/* Desktop roadmap */}
-        <div className="relative mt-2 hidden lg:block">
-          {/* Journey line */}
-          <div className="absolute left-[12.5%] right-[12.5%] top-[29px] h-px bg-[#D0DFC9]" />
+        {/* Header — two-column: heading left, description right */}
+        <div className="grid items-end gap-10 lg:grid-cols-2">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <h2 className="heading-main font-season-medium text-[#0e0e0e] text-left">
+              A year of returning
+              <span className="block text-[#6FA55E]">to yourself.</span>
+            </h2>
+          </motion.div>
 
           <motion.div
-            initial={{
-              scaleX: 0,
-            }}
-            whileInView={{
-              scaleX: 1,
-            }}
-            viewport={{
-              once: true,
-              amount: 0.4,
-            }}
-            transition={{
-              duration: 1.4,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="absolute left-[12.5%] right-[12.5%] top-[29px] h-px origin-left bg-gradient-to-r from-[#79AD66] via-[#9DC78F] to-[#79AD66]"
-          />
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="font-dm paragraph-body text-[#4a4a4a] text-left">
+              Four progressive phases that gradually transform meditation into a
+              more natural and embodied way of living.
+            </p>
+          </motion.div>
+        </div>
 
+        {/* Desktop roadmap */}
+        <div className="relative mt-0 hidden lg:block">
           <div className="grid grid-cols-4 gap-5">
             {journeyData.map((item, index) => (
               <JourneyCard
@@ -244,25 +209,14 @@ const YearlyJourney = () => {
 
         {/* Footer statement */}
         <motion.div
-          initial={{
-            opacity: 0,
-            y: 20,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-          }}
-          transition={{
-            duration: 0.7,
-          }}
-          className="mx-auto mt-14 max-w-[720px] border-t border-[#1F2A20]/10 pt-7 text-center lg:mt-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mt-8 text-center lg:mt-10"
         >
-          <p className="font-dm text-gray paragraph-body">
-            Each phase builds on the last, turning small daily practices into
-            lasting inner change.
+          <p className="font-dm text-gray paragraph-body whitespace-nowrap">
+            Each phase builds on the last, turning small daily practices into lasting inner change.
           </p>
         </motion.div>
       </div>
@@ -294,14 +248,13 @@ const JourneyCard = ({ item, index, mobile = false }) => {
       className={`
         group relative overflow-hidden
         rounded-[24px]
-        border border-[#DCE6D7]
-        bg-white/90
-        shadow-[0_18px_50px_rgba(39,63,34,0.06)]
-        backdrop-blur-xl
-        transition-all duration-500
-        hover:border-[#B8D3AE]
-        hover:shadow-[0_24px_65px_rgba(39,63,34,0.11)]
-        ${mobile ? "p-6" : "mt-[58px] min-h-[390px] p-6"}
+        border border-[#e0e0e0]
+        bg-white
+        shadow-[0_8px_28px_rgba(39,63,34,0.05)]
+        transition-all duration-400
+        hover:border-[#b8d0b0]
+        hover:shadow-[0_20px_55px_rgba(39,63,34,0.10)]
+        ${mobile ? "p-6" : "mt-[58px] min-h-[380px] p-6"}
       `}
     >
       {/* Desktop timeline marker */}
@@ -349,20 +302,6 @@ const JourneyCard = ({ item, index, mobile = false }) => {
         "
       />
 
-      {/* Number */}
-      <span
-        className="
-          pointer-events-none absolute
-          bottom-2 right-3
-          select-none
-          font-season-medium
-          text-[100px] leading-none
-          text-[#E4ECE0]/65
-        "
-      >
-        {item.id}
-      </span>
-
       <div className="relative z-10">
         {/* Top row */}
         <div className="flex items-center justify-between gap-3">
@@ -370,44 +309,40 @@ const JourneyCard = ({ item, index, mobile = false }) => {
             className="
               inline-flex items-center
               rounded-full
-              border border-[#BBD6B1]
-              bg-[#F3F8F1]
+              border border-[#c8e0c0]
+              bg-[#f0f8ec]
               px-3 py-[7px]
               font-dm text-[9px]
               font-semibold uppercase
               tracking-[0.18em]
-              text-[#649C52]
+              text-[#5a9650]
             "
           >
             {item.quarter}
           </span>
 
-          <span className="font-dm text-[10px] uppercase tracking-[0.14em] text-[#969D94]">
+          <span className="font-dm text-[10px] uppercase tracking-[0.14em] text-[#4a4a4a]/60">
             {item.duration}
           </span>
         </div>
 
         {/* Heading */}
         <div className="mt-6">
-          <p className="font-dm text-[12px] uppercase tracking-[0.06em] text-[#80A775]">
+          <p className="font-dm text-[11px] uppercase tracking-[0.12em] text-[#71AC61]">
             {item.label}
           </p>
 
-          <h3
-            className={`
-              mt-2 font-season-medium text-[#202A21] text-[20px] font-smbold
-            `}
-          >
+          <h3 className="mt-2 font-season-medium text-[#0e0e0e] text-[19px] leading-[1.25] font-semibold">
             {item.title}
           </h3>
         </div>
 
         {/* Description */}
-        <p className="mt-2 font-dm text-[14px] text-[#70776F]">
+        <p className="mt-2 font-dm text-[14px] leading-[1.6] text-[#4a4a4a]">
           {item.description}
         </p>
 
-        <div className="my-5 h-px w-full bg-gradient-to-r from-[#D7E4D2] to-transparent" />
+        <div className="my-5 h-px w-full bg-[#e0e0e0]" />
 
         {/* Points */}
         <ul className="space-y-3">
@@ -429,7 +364,7 @@ const JourneyCard = ({ item, index, mobile = false }) => {
                 duration: 0.4,
                 delay: 0.2 + pointIndex * 0.07,
               }}
-              className="flex items-start gap-3 font-dm text-[12px] leading-5 text-[#5E665D]"
+              className="flex items-start gap-3 font-dm text-[12px] leading-5 text-[#4a4a4a]"
             >
               <span className="mt-[4px] flex h-[16px] w-[16px] shrink-0 items-center justify-center rounded-full bg-[#EAF4E6]">
                 <span className="h-[5px] w-[5px] rounded-full bg-[#76AA62]" />
@@ -442,17 +377,7 @@ const JourneyCard = ({ item, index, mobile = false }) => {
       </div>
 
       {/* Hover accent */}
-      <div
-        className="
-          absolute bottom-0 left-0
-          h-[3px] w-full
-          origin-left scale-x-0
-          bg-gradient-to-r
-          from-[#72A95E] to-transparent
-          transition-transform duration-500
-          group-hover:scale-x-100
-        "
-      />
+      <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#72B866] transition-all duration-500 group-hover:w-full" />
     </motion.article>
   );
 };

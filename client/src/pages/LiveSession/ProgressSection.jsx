@@ -4,14 +4,10 @@ import { BarChart3, CalendarDays } from "lucide-react";
 export default function ProgressSection() {
   return (
     <section className="bg-white">
-      <div className="mx-auto flex min-h-[460px] max-w-full items-center justify-center bg-gradient-to-r from-white via-[#F1FAEE] to-[#C7E9C2] px-10 py-16 bg-red-200">
-        <div className="grid w-full max-w-[1080px] grid-cols-1 items-center gap-18 lg:grid-cols-2">
+      <div className="mx-auto flex min-h-[460px] max-w-full items-center justify-center bg-[#F8FAF5] px-10 py-16">
+        <div className="grid w-full max-w-[1080px] grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left Content */}
           <div>
-            <p className="text-greenbase font-dm text-[14px] md:text-[20px] tracking-widest mb-2 uppercase">
-              Measure Your Progress
-            </p>
-
             <h2 className="font-season-medium text-primary heading-main text-left">
               Track your Journey
             </h2>

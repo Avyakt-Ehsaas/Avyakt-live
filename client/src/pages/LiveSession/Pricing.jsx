@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Check, X, Sparkles } from "lucide-react";
+import { Check, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -36,7 +36,7 @@ const pricingPlans = [
     duration: "3 Months",
     durationLabel: "Quarterly",
     highlighted: true,
-    badge: "Most Popular",
+    badge: null,
     features: [
       "Everything included in Monthly",
       "Advanced meditation library",
@@ -169,16 +169,6 @@ const Pricing = () => {
         <div className="relative z-10 mx-auto max-w-[1240px] px-5 md:px-8">
           {/* Heading */}
           <div className="mx-auto max-w-[760px] text-center">
-            <div className="mb-5 inline-flex items-center gap-3">
-              <span className="h-px w-8 bg-[#83B870]" />
-
-              <p className="font-dm text-[12px] uppercase tracking-[0.28em] text-[#6FA55E] md:text-[13px]">
-                Choose Your Journey
-              </p>
-
-              <span className="h-px w-8 bg-[#83B870]" />
-            </div>
-
             <h2 className="font-season-medium text-primary heading-main">
               A plan for every stage
               <span className="block text-[#71AC61]">
