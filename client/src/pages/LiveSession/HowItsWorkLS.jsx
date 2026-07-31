@@ -1,10 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
-  ArrowUpRight,
   CalendarDays,
   Check,
-  Sparkles,
 } from "lucide-react";
 
 import TheScienceBottom from "../../assets/images/TheScienceBottom.png";
@@ -128,7 +126,7 @@ export default function HowItWorkLS() {
   return (
     <section
       id="how-it-works"
-      className="relative overflow-hidden bg-[#FAFCF8] py-20 md:py-28"
+      className="relative overflow-hidden bg-[#FAFCF8] py-12 md:py-18"
     >
       {/* Background decoration */}
       <div className="pointer-events-none absolute inset-0">
@@ -146,46 +144,32 @@ export default function HowItWorkLS() {
       </div>
 
       <div className="relative mx-auto max-w-[1180px] px-5 md:px-8">
-        {/* Header */}
-        <motion.header
-          initial={{
-            opacity: 0,
-            y: 30,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          viewport={{
-            once: true,
-            amount: 0.4,
-          }}
-          transition={{
-            duration: 0.75,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="mx-auto max-w-[760px] text-center"
-        >
-          <div className="mb-5 inline-flex items-center gap-3">
-            <span className="h-px w-8 bg-[#72AC61]" />
+        {/* Header — two-column: heading left, description right */}
+        <div className="grid items-end gap-10 lg:grid-cols-2">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <h2 className="heading-main font-season-medium leading-[1.05] text-primary text-left">
+              Here is exactly
+              <span className="block text-greenbase">what happens next.</span>
+            </h2>
+          </motion.div>
 
-            <p className="font-dm text-[11px] font-medium uppercase tracking-[0.26em] text-[#669F56] md:text-[13px]">
-              How It Works
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.75, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="font-dm text-[15px] leading-7 text-gray md:text-[17px] text-center">
+              Begin with one live session, build a consistent daily practice and
+              track the changes you experience along the way.
             </p>
-
-            <span className="h-px w-8 bg-[#72AC61]" />
-          </div>
-
-          <h2 className="heading-main font-season-medium leading-[1.05] text-primary">
-            Here is exactly
-            <span className="block text-greenbase">what happens next.</span>
-          </h2>
-
-          <p className="mx-auto mt-4 max-w-[620px] font-dm text-[15px] leading-7 text-gray md:text-[17px]">
-            Begin with one live session, build a consistent daily practice and
-            track the changes you experience along the way.
-          </p>
-        </motion.header>
+          </motion.div>
+        </div>
 
         {/* Main card */}
         <motion.div
@@ -222,30 +206,7 @@ export default function HowItWorkLS() {
             <div className="pointer-events-none absolute -bottom-20 -right-20 h-72 w-72 rounded-full bg-[#BFDDB6]/55 blur-[80px]" />
 
             <div className="relative z-10 flex h-full flex-col">
-              <div className="flex items-center justify-between gap-4">
-                <span
-                  className="
-                    inline-flex items-center gap-2 rounded-full
-                    border border-[#75AC64]/20 bg-white/70
-                    px-4 py-2 backdrop-blur-md
-                  "
-                >
-                 
-                  <span className="font-dm text-[10px] font-semibold uppercase tracking-[0.18em] text-[#5F9650]">
-                    For Individuals
-                  </span>
-                </span>
-
-                <span className="font-dm text-[11px] uppercase tracking-[0.15em] text-[#4E7552]/65">
-                  Four steps
-                </span>
-              </div>
-
-              <div className="mt-9 max-w-[380px]">
-                <p className="font-dm text-[11px] uppercase tracking-[0.2em] text-[#6C9B61]">
-                  Your starting journey
-                </p>
-
+              <div className="max-w-[380px]">
                 <h3 className="mt-3 font-season-medium text-[32px] leading-[1.08] text-[#1D3827] md:text-[42px]">
                   Your first
                   <span className="block text-[#69A357]">
@@ -312,25 +273,13 @@ export default function HowItWorkLS() {
 
           {/* Right timeline */}
           <div className="relative p-7 md:p-10">
-            <div className="mb-4 flex items-end justify-between gap-4">
-              <div>
-                <p className="font-dm text-[12px] uppercase tracking-[0.2em] text-[#75A66A]">
-                  The process
-                </p>
-
-                <h3 className="mt-2 font-season heading-large font-med text-left text-primary">
-                  From your first session
-                  <span className="block text-greenbase">
-                    to lasting practice.
-                  </span>
-                </h3>
-              </div>
-
-              <ArrowUpRight
-                size={22}
-                strokeWidth={1.5}
-                className="hidden text-[#75A66A] sm:block"
-              />
+            <div className="mb-4">
+              <h3 className="mt-2 font-season heading-large font-med text-left text-primary">
+                From your first session
+                <span className="block text-greenbase">
+                  to lasting practice.
+                </span>
+              </h3>
             </div>
 
             <motion.ul

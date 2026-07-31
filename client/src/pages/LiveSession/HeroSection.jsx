@@ -125,49 +125,6 @@ const HeroSection = () => {
             md:py-20
           "
         >
-          {/* Small Label */}
-          <div
-            className="
-            mt-6 
-            mb-3
-              inline-flex items-center
-              gap-3
-              rounded-full
-              border border-white/70
-              bg-[#fffaf0]/85
-              px-3 py-2
-              shadow-[0_8px_30px_rgba(33,67,45,0.08)]
-              backdrop-blur-md
-            "
-          >
-            <span
-              className="
-                flex h-8 w-8
-                items-center justify-center
-                rounded-full
-                bg-red-100
-                text-white
-              "
-            >
-              <Radio className="text-red-400" />
-            </span>
-
-            <span
-              className="
-                font-dm
-                text-[10px] font-semibold
-                uppercase
-                tracking-[0.17em]
-                text-[#466f45]
-                sm:text-xs
-              "
-            >
-              Scientifically Optimized
-              <span className="mx-2">•</span>
-              Live Daily Meditation
-            </span>
-          </div>
-
           {/* Heading */}
           <h1
             className="
@@ -301,10 +258,9 @@ const HeroSection = () => {
                           shrink-0
                           items-center justify-center
                           rounded-full
-                          bg-[#fbf5dc]/90
-                          text-primary
+                          bg-[#4f8f45]
+                          text-white
                           shadow-sm
-                          backdrop-blur
                         "
                       >
                         <Icon size={18} strokeWidth={1.8} />
