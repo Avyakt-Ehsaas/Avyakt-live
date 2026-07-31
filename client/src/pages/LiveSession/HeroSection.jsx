@@ -1,129 +1,304 @@
 import React from "react";
-import liveSessionHero from "../../assets/images/liveSessionHero.png";
-import toat, { toast } from "react-hot-toast";
+import {
+  ArrowRight,
+  Radio,
+  Clock3,
+  ShieldCheck,
+  UserRound,
+} from "lucide-react";
+
+import liveSessionHero from "../../assets/images/LiveSessionheroimage.png";
+import { toast } from "react-hot-toast";
 
 const HeroSection = () => {
   const handleClick = () => {
     try {
-    const element = document.getElementById("pricing-section");
-    if (element) {
-    element.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }
-    }catch (error) {
+      const element = document.getElementById("pricing-section");
+
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    } catch (error) {
       toast.error("Something went wrong. Please try again later.");
     }
   };
 
   const handleHowItsWork = () => {
-    try{
+    try {
       const element = document.getElementById("working-steps");
-      if(element){
+
+      if (element) {
         element.scrollIntoView({
           behavior: "smooth",
-          block: "start"
-        })
+          block: "start",
+        });
       }
-    }catch(error){
-      toast.error("unknown error occured!")
+    } catch (error) {
+      toast.error("Something went wrong. Please try again later.");
     }
-  }
+  };
+
+  const trustItems = [
+    {
+      icon: Radio,
+      text: "Live Every Day",
+    },
+    {
+      icon: Clock3,
+      text: "15 Minutes",
+    },
+    {
+      icon: ShieldCheck,
+      text: "Science-Backed",
+    },
+    {
+      icon: UserRound,
+      text: "Beginner Friendly",
+    },
+  ];
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#C2E0BA33]">
+    <section className="relative min-h-screen w-full overflow-hidden bg-[#f8faf4]">
       {/* Background Image */}
       <img
         src={liveSessionHero}
-        alt="Meditation"
+        alt="Peaceful misty mountain landscape"
         className="
-          absolute top-0 right-0 z-0
-          h-[55%] w-full object-cover object-center
-          md:h-full md:w-[57%]
+          absolute inset-0
+          h-full w-full
+          object-cover
+          object-[62%_center]
+          sm:object-center
         "
       />
 
       {/* Desktop Overlay */}
-      <div className="hidden md:block absolute inset-0 z-[1] bg-[linear-gradient(90deg,#F7FCF5_0%,#F7FCF5_42%,rgba(247,252,245,0)_100%)]" />
+      <div
+        className="
+          absolute inset-0
+          hidden md:block
+          bg-[linear-gradient(90deg,rgba(250,250,246,0.98)_0%,rgba(250,250,246,0.96)_27%,rgba(250,250,246,0.82)_45%,rgba(250,250,246,0.18)_68%,rgba(250,250,246,0)_100%)]
+        "
+      />
+
+     
+
 
       {/* Mobile Overlay */}
-<div className="absolute inset-0 z-[1] md:hidden bg-[linear-gradient(to_top,#F7FCF5_0%,rgba(247,252,245,1)_48%,rgba(247,252,245,0.9)_54%,rgba(247,252,245,0.4)_62%,transparent_78%)]" />
+      <div
+        className="
+          absolute inset-0
+          md:hidden
+          bg-[linear-gradient(180deg,rgba(248,250,244,0.15)_0%,rgba(248,250,244,0.35)_26%,rgba(248,250,244,0.92)_54%,rgba(248,250,244,1)_100%)]
+        "
+      />
 
-      {/* Content */}
-      <div className="relative z-10 min-h-screen flex items-end md:items-center">
-        <div className="w-full max-w-[1280px] mx-auto px-5 sm:px-6 md:px-12 lg:px-20">
-          <div
+      {/* Soft Glow */}
+      <div
+        className="
+          pointer-events-none
+          absolute left-[-180px] top-[-120px]
+          h-[480px] w-[480px]
+          rounded-full
+          bg-white/40
+          blur-[90px]
+        "
+      />
+
+      <div
+        className="
+          relative z-10
+          mx-auto flex min-h-screen
+          w-full max-w-[1440px]
+          items-end md:items-center
+          px-5 sm:px-8 md:px-12 lg:px-20 xl:px-24
+        "
+      >
+        <div
+          className="
+            w-full max-w-[760px]
+            pb-10 pt-[340px]
+            sm:pt-[420px]
+            md:py-20
+          "
+        >
+          {/* Heading */}
+          <h1
             className="
-              max-w-[580px]
-              pb-10 pt-[340px]
-              sm:pt-[420px]
-              md:py-0
+              max-w-[900px]
+              font-season-medium
+              font-medium
+              leading-[0.92]
+              tracking-[-0.025em]
+              heading-main text-left
             "
           >
-            {/* Heading */}
-            <h1
+            Invest 15 minutes.
+            <br />
+            Transform the
+            other 1,425.
+          </h1>
+
+          {/* Description */}
+          <p
+            className="
+              mt-3 max-w-[680px]
+              font-dm
+              leading-4
+              text-[#3f4844]
+              paragraph-body text-left"
+          >
+            Every day, join a live guided meditation scientifically designed
+            to help you feel calmer, think clearer and build lasting mental
+            wellbeing.
+          </p>
+
+          {/* Buttons */}
+          <div
+            className="
+              mt-6
+              flex flex-col
+              gap-4
+              sm:flex-row
+            "
+          >
+            <button
+              type="button"
+              onClick={handleClick}
               className="
-                text-left
-                font-semibold
-                heading-main
-                text-primary
-                font-season-medium
-                px-4
+                group
+                flex w-full
+                items-center justify-center
+                gap-3
+                rounded-full
+                bg-[#5f9557]
+                px-4 py-4
+                font-dm
+                text-[15px] font-semibold
+                text-white
+                shadow-[0_14px_35px_rgba(76,125,66,0.26)]
+                transition-all duration-300
+                hover:-translate-y-0.5
+                hover:bg-[#4c7f45]
+                hover:shadow-[0_18px_40px_rgba(76,125,66,0.32)]
+                sm:w-auto
+                sm:min-w-[320px]
               "
             >
-              In stillness, rediscover your true strengths
-            </h1>
+              Start Your Free 24-Day Journey
 
-            {/* Paragraph */}
-            <p
+              <ArrowRight
+                size={19}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </button>
+
+            <button
+              type="button"
+              onClick={handleHowItsWork}
               className="
-                max-w-5xl px-2 mt-2 text-gray font-dm paragraph-body text-left
+                group
+                flex w-full
+                items-center justify-center
+                gap-3
+                rounded-full
+                border border-[#416b43]
+                bg-white/35
+                px-4 py-4
+                font-dm
+                text-[15px] font-semibold
+                text-[#315d38]
+                backdrop-blur-sm
+                transition-all duration-300
+                hover:-translate-y-0.5
+                hover:bg-white/65
+                sm:w-auto
+                sm:min-w-[230px]
               "
             >
-              A live, daily practice grounded in neuroscience - providing a
-              digital sanctuary for your mind, every single night.
-            </p>
+              How it Works
 
-            {/* Buttons */}
+              <ArrowRight
+                size={19}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </button>
+          </div>
+
+          {/* Trust Strip */}
+          <div
+            className="
+              mt-6
+              border-t border-[#426248]/20
+              pt-7
+            "
+          >
             <div
               className="
-                mt-8
-                flex flex-col sm:flex-row
-                gap-4
-                w-full
+                grid grid-cols-2
+                gap-x-4 gap-y-3
+                sm:flex
+                sm:flex-wrap
+                sm:items-center
+                sm:gap-y-4
               "
             >
-              <button
-              onClick={() => handleClick()}
-                className="
-                  bg-[#71AC61]
-                  w-full sm:w-[250px]
-                  text-white
-                  font-medium
-                  font-dm
-                  px-6 py-4
-                  rounded-full
-                  hover:bg-[#4F7944]
-                  transition-all duration-300
-                  cursor-pointerbg-[#71AC61] w-full sm:w-[250px] text-white font-medium font-dm px-4 py-4 rounded-full hover:bg-[#4F7944] transition-all duration-300 cursor-pointer
-                "
-              >
-                Start free 24-days
-              </button>
+              {trustItems.map((item, index) => {
+                const Icon = item.icon;
 
-              <button
-              onClick={() => handleHowItsWork()}
-                className="
-                  bg-transparent border w-full sm:w-[250px] text-[#71AC61] font-medium font-dm px-4 py-4 cursor-pointer rounded-full hover:bg-[#4F7944] transition-all duration-300 hover:text-white/80
-                "
-              >
-                How it works
-              </button>
+                return (
+                  <React.Fragment key={item.text}>
+                    <div className="flex items-center gap-3">
+                      <span
+                        className="
+                          flex h-10 w-10
+                          shrink-0
+                          items-center justify-center
+                          rounded-full
+                          bg-[#4f8f45]
+                          text-white
+                          shadow-sm
+                        "
+                      >
+                        <Icon size={18} strokeWidth={1.8} />
+                      </span>
+
+                      <span
+                        className="
+                          whitespace-nowrap
+                          font-dm
+                          text-[14px] font-medium
+                          text-primary
+                          sm:text-sm
+                        "
+                      >
+                        {item.text}
+                      </span>
+                    </div>
+
+                    {index !== trustItems.length - 1 && (
+                      <div
+                        className="
+                          hidden h-9 w-px
+                          bg-[#3f5f47]/20
+                          sm:block
+                        "
+                      />
+                    )}
+                  </React.Fragment>
+                );
+              })}
             </div>
           </div>
         </div>
       </div>
+       <div
+        className="absolute bottom-0 left-0 right-0 h-80 pointer-events-none
+  bg-[linear-gradient(to_bottom,rgba(250,250,246,0)_0%,rgba(250,250,246,0.25)_35%,rgba(250,250,246,0.75)_70%,rgba(250,250,246,1)_100%)]"
+      />
     </section>
   );
 };
