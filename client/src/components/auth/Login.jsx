@@ -3,11 +3,13 @@ import { motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
+import ForgotPasswordModal from "./ForgotPasswordModal";
 
 const API_BASE_URL = import.meta.env.VITE_BASE_API_URL;
 
 export default function Login() {
   const navigate = useNavigate();
+  const [showForgotModal, setShowForgotModal] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -59,26 +61,17 @@ export default function Login() {
       );
 
       const responseData = response.data;
+      console.log(responseData)
+      const accessToken = responseData?.data?.accessToken
 
-      const accessToken =
-        responseData?.accessToken ||
-        responseData?.token ||
-        responseData?.data?.accessToken ||
-        responseData?.data?.token;
-
-      const user =
-        responseData?.user ||
-        responseData?.data?.user ||
-        responseData?.data;
+      const user = responseData?.data?.user
 
       if (accessToken) {
-        localStorage.setItem("token", accessToken);
+        localStorage.setItem("accessToken", accessToken);
       }
 
       if (user?.email) {
         localStorage.setItem("email", user.email);
-      } else {
-        localStorage.setItem("email", email);
       }
 
       if (user?.id) {
@@ -123,7 +116,7 @@ export default function Login() {
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-[#F8F7F2]">
       {/* Soft background glow */}
-    
+
       <div className="relative mx-auto grid min-h-screen w-full max-w-6xl items-center px-4 py-8 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:px-10">
         {/* Left section */}
         <motion.section
@@ -201,12 +194,13 @@ export default function Login() {
               />
 
               <div className="flex justify-end">
-                <Link
-                  to="/auth/forgot-password"
+                <button
+                  type="button"
+                  onClick={() => setShowForgotModal(true)}
                   className="font-dm text-xs font-medium text-gray transition hover:text-greenbase"
                 >
                   Forgot password?
-                </Link>
+                </button>
               </div>
 
               <button
@@ -260,6 +254,12 @@ export default function Login() {
           </p>
         </motion.section>
       </div>
+
+       <ForgotPasswordModal
+        open={showForgotModal}
+        onClose={() => setShowForgotModal(false)}
+      />
+
     </main>
   );
 }

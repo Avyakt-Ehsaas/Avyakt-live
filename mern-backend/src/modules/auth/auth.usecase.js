@@ -58,6 +58,7 @@ const register = async ({ email, username, password }) => {
   if (existingEmail) throw ApiError.conflict('Email is already registered', AUTH_ERRORS.EMAIL_TAKEN);
 
   const passwordHash = await hashPassword(password);
+
   const user = await da.createUser({
     id: uuidv4(),
     email,
@@ -103,6 +104,16 @@ const login = async ({ email, password }, meta) => {
     throw ApiError.forbidden(
       `Account is temporarily locked. Try again after ${new Date(user.locked_until).toISOString()}`,
       AUTH_ERRORS.ACCOUNT_LOCKED
+    );
+  }
+
+  if(!user.password_hash){
+    logger.warn('Password login attempted for OAuth-only account',{
+      module: 'auth',
+      userId: user._id
+    })
+    throw ApiError.unauthorized('Please login using Google',
+      AUTH_ERRORS.INVALID_CREDENTIALS
     );
   }
 

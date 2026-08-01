@@ -28,7 +28,17 @@ const envSchema = Joi.object({
   SMTP_PORT: Joi.number().default(587),
   SMTP_USER: Joi.string().optional().allow(''),
   SMTP_PASS: Joi.string().optional().allow(''),
-  EMAIL_FROM: Joi.string().email().default('noreply@yourdomain.com'),
+  EMAIL_FROM: Joi.string().email().required(),
+
+  BREVO_API_KEY: Joi.string().required(),
+
+  BREVO_EMAIL_FROM: Joi.string()
+  .email()
+  .required(),
+
+  EMAIL_FROM_NAME: Joi.string()
+  .default('Avyakt Ehsaas'),
+
 }).unknown(true);
 
 const { error, value: env } = envSchema.validate(process.env);
@@ -86,6 +96,10 @@ const config = {
     user: env.SMTP_USER,
     pass: env.SMTP_PASS,
     from: env.EMAIL_FROM,
+
+    brevoApiKey: env.BREVO_API_KEY,
+    brevoFrom: env.BREVO_EMAIL_FROM,
+    fromName: env.EMAIL_FROM_NAME,
   },
 };
 
