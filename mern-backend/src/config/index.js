@@ -21,7 +21,8 @@ const envSchema = Joi.object({
   GOOGLE_CLIENT_SECRET: Joi.string().optional().allow(''),
   GITHUB_CLIENT_ID: Joi.string().optional().allow(''),
   GITHUB_CLIENT_SECRET: Joi.string().optional().allow(''),
-  OAUTH_CALLBACK_BASE_URL: Joi.string().uri().default('http://localhost:3000'),
+  OAUTH_CALLBACK_BASE_URL: Joi.string().uri().default('http://localhost:4000'),
+  FRONTEND_URL: Joi.string().uri().default('http://localhost:5173'),
 
   SMTP_HOST: Joi.string().optional().allow(''),
   SMTP_PORT: Joi.number().default(587),
@@ -64,6 +65,8 @@ const config = {
   cookie: {
     secret: env.COOKIE_SECRET,
   },
+  
+  frontendUrl: env.FRONTEND_URL,
 
   oauth: {
     google: {

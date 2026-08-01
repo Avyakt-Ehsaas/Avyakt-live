@@ -100,7 +100,8 @@ const oauthCallback = (req, res, next) => {
       const { accessToken, refreshToken } = await authUsecase.issueTokenPair(user.id, uuidv4(), getMeta(req));
       res.cookie(REFRESH_COOKIE, refreshToken, cookieOptions);
       // Redirect frontend with access token in fragment (never in query string)
-      res.redirect(`/auth/callback#token=${accessToken}`);
+      res.redirect(
+  `${config.frontendUrl}/auth/callback#token=${encodeURIComponent(accessToken)}`);
     } catch (callbackErr) {
       next(callbackErr);
     }
