@@ -66,6 +66,7 @@ import ScrollToTop from "./services/ScrollToTop";
 import LiveSession from "./pages/LiveSession/LiveSession";
 import PaymentPage from "./pages/PaymentPage/PaymentPage";
 import OAuthCallback from "./services/OAuthCallback";
+import ResetPassword from "./components/auth/ResetPassword";
 
 
 
@@ -104,6 +105,7 @@ function App() {
             ============================================ */}
 
           <Route path="/auth/callback" element={<OAuthCallback />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
 
             {/* Landing Page - Anyone can access */}
             <Route path="/" element={<LandingPage />} />

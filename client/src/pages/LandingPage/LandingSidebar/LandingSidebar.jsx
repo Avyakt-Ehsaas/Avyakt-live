@@ -72,16 +72,36 @@ useEffect(() => {
     }
   });
 
-  const handleLogout = async () => {
+ const handleLogout = async () => {
+  const accessToken = localStorage.getItem("accessToken");
   try {
-    localStorage.removeItem("token");
+    await api.post(
+      "/auth/logout",
+      {},
+      {
+        withCredentials: true,
+        headers: accessToken
+          ? {
+              Authorization: `Bearer ${accessToken}`,
+            }
+          : {},
+      }
+    );
+  } catch (error) {
+    console.error(
+      "Logout API failed:",
+      error?.response?.data || error.message
+    );
+  } finally {
+    localStorage.removeItem("accessToken");
     localStorage.removeItem("email");
+    localStorage.removeItem("hasCompletedOnboarding");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("username");
     setPayload({});
     setProfileOpen(false);
-    toast.success("User logged out");
-    navigate("/");
-  } catch (error) {
-    toast.error("Logout failed");
+    toast.success("Logged out successfully");
+    navigate("/", { replace: true });
   }
 };
 
