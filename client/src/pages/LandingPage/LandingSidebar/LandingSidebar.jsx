@@ -15,7 +15,7 @@ const profileRef = useRef(null);
   const [payload, setPayload] = useState({});
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
 
     if (token) {
       try {
@@ -183,7 +183,7 @@ useEffect(() => {
           <div className="px-5 py-2 border-b border-gray-100">
             <p className="mt-1 font-dm paragraph-secondary text-gray-500 text-left">Logged in as</p>
             <h3 className="font-dm paragraph-body font-med text-primary break-all text-left">
-              {payload?.sub}
+              {payload?.email}
             </h3>
           </div>
 
@@ -246,9 +246,9 @@ useEffect(() => {
                 );
               })}
 
-              {payload?.sub ? (<>
+              {payload?.email ? (<>
                 <div className="mt-4 mb-2 px-3 py-2 rounded-lg bg-slate-100/30 text-primary">
-                <h3 className='text-left font-dm paragraph-body px-4 text-primary'>{payload?.sub}</h3>
+                <h3 className='text-left font-dm paragraph-body px-4 text-primary'>{payload?.email}</h3>
                 </div>
               <button
               onClick={handleLogout}
