@@ -21,13 +21,18 @@ const envSchema = Joi.object({
   GOOGLE_CLIENT_SECRET: Joi.string().optional().allow(''),
   GITHUB_CLIENT_ID: Joi.string().optional().allow(''),
   GITHUB_CLIENT_SECRET: Joi.string().optional().allow(''),
-  OAUTH_CALLBACK_BASE_URL: Joi.string().uri().default('http://localhost:3000'),
+  OAUTH_CALLBACK_BASE_URL: Joi.string().uri().default('http://localhost:4000'),
+  FRONTEND_URL: Joi.string().uri().default('http://localhost:5173'),
 
-  SMTP_HOST: Joi.string().optional().allow(''),
-  SMTP_PORT: Joi.number().default(587),
-  SMTP_USER: Joi.string().optional().allow(''),
-  SMTP_PASS: Joi.string().optional().allow(''),
-  EMAIL_FROM: Joi.string().email().default('noreply@yourdomain.com'),
+  BREVO_API_KEY: Joi.string().required(),
+
+  BREVO_EMAIL_FROM: Joi.string()
+  .email()
+  .required(),
+
+  EMAIL_FROM_NAME: Joi.string()
+  .default('Avyakt Ehsaas'),
+
 }).unknown(true);
 
 const { error, value: env } = envSchema.validate(process.env);
@@ -64,6 +69,8 @@ const config = {
   cookie: {
     secret: env.COOKIE_SECRET,
   },
+  
+  frontendUrl: env.FRONTEND_URL,
 
   oauth: {
     google: {
@@ -78,11 +85,9 @@ const config = {
   },
 
   email: {
-    host: env.SMTP_HOST,
-    port: env.SMTP_PORT,
-    user: env.SMTP_USER,
-    pass: env.SMTP_PASS,
-    from: env.EMAIL_FROM,
+    brevoApiKey: env.BREVO_API_KEY,
+    brevoFrom: env.BREVO_EMAIL_FROM,
+    fromName: env.EMAIL_FROM_NAME,
   },
 };
 

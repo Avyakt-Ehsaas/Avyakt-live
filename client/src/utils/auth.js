@@ -2,17 +2,17 @@
 
 // Get token from localStorage
 export const getToken = () => {
-  return localStorage.getItem('token');
+  return localStorage.getItem('accessToken');
 };
 
 // Set token in localStorage
 export const setToken = (token) => {
   if (token) {
-    localStorage.setItem('token', token);
+    localStorage.setItem('accessToken', token);
   }
 };
 
 // Remove token from localStorage
 export const removeToken = () => {
-  localStorage.removeItem('token');
+  localStorage.removeItem('accessToken');
 };

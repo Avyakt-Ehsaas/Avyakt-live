@@ -1,18 +1,19 @@
 import React from 'react'
-import HeroSection from './HeroSection'
+import HeroSection from './HeroSection.jsx'
 import LandingSidebar from '../LandingPage/LandingSidebar/LandingSidebar'
-import StatsBar from './StatsBar'
 import ScienceSection from './ScienceCards'
+import WhyFifteenMinutes from './WhyFifteenMinutes.jsx'
 import ProgressSection from './ProgressSection'
-import PracticeSection from './PracticeSection'
 import LegendarySection from './LegendarySection'
+import MarqueeStrip from './MarqueeStrip.jsx'
 
 import TestimonialCarousel from '../LandingPage/Testimonials/TestimonialCarousel'
 import Footer from './Footer'
-import VisionSection from './VisionSection'
 import YearlyJourney from './YearlyJourney'
-import BenefitsStageLife from './BenifitsStageLife'
 import Pricing from './Pricing'
+import PersonYouBecomeSection from './PersonYouBecomeSection.jsx'
+import HowItWorkLS from './HowItsWorkLS.jsx'
+import QRLeadModal from '../../components/ui/Modal/QRLeadModal.jsx'
 
 const LiveSession = () => {
   return (
@@ -22,17 +23,18 @@ const LiveSession = () => {
         <LandingSidebar className="z-40" />
       </div>
         <HeroSection />
-        <StatsBar />
+        <MarqueeStrip />
         <ScienceSection />
-        <BenefitsStageLife />
+        <WhyFifteenMinutes />
+        <PersonYouBecomeSection />
+        <HowItWorkLS />
         <ProgressSection />
-        <PracticeSection />
         <LegendarySection />
-        <VisionSection />
         <YearlyJourney />
         <TestimonialCarousel />
         <Pricing />
         <Footer />
+        <QRLeadModal />
     </section>
     </>
   )

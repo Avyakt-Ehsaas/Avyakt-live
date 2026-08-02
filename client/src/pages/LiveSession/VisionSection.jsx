@@ -222,7 +222,7 @@ const VisionSection = () => {
               <p className="mt-1 font-dm text-base font-semibold leading-relaxed text-[#5d7c55] sm:text-lg">
                 it transformed the way I live, think, and serve.
               </p>
-            </div>
+            </div>  
 
             {/* Divider */}
             <div className="my-2 flex items-center gap-4">

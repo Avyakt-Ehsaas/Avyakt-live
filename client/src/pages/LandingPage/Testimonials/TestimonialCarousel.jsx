@@ -135,7 +135,7 @@ function TestimonialCarousel() {
           <h1 className="heading-main mb-3">
             What our community says
           </h1>
-          <p className="font-dm text-center paragraph-body leading-[24px]">
+          <p className="font-dm text-center paragraph-body leading-[24px] text-greenbase">
            From students to working professionals, thousands are using small daily  practices to improve focus and emotional wellbeing.
           </p>
         </div>
