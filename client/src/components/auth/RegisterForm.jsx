@@ -224,6 +224,38 @@ export default function Register() {
     }
 
     try {
+      const response = await axios.post(
+        `${API_BASE_URL}/auth/register`,
+        {
+          username,
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      toast.success(
+        response?.message || "Your account has been created",
+        {
+          id: loadingToast,
+        }
+      );
+      navigate("/auth/onboarding", {
+        replace: true,
+        state: {
+          userId: response?.data?.data?.user?.id,
+          email: response?.data?.data?.user?.email,
+        },
+      });
+    } catch (error) {
+        const errorMessage =
+        error.response?.data?.error?.message ||
+        error.response?.data?.message ||
+        (typeof error.response?.data === "string"
+          ? error.response.data
+          : null) ||
+        "Unable to create your account";
 
       const response = await axios.post(
         `${API_BASE_URL}/user/register`,
