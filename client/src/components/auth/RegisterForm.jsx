@@ -63,7 +63,6 @@ export default function Register() {
       toast.error("Passwords do not match");
       return;
     }
-
     setIsSubmitting(true);
 
     const loadingToast = toast.loading("Creating your account...");
@@ -86,12 +85,13 @@ export default function Register() {
           id: loadingToast,
         }
       );
-      navigate("/auth/check-email", {
-      replace: true,
-      state: {
-        email: response?.data?.user?.email,
-      },
-    });
+      navigate("/auth/onboarding", {
+        replace: true,
+        state: {
+          userId: response?.data?.data?.user?.id,
+          email: response?.data?.data?.user?.email,
+        },
+      });
     } catch (error) {
         const errorMessage =
         error.response?.data?.error?.message ||

@@ -69,6 +69,7 @@ import OAuthCallback from "./services/OAuthCallback";
 import ResetPassword from "./components/auth/ResetPassword";
 import CheckEmailPage from "./components/auth/CheckEmailPage";
 import RedirectPage from "./components/ui/RedirectPage";
+import OnboardingPage from "./pages/Onboarding/OnboardingPage";
 
 
 
@@ -109,8 +110,8 @@ function App() {
           <Route path="/auth/callback" element={<OAuthCallback />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/auth/check-email" element={<CheckEmailPage />}/>
-         <Route  path="/auth/message"  element={<RedirectPage />}
-/>
+          <Route path="/auth/message" element={<RedirectPage />} />
+          <Route path="/auth/onboarding" element={<OnboardingPage />} />
 
             {/* Landing Page - Anyone can access */}
             <Route path="/" element={<LandingPage />} />
