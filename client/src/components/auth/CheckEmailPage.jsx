@@ -26,7 +26,7 @@ const CheckEmailPage = () => {
       primaryButtonText="Open Gmail"
       onPrimaryClick={handleOpenGmail}
       secondaryButtonText="Back to login"
-      onSecondaryClick={() => navigate("/login", { replace: true })}
+      onSecondaryClick={() => navigate("/auth/login", { replace: true })}
     />
   );
 };
