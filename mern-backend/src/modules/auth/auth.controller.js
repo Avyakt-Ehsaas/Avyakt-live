@@ -70,8 +70,21 @@ const resetPassword = asyncWrapper(async (req, res) => {
 
 // GET /verify-email/:token
 const verifyEmail = asyncWrapper(async (req, res) => {
-  await authUsecase.verifyEmail(req.params.token);
-  sendSuccess(res, 200, 'Email verified successfully. You can now log in.');
+  try {
+    await authUsecase.verifyEmail(req.params.token);
+     return res.redirect(
+      `${config.frontendUrl}/auth/message?type=verified`
+    );
+  } catch (error) {
+    if (error.code === 'TOKEN_EXPIRED') {
+      return res.redirect(
+        `${config.frontendUrl}/auth/message?type=expired`
+      );
+    }
+    return res.redirect(
+      `${config.frontendUrl}/auth/message?type=invalid`
+    );
+  }
 });
 
 // GET /me  (protected)

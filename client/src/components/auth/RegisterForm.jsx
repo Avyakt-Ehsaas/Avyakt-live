@@ -80,31 +80,20 @@ export default function Register() {
           withCredentials: true,
         }
       );
-
-      const responseData = response.data;
-
-      const accessToken =
-        responseData?.accessToken ||
-        responseData?.token ||
-        responseData?.data?.accessToken ||
-        responseData?.data?.token;
-
-      if (accessToken) {
-        localStorage.setItem("token", accessToken);
-      }
-
-      localStorage.setItem("hasCompletedOnboarding", "false");
-
       toast.success(
-        responseData?.message || "Your account has been created",
+        response?.message || "Your account has been created",
         {
           id: loadingToast,
         }
       );
-
-      navigate("/onboarding");
+      navigate("/auth/check-email", {
+      replace: true,
+      state: {
+        email: response?.data?.user?.email,
+      },
+    });
     } catch (error) {
-      const errorMessage =
+        const errorMessage =
         error.response?.data?.error?.message ||
         error.response?.data?.message ||
         (typeof error.response?.data === "string"
