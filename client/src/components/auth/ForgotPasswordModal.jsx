@@ -2,8 +2,7 @@ import { useState } from "react";
 import { CheckCircle2, Mail, X } from "lucide-react";
 import axios from "axios";
 
-const API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:4000/api/v1";
+const API_URL = import.meta.env.VITE_BASE_API_URL || "http://localhost:4000/api/v1";
 
 const ForgotPasswordModal = ({ open, onClose }) => {
   const [step, setStep] = useState(1);
@@ -11,7 +10,6 @@ const ForgotPasswordModal = ({ open, onClose }) => {
   const [submittedEmail, setSubmittedEmail] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
   if (!open) return null;
 
   const handleClose = () => {
