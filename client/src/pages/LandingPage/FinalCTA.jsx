@@ -6,10 +6,12 @@ import habitImg from '../../assets/images/habitblog1.png'
 import focusImg from '../../assets/images/focusblog1.png'
 import DarkLogo from '../../assets/Logo.png'
 import avyaktFooter from '../../assets/avyakt.png';
+import { useNavigate } from 'react-router-dom';
 
 import { IoSearch } from "react-icons/io5";
 
 const FinalCTA = () => {
+    const navigate = useNavigate();
     const blogs = [
         {
             tag: "Sleep",
@@ -56,11 +58,11 @@ const FinalCTA = () => {
                     }}
                 />
 
-                <div className='flex flex-col gap-20'>
+                <div className='flex flex-col gap-8 md:gap-20'>
 
                     {/* Blog Section */}
 
-                    <div className="relative z-10 mx-auto w-full max-w-[1100px] px-8 sm:px-6 flex flex-col justify-between h-full py-28">
+                    <div className="relative z-10 mx-auto w-full max-w-[1100px] px-4 sm:px-6 flex flex-col justify-between h-full pt-16 pb-8 md:py-28">
 
                         {/* Heading */}
                         <div>
@@ -113,7 +115,7 @@ const FinalCTA = () => {
                     </div>
 
                     {/* CTA Footer */}
-                    <div className="min-h-screen 2xl:min-h-fit relative text-white text-center flex flex-col items-center justify-center gap-2 md:gap-20 px-0 md:px-0 md:py-0">
+                    <div className="relative text-white text-center flex flex-col items-center justify-center gap-8 md:gap-20 px-0 py-16 md:py-0 md:min-h-screen 2xl:min-h-fit">
 
                         <div>
                             {/* Heading */}
@@ -128,7 +130,7 @@ const FinalCTA = () => {
 
                             {/* Form */}
                             <div className="flex flex-col items-center mb-16 md:mb-24 w-full">
-                                <form className="w-full max-w-2xl px-4 md:px-0 flex flex-col items-center md:flex-row gap-4 ">
+                                <form className="w-full max-w-2xl px-4 md:px-0 flex flex-col items-center gap-4">
 
                                     {/* Inputs */}
                                     <div className="flex flex-col items-center gap-4 w-full">
@@ -161,9 +163,15 @@ const FinalCTA = () => {
 
                                     </div>
                                     {/* Button */}
-                                    <div className='md:w-[35%]'> <button className="bg-[#71AC61] w-60 md:w-full md:w-auto mt-2 font-dm hover:scale-105 transition px-4 sm:px-8 py-3 rounded-full font-medium 2xl:text-xl 2xl:py-4">
+                                    <div className='w-full'>
+                                      <button
+                                        type="button"
+                                        onClick={() => navigate('/auth/register')}
+                                        className="bg-[#E07B39] w-full mt-2 font-dm hover:bg-[#C5622A] hover:scale-105 transition px-4 sm:px-8 py-3 rounded-full font-medium 2xl:text-xl 2xl:py-4"
+                                      >
                                         Sign up
-                                    </button></div>
+                                      </button>
+                                    </div>
                                 </form>
                             </div>
                         </div>

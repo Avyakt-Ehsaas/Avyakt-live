@@ -2,7 +2,7 @@ import ProblemBrain from "../../assets/images/ProblemBrain.png";
 
 const Pill = ({ text }) => {
   return (
-    <div className="bg-[#C2E0BA33] text-greenbase font-dm  px-8 md:px-4 py-3 rounded-full text-center w-[180px] md:w-[420px] hover:scale-102  transition duration-300 card-title  text-center flex justify-center items-center font-med">
+    <div className="bg-[#C2E0BA33] text-greenbase font-dm px-4 py-3 rounded-full text-center w-[160px] sm:w-[180px] md:w-[420px] hover:scale-102 transition duration-300 card-title flex justify-center items-center font-med text-sm sm:text-base">
       {text}
     </div>
   );
@@ -11,8 +11,7 @@ const Pill = ({ text }) => {
 const ProblemSection = () => {
   return (
     
-    <section className="bg-white pt-28 px-4 md:px-10 min-h-screen 2xl:min-h-fit 2xl:py-20 flex items-center justify-center
-    ">
+    <section className="bg-white pt-16 pb-16 md:pt-28 px-4 md:px-10 md:min-h-screen 2xl:min-h-fit 2xl:py-20 flex items-center justify-center">
       <div className="max-w-5xl mx-auto text-center">
         {/* Header */}
         <header >
@@ -32,11 +31,11 @@ const ProblemSection = () => {
         </header>
 
         {/* ================= MOBILE LAYOUT ================= */}
-        <div className="flex flex-col items-center gap-6 lg:hidden mt-8">
+        <div className="flex flex-col items-center gap-4 lg:hidden mt-8">
 
           <Pill text="Reactions happen before thought" />
 
-          <div className="flex gap-3">
+          <div className="flex flex-wrap justify-center gap-3">
             <Pill text="Burnout is not an exception" />
             <Pill text="There is no good place to start" />
           </div>
@@ -44,10 +43,10 @@ const ProblemSection = () => {
           <img
             src={ProblemBrain}
             alt="Brain illustration"
-            className="w-48 md:my-4"
+            className="w-36 sm:w-48 my-2"
           />
 
-          <div className="flex gap-3">
+          <div className="flex flex-wrap justify-center gap-3">
             <Pill text="People start meditating and quit" />
             <Pill text="Sleep is broken" />
           </div>

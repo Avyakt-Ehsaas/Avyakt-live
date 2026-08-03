@@ -51,9 +51,9 @@ const issueTokenPair = async (userId, familyId, { ip, userAgent }) => {
 // ─── Register ─────────────────────────────────────────────────────────────────
 
 /**
- * @param {{ email: string, username: string, password: string }} data
+ * @param {{ firstName: string, lastName: string, email: string, username: string, password: string }} data
  */
-const register = async ({ email, username, password }) => {
+const register = async ({ firstName, lastName, email, username, password }) => {
   const existingEmail = await da.findUserByEmail(email);
   if (existingEmail) throw ApiError.conflict('Email is already registered', AUTH_ERRORS.EMAIL_TAKEN);
 
@@ -61,6 +61,8 @@ const register = async ({ email, username, password }) => {
 
   const user = await da.createUser({
     id: uuidv4(),
+    first_name: firstName,
+    last_name: lastName,
     email,
     username,
     password_hash: passwordHash,

@@ -11,7 +11,7 @@ const HeroSection = () => {
 
   const handleGetStartedClick = () => {
     try {
-      navigate("/live-sessions");
+      navigate("/auth/register");
     } catch (error) {
       toast.error("Something went wrong. Please try again later.");
     }
@@ -19,7 +19,7 @@ const HeroSection = () => {
 
   const handleExploreClick = () => {
     try {
-      navigate("/library"); 
+      navigate("/auth/register");
     } catch (error) {
       toast.error("Something went wrong. Please try again later.");
     }
@@ -51,7 +51,7 @@ const HeroSection = () => {
 
             </div>
 
-            <div className="text-center max-w-4xl mx-auto px-24 mt-4">
+            <div className="text-center max-w-4xl mx-auto px-6 sm:px-12 md:px-24 mt-4">
               <p className="paragraph-body font-dm text-center ">
                 Build a real meditation habit with daily live sessions, science-backed programs, and progress you can actually see, for individuals, schools, organizations, and senior communities.
               </p>
@@ -60,13 +60,13 @@ const HeroSection = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center px-8 mt-6">
               <button onClick={handleGetStartedClick}
-                className="bg-[#71AC61]  w-full sm:w-[250px] text-white font-medium font-dm px-4 py-4 rounded-full hover:bg-[#4F7944] transition-all duration-300 cursor-pointer"
+                className="bg-[#E07B39] w-full sm:w-[250px] text-white font-medium font-dm px-4 py-4 rounded-full hover:bg-[#C5622A] transition-all duration-300 cursor-pointer"
               >
                 Get Started
               </button>
 
               <button onClick={handleExploreClick}
-                className="bg-transparent border w-full sm:w-[250px] text-greenbase-light font-medium font-dm px-4 py-4 cursor-pointer rounded-full hover:bg-[#4F7944] transition-all duration-300"
+                className="bg-transparent border border-[#E07B39] w-full sm:w-[250px] text-white font-medium font-dm px-4 py-4 cursor-pointer rounded-full hover:bg-[#E07B39] transition-all duration-300"
               >
                 Explore Programs
               </button>

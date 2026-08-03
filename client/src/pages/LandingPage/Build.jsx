@@ -34,14 +34,19 @@ const Build = () => {
         <h1 className="px-12 md:px-0 heading-main font-semibold text-primary font-season-med"> From first visit to lasting practice </h1>
 
         {/* Timeline */}
-        <div className="relative mt-16">
+        <div className="relative mt-10 md:mt-16">
 
           {/* Line */}
           <div className="hidden md:block absolute top-5 left-[10%] right-0 w-4xl border-t-2 border-dashed border-[#71AC6166]"></div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6 relative z-10">
             {steps.map((step, i) => (
-              <div key={i} className="text-center px-4">
+              <div key={i} className="text-center px-4 relative">
+
+                {/* Vertical connector on mobile */}
+                {i < steps.length - 1 && (
+                  <div className="md:hidden absolute left-1/2 -translate-x-1/2 top-10 h-8 w-px border-l-2 border-dashed border-[#71AC6166]" />
+                )}
 
                 {/* Circle */}
                 <div className="w-10 h-10 mx-auto flex items-center justify-center rounded-full border border-[#71AC61] text-[#71AC61] font-semibold bg-white">

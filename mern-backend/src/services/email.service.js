@@ -101,7 +101,7 @@ const sendVerificationEmail = async (to, token, username) => {
         <p>Hi ${safeUsername},</p>
 
         <p>
-          Thank you for registering with Avyakt Ehsaas.
+          Thank you for registering live sessions with Avyakt Ehsaas.
           Click the button below to verify your email address.
         </p>
 

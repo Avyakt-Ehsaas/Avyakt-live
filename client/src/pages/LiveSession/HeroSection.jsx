@@ -6,24 +6,15 @@ import {
   ShieldCheck,
   UserRound,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 import liveSessionHero from "../../assets/images/LiveSessionheroimage.png";
-import { toast } from "react-hot-toast";
 
 const HeroSection = () => {
-  const handleClick = () => {
-    try {
-      const element = document.getElementById("pricing-section");
+  const navigate = useNavigate();
 
-      if (element) {
-        element.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    } catch (error) {
-      toast.error("Something went wrong. Please try again later.");
-    }
+  const handleClick = () => {
+    navigate("/auth/login");
   };
 
   const handleHowItsWork = () => {
@@ -113,15 +104,15 @@ const HeroSection = () => {
           relative z-10
           mx-auto flex min-h-screen
           w-full max-w-[1440px]
-          items-end md:items-center
+          items-center md:items-center
           px-5 sm:px-8 md:px-12 lg:px-20 xl:px-24
         "
       >
         <div
           className="
             w-full max-w-[760px]
-            pb-10 pt-[340px]
-            sm:pt-[420px]
+            pb-10 pt-20
+            sm:pt-28
             md:py-20
           "
         >

@@ -11,6 +11,8 @@ const passwordRule = Joi.string()
   });
 
 const registerSchema = Joi.object({
+  firstName: Joi.string().trim().min(1).max(50).required(),
+  lastName: Joi.string().trim().min(1).max(50).required(),
   email: Joi.string().email().lowercase().trim().required(),
   username: Joi.string().alphanum().min(3).max(30).trim().required(),
   password: passwordRule,

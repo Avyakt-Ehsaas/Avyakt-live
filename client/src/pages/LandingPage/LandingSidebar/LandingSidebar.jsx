@@ -118,16 +118,6 @@ useEffect(() => {
     //   : []),
   ];
 
-  const handleJoinUsClick = () => {
-      try {
-        navigate("/auth/login");
-        toast.success("Welcome back!");
-      } catch (error) {
-        toast.error("Error while login")
-      }
-    }
-
-
   return (
     <div className="flex justify-around">
 
@@ -189,7 +179,7 @@ useEffect(() => {
 
             {/* Desktop Button */}
           <div className="hidden md:flex items-center">
-  {payload?.sub ? (
+  {payload?.sub && (
     <div ref={profileRef} className="relative">
       <button
         onClick={() => setProfileOpen((prev) => !prev)}
@@ -217,13 +207,6 @@ useEffect(() => {
         </div>
       )}
     </div>
-  ) : (
-    <button
-      onClick={handleJoinUsClick}
-      className="px-4 py-3 bg-[#71AC61] text-white rounded-full hover:bg-[#4F7944] transition font-dm text-lg"
-    >
-      Join us
-    </button>
   )}
 </div>
 
@@ -266,7 +249,7 @@ useEffect(() => {
                 );
               })}
 
-              {payload?.email ? (<>
+              {payload?.email && (<>
                 <div className="mt-4 mb-2 px-3 py-2 rounded-lg bg-slate-100/30 text-primary">
                 <h3 className='text-left font-dm paragraph-body px-4 text-primary'>{payload?.email}</h3>
                 </div>
@@ -274,12 +257,6 @@ useEffect(() => {
               onClick={handleLogout}
               className="w-full mt-3 px-4 py-3 bg-[#71AC61] hover:bg-[#4F7944] text-white rounded-full transition-all duration-300 ">
                 Logout
-              </button>
-              </>) : (<>
-              <button 
-              onClick={handleJoinUsClick}
-              className="w-full mt-3 px-4 py-3 bg-[#71AC61] hover:bg-[#4F7944] text-white rounded-full transition-all duration-300">
-                Join us
               </button>
               </>)}
               

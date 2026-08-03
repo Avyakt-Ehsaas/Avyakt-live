@@ -65,7 +65,7 @@ function ScienceCard({ item }) {
       rounded-[22px] border border-[#e0e0e0] bg-white
       p-5 transition-all duration-400
       hover:border-[#b8d8b0] hover:shadow-[0_20px_50px_rgba(31,74,48,0.09)]
-      w-[240px] flex-shrink-0
+      w-full lg:w-[240px] lg:flex-shrink-0
     ">
       <motion.div
         className="pointer-events-none absolute -right-12 -top-12 h-32 w-32 rounded-full bg-[#CDE8C6]/30 blur-3xl"
@@ -154,8 +154,15 @@ export default function ScienceSection() {
           </motion.div>
         </div>
 
-        {/* Auto-scrolling cards — clipped within container margins */}
-        <div className="mt-8 overflow-hidden rounded-[16px]">
+        {/* Mobile: vertical grid */}
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4 lg:hidden">
+          {scienceCards.map((item, i) => (
+            <ScienceCard key={`${item.title}-${i}`} item={item} />
+          ))}
+        </div>
+
+        {/* Desktop: auto-scrolling marquee */}
+        <div className="mt-8 hidden lg:block overflow-hidden rounded-[16px]">
           <div className="science-cards-track flex gap-4">
             {doubled.map((item, i) => (
               <ScienceCard key={`${item.title}-${i}`} item={item} />
