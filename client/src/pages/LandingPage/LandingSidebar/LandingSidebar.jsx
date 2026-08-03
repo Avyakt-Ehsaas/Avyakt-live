@@ -15,7 +15,7 @@ const profileRef = useRef(null);
   const [payload, setPayload] = useState({});
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
 
     if (token) {
       try {
@@ -72,16 +72,36 @@ useEffect(() => {
     }
   });
 
-  const handleLogout = async () => {
+ const handleLogout = async () => {
+  const accessToken = localStorage.getItem("accessToken");
   try {
-    localStorage.removeItem("token");
+    await api.post(
+      "/auth/logout",
+      {},
+      {
+        withCredentials: true,
+        headers: accessToken
+          ? {
+              Authorization: `Bearer ${accessToken}`,
+            }
+          : {},
+      }
+    );
+  } catch (error) {
+    console.error(
+      "Logout API failed:",
+      error?.response?.data || error.message
+    );
+  } finally {
+    localStorage.removeItem("accessToken");
     localStorage.removeItem("email");
+    localStorage.removeItem("hasCompletedOnboarding");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("username");
     setPayload({});
     setProfileOpen(false);
-    toast.success("User logged out");
-    navigate("/");
-  } catch (error) {
-    toast.error("Logout failed");
+    toast.success("Logged out successfully");
+    navigate("/", { replace: true });
   }
 };
 
@@ -183,7 +203,7 @@ useEffect(() => {
           <div className="px-5 py-2 border-b border-gray-100">
             <p className="mt-1 font-dm paragraph-secondary text-gray-500 text-left">Logged in as</p>
             <h3 className="font-dm paragraph-body font-med text-primary break-all text-left">
-              {payload?.sub}
+              {payload?.email}
             </h3>
           </div>
 
@@ -246,9 +266,9 @@ useEffect(() => {
                 );
               })}
 
-              {payload?.sub ? (<>
+              {payload?.email ? (<>
                 <div className="mt-4 mb-2 px-3 py-2 rounded-lg bg-slate-100/30 text-primary">
-                <h3 className='text-left font-dm paragraph-body px-4 text-primary'>{payload?.sub}</h3>
+                <h3 className='text-left font-dm paragraph-body px-4 text-primary'>{payload?.email}</h3>
                 </div>
               <button
               onClick={handleLogout}
