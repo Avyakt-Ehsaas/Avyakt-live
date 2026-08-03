@@ -64,9 +64,9 @@ function SponsorPage() {
     }
   ];
 
-  const handleBrowseAllClick = () => {  
+  const handleBrowseAllClick = () => {
     try {
-      navigate("/library");
+      navigate("/auth/register");
     }
       catch (error) {
       toast.error("Something went wrong. Please try again later.");
@@ -75,22 +75,22 @@ function SponsorPage() {
 
 
   return (
-    <div className="w-full pt-0 md:pt-24 pb-0 flex items-center justify-center bg-white min-h-screen 2xl:min-h-fit mb-4 md:mb-0">
-      <div className="max-w-[1280px] h-auto mx-auto px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-24 ">
+    <div className="w-full pt-8 md:pt-24 pb-8 flex items-center justify-center bg-white mb-4 md:mb-0">
+      <div className="max-w-[1280px] h-auto mx-auto px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-24 overflow-hidden">
 
-        <div className="sponsor-page max-w-7xl pt-8">
-          <p className="text-greenbase text-center font-dm text-medium md:text-lg tracking-widest  uppercase mb-4 md:mb-0">
+        <div className="sponsor-page w-full pt-8 overflow-hidden">
+          <p className="text-greenbase text-center font-dm text-medium md:text-lg tracking-widest uppercase mb-4 md:mb-0">
             LIBRARY
           </p>
-          <h1 className="font-season-medium text-center heading-main md:leading-[80px] 2xl:leading-[72px] text-primary tracking-[0%] max-w-3xl mx-auto">
-            Sessions built around <br />what you're going through
+          <h1 className="font-season-medium text-center heading-main md:leading-[80px] 2xl:leading-[72px] text-primary tracking-[0%] max-w-full md:max-w-3xl mx-auto">
+            Sessions built around <br />what you&apos;re going through
           </h1>
 
         </div>
 
 
        {/* Mobile Swiper */}
-<div className="mt-12 block lg:hidden px-8">
+<div className="mt-12 block lg:hidden px-2 sm:px-4">
   <Swiper
     modules={[Autoplay, Pagination]}
     slidesPerView={1.15}
@@ -143,7 +143,7 @@ function SponsorPage() {
 
 
         <div className="flex justify-center mt-10">
-          <button onClick={handleBrowseAllClick} className="bg-[#71AC61] text-white px-6 py-3 font-dm paragraph-body  rounded-full font-medium hover:bg-[#4F7944] transition-all duration-300 cursor-pointer">
+          <button onClick={handleBrowseAllClick} className="bg-[#E07B39] text-white px-6 py-3 font-dm paragraph-body rounded-full font-medium hover:bg-[#C5622A] transition-all duration-300 cursor-pointer">
             Browse all sessions
           </button>
         </div>
@@ -151,12 +151,6 @@ function SponsorPage() {
 
       {/* Custom Swiper Pagination */}
    <style jsx>{`
-  .swiper {
-    overflow: visible;
-    max-width: 420px;
-    padding-right: 24px;
-  }
-
   .swiper-pagination {
     bottom: 0px !important;
   }

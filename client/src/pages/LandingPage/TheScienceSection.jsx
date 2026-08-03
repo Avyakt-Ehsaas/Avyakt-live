@@ -53,7 +53,7 @@ export default function TheScienceSection() {
       />
 
       {/* Content */}
-      <div className="relative z-10 max-w-6xl mx-auto pt-24 pb-64 md:py-48 md:pb-32 ">
+      <div className="relative z-10 max-w-6xl mx-auto pt-16 pb-20 md:pt-24 md:pb-48 lg:pb-32">
 
         {/* Header */}
         <div className="text-center mb-4 md:mb-8">
@@ -74,7 +74,7 @@ export default function TheScienceSection() {
         </div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-10 sm:gap-6 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
           {scienceCards.map((card, index) => (
             <ScienceCard
               key={index}

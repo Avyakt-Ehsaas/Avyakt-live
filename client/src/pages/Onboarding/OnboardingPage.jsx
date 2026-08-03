@@ -9,8 +9,6 @@ const API_BASE_URL = import.meta.env.VITE_BASE_API_URL;
 const GENDERS = [
   { value: "male", label: "Male" },
   { value: "female", label: "Female" },
-  { value: "non_binary", label: "Non-binary" },
-  { value: "prefer_not_to_say", label: "Prefer not to say" },
   { value: "other", label: "Other" },
 ];
 
@@ -21,19 +19,7 @@ const EXPERIENCES = [
   { value: "advanced", label: "Advanced", desc: "Consistent practice for years" },
 ];
 
-const REASONS = [
-  "Stress relief",
-  "Better sleep",
-  "Emotional balance",
-  "Spiritual growth",
-  "Focus & clarity",
-  "Physical health",
-  "Anxiety management",
-  "Self-discovery",
-];
-
 const initialStep1 = { age: "", gender: "", profession: "", city: "", state: "" };
-const initialStep2 = { meditation_experience: "", meditation_reason: "" };
 
 export default function OnboardingPage() {
   const navigate = useNavigate();
@@ -43,8 +29,9 @@ export default function OnboardingPage() {
 
   const [step, setStep] = useState(1);
   const [step1, setStep1] = useState(initialStep1);
-  const [step2, setStep2] = useState(initialStep2);
+  const [step2, setStep2] = useState({ meditation_experience: "" });
   const [selectedReasons, setSelectedReasons] = useState([]);
+  const [reasonInput, setReasonInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -72,10 +59,19 @@ export default function OnboardingPage() {
     setStep(2);
   };
 
-  const toggleReason = (reason) => {
-    setSelectedReasons((prev) =>
-      prev.includes(reason) ? prev.filter((r) => r !== reason) : [...prev, reason]
-    );
+  const addReason = (e) => {
+    if (e.key === "Enter" || e.key === ",") {
+      e.preventDefault();
+      const trimmed = reasonInput.trim().replace(/,$/, "");
+      if (trimmed && !selectedReasons.includes(trimmed)) {
+        setSelectedReasons((prev) => [...prev, trimmed]);
+      }
+      setReasonInput("");
+    }
+  };
+
+  const removeReason = (reason) => {
+    setSelectedReasons((prev) => prev.filter((r) => r !== reason));
   };
 
   const handleSubmit = async (e) => {
@@ -84,10 +80,11 @@ export default function OnboardingPage() {
       toast.error("Please select your meditation experience level");
       return;
     }
-    const meditationReason =
-      selectedReasons.length > 0
-        ? selectedReasons.join(", ")
-        : step2.meditation_reason.trim();
+    const pendingReason = reasonInput.trim();
+    const allReasons = pendingReason
+      ? [...selectedReasons, pendingReason]
+      : selectedReasons;
+    const meditationReason = allReasons.join(", ");
     if (!meditationReason) {
       toast.error("Please tell us what brings you to meditation");
       return;
@@ -123,10 +120,6 @@ export default function OnboardingPage() {
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const skip = () => {
-    navigate("/auth/check-email", { replace: true, state: { email } });
   };
 
   return (
@@ -271,18 +264,11 @@ export default function OnboardingPage() {
 
                   <button
                     type="submit"
-                    className="flex h-13 w-full items-center justify-center rounded-2xl bg-greenbase px-5 font-dm text-sm font-semibold text-white shadow-[0_14px_30px_-16px_rgba(52,88,62,0.8)] transition duration-200 hover:-translate-y-0.5 hover:opacity-95"
+                    className="flex h-13 w-full items-center justify-center rounded-2xl bg-greenbasebg px-5 font-dm text-sm font-semibold text-white shadow-[0_14px_30px_-16px_rgba(52,88,62,0.8)] transition duration-200 hover:-translate-y-0.5 hover:opacity-95"
                   >
                     Continue
                   </button>
 
-                  <button
-                    type="button"
-                    onClick={skip}
-                    className="w-full text-center font-dm text-xs text-gray hover:text-primary transition"
-                  >
-                    Skip for now
-                  </button>
                 </form>
               </motion.div>
             ) : (
@@ -337,39 +323,40 @@ export default function OnboardingPage() {
                     <span className="mb-2 block font-dm text-xs font-medium text-primary">
                       What brings you to meditation?
                     </span>
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {REASONS.map((reason) => (
-                        <button
-                          key={reason}
-                          type="button"
-                          onClick={() => toggleReason(reason)}
-                          className={`rounded-full border px-3.5 py-1.5 font-dm text-xs transition-all duration-150 ${
-                            selectedReasons.includes(reason)
-                              ? "border-greenbase bg-greenbase text-white"
-                              : "border-[#E1E6DF] bg-white text-primary hover:border-greenbase/50"
-                          }`}
-                        >
-                          {reason}
-                        </button>
-                      ))}
-                    </div>
-                    {selectedReasons.length === 0 && (
-                      <textarea
-                        name="meditation_reason"
-                        value={step2.meditation_reason}
-                        onChange={(e) =>
-                          setStep2((prev) => ({ ...prev, meditation_reason: e.target.value }))
-                        }
-                        placeholder="Tell us in your own words…"
-                        rows={3}
-                        className="w-full rounded-2xl border border-greenbase bg-white px-4 py-3 font-dm text-sm text-primary placeholder:text-gray outline-none resize-none transition-all duration-200 hover:border-greenbase/80 focus:border-greenbase focus:shadow-[0_0_0_3px_rgba(113,172,97,0.10)]"
-                      />
-                    )}
+
+                    {/* Selected reason chips */}
                     {selectedReasons.length > 0 && (
-                      <p className="font-dm text-xs text-gray">
-                        {selectedReasons.length} reason{selectedReasons.length > 1 ? "s" : ""} selected
-                      </p>
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {selectedReasons.map((reason) => (
+                          <span
+                            key={reason}
+                            className="flex items-center gap-1.5 rounded-full border border-greenbase bg-greenbase/10 px-3 py-1.5 font-dm text-xs text-greenbase"
+                          >
+                            {reason}
+                            <button
+                              type="button"
+                              onClick={() => removeReason(reason)}
+                              className="flex h-3.5 w-3.5 items-center justify-center rounded-full bg-greenbase/20 text-greenbase hover:bg-red-100 hover:text-red-500 transition-colors"
+                            >
+                              ×
+                            </button>
+                          </span>
+                        ))}
+                      </div>
                     )}
+
+                    {/* Text input */}
+                    <input
+                      type="text"
+                      value={reasonInput}
+                      onChange={(e) => setReasonInput(e.target.value)}
+                      onKeyDown={addReason}
+                      placeholder="Type a reason and press Enter…"
+                      className="w-full rounded-2xl border border-greenbase bg-white px-4 py-3 font-dm text-sm text-primary placeholder:text-gray outline-none transition-all duration-200 hover:border-greenbase/80 focus:border-greenbase focus:shadow-[0_0_0_3px_rgba(113,172,97,0.10)]"
+                    />
+                    <p className="mt-1.5 font-dm text-xs text-gray">
+                      Press Enter to add each reason. Add as many as you like.
+                    </p>
                   </div>
 
                   <div className="flex gap-3">
@@ -395,14 +382,6 @@ export default function OnboardingPage() {
                       )}
                     </button>
                   </div>
-
-                  <button
-                    type="button"
-                    onClick={skip}
-                    className="w-full text-center font-dm text-xs text-gray hover:text-primary transition"
-                  >
-                    Skip for now
-                  </button>
                 </form>
               </motion.div>
             )}

@@ -38,7 +38,7 @@ const audienceCards = [
 
 export default function WhoItsFor() {
   return (
-    <section className="w-full bg-[#F4FAF2] py-24 px-6">
+    <section className="w-full bg-[#F4FAF2] py-12 md:py-24 px-4 md:px-6">
       <div className="max-w-6xl mx-auto text-center">
         <p className="text-greenbase font-dm text-[14px] md:text-[20px] tracking-widest mb-2 uppercase">
           Who It’s For

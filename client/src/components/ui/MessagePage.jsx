@@ -10,6 +10,7 @@ const MessagePage = ({
   secondaryButtonText,
   onSecondaryClick,
   iconClassName = "bg-greenbase/10 text-greenbase",
+  extraContent,
 }) => {
   return (
     <main className="flex min-h-screen items-center justify-center bg-[#FAFAF6] px-4 py-8">
@@ -53,6 +54,8 @@ const MessagePage = ({
             {secondaryButtonText}
           </button>
         )}
+
+        {extraContent}
       </section>
     </main>
   );

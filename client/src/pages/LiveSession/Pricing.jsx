@@ -188,7 +188,7 @@ const Pricing = () => {
               <PricingCard
                 key={plan.id}
                 plan={plan}
-                onStart={() => openModal(plan)}
+                onStart={() => navigate("/auth/login")}
               />
             ))}
           </div>
@@ -214,7 +214,7 @@ const Pricing = () => {
                 <SwiperSlide key={plan.id} className="h-auto">
                   <PricingCard
                     plan={plan}
-                    onStart={() => openModal(plan)}
+                    onStart={() => navigate("/auth/login")}
                   />
                 </SwiperSlide>
               ))}

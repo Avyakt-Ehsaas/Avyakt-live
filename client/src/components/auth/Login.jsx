@@ -206,7 +206,7 @@ export default function Login() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex h-12 w-full items-center justify-center rounded-2xl bg-greenbase px-5 font-dm text-sm font-semibold text-white shadow-[0_14px_30px_-16px_rgba(52,88,62,0.8)] transition duration-200 hover:-translate-y-0.5 hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60"
+                className="flex h-12 w-full items-center justify-center rounded-2xl bg-greenbasebg px-5 font-dm text-sm font-semibold text-white shadow-[0_14px_30px_-16px_rgba(52,88,62,0.8)] transition duration-200 hover:-translate-y-0.5 hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isSubmitting ? (
                   <span className="flex items-center gap-2">

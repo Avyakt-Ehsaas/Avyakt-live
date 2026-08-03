@@ -7,6 +7,8 @@ import toast from "react-hot-toast";
 const API_BASE_URL = import.meta.env.VITE_BASE_API_URL;
 
 const initialForm = {
+  firstName: "",
+  lastName: "",
   username: "",
   email: "",
   password: "",
@@ -33,9 +35,21 @@ export default function Register() {
   const handleRegister = async (event) => {
     event.preventDefault();
 
+    const firstName = formData.firstName.trim();
+    const lastName = formData.lastName.trim();
     const username = formData.username.trim();
     const email = formData.email.trim().toLowerCase();
     const password = formData.password;
+
+    if (!firstName) {
+      toast.error("First name is required");
+      return;
+    }
+
+    if (!lastName) {
+      toast.error("Last name is required");
+      return;
+    }
 
     if (username.length < 3) {
       toast.error("Username must contain at least 3 characters");
@@ -71,6 +85,8 @@ export default function Register() {
       const response = await axios.post(
         `${API_BASE_URL}/auth/register`,
         {
+          firstName,
+          lastName,
           username,
           email,
           password,
@@ -178,6 +194,27 @@ export default function Register() {
 
           <div className="rounded-[30px] border border-white/90 bg-white/85 p-5 shadow-[0_32px_90px_-45px_rgba(38,68,47,0.4)] backdrop-blur-xl sm:p-7">
             <form onSubmit={handleRegister} className="space-y-4">
+              <div className="grid grid-cols-2 gap-3">
+                <FormField
+                  label="First name"
+                  name="firstName"
+                  type="text"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  placeholder="First name"
+                  autoComplete="given-name"
+                />
+                <FormField
+                  label="Last name"
+                  name="lastName"
+                  type="text"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  placeholder="Last name"
+                  autoComplete="family-name"
+                />
+              </div>
+
               <FormField
                 label="Username"
                 name="username"
@@ -227,7 +264,7 @@ export default function Register() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex h-13 w-full items-center justify-center rounded-2xl bg-greenbase px-5 font-dm text-sm font-semibold text-white shadow-[0_14px_30px_-16px_rgba(52,88,62,0.8)] transition duration-200 hover:-translate-y-0.5 hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60"
+                className="flex h-13 w-full items-center justify-center rounded-2xl bg-greenbasebg px-5 font-dm text-sm font-semibold text-white shadow-[0_14px_30px_-16px_rgba(52,88,62,0.8)] transition duration-200 hover:-translate-y-0.5 hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isSubmitting ? (
                   <span className="flex items-center gap-2">

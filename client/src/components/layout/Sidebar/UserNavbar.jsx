@@ -88,7 +88,7 @@ const UserNavbar = () => {
             ))}
 
             {/* Profile */}
-            {user?.name ? (
+            {user?.name && (
               <div className="relative">
                 <button
                   onClick={() => setProfileOpen(!profileOpen)}
@@ -126,12 +126,6 @@ const UserNavbar = () => {
                   )}
                 </AnimatePresence>
               </div>
-            ) : (
-              <Link to="/auth/login">
-                <button className="px-4 py-2 rounded-full bg-greenbasebg text-white font-medium hover:bg-green-600 transition">
-                  Join Us
-                </button>
-              </Link>
             )}
 
           </div>

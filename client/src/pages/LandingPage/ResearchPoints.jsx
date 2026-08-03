@@ -20,8 +20,8 @@ const researchPoints = [
 
 export default function ResearchPoints() {
   return (
-    <section className="w-full bg-white py-24 px-6 mt-8">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 items-center gap-16">
+    <section className="w-full bg-white py-12 md:py-24 px-4 md:px-6 mt-4 md:mt-8">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 items-center gap-8 lg:gap-16">
         
 <div className="flex justify-center lg:justify-start relative">
   
@@ -32,7 +32,7 @@ export default function ResearchPoints() {
   <img
     src={meditationIllustration}
     alt="Meditation illustration"
-    className="w-[360px] md:w-[430px] object-contain relative z-10"
+    className="w-full max-w-[280px] sm:max-w-[360px] md:max-w-[430px] object-contain relative z-10"
   />
 </div>
 
