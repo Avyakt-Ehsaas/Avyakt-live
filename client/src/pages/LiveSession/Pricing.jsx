@@ -478,17 +478,6 @@ const PricingCard = ({ plan, onStart }) => {
           ))}
         </ul>
 
-        <button
-          type="button"
-          onClick={onStart}
-          className={`mt-3 w-full rounded-full px-5 py-4 font-dm text-[14px] font-medium transition-all duration-300 ${
-            plan.highlighted
-              ? "bg-[#71AC61] text-white shadow-[0_14px_30px_rgba(113,172,97,0.3)] hover:-translate-y-0.5 hover:bg-[#5E9550]"
-              : "border border-[#D5E2D1] bg-[#F8FAF7] text-[#355331] hover:border-[#71AC61] hover:bg-[#71AC61] hover:text-white"
-          }`}
-        >
-          Start free 24-days
-        </button>
       </div>
     </article>
   );

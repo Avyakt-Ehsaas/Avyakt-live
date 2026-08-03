@@ -143,7 +143,7 @@ function SponsorPage() {
 
 
         <div className="flex justify-center mt-10">
-          <button onClick={handleBrowseAllClick} className="bg-[#E07B39] text-white px-6 py-3 font-dm paragraph-body rounded-full font-medium hover:bg-[#C5622A] transition-all duration-300 cursor-pointer">
+          <button onClick={handleBrowseAllClick} className="bg-[#71AC61] text-white px-6 py-3 font-dm paragraph-body rounded-full font-medium hover:bg-[#5E9550] transition-all duration-300 cursor-pointer">
             Browse all sessions
           </button>
         </div>

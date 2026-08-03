@@ -167,7 +167,7 @@ const FinalCTA = () => {
                                       <button
                                         type="button"
                                         onClick={() => navigate('/auth/register')}
-                                        className="bg-[#E07B39] w-full mt-2 font-dm hover:bg-[#C5622A] hover:scale-105 transition px-4 sm:px-8 py-3 rounded-full font-medium 2xl:text-xl 2xl:py-4"
+                                        className="bg-[#71AC61] w-full mt-2 font-dm hover:bg-[#5E9550] hover:scale-105 transition px-4 sm:px-8 py-3 rounded-full font-medium 2xl:text-xl 2xl:py-4"
                                       >
                                         Sign up
                                       </button>
