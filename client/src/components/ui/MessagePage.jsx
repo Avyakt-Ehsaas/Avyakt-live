@@ -39,7 +39,7 @@ const MessagePage = ({
           <button
             type="button"
             onClick={onPrimaryClick}
-            className="mt-7 flex w-full items-center justify-center rounded-xl bg-greenbase px-4 py-3 font-dm text-sm font-medium text-white transition hover:opacity-90"
+            className="mt-7 flex w-full items-center justify-center rounded-xl bg-greenbasebg px-4 py-3 font-dm text-sm font-medium text-white transition hover:opacity-90"
           >
             {primaryButtonText}
           </button>
