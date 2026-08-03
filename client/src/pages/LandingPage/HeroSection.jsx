@@ -60,13 +60,13 @@ const HeroSection = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center px-8 mt-6">
               <button onClick={handleGetStartedClick}
-                className="bg-[#E07B39] w-full sm:w-[250px] text-white font-medium font-dm px-4 py-4 rounded-full hover:bg-[#C5622A] transition-all duration-300 cursor-pointer"
+                className="bg-[#71AC61] w-full sm:w-[250px] text-white font-medium font-dm px-4 py-4 rounded-full hover:bg-[#5E9550] transition-all duration-300 cursor-pointer"
               >
                 Get Started
               </button>
 
               <button onClick={handleExploreClick}
-                className="bg-transparent border border-[#E07B39] w-full sm:w-[250px] text-white font-medium font-dm px-4 py-4 cursor-pointer rounded-full hover:bg-[#E07B39] transition-all duration-300"
+                className="bg-transparent border border-[#71AC61] w-full sm:w-[250px] text-white font-medium font-dm px-4 py-4 cursor-pointer rounded-full hover:bg-[#71AC61] transition-all duration-300"
               >
                 Explore Programs
               </button>

@@ -92,7 +92,7 @@ const MeditationPlayer = () => {
         <button
           type="button"
           onClick={togglePlay}
-          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-greenbase text-white shadow-sm transition hover:opacity-90 active:scale-95"
+          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-greenbasebg text-white shadow-sm transition hover:opacity-90 active:scale-95"
           aria-label={isPlaying ? "Pause" : "Play"}
         >
           {isPlaying ? (

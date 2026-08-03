@@ -153,7 +153,7 @@ const ForgotPasswordModal = ({ open, onClose }) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="mt-5 flex w-full items-center justify-center rounded-xl bg-greenbase px-4 py-3 font-dm text-sm font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+                className="mt-5 flex w-full items-center justify-center rounded-xl bg-greenbasebg px-4 py-3 font-dm text-sm font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {loading ? "Sending link..." : "Send reset link"}
               </button>
@@ -199,7 +199,7 @@ const ForgotPasswordModal = ({ open, onClose }) => {
             <button
               type="button"
               onClick={handleClose}
-              className="mt-6 w-full rounded-xl bg-greenbase px-4 py-3 font-dm text-sm font-medium text-white transition hover:opacity-90"
+              className="mt-6 w-full rounded-xl bg-greenbasebg px-4 py-3 font-dm text-sm font-medium text-white transition hover:opacity-90"
             >
               Back to login
             </button>

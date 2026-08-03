@@ -103,7 +103,7 @@ const ResetPassword = () => {
 
           <Link
             to="/login"
-            className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-greenbase px-4 py-3 font-dm text-sm font-medium text-white transition hover:opacity-90"
+            className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-greenbasebg px-4 py-3 font-dm text-sm font-medium text-white transition hover:opacity-90"
           >
             Continue to login
           </Link>
@@ -259,7 +259,7 @@ const ResetPassword = () => {
           <button
             type="submit"
             disabled={!token || loading}
-            className="flex w-full items-center justify-center rounded-xl bg-greenbase px-4 py-3 font-dm text-sm font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+            className="flex w-full items-center justify-center rounded-xl bg-greenbasebg px-4 py-3 font-dm text-sm font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {loading ? "Updating password..." : "Reset password"}
           </button>
